@@ -19,18 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    
-    
-    ///564654654654564
 
-    //uogqrwuogqrouwguoqr3w
-    ////    ///6546546546
-    
     [self initUI];
-    
-    
-    
+
     return YES;
 }
 //初始化UI
