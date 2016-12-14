@@ -1,0 +1,66 @@
+//
+//  ICPrefixHeader.pch
+//  IntelligenceCommunity
+//
+//  Created by apple on 16/11/21.
+//  Copyright © 2016年 mumu. All rights reserved.
+//
+
+#ifndef ICPrefixHeader_pch
+#define ICPrefixHeader_pch
+
+#import "Common.h"
+#import <objc/message.h>
+#import "UIViewController+Default.h"
+#import "UINavigationController+Default.h"
+#import "HUD.h"
+#import "UIView+CGRect.h"
+#import <MJRefresh/MJRefresh.h>
+#import <objc/message.h>
+#import <AFNetworking/AFNetworking.h>
+#import <Masonry.h>
+#import "CacheData.h"
+#import "CacheImage.h"
+
+
+//公共类
+#import "SectionModel.h"
+#import "RequestManager.h"
+#import "UITableViewCell+HYBMasonryAutoCellHeight.h"    //cell高度只适应
+
+//缴费模块:费用类型
+typedef NS_ENUM(NSUInteger, FeeType) {
+    propertyFee = 1,    //物业费
+    ParkingFee  = 2,    //停车费
+    WaterFee = 3,       //水费
+    PowerFee = 4,       //电费
+    FueGasFee = 5,      //燃气费
+    HeatingFee = 6,     //暖气费
+    FixedLineFee = 7,   //固话宽带
+    CableTVFee = 8,     //有线电视
+    PrePaidPhone = 9,   //手机充值
+};
+//社区服务:服务类型
+typedef NS_ENUM(NSUInteger, CommunityServiceType) {
+    CommodityService = 1,       //商品
+    ConvenientService = 2,      //便民
+    DelicacyService = 3,        //美食
+    EntertainmentService = 4,   //娱乐
+};
+
+
+
+
+#endif /* ICPrefixHeader_pch */
+
+#ifdef DEBUG
+# define ICLog(fmt, ...) NSLog((@"\n[File:%s]\n" "[Function:%s]\n" "[Line:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+# define ICLog(...);
+#endif
+
+#ifdef DEBUG
+# define ICLog_2(fmt, ...) NSLog((fmt), ##__VA_ARGS__);
+#else
+# define ICLog(...);
+#endif
