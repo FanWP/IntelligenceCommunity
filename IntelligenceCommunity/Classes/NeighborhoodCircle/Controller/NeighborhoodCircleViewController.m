@@ -25,12 +25,14 @@ NSString *const NeighborhoodCircleCellIdentifier = @"neighborhoodCircleCellIdent
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.navigationItem.title = @"邻里圈";
+    
+    
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+
     
     [self initializeComponent];
     
