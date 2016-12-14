@@ -17,6 +17,7 @@
 #import "PayMoneyViewController.h"    //缴费
 
 
+
 NSString *const NoticeViewCellIdentifier = @"noticeViewCellIdentifier";
 NSString *const ServiceListCellIdentifier = @"ServiceListCellIdentifier";
 
