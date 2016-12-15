@@ -149,6 +149,7 @@
         if (btn.tag-1==_defaultIndex-1) {
             _titleBtn=btn;
             btn.selected=YES;
+            _selectLine.mj_x = btn.mj_x;
         }else{
             btn.selected=NO;
         }

@@ -49,6 +49,14 @@ typedef NS_ENUM(NSUInteger, CommunityServiceType) {
 };
 
 
+typedef enum : NSUInteger {
+    Neighborhood = 1,        //邻里圈
+    NeighborhoodAppointment, //约会
+    NeighborhoodShareLife,   //生活分享
+    NeighborhoodLostFound,   //失物招领
+} NeighborhoodCircleType;
+
+
 
 
 #endif /* ICPrefixHeader_pch */
