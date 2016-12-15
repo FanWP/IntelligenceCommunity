@@ -114,6 +114,7 @@
 		18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573531DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m */; };
 		18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573561DED6804000FDBF6 /* PropertyFeeBillingModel.m */; };
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
+		710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F30ED1E0264FA00E256C6 /* YYTextView.m */; };
 		B2DF503E12DEBB83D31B2323 /* libPods-IntelligenceCommunity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */; };
 /* End PBXBuildFile section */
 
@@ -346,6 +347,8 @@
 		18F573581DED6E58000FDBF6 /* ParkingFeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingFeeViewController.h; sourceTree = "<group>"; };
 		18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingFeeViewController.m; sourceTree = "<group>"; };
 		25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligenceCommunity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		710F30EC1E0264FA00E256C6 /* YYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextView.h; sourceTree = "<group>"; };
+		710F30ED1E0264FA00E256C6 /* YYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextView.m; sourceTree = "<group>"; };
 		A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.debug.xcconfig"; sourceTree = "<group>"; };
 		DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -478,13 +481,6 @@
 				187A23841DEC318C00D921FC /* PropertyFeeBillingDetailViewCell.m */,
 			);
 			path = PayMoney;
-			sourceTree = "<group>";
-		};
-		1808971F1DE59F2A0049A180 /* Repairs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repairs;
 			sourceTree = "<group>";
 		};
 		184071261DF7AD15000DA659 /* CommodityDetail */ = {
@@ -943,7 +939,7 @@
 				1808971C1DE59F2A0049A180 /* Community */,
 				1808971D1DE59F2A0049A180 /* FreeArticle */,
 				1808971E1DE59F2A0049A180 /* PayMoney */,
-				1808971F1DE59F2A0049A180 /* Repairs */,
+				710F30EB1E0264D100E256C6 /* Repairs */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1048,6 +1044,15 @@
 				185ADBE11DE41F0B00CD556D /* OwnerViewCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		710F30EB1E0264D100E256C6 /* Repairs */ = {
+			isa = PBXGroup;
+			children = (
+				710F30EC1E0264FA00E256C6 /* YYTextView.h */,
+				710F30ED1E0264FA00E256C6 /* YYTextView.m */,
+			);
+			path = Repairs;
 			sourceTree = "<group>";
 		};
 		974C17013F9DD1E00D839AA2 /* Frameworks */ = {
@@ -1282,6 +1287,7 @@
 				184071251DF7ACF1000DA659 /* CommodityDetailViewController.m in Sources */,
 				1808971B1DE59EAF0049A180 /* PayMoneyViewController.m in Sources */,
 				18B002C01DE2DF0800D8FE56 /* RootNavigationController.m in Sources */,
+				710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */,
 				18B002D81DE2E4B500D8FE56 /* MainViewController.m in Sources */,
 				185ADBEF1DE44ECA00CD556D /* NeighborhoodCircleCell.m in Sources */,
 				187A23701DEBD51900D921FC /* PropertyFeeViewController.m in Sources */,

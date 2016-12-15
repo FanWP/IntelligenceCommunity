@@ -27,6 +27,8 @@
 #import "SectionModel.h"
 #import "RequestManager.h"
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"    //cell高度只适应
+#import "YYTextView.h" // TextView
+
 
 //缴费模块:费用类型
 typedef NS_ENUM(NSUInteger, FeeType) {
@@ -47,6 +49,21 @@ typedef NS_ENUM(NSUInteger, CommunityServiceType) {
     DelicacyService = 3,        //美食
     EntertainmentService = 4,   //娱乐
 };
+
+
+
+// 屏幕宽、屏幕高
+#define KWidth [UIScreen mainScreen].bounds.size.width
+#define KHeight [UIScreen mainScreen].bounds.size.height
+
+
+
+
+
+
+
+
+
 
 
 

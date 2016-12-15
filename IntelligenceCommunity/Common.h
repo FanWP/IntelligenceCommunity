@@ -25,6 +25,7 @@
 #define UIFontNormal [Common systemFontOfSize:14]
 #define UIFontSmall [Common systemFontOfSize:12]
 #define UIFontSmallest [Common systemFontOfSize:10]
+#define UIFont15 [Common systemFontOfSize:15]
 
 extern NSString *const CommonRegexEmail;
 extern NSString *const CommonRegexMoney;

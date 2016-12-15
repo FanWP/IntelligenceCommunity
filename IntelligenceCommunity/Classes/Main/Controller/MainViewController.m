@@ -108,7 +108,9 @@ NSString *const ServiceListCellIdentifier = @"ServiceListCellIdentifier";
         PayMoneyViewController *VC = [[PayMoneyViewController alloc] init];
         [self.navigationController pushViewController:VC animated:YES];
     }else if (tag == 4){
-        NSLog(@"保修");
+        RepairsViewController *repairsViewController = [[RepairsViewController alloc] init];
+        [self.navigationController pushViewController:repairsViewController animated:YES];
+        NSLog(@"报修");
     }
     self.hidesBottomBarWhenPushed = YES;
 }
