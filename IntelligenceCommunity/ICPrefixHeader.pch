@@ -26,6 +26,7 @@
 //公共类
 #import "SectionModel.h"
 #import "RequestManager.h"
+#import "UIView+MyExtension.h"
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"    //cell高度只适应
 #import "YYTextView.h" // TextView
 

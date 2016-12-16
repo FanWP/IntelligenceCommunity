@@ -5,11 +5,13 @@
 //  Created by apple on 16/11/21.
 //  Copyright © 2016年 mumu. All rights reserved.
 //
-
-#import "NeighborhoodCircleViewController.h"
 #import "NeighborhoodCircleHeaderView.h"
 #import "NeighborhoodCircleCell.h"
+
+#import "NeighborhoodCircleViewController.h"
 #import "NeighborhoodMainCommonTableVC.h" //公共的控制器
+#import "NeighborhoodMessageTableVC.h"  //邻里圈消息的控制器
+#import "neighborhoodSendMessageVC.h"  //邻里圈发活动  动态
 
 @interface NeighborhoodCircleViewController ()<UIScrollViewDelegate>
 
@@ -22,6 +24,10 @@
 
 /** 设置右上角的点击 */
 @property (nonatomic,assign) NeighborhoodCircleType NeighborhoodType;
+
+
+/** 右上角的消息弹出框 */
+@property (nonatomic,weak) UIView *NeighborhoodMainView;
 
 @end
 
@@ -58,8 +64,9 @@
 - (void)actiondccd
 {
     ICLog(@"803428y0235");
-    UIView *NeighborhoodMainView = [[UIView alloc] initWithFrame:CGRectMake(200, 64, 200, 100)];
-    NeighborhoodMainView.backgroundColor = [UIColor redColor];
+    UIView *NeighborhoodMainView = [[UIView alloc] initWithFrame:CGRectMake(KWidth - 100, 64, 100, 120)];
+    NeighborhoodMainView.backgroundColor = [UIColor lightGrayColor];
+    self.NeighborhoodMainView = NeighborhoodMainView;
     [self.view addSubview:NeighborhoodMainView];
     
     //设置子控件button
@@ -73,15 +80,53 @@
         button.mj_h = 30;
         button.mj_w = 90;
         button.mj_y = i * button.mj_h;
-        
+
+        button.tag = i + 1;
+        [button addTarget:self action:@selector(rightBarClick:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:arr[i] forState:UIControlStateNormal];
         [NeighborhoodMainView addSubview:button];
     }
+ 
+}
+
+
+-(void)rightBarClick:(UIButton *)button
+{
     
+    switch (button.tag) {
+        case 1://消息
+        {
+            NeighborhoodMessageTableVC *vc = [[NeighborhoodMessageTableVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            MJRefreshLog(@"消息");
+            break;
+        }
+        case 2://约活动
+        {
+            MJRefreshLog(@"约活动");
+            break;
+        }
+        case 3://发动态
+        {
+            neighborhoodSendMessageVC *vc = [[neighborhoodSendMessageVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            MJRefreshLog(@"发动态");
+            break;
+        }
+        case 4://寻物招领
+        {
+            MJRefreshLog(@"寻物招领");
+            break;
+        }
+            
+        default:
+            break;
+    }
     
+    //移除
+    [self.NeighborhoodMainView removeFromSuperview];
     
-    
-    
+
 }
 
 
@@ -158,6 +203,8 @@
     
     // 添加第一个控制器的view
     [self scrollViewDidEndScrollingAnimation:contentView];
+    
+
 
 
 }

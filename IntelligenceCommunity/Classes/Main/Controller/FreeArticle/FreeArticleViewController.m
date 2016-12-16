@@ -10,6 +10,9 @@
 #import "CommunityCell.h"
 #import "SearchViewController.h"    //关键字搜索
 
+
+#import "FreeArticleModel.h"
+
 NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
 @interface FreeArticleViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
@@ -29,20 +32,35 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     // Do any additional setup after loading the view.
     [self defaultViewStyle];
 
-    self.navigationItem.title = @"闲置物品";
+    self.title = @"闲置物品处理";
     [self defaultViewStyle];
-    
-    
+
     [self initializeComponent];
     
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    _searchBar.placeholder = @"搜索";
-    _searchBar.delegate = self;
-    self.navigationItem.titleView = _searchBar;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(action:)];
+//    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+//    _searchBar.placeholder = @"搜索";
+//    _searchBar.delegate = self;
+//    self.navigationItem.titleView = _searchBar;
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(action:)];
 
     
+    [self setupRightBar];
+    
 }
+
+
+- (void)setupRightBar
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarClick)];
+}
+
+
+- (void)rightBarClick
+{
+    MJRefreshLog(@"rightBarClick");
+
+}
+
 -(void)action:(UIBarButtonItem *)sender{
     //预留
 }
@@ -73,6 +91,24 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:communityCellIdentifier forIndexPath:indexPath];
+    
+    //设置假数据
+    FreeArticleModel *model = [[FreeArticleModel alloc] init];
+    
+    
+    model.likeUserid = @"8tpiti3q";
+    model.createTime = @"2016-12-22";
+    model.saleStatus = NO;
+    model.price = @"6575";
+    model.srcPrice = @"654";
+    model.content = @"t43wt235y52y3hiegrhovwovwo    ";
+    
+    
+    
+    
+    
+    
+    cell.freeArticleModel = model;
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
 

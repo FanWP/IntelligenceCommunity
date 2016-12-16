@@ -11,7 +11,6 @@
 		180897151DE59E620049A180 /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180897141DE59E620049A180 /* CommunityViewController.m */; };
 		180897181DE59E9A0049A180 /* RepairsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180897171DE59E9A0049A180 /* RepairsViewController.m */; };
 		1808971B1DE59EAF0049A180 /* PayMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808971A1DE59EAF0049A180 /* PayMoneyViewController.m */; };
-		180897221DE59FEF0049A180 /* CommunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180897211DE59FEF0049A180 /* CommunityCell.m */; };
 		184071221DF7A1BA000DA659 /* CommodityListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184071211DF7A1BA000DA659 /* CommodityListHeaderView.m */; };
 		184071251DF7ACF1000DA659 /* CommodityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184071241DF7ACF1000DA659 /* CommodityDetailViewController.m */; };
 		1840712B1DF7B53C000DA659 /* CommodityDetailTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840712A1DF7B53C000DA659 /* CommodityDetailTopViewCell.m */; };
@@ -44,7 +43,6 @@
 		184B1D331DE6E5C000F8F56E /* WUImageCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B1D281DE6E5C000F8F56E /* WUImageCollectionView.m */; };
 		184B1D341DE6E5C000F8F56E /* WUImagePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 184B1D291DE6E5C000F8F56E /* WUImagePicker.bundle */; };
 		184B1D351DE6E5C000F8F56E /* WUPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B1D2B1DE6E5C000F8F56E /* WUPreviewViewController.m */; };
-		184B1D381DE6F7A900F8F56E /* MaterialsAreadlySaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B1D371DE6F7A900F8F56E /* MaterialsAreadlySaleView.m */; };
 		184C99C81DEFD25700588FFD /* HelpCenterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C99C71DEFD25700588FFD /* HelpCenterViewCell.m */; };
 		184C99CB1DEFD41200588FFD /* HelpCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C99CA1DEFD41200588FFD /* HelpCenterViewController.m */; };
 		184C99CE1DEFF12600588FFD /* HelpCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C99CD1DEFF12600588FFD /* HelpCenterModel.m */; };
@@ -116,6 +114,11 @@
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
 		710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F30ED1E0264FA00E256C6 /* YYTextView.m */; };
 		B2DF503E12DEBB83D31B2323 /* libPods-IntelligenceCommunity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */; };
+		D70A89C51E027D4A00BCE03C /* NeighborhoodMessageTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89C41E027D4A00BCE03C /* NeighborhoodMessageTableVC.m */; };
+		D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89C71E027FED00BCE03C /* neighborhoodSendMessageVC.m */; };
+		D70A89CD1E028A4500BCE03C /* CommunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89CA1E028A4500BCE03C /* CommunityCell.m */; };
+		D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89CC1E028A4500BCE03C /* MaterialsAreadlySaleView.m */; };
+		D70A89D11E028BB400BCE03C /* FreeArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89D01E028BB400BCE03C /* FreeArticleModel.m */; };
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
 /* End PBXBuildFile section */
 
@@ -145,8 +148,6 @@
 		180897171DE59E9A0049A180 /* RepairsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairsViewController.m; sourceTree = "<group>"; };
 		180897191DE59EAF0049A180 /* PayMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMoneyViewController.h; sourceTree = "<group>"; };
 		1808971A1DE59EAF0049A180 /* PayMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMoneyViewController.m; sourceTree = "<group>"; };
-		180897201DE59FEF0049A180 /* CommunityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommunityCell.h; path = ../Community/CommunityCell.h; sourceTree = "<group>"; };
-		180897211DE59FEF0049A180 /* CommunityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommunityCell.m; path = ../Community/CommunityCell.m; sourceTree = "<group>"; };
 		184071201DF7A1BA000DA659 /* CommodityListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityListHeaderView.h; sourceTree = "<group>"; };
 		184071211DF7A1BA000DA659 /* CommodityListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityListHeaderView.m; sourceTree = "<group>"; };
 		184071231DF7ACF1000DA659 /* CommodityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityDetailViewController.h; sourceTree = "<group>"; };
@@ -209,8 +210,6 @@
 		184B1D291DE6E5C000F8F56E /* WUImagePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WUImagePicker.bundle; sourceTree = "<group>"; };
 		184B1D2A1DE6E5C000F8F56E /* WUPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPreviewViewController.h; sourceTree = "<group>"; };
 		184B1D2B1DE6E5C000F8F56E /* WUPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUPreviewViewController.m; sourceTree = "<group>"; };
-		184B1D361DE6F7A900F8F56E /* MaterialsAreadlySaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaterialsAreadlySaleView.h; path = ../Community/MaterialsAreadlySaleView.h; sourceTree = "<group>"; };
-		184B1D371DE6F7A900F8F56E /* MaterialsAreadlySaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MaterialsAreadlySaleView.m; path = ../Community/MaterialsAreadlySaleView.m; sourceTree = "<group>"; };
 		184C99C61DEFD25700588FFD /* HelpCenterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpCenterViewCell.h; sourceTree = "<group>"; };
 		184C99C71DEFD25700588FFD /* HelpCenterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpCenterViewCell.m; sourceTree = "<group>"; };
 		184C99C91DEFD41200588FFD /* HelpCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpCenterViewController.h; sourceTree = "<group>"; };
@@ -351,6 +350,16 @@
 		710F30EC1E0264FA00E256C6 /* YYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextView.h; sourceTree = "<group>"; };
 		710F30ED1E0264FA00E256C6 /* YYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextView.m; sourceTree = "<group>"; };
 		A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.debug.xcconfig"; sourceTree = "<group>"; };
+		D70A89C31E027D4A00BCE03C /* NeighborhoodMessageTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMessageTableVC.h; sourceTree = "<group>"; };
+		D70A89C41E027D4A00BCE03C /* NeighborhoodMessageTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMessageTableVC.m; sourceTree = "<group>"; };
+		D70A89C61E027FEC00BCE03C /* neighborhoodSendMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neighborhoodSendMessageVC.h; sourceTree = "<group>"; };
+		D70A89C71E027FED00BCE03C /* neighborhoodSendMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = neighborhoodSendMessageVC.m; sourceTree = "<group>"; };
+		D70A89C91E028A4500BCE03C /* CommunityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityCell.h; sourceTree = "<group>"; };
+		D70A89CA1E028A4500BCE03C /* CommunityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityCell.m; sourceTree = "<group>"; };
+		D70A89CB1E028A4500BCE03C /* MaterialsAreadlySaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialsAreadlySaleView.h; sourceTree = "<group>"; };
+		D70A89CC1E028A4500BCE03C /* MaterialsAreadlySaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialsAreadlySaleView.m; sourceTree = "<group>"; };
+		D70A89CF1E028BB400BCE03C /* FreeArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeArticleModel.h; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/FreeArticleModel.h; sourceTree = SOURCE_ROOT; };
+		D70A89D01E028BB400BCE03C /* FreeArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FreeArticleModel.m; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/FreeArticleModel.m; sourceTree = SOURCE_ROOT; };
 		D73533B11E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMainCommonTableVC.h; sourceTree = "<group>"; };
 		D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMainCommonTableVC.m; sourceTree = "<group>"; };
 		DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.release.xcconfig"; sourceTree = "<group>"; };
@@ -455,10 +464,10 @@
 		1808971D1DE59F2A0049A180 /* FreeArticle */ = {
 			isa = PBXGroup;
 			children = (
-				184B1D361DE6F7A900F8F56E /* MaterialsAreadlySaleView.h */,
-				184B1D371DE6F7A900F8F56E /* MaterialsAreadlySaleView.m */,
-				180897201DE59FEF0049A180 /* CommunityCell.h */,
-				180897211DE59FEF0049A180 /* CommunityCell.m */,
+				D70A89C91E028A4500BCE03C /* CommunityCell.h */,
+				D70A89CA1E028A4500BCE03C /* CommunityCell.m */,
+				D70A89CB1E028A4500BCE03C /* MaterialsAreadlySaleView.h */,
+				D70A89CC1E028A4500BCE03C /* MaterialsAreadlySaleView.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -527,6 +536,8 @@
 		184AB44F1DED169600DC1A54 /* FreeArticle */ = {
 			isa = PBXGroup;
 			children = (
+				D70A89CF1E028BB400BCE03C /* FreeArticleModel.h */,
+				D70A89D01E028BB400BCE03C /* FreeArticleModel.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -950,6 +961,7 @@
 		18B002D91DE2E50900D8FE56 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D70A89C21E027D4A00BCE03C /* Neighborhood */,
 				18B002E21DE2E5FA00D8FE56 /* NeighborhoodCircleViewController.h */,
 				18B002E31DE2E5FA00D8FE56 /* NeighborhoodCircleViewController.m */,
 				D73533B11E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.h */,
@@ -1066,6 +1078,17 @@
 				25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D70A89C21E027D4A00BCE03C /* Neighborhood */ = {
+			isa = PBXGroup;
+			children = (
+				D70A89C31E027D4A00BCE03C /* NeighborhoodMessageTableVC.h */,
+				D70A89C41E027D4A00BCE03C /* NeighborhoodMessageTableVC.m */,
+				D70A89C61E027FEC00BCE03C /* neighborhoodSendMessageVC.h */,
+				D70A89C71E027FED00BCE03C /* neighborhoodSendMessageVC.m */,
+			);
+			path = Neighborhood;
 			sourceTree = "<group>";
 		};
 		FD8C0431E9B21BD24E03FFC3 /* Pods */ = {
@@ -1276,6 +1299,7 @@
 				18B002BD1DE2DEA900D8FE56 /* UINavigationController+Default.m in Sources */,
 				184C99CE1DEFF12600588FFD /* HelpCenterModel.m in Sources */,
 				184B1D2D1DE6E5C000F8F56E /* WUAlbum.m in Sources */,
+				D70A89C51E027D4A00BCE03C /* NeighborhoodMessageTableVC.m in Sources */,
 				18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */,
 				184719EB1DE811ED0081DABE /* CostListViewCell.m in Sources */,
 				18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */,
@@ -1299,6 +1323,7 @@
 				18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */,
 				184B1D351DE6E5C000F8F56E /* WUPreviewViewController.m in Sources */,
 				187A237F1DEC292200D921FC /* PropertyFeeHistoryVC.m in Sources */,
+				D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */,
 				185ADBC81DE4122800CD556D /* AdvertiseViewCell.m in Sources */,
 				184B1D311DE6E5C000F8F56E /* WUAlbumViewController.m in Sources */,
 				1857BD2E1DF68F2700E5F1DE /* CommodityListViewController.m in Sources */,
@@ -1306,6 +1331,7 @@
 				185ADBCF1DE4135100CD556D /* SectionModel.m in Sources */,
 				1857BD1F1DF68E7500E5F1DE /* PopTableViewCustom.m in Sources */,
 				185ADBE21DE41F0B00CD556D /* OwnerViewCell.m in Sources */,
+				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
 				187A23761DEBFC8800D921FC /* PropertyFeeHeaderView.m in Sources */,
@@ -1313,7 +1339,6 @@
 				184B1D301DE6E5C000F8F56E /* WUAlbumNavigationController.m in Sources */,
 				185ADBDB1DE414AA00CD556D /* UIScrollView+HeaderView.m in Sources */,
 				1840712B1DF7B53C000DA659 /* CommodityDetailTopViewCell.m in Sources */,
-				180897221DE59FEF0049A180 /* CommunityCell.m in Sources */,
 				18B002E41DE2E5FA00D8FE56 /* NeighborhoodCircleViewController.m in Sources */,
 				187383C41DF123060088544A /* CommunityServiceListCell.m in Sources */,
 				185ADBDC1DE414AA00CD556D /* UIImage+FixOrientation.m in Sources */,
@@ -1325,6 +1350,7 @@
 				185ADBDF1DE414DC00CD556D /* UIView+MyExtension.m in Sources */,
 				184B1D141DE6E12F00F8F56E /* SearchHistory.m in Sources */,
 				187A237C1DEC176C00D921FC /* SpecialOffersListViewCell.m in Sources */,
+				D70A89D11E028BB400BCE03C /* FreeArticleModel.m in Sources */,
 				D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */,
 				184071221DF7A1BA000DA659 /* CommodityListHeaderView.m in Sources */,
 				18466EAA1DFAB015009541D6 /* PayMentViewController.m in Sources */,
@@ -1333,9 +1359,9 @@
 				184B1D2C1DE6E5C000F8F56E /* UIImage+Aspect.m in Sources */,
 				18F5734D1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m in Sources */,
 				1857BD341DF6C43200E5F1DE /* LeftTableViewCell.m in Sources */,
+				D70A89CD1E028A4500BCE03C /* CommunityCell.m in Sources */,
 				187383C11DF10E5F0088544A /* CommunityServiceHeaderView.m in Sources */,
 				184B1D321DE6E5C000F8F56E /* WUImageBrowseView.m in Sources */,
-				184B1D381DE6F7A900F8F56E /* MaterialsAreadlySaleView.m in Sources */,
 				1808970F1DE59DCB0049A180 /* FreeArticleViewController.m in Sources */,
 				187A23731DEBD58800D921FC /* PropertyFeeViewCell.m in Sources */,
 				184C99C81DEFD25700588FFD /* HelpCenterViewCell.m in Sources */,
