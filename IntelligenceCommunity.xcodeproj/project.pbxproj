@@ -131,6 +131,7 @@
 		D71BC1341E0389900093357C /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1271E0389900093357C /* NSObject+MJProperty.m */; };
 		D71BC1351E0389910093357C /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1291E0389900093357C /* NSString+MJExtension.m */; };
 		D71BC1361E0389910093357C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D71BC12A1E0389900093357C /* README.md */; };
+		D71BC1391E0393DE0093357C /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1381E0393DE0093357C /* Const.m */; };
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
 /* End PBXBuildFile section */
 
@@ -395,6 +396,8 @@
 		D71BC1281E0389900093357C /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		D71BC1291E0389900093357C /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 		D71BC12A1E0389900093357C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D71BC1371E0393DE0093357C /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Const.h; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/Const.h; sourceTree = SOURCE_ROOT; };
+		D71BC1381E0393DE0093357C /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Const.m; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/Const.m; sourceTree = SOURCE_ROOT; };
 		D73533B11E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMainCommonTableVC.h; sourceTree = "<group>"; };
 		D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMainCommonTableVC.m; sourceTree = "<group>"; };
 		DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.release.xcconfig"; sourceTree = "<group>"; };
@@ -934,6 +937,8 @@
 		18B002B31DE2DC9B00D8FE56 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				D71BC1371E0393DE0093357C /* Const.h */,
+				D71BC1381E0393DE0093357C /* Const.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1410,6 +1415,7 @@
 				18B002EA1DE2E65500D8FE56 /* KeyViewController.m in Sources */,
 				185ADBCF1DE4135100CD556D /* SectionModel.m in Sources */,
 				1857BD1F1DF68E7500E5F1DE /* PopTableViewCustom.m in Sources */,
+				D71BC1391E0393DE0093357C /* Const.m in Sources */,
 				185ADBE21DE41F0B00CD556D /* OwnerViewCell.m in Sources */,
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,

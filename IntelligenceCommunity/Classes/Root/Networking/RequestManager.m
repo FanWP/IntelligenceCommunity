@@ -120,17 +120,19 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
     NSError *error;
     
     //    NSString *serviceURL = @"http://192.168.1.23:8080/pro_api/";
-    NSString *serviceURL = @"http://192.168.1.18:8080/pro_api/";   //李宇
+    NSString *serviceURL = [NSString stringWithFormat:@"%@pro_api/",Smart_community_URL];   //李宇
     if (requestMethodType == Pro_api) {
-        serviceURL = @"http://192.168.1.18:8080/pro_api/";
+        serviceURL = [NSString stringWithFormat:@"%@pro_api/",Smart_community_URL];   //李宇
     }else if (requestMethodType == Smart_community){
-        serviceURL = @"http://192.168.1.18:8080/smart_community/";
+        serviceURL = [NSString stringWithFormat:@"%@smart_community/",Smart_community_URL];
     }else if (requestMethodType == Mall_api){
-        serviceURL = @"http://192.168.1.18:8080/mall_api/";
+        serviceURL = [NSString stringWithFormat:@"%@mall_api/",Smart_community_URL];
     }
     
     
     NSString *RequestURL = [serviceURL stringByAppendingString:[NSString stringWithFormat:@"%@",urlString]];
+    
+    MJRefreshLog(@"RequestURL---:%@",RequestURL);
     
     
     NSMutableURLRequest *urlRequest = [[AFJSONRequestSerializer serializer] requestWithMethod:requestMethod URLString:RequestURL parameters:parameters error:&error];
