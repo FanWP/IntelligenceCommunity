@@ -37,6 +37,9 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
     [self initializeComponent];
     
+    
+    [self setupRefresh];
+    
 //    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
 //    _searchBar.placeholder = @"搜索";
 //    _searchBar.delegate = self;
@@ -45,6 +48,49 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
     
     [self setupRightBar];
+    
+}
+
+
+- (void)setupRefresh
+{
+
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewFreeArticle)];
+    [self.tableView.mj_header beginRefreshing];
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    
+    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreFreeArticle)];
+
+}
+
+
+//下拉刷新
+-(void)loadNewFreeArticle
+{
+    [self.tableView.mj_footer endRefreshing];
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userId"] = UserID;
+    parmas[@"sessionId"] = SessionID;
+    
+    
+    NSString*url = @"find/sellingThings/list";
+    
+    [[RequestManager manager] JSONRequestWithType:Smart_community urlString:url method:RequestMethodPost timeout:30 parameters:parmas success:^(id  _Nullable responseObject) {
+        
+        MJRefreshLog(@"闲置物品显示成功：%@",responseObject);
+        
+    } faile:^(NSError * _Nullable error) {
+        MJRefreshLog(@"闲置物品失败:%@",error);
+    }];
+
+}
+
+//上拉刷新
+-(void)loadMoreFreeArticle
+{
+        [self.tableView.mj_header endRefreshing];
+    
     
 }
 
