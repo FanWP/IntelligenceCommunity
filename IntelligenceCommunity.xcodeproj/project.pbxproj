@@ -113,6 +113,8 @@
 		18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573561DED6804000FDBF6 /* PropertyFeeBillingModel.m */; };
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
 		710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F30ED1E0264FA00E256C6 /* YYTextView.m */; };
+		71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A841E0390F500067125 /* RepairStatusTableVC.m */; };
+		71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A871E0391E900067125 /* RepairStatusCell.m */; };
 		B2DF503E12DEBB83D31B2323 /* libPods-IntelligenceCommunity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */; };
 		D70A89C51E027D4A00BCE03C /* NeighborhoodMessageTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89C41E027D4A00BCE03C /* NeighborhoodMessageTableVC.m */; };
 		D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89C71E027FED00BCE03C /* neighborhoodSendMessageVC.m */; };
@@ -361,6 +363,10 @@
 		25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligenceCommunity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		710F30EC1E0264FA00E256C6 /* YYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextView.h; sourceTree = "<group>"; };
 		710F30ED1E0264FA00E256C6 /* YYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextView.m; sourceTree = "<group>"; };
+		71A20A831E0390F500067125 /* RepairStatusTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusTableVC.h; sourceTree = "<group>"; };
+		71A20A841E0390F500067125 /* RepairStatusTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairStatusTableVC.m; sourceTree = "<group>"; };
+		71A20A861E0391E900067125 /* RepairStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusCell.h; sourceTree = "<group>"; };
+		71A20A871E0391E900067125 /* RepairStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairStatusCell.m; sourceTree = "<group>"; };
 		A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.debug.xcconfig"; sourceTree = "<group>"; };
 		D70A89C31E027D4A00BCE03C /* NeighborhoodMessageTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMessageTableVC.h; sourceTree = "<group>"; };
 		D70A89C41E027D4A00BCE03C /* NeighborhoodMessageTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMessageTableVC.m; sourceTree = "<group>"; };
@@ -475,6 +481,8 @@
 			children = (
 				180897161DE59E9A0049A180 /* RepairsViewController.h */,
 				180897171DE59E9A0049A180 /* RepairsViewController.m */,
+				71A20A831E0390F500067125 /* RepairStatusTableVC.h */,
+				71A20A841E0390F500067125 /* RepairStatusTableVC.m */,
 			);
 			path = Repairs;
 			sourceTree = "<group>";
@@ -1104,6 +1112,8 @@
 			children = (
 				710F30EC1E0264FA00E256C6 /* YYTextView.h */,
 				710F30ED1E0264FA00E256C6 /* YYTextView.m */,
+				71A20A861E0391E900067125 /* RepairStatusCell.h */,
+				71A20A871E0391E900067125 /* RepairStatusCell.m */,
 			);
 			path = Repairs;
 			sourceTree = "<group>";
@@ -1244,7 +1254,7 @@
 				TargetAttributes = {
 					18B002731DE2C9D700D8FE56 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 2JS4PPTR7V;
+						DevelopmentTeam = QL2W84V672;
 						ProvisioningStyle = Automatic;
 					};
 					18B0028C1DE2C9D700D8FE56 = {
@@ -1390,6 +1400,7 @@
 				184B1D111DE6E0F500F8F56E /* SearchViewController.m in Sources */,
 				1857BD311DF6AF2900E5F1DE /* ShoppingCartBottomView.m in Sources */,
 				D71BC1351E0389910093357C /* NSString+MJExtension.m in Sources */,
+				71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */,
 				D71BC12F1E0389900093357C /* MJPropertyKey.m in Sources */,
 				185ADBEC1DE4442200CD556D /* NeighborhoodCircleHeaderView.m in Sources */,
 				184071251DF7ACF1000DA659 /* CommodityDetailViewController.m in Sources */,
@@ -1411,6 +1422,7 @@
 				185ADBCF1DE4135100CD556D /* SectionModel.m in Sources */,
 				1857BD1F1DF68E7500E5F1DE /* PopTableViewCustom.m in Sources */,
 				185ADBE21DE41F0B00CD556D /* OwnerViewCell.m in Sources */,
+				71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */,
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
@@ -1627,7 +1639,7 @@
 			baseConfigurationReference = A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2JS4PPTR7V;
+				DEVELOPMENT_TEAM = QL2W84V672;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = IntelligenceCommunity/ICPrefixHeader.pch;
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
@@ -1647,7 +1659,7 @@
 			baseConfigurationReference = DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2JS4PPTR7V;
+				DEVELOPMENT_TEAM = QL2W84V672;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = IntelligenceCommunity/ICPrefixHeader.pch;
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
