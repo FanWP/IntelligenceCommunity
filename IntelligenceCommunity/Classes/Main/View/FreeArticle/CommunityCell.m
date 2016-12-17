@@ -277,8 +277,14 @@
     self.userNameLabel.text = freeArticleModel.likeUserid;
     self.uploadTimeLabel.text = freeArticleModel.createTime;
     
-//    self.isSupportBarterLabel.hidden = freeArticleModel.saleStatus == NO;
-//    self.alreadySell
+    if (freeArticleModel.change == 1) {
+        self.isSupportBarterLabel.hidden = NO;
+    }else
+    {
+        self.isSupportBarterLabel.hidden = YES;
+    }
+
+
     
 //    [self.communityImageView load:freeArticleModel.images placeholderImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"]];
     
@@ -292,6 +298,8 @@
     self.thumbUpCountLabel.text = @"86426";
     
     self.commentCountLabel.text = @"7923";
+    
+    
     
     
     

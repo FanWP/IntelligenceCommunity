@@ -10,6 +10,10 @@
 
 #import "SmartCommunityPhotosView.h"
 
+#import "FreeArticleDetailTableVC.h"
+
+#import <AFNetworking.h>
+
 #import "FreeArticleModel.h"
 
 
@@ -29,7 +33,7 @@
 @property(nonatomic,strong) UILabel *isSupportBarterLabel;
 
 //图片
-@property(nonatomic,strong) SmartCommunityPhotosView *communityImageView;
+@property(nonatomic,strong) UIImageView *communityImageView;
 
 //价格
 @property(nonatomic,strong) UILabel *priceLabel;
@@ -103,40 +107,40 @@
         _isSupportBarterLabel = [[UILabel alloc] init];
         _isSupportBarterLabel.text = @"支持物物交换";
         _isSupportBarterLabel.textColor = MJRefreshColor(239, 143, 88);
-        _isSupportBarterLabel.textAlignment = NSTextAlignmentLeft;
+        _isSupportBarterLabel.textAlignment = NSTextAlignmentRight;
         _isSupportBarterLabel.font = UIFont13;
         [self addSubview:_isSupportBarterLabel];
         [_isSupportBarterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_userImageView.mas_centerY);
-            make.right.mas_equalTo(-20);
+            make.right.mas_equalTo(-10);
             make.width.mas_equalTo(100);
             make.height.mas_equalTo(20);
         }];
         
         
         //    //图片
-        
-        _communityImageView = [[SmartCommunityPhotosView alloc] initWithFrame:CGRectMake(10, 65, 80, 80)];
-        [self addSubview:_communityImageView];
-        
-//        //    @property(nonatomic,strong) UIImageView *communityImageView;
-//        _communityImageView = [[UIImageView alloc] init];
-//        _communityImageView.contentMode = UIViewContentModeScaleAspectFill;
-//        _communityImageView.image = [UIImage imageNamed:@"3.jpg"];
-//        _communityImageView.clipsToBounds = YES;
-//        [self addSubview:_communityImageView];
-//        [_communityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(_userImageView.mas_bottom).offset(10);
-//            make.left.mas_equalTo(10);
-//            make.right.mas_equalTo(-10);
-//            make.height.mas_equalTo(202);
-//        }];
 //        
+//        _communityImageView = [[SmartCommunityPhotosView alloc] initWithFrame:CGRectMake(10, 65, 80, 80)];
+//        [self addSubview:_communityImageView];
+        
+        //    @property(nonatomic,strong) UIImageView *communityImageView;
+        _communityImageView = [[UIImageView alloc] init];
+        _communityImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _communityImageView.image = [UIImage imageNamed:@"3.jpg"];
+        _communityImageView.clipsToBounds = YES;
+        [self addSubview:_communityImageView];
+        [_communityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_userImageView.mas_bottom).offset(10);
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.height.mas_equalTo(202);
+        }];
+        
         
         //已售
         UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"halt sales"]];
         img.mj_x = KWidth - 10 - img.width;
-        img.mj_y = 65;
+        img.mj_y = 60;
         self.alreadySell = img;
         [self addSubview:img];
 #warning 原价、点赞、评论系列控件以[价格]的中心线为基准对齐
@@ -195,6 +199,7 @@
         
         _commentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_commentsButton setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
+        [_commentsButton addTarget:self action:@selector(commentsButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_commentsButton];
         [_commentsButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_oldPriceLabel.mas_centerY);
@@ -220,8 +225,11 @@
         
         
         _thumbUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_thumbUpButton setImage:[UIImage imageNamed:@"praise2"] forState:UIControlStateNormal];
+        [_thumbUpButton setImage:[UIImage imageNamed:@"praise"] forState:UIControlStateNormal];
+        [_thumbUpButton setImage:[UIImage imageNamed:@"praise2"] forState:UIControlStateSelected];
+        [_thumbUpButton addTarget:self action:@selector(thumbUpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_thumbUpButton];
+        
         [_thumbUpButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_priceLabel.mas_centerY);
             make.right.equalTo(_thumbUpCountLabel.mas_left).offset(-2);
@@ -236,12 +244,22 @@
         _communityContentLabel.textAlignment = NSTextAlignmentLeft;
         _communityContentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _communityContentLabel.font = UIFont15;
+        
+    
+        
+
+        
         [self addSubview:_communityContentLabel];
         [_communityContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_priceLabel.mas_bottom).offset(5);
             make.left.mas_equalTo(10);
             make.right.mas_equalTo(-10);
         }];
+        
+        //给详情添加手势
+        UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentLableTap)];
+        _communityContentLabel.userInteractionEnabled = YES;
+        [self.communityContentLabel addGestureRecognizer:tap];
         
         //分割线
         _lineLayer = [[CALayer alloc] init];
@@ -264,19 +282,48 @@
     self.userNameLabel.text = freeArticleModel.likeUserid;
     self.uploadTimeLabel.text = freeArticleModel.createTime;
     
-    //    self.isSupportBarterLabel.hidden = freeArticleModel.saleStatus == NO;
-    //    self.alreadySell
+    //是否支持交换
+    if (freeArticleModel.change == 1) {
+        self.isSupportBarterLabel.hidden = NO;
+    }else
+    {
+        self.isSupportBarterLabel.hidden = YES;
+    }
     
-    //    [self.communityImageView load:freeArticleModel.images placeholderImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"]];
+    //判断是否是已经停售
+    if (freeArticleModel.saleStatus == 1) {
+        self.alreadySell.hidden = NO;
+    }else
+    {
+        self.alreadySell.hidden = YES;
+    }
+
     
     self.communityContentLabel.text = freeArticleModel.content;
     self.priceLabel.text = [NSString stringWithFormat:@"¥ %@",freeArticleModel.price];
     self.oldPriceLabel.text = [NSString stringWithFormat:@"原价%@",freeArticleModel.srcPrice];
+    
+    //设置点赞数据
     self.thumbUpCountLabel.text = freeArticleModel.number;
+    
+    NSString *str = [NSString stringWithFormat:@",%@,",UserID];
+    
+    //判断当前用户是否点赞
+    if ([self.freeArticleModel.likeUserid rangeOfString:str].location != NSNotFound) {
+        
+        self.thumbUpButton.selected = YES;
+    }else
+    {
+        self.thumbUpButton.selected = NO;
+    }
+    
     self.commentCountLabel.text = @"43r";
+    
+    [self.communityImageView load:[NSString stringWithFormat:@"%@",[freeArticleModel.imagesArr firstObject]] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
 
-    self.communityImageView.size = [SmartCommunityPhotosView sizeWithCount:freeArticleModel.imagesArr.count];
-    self.communityImageView.photos = freeArticleModel.imagesArr;
+//    self.communityImageView.size = [SmartCommunityPhotosView sizeWithCount:freeArticleModel.imagesArr.count];
+//    self.communityImageView.photos = freeArticleModel.imagesArr;
+    
 
     /*
      //用户头像
@@ -315,6 +362,58 @@
     [super layoutSubviews];
 
     _lineLayer.frame = CGRectMake(0, self.bounds.size.height-5, self.width, 8);
+}
+
+
+
+
+//设置点赞,取消还是点击点赞
+- (void)thumbUpButtonClick:(UIButton *)button
+{
+    button.selected = !button.selected;
+
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userId"] = UserID;
+    parmas[@"sessionId"] = SessionID;
+    parmas[@"id"] = self.freeArticleModel.ID;
+    NSString*url = @"likes/cancel/fabulous";
+    NSString*AFurl = [NSString stringWithFormat:@"%@smart_community/likes/cancel/fabulous",Smart_community_URL];
+    
+    
+    MJRefreshLog(@"%@url---:%@",parmas,url);
+
+    [[AFHTTPSessionManager manager]POST:AFurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+           MJRefreshLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+          MJRefreshLog(@"%@",error);
+    }];
+    
+    
+//    [[RequestManager manager] JSONRequestWithType:Smart_community urlString:url method:RequestMethodPost timeout:20 parameters:parmas success:^(id  _Nullable responseObject) {
+//            MJRefreshLog(@"%@",responseObject);
+//    } faile:^(NSError * _Nullable error) {
+//          MJRefreshLog(@"%@",error);
+//    }];
+    
+    
+}
+
+//回复
+-(void)commentsButtonClick
+{
+    MJRefreshLog(@"回复");
+}
+
+//点击文字的时候进行跳转
+-(void)contentLableTap
+{
+    FreeArticleDetailTableVC *vc = [[FreeArticleDetailTableVC alloc] init];
+    vc.model = self.freeArticleModel;
+    [self.nav pushViewController:vc animated:YES];
 }
 
 @end

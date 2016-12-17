@@ -149,6 +149,7 @@
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
 		D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD231E04DB450094602C /* NSDate+Extension.m */; };
 		D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */; };
+		D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */; };
 		D759D1EC1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */; };
 		D759D1EF1E03BFBB002B9F2D /* CommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */; };
 /* End PBXBuildFile section */
@@ -449,6 +450,8 @@
 		D753AD231E04DB450094602C /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		D753AD2B1E04E7680094602C /* SmartCommunityPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCommunityPhotosView.h; sourceTree = "<group>"; };
 		D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartCommunityPhotosView.m; sourceTree = "<group>"; };
+		D753AD2E1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleDetailTableViewImagesCell.h; sourceTree = "<group>"; };
+		D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleDetailTableViewImagesCell.m; sourceTree = "<group>"; };
 		D759D1EA1E03BD7F002B9F2D /* FreeArticleDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleDetailTableVC.h; sourceTree = "<group>"; };
 		D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleDetailTableVC.m; sourceTree = "<group>"; };
 		D759D1ED1E03BFBB002B9F2D /* CommunityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityDetailCell.h; sourceTree = "<group>"; };
@@ -567,6 +570,8 @@
 				D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */,
 				D702430F1E04CC340033B78C /* FreeArticleHeaderView.h */,
 				D70243101E04CC340033B78C /* FreeArticleHeaderView.m */,
+				D753AD2E1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.h */,
+				D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -1656,6 +1661,7 @@
 				D71BC1301E0389900093357C /* MJPropertyType.m in Sources */,
 				184B1D2E1DE6E5C000F8F56E /* WUAlbumAsset.m in Sources */,
 				D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */,
+				D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */,
 				1857BD1E1DF68E7500E5F1DE /* RightTableViewCell.m in Sources */,
 				18B002791DE2C9D700D8FE56 /* main.m in Sources */,
 				D759D1EC1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m in Sources */,

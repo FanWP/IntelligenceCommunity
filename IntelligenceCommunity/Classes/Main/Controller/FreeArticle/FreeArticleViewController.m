@@ -208,8 +208,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     //设置假数据
     FreeArticleModel *model = _FreeArticleArr[section];
-    return model.contentH ;
-
+    return model.contentH + 200;
 }
 
 
@@ -219,6 +218,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     FreeArticleModel *model = _FreeArticleArr[section];
     FreeArticleHeaderView *header = [[FreeArticleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 350)];
     header.freeArticleModel = model;
+    header.nav = self.navigationController;
     return header;
     
     

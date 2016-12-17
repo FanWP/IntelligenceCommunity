@@ -12,5 +12,8 @@
 
 /** 网址前段 */
 extern NSString *const Smart_community_URL;
+extern NSString *const Smart_community_picURL;
+
+
 
 

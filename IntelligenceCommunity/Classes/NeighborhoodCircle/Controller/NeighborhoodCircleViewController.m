@@ -25,9 +25,12 @@
 /** 设置右上角的点击 */
 @property (nonatomic,assign) NeighborhoodCircleType NeighborhoodType;
 
+/** 设置蒙版 */
+@property (nonatomic,weak) UIView *coverView;
+
 
 /** 右上角的消息弹出框 */
-@property (nonatomic,weak) UIView *NeighborhoodMainView;
+@property (nonatomic,weak) UIImageView *NeighborhoodMainView;
 
 @end
 
@@ -63,15 +66,21 @@
 
 - (void)actiondccd
 {
-    ICLog(@"803428y0235");
-    UIView *NeighborhoodMainView = [[UIView alloc] initWithFrame:CGRectMake(KWidth - 100, 64, 100, 120)];
-    NeighborhoodMainView.backgroundColor = [UIColor lightGrayColor];
-    self.NeighborhoodMainView = NeighborhoodMainView;
-    [self.view addSubview:NeighborhoodMainView];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-down"]];
+    imgView.x = KWidth - imgView.width;
+    imgView.y = 100;
+    imgView.userInteractionEnabled  = YES;
+    self.NeighborhoodMainView = imgView;
+    [self.view addSubview:imgView];
+
     
     //设置子控件button
     
     NSArray *arr = @[@"消息",@"约活动",@"发动态",@"寻物招领"];
+    NSArray *imgArr = @[@"information",@"activity",@"friend",@"goods"];
+    
+    
     
     for (NSInteger i = 0; i < arr.count; i++) {
         
@@ -83,8 +92,10 @@
 
         button.tag = i + 1;
         [button addTarget:self action:@selector(rightBarClick:) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:[UIImage imageNamed:imgArr[i]] forState:UIControlStateNormal];
         [button setTitle:arr[i] forState:UIControlStateNormal];
-        [NeighborhoodMainView addSubview:button];
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [imgView addSubview:button];
     }
  
 }
