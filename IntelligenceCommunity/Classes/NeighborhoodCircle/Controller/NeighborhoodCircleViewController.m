@@ -29,6 +29,10 @@
 @property (nonatomic,weak) UIView *coverView;
 
 
+/** 设置右上角的图片 */
+@property (nonatomic,weak) UIImage *rightBarImg;
+
+
 /** 右上角的消息弹出框 */
 @property (nonatomic,weak) UIImageView *NeighborhoodMainView;
 
@@ -38,7 +42,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.navigationItem.title = @"邻里圈";
+    
 
 }
 
@@ -52,6 +56,7 @@
 
     // 底部的scrollView
     [self setupContentView];
+    self.title = @"邻里圈";
     
     //右上角的
     [self setupRightBar];
@@ -61,18 +66,26 @@
 
 - (void)setupRightBar
 {
-    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] style:UIBarButtonItemStylePlain target:self action:@selector(actiondccd)];
+    self.rightBarImg = [UIImage imageNamed:@"menu"];
+    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.rightBarImg style:UIBarButtonItemStylePlain target:self action:@selector(actiondccd)];
 }
 
 - (void)actiondccd
 {
+    UIView *coverView = [[UIView alloc] initWithFrame:self.view.bounds];
+    coverView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+    UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [coverView addGestureRecognizer:tap];
+    self.coverView = coverView;
+    [self.view addSubview:coverView];
+    
     
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-down"]];
-    imgView.x = KWidth - imgView.width;
-    imgView.y = 100;
+    imgView.x = KWidth - imgView.width - 5;
+    imgView.y = 64;
     imgView.userInteractionEnabled  = YES;
     self.NeighborhoodMainView = imgView;
-    [self.view addSubview:imgView];
+    [self.coverView addSubview:imgView];
 
     
     //设置子控件button
@@ -85,16 +98,20 @@
     for (NSInteger i = 0; i < arr.count; i++) {
         
         UIButton *button = [[UIButton alloc] init];
-        button.mj_x = 0;
-        button.mj_h = 30;
-        button.mj_w = 90;
-        button.mj_y = i * button.mj_h;
+        button.mj_x = 15;
+        button.mj_h = 44;
+        button.mj_w = 130;
+        button.mj_y = i * button.mj_h + 10;
+        
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
 
         button.tag = i + 1;
         [button addTarget:self action:@selector(rightBarClick:) forControlEvents:UIControlEventTouchUpInside];
         [button setImage:[UIImage imageNamed:imgArr[i]] forState:UIControlStateNormal];
         [button setTitle:arr[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        button.titleLabel.font = UIFontLarge;
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [imgView addSubview:button];
     }
  
@@ -135,11 +152,16 @@
     }
     
     //移除
-    [self.NeighborhoodMainView removeFromSuperview];
+    [self.coverView removeFromSuperview];
     
-
 }
 
+
+-(void)tap
+{
+    //移除
+    [self.coverView removeFromSuperview];
+}
 
 - (void)setupChildVces
 {
