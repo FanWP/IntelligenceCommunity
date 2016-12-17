@@ -163,29 +163,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     
     
     
-    // 报修图片的view
-    CGFloat bottomX = 17;
-    CGFloat bottomY = 380;
-    CGFloat bottomWidth = KWidth - 2 * bottomX;
-    CGFloat bottomHeight = 200;
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(bottomX,bottomY, bottomWidth, bottomHeight)];
-    [self.view addSubview:_bottomView];
-    [self createData];
-    [self.bottomView addSubview:self.collectionView];
-
-//    _bottomView = [[UIView alloc] init];
-//    _bottomView.userInteractionEnabled = YES;
-//    _bottomView.backgroundColor = [UIColor redColor];
-//    [self createData];
-//    [_repairPictureBottomTF addSubview:_bottomView];
-//    [_bottomView addSubview:_collectionView];
-//    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(_repairPictureBottomTF.mas_left).offset(6);
-//        make.top.equalTo(_repairPictureBottomTF.mas_top).offset(3);
-//        make.right.equalTo(_repairPictureBottomTF.mas_right).offset(-6);
-//        make.bottom.equalTo(_repairPictureBottomTF.mas_bottom).offset(-3);
-//    }];
-    
+    [self creatRepairPictureView];
     
     
     // 提交
@@ -222,6 +200,27 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     
     // 添加提交的点击事件
     [_handButton addTarget:self action:@selector(repairHandAction) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+
+- (void)creatRepairPictureView
+{
+    // 报修图片的view
+    CGFloat bottomX = 17;
+    CGFloat bottomY = 380;
+    CGFloat bottomWidth = KWidth - 2 * bottomX;
+    CGFloat bottomHeight = 200;
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(bottomX,bottomY, bottomWidth, bottomHeight)];
+    [self.view addSubview:_bottomView];
+    [self createData];
+    [self.bottomView addSubview:self.collectionView];
+}
+
+
+//拖动退出键盘
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
 }
 
 
@@ -281,6 +280,12 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
         if (resultCode == 1000)
         {
             ICLog_2(@"提交报修请求成功：");
+            
+            self.repairContentTextView.text = @"";
+            
+            [_bottomView removeFromSuperview];
+            
+            [self creatRepairPictureView];
         }
         else
         {

@@ -33,6 +33,8 @@
     [self dataFindRepairStatus];// 请求报修状态列表的数据
     
     [self dropdownRefresh];// 下拉刷新
+    
+    [self pullOnLoading];// 上拉加载
 }
 
 
