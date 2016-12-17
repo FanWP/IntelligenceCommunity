@@ -51,6 +51,7 @@
     _timeLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:_timeLabel];
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_contentLabel.mas_bottom);
         make.right.mas_offset(-15);
         make.bottom.mas_offset(-5);
         make.left.mas_offset(15);
