@@ -17,6 +17,8 @@
 @property (nonatomic,strong) NSMutableArray *repairStatusMArray;// 报修状态个数数组
 @property (nonatomic,strong) RepairModel *repairModel;
 
+@property (nonatomic,assign) NSInteger pageNum;
+
 @end
 
 @implementation RepairStatusTableVC
@@ -28,7 +30,9 @@
     
     self.tableView.backgroundColor = HexColor(0xeeeeee);
     
-    [self dataFindRepairStatus];
+    [self dataFindRepairStatus];// 请求报修状态列表的数据
+    
+    [self dropdownRefresh];// 下拉刷新
 }
 
 
@@ -37,7 +41,8 @@
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = @"sessionId";
-    parameters[@"pageNum"] = @"1";
+    self.pageNum = 1;// 页数初始值为1
+    parameters[@"pageNum"] = @(_pageNum);
     parameters[@"pageSize"] = @"10";
     parameters[@"userId"] = @"1";
     
@@ -83,8 +88,9 @@
         
         if (resultCode == 1000)
         {
+            _pageNum++;
             
-            self.repairStatusMArray = [RepairModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+            _repairStatusMArray = [RepairModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
             
             [self.tableView reloadData];
         }
@@ -97,9 +103,70 @@
     {
         ICLog_2(@"报修状态返回错误：%@",error);
     }];
-    
 }
 
+// 下拉刷新
+- (void)dropdownRefresh
+{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [_repairStatusMArray removeAllObjects];
+        
+        [self dataFindRepairStatus];
+        
+        [self.tableView reloadData];
+        
+        [self.tableView.mj_header endRefreshing];
+    }];
+}
+
+// 上拉加载
+- (void)pullOnLoading
+{
+    [self.tableView reloadData];
+    
+    [self.tableView.mj_footer endRefreshing];
+    
+    self.tableView.mj_footer = [MJRefreshBackFooter footerWithRefreshingBlock:^{
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"sessionId"] = @"sessionId";
+        parameters[@"pageNum"] = @(_pageNum);
+        parameters[@"pageSize"] = @"10";
+        parameters[@"userId"] = @"1";
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@pro_api/find/repairRef/list",Smart_community_URL];
+        
+        ICLog_2(@"接口：：%@",urlString);
+        
+        [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             ICLog_2(@"报修状态返回：%@",responseObject);
+             
+             NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+             
+             if (resultCode == 1000)
+             {
+                 _pageNum++;
+                 
+                 NSArray *moreArray = [RepairModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+                 
+                 [_repairStatusMArray addObjectsFromArray:moreArray];
+                 
+                 [self.tableView reloadData];
+             }
+             else
+             {
+                 ICLog_2(@"没有更多数据了");
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         {
+             ICLog_2(@"报修状态返回错误：%@",error);
+         }];
+    }];
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -141,9 +208,6 @@
     cell.contentLabel.text = _repairModel.content;
     cell.timeLabel.text = _repairModel.createTime;
     
-
-//    cell.contentLabel.text = @"您好，您提交的报修正在抢救中";
-//    cell.timeLabel.text = @"2016.10.30";
     return cell;
 }
 

@@ -31,6 +31,7 @@
 #import "UIView+MyExtension.h"
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"    //cell高度只适应
 #import "YYTextView.h" // TextView
+#import "UILabel+AdjustHeightAndWidth.h"
 
 
 //缴费模块:费用类型

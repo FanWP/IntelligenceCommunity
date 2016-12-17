@@ -11,6 +11,7 @@
 #import "NoticeCell.h"
 #import "ServiceListCell.h"
 
+#import "NoticeVC.h" // 公告
 #import "CommunityViewController.h"  //社区服务
 #import "FreeArticleViewController.h" //闲置物品
 #import "RepairsViewController.h"     //报修
@@ -95,6 +96,12 @@ NSString *const ServiceListCellIdentifier = @"ServiceListCellIdentifier";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0)
+    {
+        NoticeVC *noticeVC = [[NoticeVC alloc] init];
+        [self.navigationController pushViewController:noticeVC animated:YES];
+    }
 }
 -(void)serviceListCell:(ServiceListCell *)serviceListCell buttonWithTag:(NSInteger)tag{
     if (tag == 1) {

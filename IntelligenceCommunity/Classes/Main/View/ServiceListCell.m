@@ -130,7 +130,7 @@
     }];
     
     _repairsLabel = [[UILabel alloc] init];
-    _repairsLabel.text = @"保修";
+    _repairsLabel.text = @"报修";
     _repairsLabel.font = UIFontNormal;
     _repairsLabel.textColor = [UIColor grayColor];
     _repairsLabel.textAlignment = NSTextAlignmentCenter;

@@ -44,6 +44,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 
 @property (nonatomic,strong) NSMutableArray *repairImagesArray;// 报修图片数组
 
+
 @end
 
 @implementation RepairsViewController
@@ -146,9 +147,9 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     
     
     
-    // 拍照底部的框
+    // 报修图片底部的框
     _repairPictureBottomTF = [[UITextField alloc] init];
-//    _repairPictureBottomTF.userInteractionEnabled = NO;
+    _repairPictureBottomTF.userInteractionEnabled = NO;
     _repairPictureBottomTF.borderStyle = 3;
     _repairPictureBottomTF.backgroundColor = [UIColor whiteColor];
     _repairPictureBottomTF.layer.cornerRadius = 5.0;
@@ -163,17 +164,27 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     
     
     // 报修图片的view
-    _repairPictureView = [[UIView alloc] init];
-    _repairPictureView.backgroundColor = [UIColor redColor];
-    _repairPictureView.userInteractionEnabled = YES;
-    [_repairPictureBottomTF addSubview:_repairPictureView];
+    CGFloat bottomX = 17;
+    CGFloat bottomY = 380;
+    CGFloat bottomWidth = KWidth - 2 * bottomX;
+    CGFloat bottomHeight = 200;
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(bottomX,bottomY, bottomWidth, bottomHeight)];
+    [self.view addSubview:_bottomView];
     [self createData];
-    [_repairPictureView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_repairPictureBottomTF.mas_left).offset(6);
-        make.top.equalTo(_repairPictureBottomTF.mas_top).offset(3);
-        make.right.equalTo(_repairPictureBottomTF.mas_right).offset(-6);
-        make.bottom.equalTo(_repairPictureBottomTF.mas_bottom).offset(-3);
-    }];
+    [self.bottomView addSubview:self.collectionView];
+
+//    _bottomView = [[UIView alloc] init];
+//    _bottomView.userInteractionEnabled = YES;
+//    _bottomView.backgroundColor = [UIColor redColor];
+//    [self createData];
+//    [_repairPictureBottomTF addSubview:_bottomView];
+//    [_bottomView addSubview:_collectionView];
+//    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(_repairPictureBottomTF.mas_left).offset(6);
+//        make.top.equalTo(_repairPictureBottomTF.mas_top).offset(3);
+//        make.right.equalTo(_repairPictureBottomTF.mas_right).offset(-6);
+//        make.bottom.equalTo(_repairPictureBottomTF.mas_bottom).offset(-3);
+//    }];
     
     
     
@@ -189,7 +200,6 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
         make.right.mas_offset(-21);
         make.height.mas_offset(43.5);
     }];
-    
     
     
     
@@ -218,7 +228,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 
 - (void)repairHandAction
 {
-    [self dataHandRepair];// 报修数据
+    [self dataHandRepair];// 提交报修
 }
 
 
@@ -287,7 +297,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 #pragma mark--添加附件
 -(void)createData {
     
-    _plusImage = [UIImage imageNamed:@"add_03"];
+    _plusImage = [UIImage imageNamed:@"plus"];
     
     self.s0 = [SectionModel sectionModelWith:@"" cells:nil];
     self.s0.mutableCells = [NSMutableArray array];
@@ -295,9 +305,6 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     [self.s0.mutableCells addObject:_plusImage];
     
     _dataArray = @[self.s0];
-    
-    
-    [self collectionView];
 }
 #pragma 附件
 - (UICollectionView *)collectionView{
@@ -306,16 +313,16 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
-    CGFloat width = self.view.width / 4;
+    CGFloat width = _bottomView.width / 3;
     layout.itemSize = CGSizeMake(width, width);
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, _repairPictureView.width, _repairPictureView.height) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, _bottomView.width, _bottomView.height) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.bounces = YES;
     _collectionView.alwaysBounceVertical = YES;
     _collectionView.backgroundColor = [UIColor whiteColor];
-    [_repairPictureView addSubview:_collectionView];
+    
     
     [_collectionView registerClass:[HouseImageCell class] forCellWithReuseIdentifier:commImageViewCellIdentifier];
     
