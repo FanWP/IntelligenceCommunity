@@ -114,7 +114,7 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
     NSURLSessionDataTask *dataTask = [self dataTaskWithManager:[self sessionManager] url:urlRequest success:success faile:faile];
     [dataTask resume];
 }
--(void)JSONRequestWithType:(RequestMethodType)requestMethodType urlString:(NSString *)urlString method:(RequestMethod)method timeout:(NSTimeInterval)timeout parameters:(id)parameters success:(RequestSuccess)success faile:(RequestFaile)faile{
+-(void)JSONRequestWithType:(RequestMethodType)requestMethodType urlString:(NSString *)urlString method:(RequestMethod)method timeout:(NSTimeInterval)timeout parameters:(NSMutableDictionary *)parameters success:(RequestSuccess)success faile:(RequestFaile)faile{
 
     NSString *requestMethod = [self requestMethod:method];
     NSError *error;
@@ -136,6 +136,13 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
     
     
     NSMutableURLRequest *urlRequest = [[AFJSONRequestSerializer serializer] requestWithMethod:requestMethod URLString:RequestURL parameters:parameters error:&error];
+    
+    if (method == RequestMethodPost) {
+        if (parameters && parameters.count) {
+            urlRequest.HTTPBody = [[RequestManager manager] dictionaryTransformParameters:parameters];
+        }
+    }
+    
     if(error){
         faile(error);
         return;

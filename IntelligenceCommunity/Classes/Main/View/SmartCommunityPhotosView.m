@@ -44,7 +44,7 @@
         
         if (i < photosCount) { // 显示
 //            photoView.photo = photos[i];
-            [photoView load:photos[i] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+            [photoView load:[NSString stringWithFormat:@"%@%@",Smart_community_picURL,photos[i]] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
             
             photoView.hidden = NO;
         } else { // 隐藏

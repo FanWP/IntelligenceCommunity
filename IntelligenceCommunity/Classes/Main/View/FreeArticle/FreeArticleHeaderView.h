@@ -17,4 +17,7 @@
 /** 传入的模型 */
 @property (nonatomic,strong) FreeArticleModel *freeArticleModel;
 
+/** 传入导航控制器 */
+@property (nonatomic,strong) UINavigationController *nav;
+
 @end

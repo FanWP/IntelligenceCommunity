@@ -12,7 +12,7 @@
 
 
 /** 是否支持物品交换 */
-@property (nonatomic,assign) BOOL change;
+@property (nonatomic,assign) NSInteger change;
 
 /** 内容 */
 @property (nonatomic,copy) NSString *content;
@@ -34,7 +34,7 @@
 @property (nonatomic,copy) NSString *price;
 
 /** 销售状态 */
-@property (nonatomic,assign) BOOL saleStatus;
+@property (nonatomic,assign) NSInteger saleStatus;
 
 /** 原价 */
 @property (nonatomic,copy) NSString *srcPrice;
@@ -63,6 +63,12 @@
 
 /** 图片的uRL数组 */
 @property (nonatomic,strong) NSArray *imagesArr;
+
+
+/** 头像 */
+@property (nonatomic,copy) NSString *headimage;
+/** 用户名 */
+@property (nonatomic,copy) NSString *nickname;
 
 
 

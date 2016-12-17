@@ -45,8 +45,9 @@
         
         CGFloat textH = [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFont15} context:nil].size.height;
         
-        _contentH = imageH + textH + 115;
-        MJRefreshLog(@"contentH--%f",_contentH);
+//        _contentH = imageH + textH + 115;
+        _contentH = textH + 115;
+//        MJRefreshLog(@"contentH--%f",_contentH);
         
     }
     return _contentH;
