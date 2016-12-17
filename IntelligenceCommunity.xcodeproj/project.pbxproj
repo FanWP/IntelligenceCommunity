@@ -114,6 +114,8 @@
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
 		710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F30ED1E0264FA00E256C6 /* YYTextView.m */; };
 		B2DF503E12DEBB83D31B2323 /* libPods-IntelligenceCommunity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */; };
+		D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D702430D1E04CA610033B78C /* Foundation+Log.m */; };
+		D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D70243101E04CC340033B78C /* FreeArticleHeaderView.m */; };
 		D70A89C51E027D4A00BCE03C /* NeighborhoodMessageTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89C41E027D4A00BCE03C /* NeighborhoodMessageTableVC.m */; };
 		D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89C71E027FED00BCE03C /* neighborhoodSendMessageVC.m */; };
 		D70A89CD1E028A4500BCE03C /* CommunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89CA1E028A4500BCE03C /* CommunityCell.m */; };
@@ -133,6 +135,10 @@
 		D71BC1361E0389910093357C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D71BC12A1E0389900093357C /* README.md */; };
 		D71BC1391E0393DE0093357C /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1381E0393DE0093357C /* Const.m */; };
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
+		D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD231E04DB450094602C /* NSDate+Extension.m */; };
+		D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */; };
+		D759D1EC1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */; };
+		D759D1EF1E03BFBB002B9F2D /* CommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -363,6 +369,9 @@
 		710F30EC1E0264FA00E256C6 /* YYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextView.h; sourceTree = "<group>"; };
 		710F30ED1E0264FA00E256C6 /* YYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextView.m; sourceTree = "<group>"; };
 		A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.debug.xcconfig"; sourceTree = "<group>"; };
+		D702430D1E04CA610033B78C /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		D702430F1E04CC340033B78C /* FreeArticleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleHeaderView.h; sourceTree = "<group>"; };
+		D70243101E04CC340033B78C /* FreeArticleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleHeaderView.m; sourceTree = "<group>"; };
 		D70A89C31E027D4A00BCE03C /* NeighborhoodMessageTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMessageTableVC.h; sourceTree = "<group>"; };
 		D70A89C41E027D4A00BCE03C /* NeighborhoodMessageTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMessageTableVC.m; sourceTree = "<group>"; };
 		D70A89C61E027FEC00BCE03C /* neighborhoodSendMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neighborhoodSendMessageVC.h; sourceTree = "<group>"; };
@@ -400,6 +409,14 @@
 		D71BC1381E0393DE0093357C /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Const.m; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/Const.m; sourceTree = SOURCE_ROOT; };
 		D73533B11E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMainCommonTableVC.h; sourceTree = "<group>"; };
 		D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMainCommonTableVC.m; sourceTree = "<group>"; };
+		D753AD221E04DB450094602C /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		D753AD231E04DB450094602C /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		D753AD2B1E04E7680094602C /* SmartCommunityPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCommunityPhotosView.h; sourceTree = "<group>"; };
+		D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartCommunityPhotosView.m; sourceTree = "<group>"; };
+		D759D1EA1E03BD7F002B9F2D /* FreeArticleDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleDetailTableVC.h; sourceTree = "<group>"; };
+		D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleDetailTableVC.m; sourceTree = "<group>"; };
+		D759D1ED1E03BFBB002B9F2D /* CommunityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityDetailCell.h; sourceTree = "<group>"; };
+		D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityDetailCell.m; sourceTree = "<group>"; };
 		DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -434,6 +451,8 @@
 			children = (
 				1808970D1DE59DCB0049A180 /* FreeArticleViewController.h */,
 				1808970E1DE59DCB0049A180 /* FreeArticleViewController.m */,
+				D759D1EA1E03BD7F002B9F2D /* FreeArticleDetailTableVC.h */,
+				D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -506,6 +525,10 @@
 				D70A89CA1E028A4500BCE03C /* CommunityCell.m */,
 				D70A89CB1E028A4500BCE03C /* MaterialsAreadlySaleView.h */,
 				D70A89CC1E028A4500BCE03C /* MaterialsAreadlySaleView.m */,
+				D759D1ED1E03BFBB002B9F2D /* CommunityDetailCell.h */,
+				D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */,
+				D702430F1E04CC340033B78C /* FreeArticleHeaderView.h */,
+				D70243101E04CC340033B78C /* FreeArticleHeaderView.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -752,6 +775,8 @@
 		185ADBD01DE4149500CD556D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D753AD221E04DB450094602C /* NSDate+Extension.h */,
+				D753AD231E04DB450094602C /* NSDate+Extension.m */,
 				185ADBDD1DE414DC00CD556D /* UIView+MyExtension.h */,
 				185ADBDE1DE414DC00CD556D /* UIView+MyExtension.m */,
 				185ADBD31DE414AA00CD556D /* UIView+CGRect.h */,
@@ -822,6 +847,7 @@
 			children = (
 				18B002781DE2C9D700D8FE56 /* main.m */,
 				18B002AA1DE2D8D800D8FE56 /* ICPrefixHeader.pch */,
+				D702430D1E04CA610033B78C /* Foundation+Log.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -985,6 +1011,8 @@
 		18B002D71DE2E4B500D8FE56 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D753AD2B1E04E7680094602C /* SmartCommunityPhotosView.h */,
+				D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */,
 				18B002F71DE2EE6D00D8FE56 /* HeaderView.h */,
 				18B002F81DE2EE6D00D8FE56 /* HeaderView.m */,
 				18B003021DE3045600D8FE56 /* NoticeCell.h */,
@@ -1386,12 +1414,14 @@
 				184719EB1DE811ED0081DABE /* CostListViewCell.m in Sources */,
 				18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */,
 				185ADBDA1DE414AA00CD556D /* UIView+CGRect.m in Sources */,
+				D759D1EF1E03BFBB002B9F2D /* CommunityDetailCell.m in Sources */,
 				1857BD151DF68E0E00E5F1DE /* ProListModel.m in Sources */,
 				18B0027F1DE2C9D700D8FE56 /* ViewController.m in Sources */,
 				1840713B1DF7FA30000DA659 /* ServiceProvidersListModel.m in Sources */,
 				187A23851DEC318C00D921FC /* PropertyFeeBillingDetailViewCell.m in Sources */,
 				1857BD271DF68EE200E5F1DE /* ShoppingCartViewCell.m in Sources */,
 				180897181DE59E9A0049A180 /* RepairsViewController.m in Sources */,
+				D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */,
 				184B1D111DE6E0F500F8F56E /* SearchViewController.m in Sources */,
 				1857BD311DF6AF2900E5F1DE /* ShoppingCartBottomView.m in Sources */,
 				D71BC1351E0389910093357C /* NSString+MJExtension.m in Sources */,
@@ -1402,6 +1432,7 @@
 				18B002C01DE2DF0800D8FE56 /* RootNavigationController.m in Sources */,
 				710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */,
 				D71BC12C1E0389900093357C /* MJExtensionConst.m in Sources */,
+				D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */,
 				18B002D81DE2E4B500D8FE56 /* MainViewController.m in Sources */,
 				185ADBEF1DE44ECA00CD556D /* NeighborhoodCircleCell.m in Sources */,
 				187A23701DEBD51900D921FC /* PropertyFeeViewController.m in Sources */,
@@ -1428,6 +1459,7 @@
 				1840712B1DF7B53C000DA659 /* CommodityDetailTopViewCell.m in Sources */,
 				18B002E41DE2E5FA00D8FE56 /* NeighborhoodCircleViewController.m in Sources */,
 				187383C41DF123060088544A /* CommunityServiceListCell.m in Sources */,
+				D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */,
 				185ADBDC1DE414AA00CD556D /* UIImage+FixOrientation.m in Sources */,
 				18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */,
 				D71BC1341E0389900093357C /* NSObject+MJProperty.m in Sources */,
@@ -1479,8 +1511,10 @@
 				184B1D2F1DE6E5C000F8F56E /* WUAlbumGroupViewController.m in Sources */,
 				D71BC1301E0389900093357C /* MJPropertyType.m in Sources */,
 				184B1D2E1DE6E5C000F8F56E /* WUAlbumAsset.m in Sources */,
+				D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */,
 				1857BD1E1DF68E7500E5F1DE /* RightTableViewCell.m in Sources */,
 				18B002791DE2C9D700D8FE56 /* main.m in Sources */,
+				D759D1EC1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m in Sources */,
 				1857BD2B1DF68EEC00E5F1DE /* ShoppingCartModel.m in Sources */,
 				184B1D021DE6CCB800F8F56E /* CacheObject.m in Sources */,
 				1857BD281DF68EE200E5F1DE /* ShoppingCartView.m in Sources */,

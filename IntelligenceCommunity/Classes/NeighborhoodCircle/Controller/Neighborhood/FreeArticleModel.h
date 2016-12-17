@@ -50,6 +50,23 @@
 @property (nonatomic,copy) NSString *userid;
 
 
+/** 点赞的数量 */
+@property (nonatomic,copy) NSString *number;
+
+
+
+
+//额外属性
+/** 计算闲置物品内容的高度和图片以及顶部的高度，cell的总体高度 */
+@property (nonatomic,assign) CGFloat contentH;
+
+
+/** 图片的uRL数组 */
+@property (nonatomic,strong) NSArray *imagesArr;
+
+
+
+
 
 
 

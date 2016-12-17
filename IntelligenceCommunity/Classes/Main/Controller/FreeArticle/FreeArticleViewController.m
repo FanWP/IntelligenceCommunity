@@ -8,7 +8,11 @@
 
 #import "FreeArticleViewController.h"
 #import "CommunityCell.h"
+#import "FreeArticleHeaderView.h"  //单元格顶部的发布详情
+
+
 #import "SearchViewController.h"    //关键字搜索
+#import "FreeArticleDetailTableVC.h" //闲置物品详情
 
 
 #import "FreeArticleModel.h"
@@ -22,6 +26,14 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
 @property(nonatomic,strong) UISearchBar *searchBar;     //搜索栏
 @property(nonatomic,retain) NSString *keywordSearchString;  //关键字
+
+/** 接收到的服务器返回的数据数组 */
+@property (nonatomic,strong) NSMutableArray *FreeArticleArr;
+
+/** 每页显示多少条数据 */
+@property (nonatomic,assign) NSInteger pageSize;
+/** 当前页 */
+@property (nonatomic,assign) NSInteger pageNum;
 
 @end
 
@@ -40,11 +52,8 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     [self setupRefresh];
     
-//    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-//    _searchBar.placeholder = @"搜索";
-//    _searchBar.delegate = self;
-//    self.navigationItem.titleView = _searchBar;
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(action:)];
+    //添加搜索框
+    [self addSearchBar];
 
     
     [self setupRightBar];
@@ -52,6 +61,20 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 
 
+-(void)addSearchBar
+{
+    UIView *searchView = [[UIView alloc] initWithFrame:CGRectMake(10, 64, KWidth - 20, 44)];
+    searchView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:searchView];
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 15.6, searchView.width, 28)];
+    _searchBar.placeholder = @"搜索";
+    _searchBar.backgroundColor = [UIColor grayColor];
+    _searchBar.delegate = self;
+    [searchView addSubview:_searchBar];
+}
+
+#pragma mark ==========/** 添加上下拉数据 */============
+/** 添加上下拉数据 */
 - (void)setupRefresh
 {
 
@@ -60,36 +83,78 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
     
     self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreFreeArticle)];
-
 }
 
 
 //下拉刷新
 -(void)loadNewFreeArticle
 {
+    
+    //结束上拉刷新
     [self.tableView.mj_footer endRefreshing];
+    
+    
+    self.pageSize = 10;
+    self.pageNum = 1;
     
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     parmas[@"userId"] = UserID;
     parmas[@"sessionId"] = SessionID;
+    parmas[@"pageNum"] = @(self.pageNum);
+    parmas[@"pageSize"] = @(self.pageSize);
     
     
     NSString*url = @"find/sellingThings/list";
     
     [[RequestManager manager] JSONRequestWithType:Smart_community urlString:url method:RequestMethodPost timeout:30 parameters:parmas success:^(id  _Nullable responseObject) {
         
-        MJRefreshLog(@"闲置物品显示成功：%@",responseObject);
+        [self.tableView.mj_header endRefreshing];
+        
+        MJRefreshLog(@"闲置物品下拉显示成功：%@",responseObject);
+        _FreeArticleArr = [FreeArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+        
+        if (_FreeArticleArr.count > 0) {
+            self.pageNum++;
+            [self.tableView reloadData];
+        }
         
     } faile:^(NSError * _Nullable error) {
-        MJRefreshLog(@"闲置物品失败:%@",error);
+        MJRefreshLog(@"闲置物品下拉失败:%@",error);
+        [self.tableView.mj_header endRefreshing];
     }];
-
 }
 
 //上拉刷新
 -(void)loadMoreFreeArticle
 {
+    //结束下拉刷新
+    [self.tableView.mj_header endRefreshing];
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userId"] = UserID;
+    parmas[@"sessionId"] = SessionID;
+    parmas[@"pageNum"] = @(self.pageNum);
+    parmas[@"pageSize"] = @(self.pageSize);
+    
+    
+    NSString*url = @"find/sellingThings/list";
+    
+    [[RequestManager manager] JSONRequestWithType:Smart_community urlString:url method:RequestMethodPost timeout:30 parameters:parmas success:^(id  _Nullable responseObject) {
+        
         [self.tableView.mj_header endRefreshing];
+        MJRefreshLog(@"闲置物品加载更多显示成功：%@",responseObject);
+        NSArray *arr = [FreeArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+        
+        if (arr.count > 0) {
+            [self.FreeArticleArr addObjectsFromArray:arr];
+            self.pageNum++;
+            [self.tableView reloadData];
+        }
+    } faile:^(NSError * _Nullable error) {
+        MJRefreshLog(@"闲置物品加载更多失败:%@",error);
+        
+        [self.tableView.mj_header endRefreshing];
+    }];
     
     
 }
@@ -113,6 +178,9 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 -(void)initializeComponent{
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    _tableView.x = 0;
+    _tableView.y = 44;
+    _tableView.height = KHeight - _tableView.y;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -125,44 +193,50 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 #pragma mark--delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 1;
+        return self.FreeArticleArr.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 5;
+    return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 300;
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    //设置假数据
+    FreeArticleModel *model = _FreeArticleArr[section];
+    return model.contentH ;
+
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    //设置假数据
+    FreeArticleModel *model = _FreeArticleArr[section];
+    FreeArticleHeaderView *header = [[FreeArticleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 350)];
+    header.freeArticleModel = model;
+    return header;
+    
+    
+
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:communityCellIdentifier forIndexPath:indexPath];
     
-    //设置假数据
-    FreeArticleModel *model = [[FreeArticleModel alloc] init];
-    
-    
-    model.likeUserid = @"8tpiti3q";
-    model.createTime = @"2016-12-22";
-    model.saleStatus = NO;
-    model.price = @"6575";
-    model.srcPrice = @"654";
-    model.content = @"t43wt235y52y3hiegrhovwovwo    ";
-    
-    
-    
-    
-    
-    
-    cell.freeArticleModel = model;
-    
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ICLog_2(@"%ld",(long)indexPath.row);
+    //设置跳转并传入模型数据
+    FreeArticleDetailTableVC *VC = [[FreeArticleDetailTableVC alloc] init];
+    VC.model = self.FreeArticleArr[indexPath.row];
+    [self.navigationController pushViewController:VC animated:YES];
+ 
 }
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     
@@ -184,14 +258,6 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
