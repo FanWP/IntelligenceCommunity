@@ -12,4 +12,7 @@
 
 -(CGRect)rectAspectFitRectForSize:(CGSize)size;
 
+/** 图片裁剪 */
++ (NSData *)reSizeImageData:(UIImage *)sourceImage maxImageSize:(CGFloat)maxImageSize maxSizeWithKB:(CGFloat) maxSize;
+
 @end

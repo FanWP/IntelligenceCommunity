@@ -10,6 +10,8 @@
 #import "OwnerViewCell.h"
 #import "OwnerHeaderView.h"
 
+#import "FeedbackVC.h"// 意见反馈
+
 NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 
 @interface OwnerViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -125,6 +127,8 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 //意见反馈
 -(void)feedback:(NSIndexPath *)indexPath{
     
+    FeedbackVC *feedbackVC = [[FeedbackVC alloc] init];
+    [self.navigationController pushViewController:feedbackVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
