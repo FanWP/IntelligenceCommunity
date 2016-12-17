@@ -121,6 +121,10 @@
 		71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB761E04DC2100CE467A /* FeedbackVC.m */; };
 		71EFEB7A1E04E73700CE467A /* MyShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB791E04E73700CE467A /* MyShoppingCartVC.m */; };
 		71EFEB7D1E04E7AD00CE467A /* MyOrdersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB7C1E04E7AD00CE467A /* MyOrdersVC.m */; };
+		71EFEB811E05188400CE467A /* NoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB801E05188400CE467A /* NoticeVC.m */; };
+		71EFEB841E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB831E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m */; };
+		71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB861E05245500CE467A /* NoticeListTableVC.m */; };
+		71EFEB8B1E05265A00CE467A /* NoticeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB8A1E05265A00CE467A /* NoticeListCell.m */; };
 		B2DF503E12DEBB83D31B2323 /* libPods-IntelligenceCommunity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */; };
 		D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D702430D1E04CA610033B78C /* Foundation+Log.m */; };
 		D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D70243101E04CC340033B78C /* FreeArticleHeaderView.m */; };
@@ -392,6 +396,14 @@
 		71EFEB791E04E73700CE467A /* MyShoppingCartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShoppingCartVC.m; sourceTree = "<group>"; };
 		71EFEB7B1E04E7AD00CE467A /* MyOrdersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersVC.h; sourceTree = "<group>"; };
 		71EFEB7C1E04E7AD00CE467A /* MyOrdersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersVC.m; sourceTree = "<group>"; };
+		71EFEB7F1E05188400CE467A /* NoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeVC.h; sourceTree = "<group>"; };
+		71EFEB801E05188400CE467A /* NoticeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeVC.m; sourceTree = "<group>"; };
+		71EFEB821E051DD600CE467A /* UILabel+AdjustHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+AdjustHeightAndWidth.h"; sourceTree = "<group>"; };
+		71EFEB831E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+AdjustHeightAndWidth.m"; sourceTree = "<group>"; };
+		71EFEB851E05245500CE467A /* NoticeListTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListTableVC.h; sourceTree = "<group>"; };
+		71EFEB861E05245500CE467A /* NoticeListTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListTableVC.m; sourceTree = "<group>"; };
+		71EFEB891E05265A00CE467A /* NoticeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListCell.h; sourceTree = "<group>"; };
+		71EFEB8A1E05265A00CE467A /* NoticeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListCell.m; sourceTree = "<group>"; };
 		A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.debug.xcconfig"; sourceTree = "<group>"; };
 		D702430D1E04CA610033B78C /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		D702430F1E04CC340033B78C /* FreeArticleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleHeaderView.h; sourceTree = "<group>"; };
@@ -815,6 +827,8 @@
 				185ADBD61DE414AA00CD556D /* UIScrollView+HeaderView.m */,
 				185ADBD71DE414AA00CD556D /* UIImage+FixOrientation.h */,
 				185ADBD81DE414AA00CD556D /* UIImage+FixOrientation.m */,
+				71EFEB821E051DD600CE467A /* UILabel+AdjustHeightAndWidth.h */,
+				71EFEB831E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1019,6 +1033,7 @@
 			children = (
 				18B002D41DE2E4B500D8FE56 /* MainViewController.h */,
 				18B002D51DE2E4B500D8FE56 /* MainViewController.m */,
+				71EFEB7E1E05186F00CE467A /* Notice */,
 				180897101DE59E060049A180 /* Community */,
 				180897011DE5995D0049A180 /* FreeArticle */,
 				180897121DE59E270049A180 /* Repairs */,
@@ -1049,6 +1064,7 @@
 				18B003031DE3045600D8FE56 /* NoticeCell.m */,
 				185ADBC31DE3E43400CD556D /* ServiceListCell.h */,
 				185ADBC41DE3E43400CD556D /* ServiceListCell.m */,
+				71EFEB881E05262B00CE467A /* Notice */,
 				1808971C1DE59F2A0049A180 /* Community */,
 				1808971D1DE59F2A0049A180 /* FreeArticle */,
 				1808971E1DE59F2A0049A180 /* PayMoney */,
@@ -1235,6 +1251,26 @@
 			children = (
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		71EFEB7E1E05186F00CE467A /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				71EFEB7F1E05188400CE467A /* NoticeVC.h */,
+				71EFEB801E05188400CE467A /* NoticeVC.m */,
+				71EFEB851E05245500CE467A /* NoticeListTableVC.h */,
+				71EFEB861E05245500CE467A /* NoticeListTableVC.m */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		71EFEB881E05262B00CE467A /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				71EFEB891E05265A00CE467A /* NoticeListCell.h */,
+				71EFEB8A1E05265A00CE467A /* NoticeListCell.m */,
+			);
+			path = Notice;
 			sourceTree = "<group>";
 		};
 		974C17013F9DD1E00D839AA2 /* Frameworks */ = {
@@ -1501,6 +1537,7 @@
 				184B1D0E1DE6E0CD00F8F56E /* WebViewController.m in Sources */,
 				187A23791DEC0E3700D921FC /* PropertyFeeOtherInfoHeaderView.m in Sources */,
 				18B002BD1DE2DEA900D8FE56 /* UINavigationController+Default.m in Sources */,
+				71EFEB841E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m in Sources */,
 				D71BC12D1E0389900093357C /* MJFoundation.m in Sources */,
 				184C99CE1DEFF12600588FFD /* HelpCenterModel.m in Sources */,
 				184B1D2D1DE6E5C000F8F56E /* WUAlbum.m in Sources */,
@@ -1551,6 +1588,7 @@
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
+				71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */,
 				D71BC1331E0389900093357C /* NSObject+MJKeyValue.m in Sources */,
 				187A23761DEBFC8800D921FC /* PropertyFeeHeaderView.m in Sources */,
 				187383C71DF153440088544A /* ServiceProvidersListViewController.m in Sources */,
@@ -1577,6 +1615,7 @@
 				D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */,
 				D71BC1361E0389910093357C /* README.md in Sources */,
 				184071221DF7A1BA000DA659 /* CommodityListHeaderView.m in Sources */,
+				71EFEB8B1E05265A00CE467A /* NoticeListCell.m in Sources */,
 				18466EAA1DFAB015009541D6 /* PayMentViewController.m in Sources */,
 				185ADBC51DE3E43400CD556D /* ServiceListCell.m in Sources */,
 				180897151DE59E620049A180 /* CommunityViewController.m in Sources */,
@@ -1591,6 +1630,7 @@
 				187A23731DEBD58800D921FC /* PropertyFeeViewCell.m in Sources */,
 				184C99C81DEFD25700588FFD /* HelpCenterViewCell.m in Sources */,
 				185ADBCC1DE4134000CD556D /* CellModel.m in Sources */,
+				71EFEB811E05188400CE467A /* NoticeVC.m in Sources */,
 				185ADBE51DE432CA00CD556D /* OwnerHeaderView.m in Sources */,
 				D71BC1311E0389900093357C /* NSObject+MJClass.m in Sources */,
 				187383CD1DF1676A0088544A /* ServiceProvidersListViewCell.m in Sources */,
