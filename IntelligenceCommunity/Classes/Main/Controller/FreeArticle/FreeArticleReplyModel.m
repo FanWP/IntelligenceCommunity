@@ -44,7 +44,6 @@
         [attrReply addAttributes:@{NSForegroundColorAttributeName : [UIColor greenColor]} range:[reply rangeOfString:self.userNickName]];
         [attrReply addAttributes:@{NSForegroundColorAttributeName : [UIColor greenColor]} range:[reply rangeOfString:self.replyToUserNickName]];
         
-        
     }
 
     return attrReply;
