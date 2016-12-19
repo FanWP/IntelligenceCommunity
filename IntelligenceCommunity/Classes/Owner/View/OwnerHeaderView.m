@@ -24,63 +24,98 @@
     
     _backGroundImageView = [[UIImageView alloc] init];
     _backGroundImageView.contentMode = UIViewContentModeScaleToFill;
-    _backGroundImageView.image = [UIImage imageNamed:@"3.jpg"];
+    _backGroundImageView.image = [UIImage imageNamed:@"background"];
     [self addSubview:_backGroundImageView];
     [_backGroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(0);
+        make.top.left.right.mas_equalTo(0);
+        make.height.mas_offset(130);
     }];
-    //用户头像、名称
-//    @property(nonatomic,strong) UIImageView *userImageView;
-//    @property(nonatomic,strong) UILabel *userName;
+    
+    
+    
     _userImageView = [[UIImageView alloc] init];
     _userImageView.contentMode = UIViewContentModeScaleAspectFit;
     _userImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
     [self addSubview:_userImageView];
     [_userImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(10);
-        make.centerX.mas_equalTo(self.mas_centerX);
+        make.top.mas_offset(55);
+        make.left.mas_offset(25);
         make.width.height.mas_equalTo(70);
     }];
+    
+    
+    
     _userNameLabel = [[UILabel alloc] init];
     _userNameLabel.text = @"王先生";
-    _userNameLabel.textColor = [UIColor grayColor];
-    _userNameLabel.textAlignment = NSTextAlignmentCenter;
-    _userNameLabel.font = UIFontNormal;
+    _userNameLabel.textAlignment = NSTextAlignmentLeft;
+    _userNameLabel.textColor = HexColor(0x505050);
+    _userNameLabel.font = UIFont15;
     [self addSubview:_userNameLabel];
     [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_userImageView.mas_bottom).offset(5);
-        make.left.right.equalTo(_userImageView);
+        make.top.mas_offset(75);
+        make.left.equalTo(_userImageView.mas_right).offset(14);
+        make.right.mas_offset(-25);
         make.height.mas_equalTo(30);
     }];
-    //我的发布、好友
-//    @property(nonatomic,strong) UILabel *onwerUploadLabel;
-//    @property(nonatomic,strong) UILabel *friendCountLabel;
-    _ownerUploadLabel = [[UILabel alloc] init];
-    _ownerUploadLabel.text = @"43\n我的发布";
-    _ownerUploadLabel.numberOfLines = 0;
-    _ownerUploadLabel.textColor = [UIColor grayColor];
-    _ownerUploadLabel.textAlignment = NSTextAlignmentCenter;
-    _ownerUploadLabel.font = UIFontNormal;
-    [self addSubview:_ownerUploadLabel];
-    [_ownerUploadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.mas_centerX).offset(-70);
-        make.bottom.mas_equalTo(-20);
-        make.width.mas_equalTo(100);
-    }];
-    _friendCountLabel = [[UILabel alloc] init];
-    _friendCountLabel.text = @"21\n好友";
-    _friendCountLabel.numberOfLines = 0;
-    _friendCountLabel.textColor = [UIColor grayColor];
-    _friendCountLabel.textAlignment = NSTextAlignmentCenter;
-    _friendCountLabel.font = UIFontNormal;
-    [self addSubview:_friendCountLabel];
-    [_friendCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.mas_centerX).offset(70);
-        make.bottom.equalTo(_ownerUploadLabel.mas_bottom);
-        make.width.equalTo(_ownerUploadLabel.mas_width);
+    
+    
+    
+    _ownerUploadCountButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [_ownerUploadCountButton.titleLabel setFont:UIFontSmall];
+    [_ownerUploadCountButton setTitleColor:HexColor(0x505050) forState:(UIControlStateNormal)];
+    [self addSubview:_ownerUploadCountButton];
+    [_ownerUploadCountButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_offset(130);
+        make.left.mas_offset(58.5);
+        make.width.mas_offset(129);
+        make.height.mas_offset(20);
     }];
     
+    
+    _ownerUploadButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [_ownerUploadButton.titleLabel setFont:UIFont15];
+    [_ownerUploadButton setTitleColor:HexColor(0x161616) forState:(UIControlStateNormal)];
+    [self addSubview:_ownerUploadButton];
+    [_ownerUploadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_ownerUploadCountButton.mas_bottom);
+        make.left.equalTo(_ownerUploadCountButton.mas_left);
+        make.width.equalTo(_ownerUploadCountButton);
+        make.height.mas_offset(30);
+    }];
+    
+
+    
+    _friendCountButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [_friendCountButton.titleLabel setFont:UIFontSmall];
+    [_friendCountButton setTitleColor:HexColor(0x505050) forState:(UIControlStateNormal)];
+    [self addSubview:_friendCountButton];
+    [_friendCountButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_ownerUploadCountButton.mas_top);
+        make.right.mas_offset(-58.5);
+        make.width.height.equalTo(_ownerUploadCountButton);
+    }];
+    
+    
+    
+    _friendButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [_friendButton.titleLabel setFont:UIFont15];
+    [_friendButton setTitleColor:HexColor(0x161616) forState:(UIControlStateNormal)];
+    [self addSubview:_friendButton];
+    [_friendButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_ownerUploadButton.mas_top);
+        make.left.equalTo(_friendCountButton.mas_left);
+        make.width.height.equalTo(_ownerUploadButton);
+    }];
+
+    
+    
+    [_ownerUploadCountButton setTitle:@"35" forState:(UIControlStateNormal)];
+    [_ownerUploadButton setTitle:@"我的发布" forState:(UIControlStateNormal)];
+    
+    [_friendCountButton setTitle:@"321" forState:(UIControlStateNormal)];
+    [_friendButton setTitle:@"我的好友" forState:(UIControlStateNormal)];
 }
+
 
 
 

@@ -25,7 +25,7 @@
     
     _leftImageView = [[UIImageView alloc] init];
     _leftImageView.contentMode = UIViewContentModeCenter;
-    _leftImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+//    _leftImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
     [self addSubview:_leftImageView];
     [_leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);

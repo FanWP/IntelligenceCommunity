@@ -82,6 +82,14 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [HUD dismiss];
+}
+
+
 
 // 初始化
 - (void)initializeComponent

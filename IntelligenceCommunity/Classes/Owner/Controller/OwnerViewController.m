@@ -10,6 +10,7 @@
 #import "OwnerViewCell.h"
 #import "OwnerHeaderView.h"
 
+#import "HouseAuthorityVC.h"// 房屋认证
 #import "FeedbackVC.h"// 意见反馈
 
 NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
@@ -19,6 +20,7 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 @property(nonatomic,strong) UITableView *tableView;
 
 @property(nonatomic,strong) NSArray <SectionModel *>*dataArray;
+@property (nonatomic,strong) NSArray *leftImagesArray;
 
 @end
 
@@ -27,6 +29,8 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.navigationItem.title = @"我的";
+    
+    _leftImagesArray = @[[UIImage imageNamed:@"houses"],[UIImage imageNamed:@"Payment"],[UIImage imageNamed:@"Orders"],[UIImage imageNamed:@"address"],[UIImage imageNamed:@"shopping cart"],[UIImage imageNamed:@"opinion"]];
 }
 
 - (void)viewDidLoad {
@@ -45,7 +49,7 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
     [_tableView registerClass:[OwnerViewCell class] forCellReuseIdentifier:OwnerViewCellIdentifier];
-    OwnerHeaderView *view = [[OwnerHeaderView alloc] initWithFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 200)];
+    OwnerHeaderView *view = [[OwnerHeaderView alloc] initWithFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 183.5)];
 
     _tableView.tableHeaderView = view;
 }
@@ -54,13 +58,14 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 }
 -(void)createData{
     
+    CellModel *houseAuthority = [CellModel cellModelWith:@"房屋认证" sel:@"houseAuthority:"];
     CellModel *payMoneyRecord = [CellModel cellModelWith:@"缴费记录" sel:@"payMoneyRecord:"];
     CellModel *ownerOrder = [CellModel cellModelWith:@"我的订单" sel:@"ownerOrder:"];
     CellModel *shipingAddress = [CellModel cellModelWith:@"收货地址" sel:@"shipAddress:"];
     CellModel *ownerShoppingChart = [CellModel cellModelWith:@"我的购物车" sel:@"ownerShoppingChart:"];
     CellModel *feedback = [CellModel cellModelWith:@"意见反馈" sel:@"feedback:"];
     
-    SectionModel *section_1 = [SectionModel sectionModelWith:nil cells:@[payMoneyRecord,ownerOrder,shipingAddress,ownerShoppingChart,feedback]];
+    SectionModel *section_1 = [SectionModel sectionModelWith:nil cells:@[houseAuthority,payMoneyRecord,ownerOrder,shipingAddress,ownerShoppingChart,feedback]];
     
     _dataArray = @[section_1];
 }
@@ -86,6 +91,8 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     OwnerViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OwnerViewCellIdentifier forIndexPath:indexPath];
     CellModel *model = [self getCellModelWith:indexPath];
     cell.titleLabel.text = model.title;
+    cell.imageView.image = _leftImagesArray[indexPath.row];
+    cell.titleLabel.textColor = [UIColor blackColor];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,6 +115,11 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     return row;
 }
 #pragma mark--cell点击方法
+//房屋认证
+- (void)houseAuthority:(NSIndexPath *)indexPath{
+    HouseAuthorityVC *houseAuthorityVC = [[HouseAuthorityVC alloc] init];
+    [self.navigationController pushViewController:houseAuthorityVC animated:YES];
+}
 //缴费记录
 -(void)payMoneyRecord:(NSIndexPath *)indexPath{
     
@@ -126,10 +138,20 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 }
 //意见反馈
 -(void)feedback:(NSIndexPath *)indexPath{
-    
     FeedbackVC *feedbackVC = [[FeedbackVC alloc] init];
     [self.navigationController pushViewController:feedbackVC animated:YES];
 }
+
+//- (NSArray<UIImage *> *)leftImagesArray
+//{
+//    if (!_leftImagesArray)
+//    {
+//        _leftImagesArray = @[[UIImage imageNamed:@"houses"],[UIImage imageNamed:@"Payment"],[UIImage imageNamed:@"Orders"],[UIImage imageNamed:@"address"],[UIImage imageNamed:@"shopping cart"],[UIImage imageNamed:@"opinion"]];
+//    }
+//    
+//    return _leftImagesArray;
+//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
