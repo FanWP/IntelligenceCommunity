@@ -9,6 +9,7 @@
 #import "FreeArticleViewController.h"
 #import "CommunityCell.h"
 #import "FreeArticleHeaderView.h"  //单元格顶部的发布详情
+#import "FreeArticleReplyCell.h"   //底部评论的cell
 
 
 #import "SearchViewController.h"    //关键字搜索
@@ -17,6 +18,7 @@
 
 
 #import "FreeArticleModel.h"
+#import "FreeArticleReplyModel.h"
 
 NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
@@ -112,6 +114,26 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         [self.tableView.mj_header endRefreshing];
         
         MJRefreshLog(@"闲置物品下拉显示成功：%@",responseObject);
+        
+        
+        //把数据保存到沙盒里的plist文件
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *plistPath1= [paths objectAtIndex:0];
+        
+        NSLog(@"%@",plistPath1);
+        //得到完整的路径名
+        NSString *fileName = [plistPath1 stringByAppendingPathComponent:@"cityCode.plist"];
+        //NSMutableDictionary *myDic = [[NSMutableDictionary alloc]init];
+        //[myDic setValuesForKeysWithDictionary:cityDic];
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ([fm createFileAtPath:fileName contents:nil attributes:nil] ==YES) {
+            
+            [responseObject writeToFile:fileName atomically:YES];
+            NSLog(@"文件写入完成");  
+        }
+        
+        
+        
         _FreeArticleArr = [FreeArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
         
         if (_FreeArticleArr.count > 0) {
@@ -179,7 +201,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 -(void)initializeComponent{
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     _tableView.x = 0;
     _tableView.y = 44;
     _tableView.height = KHeight - _tableView.y;
@@ -192,6 +214,9 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     [_tableView registerClass:[CommunityCell class] forCellReuseIdentifier:communityCellIdentifier];
 }
+
+
+
 #pragma mark--delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -199,11 +224,13 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    //设置假数据
+    FreeArticleModel *model = _FreeArticleArr[section];
+    return model.friendsRefList.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 0;
+    return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -216,7 +243,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    //设置假数据
+    //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
     FreeArticleHeaderView *header = [[FreeArticleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 350)];
     header.freeArticleModel = model;
@@ -224,21 +251,33 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     return header;
     
     
-
+    
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    FreeArticleReplyCell *cell = [FreeArticleReplyCell cellWithTableView:tableView];
+    
+    FreeArticleModel *model = _FreeArticleArr[indexPath.section];
+//    cell.replyModel = model.friendsRefList[indexPath.row];
+    
+    
+    FreeArticleReplyModel *modelReply = [[FreeArticleReplyModel alloc] init];
+    modelReply.userNickName = @"我也是醉了";
+    modelReply.replyToUserNickName = @"你就是醉了";
+    modelReply.conment = @"你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了";
 
+        cell.replyModel = modelReply;
+    
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //设置跳转并传入模型数据
-    FreeArticleDetailTableVC *VC = [[FreeArticleDetailTableVC alloc] init];
-    VC.model = self.FreeArticleArr[indexPath.row];
-    [self.navigationController pushViewController:VC animated:YES];
- 
+//    //设置跳转并传入模型数据
+//    FreeArticleDetailTableVC *VC = [[FreeArticleDetailTableVC alloc] init];
+//    VC.model = self.FreeArticleArr[indexPath.row];
+//    [self.navigationController pushViewController:VC animated:YES];
+    
 }
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     

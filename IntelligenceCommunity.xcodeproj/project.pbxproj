@@ -148,6 +148,8 @@
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
 		D73C21331E076D8800D90FFB /* FreeArticleAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */; };
 		D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */; };
+		D74687111E07BBEE00FF8AF8 /* FreeArticleReplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D74687101E07BBEE00FF8AF8 /* FreeArticleReplyModel.m */; };
+		D74687171E07D40E00FF8AF8 /* FreeArticleReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D74687161E07D40E00FF8AF8 /* FreeArticleReplyCell.m */; };
 		D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD231E04DB450094602C /* NSDate+Extension.m */; };
 		D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */; };
 		D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */; };
@@ -449,6 +451,10 @@
 		D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleAddViewController.m; sourceTree = "<group>"; };
 		D73C21341E07714F00D90FFB /* YYPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYPlaceholderTextView.h; sourceTree = "<group>"; };
 		D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYPlaceholderTextView.m; sourceTree = "<group>"; };
+		D746870F1E07BBEE00FF8AF8 /* FreeArticleReplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeArticleReplyModel.h; path = IntelligenceCommunity/Classes/Main/Controller/FreeArticle/FreeArticleReplyModel.h; sourceTree = SOURCE_ROOT; };
+		D74687101E07BBEE00FF8AF8 /* FreeArticleReplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FreeArticleReplyModel.m; path = IntelligenceCommunity/Classes/Main/Controller/FreeArticle/FreeArticleReplyModel.m; sourceTree = SOURCE_ROOT; };
+		D74687151E07D40E00FF8AF8 /* FreeArticleReplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleReplyCell.h; sourceTree = "<group>"; };
+		D74687161E07D40E00FF8AF8 /* FreeArticleReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleReplyCell.m; sourceTree = "<group>"; };
 		D753AD221E04DB450094602C /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		D753AD231E04DB450094602C /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		D753AD2B1E04E7680094602C /* SmartCommunityPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCommunityPhotosView.h; sourceTree = "<group>"; };
@@ -577,6 +583,8 @@
 				D70243101E04CC340033B78C /* FreeArticleHeaderView.m */,
 				D753AD2E1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.h */,
 				D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */,
+				D74687151E07D40E00FF8AF8 /* FreeArticleReplyCell.h */,
+				D74687161E07D40E00FF8AF8 /* FreeArticleReplyCell.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -647,6 +655,8 @@
 			children = (
 				D70A89CF1E028BB400BCE03C /* FreeArticleModel.h */,
 				D70A89D01E028BB400BCE03C /* FreeArticleModel.m */,
+				D746870F1E07BBEE00FF8AF8 /* FreeArticleReplyModel.h */,
+				D74687101E07BBEE00FF8AF8 /* FreeArticleReplyModel.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -1610,6 +1620,7 @@
 				D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */,
 				185ADBDC1DE414AA00CD556D /* UIImage+FixOrientation.m in Sources */,
 				18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */,
+				D74687111E07BBEE00FF8AF8 /* FreeArticleReplyModel.m in Sources */,
 				D71BC1341E0389900093357C /* NSObject+MJProperty.m in Sources */,
 				18B002F91DE2EE6D00D8FE56 /* HeaderView.m in Sources */,
 				18B003041DE3045600D8FE56 /* NoticeCell.m in Sources */,
@@ -1638,6 +1649,7 @@
 				184B1D321DE6E5C000F8F56E /* WUImageBrowseView.m in Sources */,
 				1808970F1DE59DCB0049A180 /* FreeArticleViewController.m in Sources */,
 				187A23731DEBD58800D921FC /* PropertyFeeViewCell.m in Sources */,
+				D74687171E07D40E00FF8AF8 /* FreeArticleReplyCell.m in Sources */,
 				184C99C81DEFD25700588FFD /* HelpCenterViewCell.m in Sources */,
 				185ADBCC1DE4134000CD556D /* CellModel.m in Sources */,
 				71EFEB811E05188400CE467A /* NoticeVC.m in Sources */,

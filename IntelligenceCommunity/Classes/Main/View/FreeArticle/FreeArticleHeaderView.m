@@ -318,8 +318,10 @@
     }
     
     self.commentCountLabel.text = @"43r";
-    
-    [self.communityImageView load:[NSString stringWithFormat:@"%@",[freeArticleModel.imagesArr firstObject]] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+
+    NSString *strurl = [NSString stringWithFormat:@"%@%@",Smart_community_picURL,[freeArticleModel.imagesArr firstObject]];
+
+    [self.communityImageView load:strurl placeholderImage:[UIImage imageNamed:@"3.jpg"]];
 
 //    self.communityImageView.size = [SmartCommunityPhotosView sizeWithCount:freeArticleModel.imagesArr.count];
 //    self.communityImageView.photos = freeArticleModel.imagesArr;

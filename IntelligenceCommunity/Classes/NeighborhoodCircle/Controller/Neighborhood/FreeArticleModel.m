@@ -10,6 +10,8 @@
 #import "NSDate+Extension.h"
 #import "SmartCommunityPhotosView.h"
 
+#import "FreeArticleReplyModel.h" //评论回复
+
 @implementation FreeArticleModel
 
 
@@ -18,6 +20,16 @@
     return @{ @"ID" : @"id" };
 
 }
+
+
++(NSDictionary *)mj_objectClassInArray
+{
+    
+    return @{
+             @"friendsRefList":[FreeArticleReplyModel class]
+             };
+}
+
 
 
 -(NSArray *)imagesArr

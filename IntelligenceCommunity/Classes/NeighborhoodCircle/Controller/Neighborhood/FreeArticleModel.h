@@ -70,13 +70,8 @@
 /** 用户名 */
 @property (nonatomic,copy) NSString *nickname;
 
-
-
-
-
-
-
-
+/** 用户的回复列表 */
+@property (nonatomic,strong) NSArray *friendsRefList;
 
 
 
