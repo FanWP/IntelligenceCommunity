@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-// 房屋认证
+// 房屋认证-添加房屋
 @interface HouseAuthorityVC : UIViewController
 
 @end
