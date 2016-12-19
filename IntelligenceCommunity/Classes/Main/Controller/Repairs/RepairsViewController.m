@@ -281,14 +281,19 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
         {
             ICLog_2(@"提交报修请求成功：");
             
+            [HUD showSuccessMessage:@"提交报修成功~"];
+            
             self.repairContentTextView.text = @"";
             
             [_bottomView removeFromSuperview];
             
             [self creatRepairPictureView];
+            
         }
         else
         {
+            [HUD showErrorMessage:@"提交报修失败"];
+            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

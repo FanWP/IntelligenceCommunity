@@ -21,7 +21,7 @@
 }
 
 +(void)showMessage:(NSString*)message {
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
     [SVProgressHUD showInfoWithStatus:message];
 }
 

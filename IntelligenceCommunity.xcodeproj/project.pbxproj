@@ -113,6 +113,7 @@
 		18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573561DED6804000FDBF6 /* PropertyFeeBillingModel.m */; };
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
 		710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F30ED1E0264FA00E256C6 /* YYTextView.m */; };
+		711CBE291E077017009E4257 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 711CBE281E077017009E4257 /* AlertView.m */; };
 		71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A841E0390F500067125 /* RepairStatusTableVC.m */; };
 		71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A871E0391E900067125 /* RepairStatusCell.m */; };
 		71A20A8B1E03B58A00067125 /* HouseImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A8A1E03B58A00067125 /* HouseImageCell.m */; };
@@ -381,6 +382,8 @@
 		25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligenceCommunity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		710F30EC1E0264FA00E256C6 /* YYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextView.h; sourceTree = "<group>"; };
 		710F30ED1E0264FA00E256C6 /* YYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextView.m; sourceTree = "<group>"; };
+		711CBE271E077017009E4257 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertView.h; path = WUAlbum/AlertView.h; sourceTree = "<group>"; };
+		711CBE281E077017009E4257 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertView.m; path = WUAlbum/AlertView.m; sourceTree = "<group>"; };
 		71A20A831E0390F500067125 /* RepairStatusTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusTableVC.h; sourceTree = "<group>"; };
 		71A20A841E0390F500067125 /* RepairStatusTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairStatusTableVC.m; sourceTree = "<group>"; };
 		71A20A861E0391E900067125 /* RepairStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusCell.h; sourceTree = "<group>"; };
@@ -987,6 +990,8 @@
 		18B002B11DE2DC9B00D8FE56 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				711CBE271E077017009E4257 /* AlertView.h */,
+				711CBE281E077017009E4257 /* AlertView.m */,
 				184B1D181DE6E5C000F8F56E /* WUAlbum */,
 			);
 			path = Other;
@@ -1536,6 +1541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				184C99CB1DEFD41200588FFD /* HelpCenterViewController.m in Sources */,
+				711CBE291E077017009E4257 /* AlertView.m in Sources */,
 				184FF9DA1DF95BAB005FD46E /* DeterminePayViewController.m in Sources */,
 				184B1CF81DE6CC7000F8F56E /* HUD.m in Sources */,
 				184071351DF7D61B000DA659 /* UITableView+HYBCacheHeight.m in Sources */,

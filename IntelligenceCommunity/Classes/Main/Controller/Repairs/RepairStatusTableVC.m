@@ -38,6 +38,14 @@
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [HUD dismiss];
+}
+
+
 
 - (void)dataFindRepairStatus
 {
@@ -50,34 +58,6 @@
     
     NSString *urlString = [NSString stringWithFormat:@"%@pro_api/find/repairRef/list",Smart_community_URL];
 
-//    ICLog_2(@"-------:%@",parameters);
-//    
-//    NSString *urlString = @"find/repairRef/list";
-//    
-//    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:urlString method:RequestMethodPost timeout:50 parameters:parameters success:^(id  _Nullable responseObject)
-//    {
-//        ICLog_2(@"报修状态返回：%@",responseObject);
-//        
-//        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
-//        
-//        if (resultCode == 1000)
-//        {
-//            
-//            self.repairStatusMArray = [RepairModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
-//            
-//            [self.tableView reloadData];
-//        }
-//        else
-//        {
-//            ICLog_2(@"不是1000");
-//        }
-//        
-//    } faile:^(NSError * _Nullable error)
-//    {
-//        ICLog_2(@"报修状态返回错误：%@",error);
-//        
-//    }];
-    
     ICLog_2(@"接口：：%@",urlString);
     
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -104,6 +84,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
     {
         ICLog_2(@"报修状态返回错误：%@",error);
+        
+        [HUD showErrorMessage:@"数据加载失败"];
     }];
 }
 
@@ -154,18 +136,29 @@
                  
                  NSArray *moreArray = [RepairModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
                  
-                 [_repairStatusMArray addObjectsFromArray:moreArray];
-                 
-                 [self.tableView reloadData];
+                 if (moreArray.count == 0)
+                 {
+                     [HUD showMessage:@"没有更多数据了"];
+                 }
+                 else
+                 {
+                     [_repairStatusMArray addObjectsFromArray:moreArray];
+                     
+                     [self.tableView reloadData];
+                 }
              }
              else
              {
+                 [HUD showErrorMessage:@"数据加载失败"];
+                 
                  ICLog_2(@"没有更多数据了");
              }
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
          {
              ICLog_2(@"报修状态返回错误：%@",error);
+             
+             [HUD showErrorMessage:@"数据加载失败"];
          }];
     }];
 }
