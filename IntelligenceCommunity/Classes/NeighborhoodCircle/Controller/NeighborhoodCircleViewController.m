@@ -89,12 +89,9 @@
 
     
     //设置子控件button
-    
     NSArray *arr = @[@"消息",@"约活动",@"发动态",@"寻物招领"];
     NSArray *imgArr = @[@"information",@"activity",@"friend",@"goods"];
-    
-    
-    
+
     for (NSInteger i = 0; i < arr.count; i++) {
         
         UIButton *button = [[UIButton alloc] init];
@@ -114,13 +111,11 @@
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [imgView addSubview:button];
     }
- 
 }
 
 
 -(void)rightBarClick:(UIButton *)button
 {
-    
     switch (button.tag) {
         case 1://消息
         {
@@ -191,10 +186,8 @@
     NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), 50) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
 
         [self titleClick:(index - 1)];
-        
         NSLog(@"%ld",index);
     }];
-    
     
     self.headerView = headerView;
     [self.view addSubview:headerView];
@@ -218,7 +211,6 @@
 
 - (void)setupContentView
 {
-    
     // 不要自动调整inset
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -236,10 +228,6 @@
     
     // 添加第一个控制器的view
     [self scrollViewDidEndScrollingAnimation:contentView];
-    
-
-
-
 }
 
 #pragma mark - <UIScrollViewDelegate>

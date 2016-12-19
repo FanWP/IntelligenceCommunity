@@ -112,7 +112,6 @@
 		18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573531DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m */; };
 		18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573561DED6804000FDBF6 /* PropertyFeeBillingModel.m */; };
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
-		710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F30ED1E0264FA00E256C6 /* YYTextView.m */; };
 		71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A841E0390F500067125 /* RepairStatusTableVC.m */; };
 		71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A871E0391E900067125 /* RepairStatusCell.m */; };
 		71A20A8B1E03B58A00067125 /* HouseImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A8A1E03B58A00067125 /* HouseImageCell.m */; };
@@ -147,6 +146,8 @@
 		D71BC1361E0389910093357C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D71BC12A1E0389900093357C /* README.md */; };
 		D71BC1391E0393DE0093357C /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1381E0393DE0093357C /* Const.m */; };
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
+		D73C21331E076D8800D90FFB /* FreeArticleAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */; };
+		D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */; };
 		D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD231E04DB450094602C /* NSDate+Extension.m */; };
 		D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */; };
 		D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */; };
@@ -379,8 +380,6 @@
 		18F573581DED6E58000FDBF6 /* ParkingFeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingFeeViewController.h; sourceTree = "<group>"; };
 		18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingFeeViewController.m; sourceTree = "<group>"; };
 		25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligenceCommunity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		710F30EC1E0264FA00E256C6 /* YYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextView.h; sourceTree = "<group>"; };
-		710F30ED1E0264FA00E256C6 /* YYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextView.m; sourceTree = "<group>"; };
 		71A20A831E0390F500067125 /* RepairStatusTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusTableVC.h; sourceTree = "<group>"; };
 		71A20A841E0390F500067125 /* RepairStatusTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairStatusTableVC.m; sourceTree = "<group>"; };
 		71A20A861E0391E900067125 /* RepairStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusCell.h; sourceTree = "<group>"; };
@@ -446,6 +445,10 @@
 		D71BC1381E0393DE0093357C /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Const.m; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/Const.m; sourceTree = SOURCE_ROOT; };
 		D73533B11E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMainCommonTableVC.h; sourceTree = "<group>"; };
 		D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMainCommonTableVC.m; sourceTree = "<group>"; };
+		D73C21311E076D8800D90FFB /* FreeArticleAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleAddViewController.h; sourceTree = "<group>"; };
+		D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleAddViewController.m; sourceTree = "<group>"; };
+		D73C21341E07714F00D90FFB /* YYPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYPlaceholderTextView.h; sourceTree = "<group>"; };
+		D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYPlaceholderTextView.m; sourceTree = "<group>"; };
 		D753AD221E04DB450094602C /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		D753AD231E04DB450094602C /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		D753AD2B1E04E7680094602C /* SmartCommunityPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCommunityPhotosView.h; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 				1808970E1DE59DCB0049A180 /* FreeArticleViewController.m */,
 				D759D1EA1E03BD7F002B9F2D /* FreeArticleDetailTableVC.h */,
 				D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */,
+				D73C21311E076D8800D90FFB /* FreeArticleAddViewController.h */,
+				D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */,
 			);
 			path = FreeArticle;
 			sourceTree = "<group>";
@@ -1061,6 +1066,8 @@
 		18B002D71DE2E4B500D8FE56 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D73C21341E07714F00D90FFB /* YYPlaceholderTextView.h */,
+				D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */,
 				D753AD2B1E04E7680094602C /* SmartCommunityPhotosView.h */,
 				D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */,
 				18B002F71DE2EE6D00D8FE56 /* HeaderView.h */,
@@ -1193,8 +1200,6 @@
 		710F30EB1E0264D100E256C6 /* Repairs */ = {
 			isa = PBXGroup;
 			children = (
-				710F30EC1E0264FA00E256C6 /* YYTextView.h */,
-				710F30ED1E0264FA00E256C6 /* YYTextView.m */,
 				71A20A861E0391E900067125 /* RepairStatusCell.h */,
 				71A20A871E0391E900067125 /* RepairStatusCell.m */,
 			);
@@ -1569,7 +1574,6 @@
 				184071251DF7ACF1000DA659 /* CommodityDetailViewController.m in Sources */,
 				1808971B1DE59EAF0049A180 /* PayMoneyViewController.m in Sources */,
 				18B002C01DE2DF0800D8FE56 /* RootNavigationController.m in Sources */,
-				710F30EE1E0264FA00E256C6 /* YYTextView.m in Sources */,
 				D71BC12C1E0389900093357C /* MJExtensionConst.m in Sources */,
 				D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */,
 				18B002D81DE2E4B500D8FE56 /* MainViewController.m in Sources */,
@@ -1610,6 +1614,7 @@
 				18B002F91DE2EE6D00D8FE56 /* HeaderView.m in Sources */,
 				18B003041DE3045600D8FE56 /* NoticeCell.m in Sources */,
 				184B1D011DE6CCB800F8F56E /* CacheImage.m in Sources */,
+				D73C21331E076D8800D90FFB /* FreeArticleAddViewController.m in Sources */,
 				D71BC12E1E0389900093357C /* MJProperty.m in Sources */,
 				71EFEB7A1E04E73700CE467A /* MyShoppingCartVC.m in Sources */,
 				18466EA71DFAA4B5009541D6 /* DeterminePayToCommodityDetailVC.m in Sources */,
@@ -1661,6 +1666,7 @@
 				D71BC1301E0389900093357C /* MJPropertyType.m in Sources */,
 				184B1D2E1DE6E5C000F8F56E /* WUAlbumAsset.m in Sources */,
 				D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */,
+				D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */,
 				D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */,
 				1857BD1E1DF68E7500E5F1DE /* RightTableViewCell.m in Sources */,
 				18B002791DE2C9D700D8FE56 /* main.m in Sources */,

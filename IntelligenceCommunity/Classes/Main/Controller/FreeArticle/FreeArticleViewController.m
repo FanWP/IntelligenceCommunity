@@ -13,6 +13,7 @@
 
 #import "SearchViewController.h"    //关键字搜索
 #import "FreeArticleDetailTableVC.h" //闲置物品详情
+#import "FreeArticleAddViewController.h" //闲置物品添加
 
 
 #import "FreeArticleModel.h"
@@ -168,7 +169,8 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
 - (void)rightBarClick
 {
-    MJRefreshLog(@"rightBarClick");
+    FreeArticleAddViewController *VC= [[FreeArticleAddViewController alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
 
 }
 

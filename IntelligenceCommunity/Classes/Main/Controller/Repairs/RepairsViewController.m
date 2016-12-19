@@ -27,7 +27,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 
 @property (nonatomic,strong) UILabel *householdInfoLabel;// 住户信息
 @property (nonatomic,strong) UILabel *repairContentLabel;// 报修内容描述
-@property (nonatomic,strong) YYTextView *repairContentTextView;// 输入报修内容
+@property (nonatomic,strong) YYPlaceholderTextView *repairContentTextView;// 输入报修内容
 @property (nonatomic,strong) UILabel *attachmentLabel;// 附件
 @property (nonatomic,strong) UITextField *repairPictureBottomTF;// 图片附件底部的框
 @property (nonatomic,strong) UIView *repairPictureView;// 报修图片的view
@@ -117,7 +117,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     
     
     // 输入报修内容
-    _repairContentTextView = [[YYTextView alloc] init];
+    _repairContentTextView = [[YYPlaceholderTextView alloc] init];
     _repairContentTextView.placeholder = @"   请描述报修内容...";
     _repairContentTextView.font = UIFontSmall;
     _repairContentTextView.layer.cornerRadius = 5.0;
