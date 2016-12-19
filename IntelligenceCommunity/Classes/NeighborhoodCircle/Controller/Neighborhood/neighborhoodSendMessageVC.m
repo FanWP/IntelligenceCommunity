@@ -7,6 +7,7 @@
 //
 
 #import "neighborhoodSendMessageVC.h"
+#import "YYPlaceholderTextView.h"
 
 @interface neighborhoodSendMessageVC ()
 
@@ -46,7 +47,7 @@
 - (void)setupControls
 {
     //设置输入框
-    YYTextView *view = [[YYTextView alloc] initWithFrame:CGRectMake(20, 90, KWidth - 40, 200)];
+    YYPlaceholderTextView *view = [[YYPlaceholderTextView alloc] initWithFrame:CGRectMake(20, 90, KWidth - 40, 200)];
     view.backgroundColor = [UIColor whiteColor];
     view.placeholder = @"我想说...";
     view.placeholderColor = [UIColor grayColor];

@@ -11,7 +11,7 @@
 @interface FeedbackVC ()
 
 @property (nonatomic,strong) UILabel *suggestionDescribeLabel;// 意见描述
-@property (nonatomic,strong) YYTextView *feedbackContentTextView;// 输入意见内容
+@property (nonatomic,strong) YYPlaceholderTextView *feedbackContentTextView;// 输入意见内容
 @property (nonatomic,strong) UIButton *handFeedbackButton;// 提交意见
 
 @end
@@ -42,7 +42,7 @@
     
     
     // 输入意见内容
-    _feedbackContentTextView = [[YYTextView alloc] init];
+    _feedbackContentTextView = [[YYPlaceholderTextView alloc] init];
     _feedbackContentTextView.placeholder = @"  请输入要反馈的意见内容...";
     _feedbackContentTextView.font = UIFontSmall;
     _feedbackContentTextView.layer.cornerRadius = 5.0;
