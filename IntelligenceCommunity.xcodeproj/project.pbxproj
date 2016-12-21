@@ -155,6 +155,8 @@
 		D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */; };
 		D759D1EC1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */; };
 		D759D1EF1E03BFBB002B9F2D /* CommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */; };
+		D78828671E08C04A008E21B0 /* HouseAuthorityTelNumberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D78828661E08C04A008E21B0 /* HouseAuthorityTelNumberVC.m */; };
+		D7ECDCA21E0936450034D40B /* NeighborhoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7ECDCA11E0936450034D40B /* NeighborhoodModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -465,6 +467,10 @@
 		D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleDetailTableVC.m; sourceTree = "<group>"; };
 		D759D1ED1E03BFBB002B9F2D /* CommunityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityDetailCell.h; sourceTree = "<group>"; };
 		D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityDetailCell.m; sourceTree = "<group>"; };
+		D78828651E08C04A008E21B0 /* HouseAuthorityTelNumberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityTelNumberVC.h; sourceTree = "<group>"; };
+		D78828661E08C04A008E21B0 /* HouseAuthorityTelNumberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityTelNumberVC.m; sourceTree = "<group>"; };
+		D7ECDCA01E0936450034D40B /* NeighborhoodModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NeighborhoodModel.h; path = IntelligenceCommunity/Classes/Main/Controller/FreeArticle/NeighborhoodModel.h; sourceTree = SOURCE_ROOT; };
+		D7ECDCA11E0936450034D40B /* NeighborhoodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NeighborhoodModel.m; path = IntelligenceCommunity/Classes/Main/Controller/FreeArticle/NeighborhoodModel.m; sourceTree = SOURCE_ROOT; };
 		DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1110,6 +1116,8 @@
 		18B002DE1DE2E50900D8FE56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D7ECDCA01E0936450034D40B /* NeighborhoodModel.h */,
+				D7ECDCA11E0936450034D40B /* NeighborhoodModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1228,6 +1236,8 @@
 		71EFEB6C1E04D90E00CE467A /* HouseAuthority */ = {
 			isa = PBXGroup;
 			children = (
+				D78828651E08C04A008E21B0 /* HouseAuthorityTelNumberVC.h */,
+				D78828661E08C04A008E21B0 /* HouseAuthorityTelNumberVC.m */,
 				71EFEB721E04D97700CE467A /* HouseAuthorityVC.h */,
 				71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */,
 			);
@@ -1563,6 +1573,7 @@
 				184B1D2D1DE6E5C000F8F56E /* WUAlbum.m in Sources */,
 				D70A89C51E027D4A00BCE03C /* NeighborhoodMessageTableVC.m in Sources */,
 				D71BC1321E0389900093357C /* NSObject+MJCoding.m in Sources */,
+				D78828671E08C04A008E21B0 /* HouseAuthorityTelNumberVC.m in Sources */,
 				18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */,
 				184719EB1DE811ED0081DABE /* CostListViewCell.m in Sources */,
 				18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */,
@@ -1600,6 +1611,7 @@
 				1857BD2E1DF68F2700E5F1DE /* CommodityListViewController.m in Sources */,
 				18B002EA1DE2E65500D8FE56 /* KeyViewController.m in Sources */,
 				185ADBCF1DE4135100CD556D /* SectionModel.m in Sources */,
+				D7ECDCA21E0936450034D40B /* NeighborhoodModel.m in Sources */,
 				1857BD1F1DF68E7500E5F1DE /* PopTableViewCustom.m in Sources */,
 				D71BC1391E0393DE0093357C /* Const.m in Sources */,
 				185ADBE21DE41F0B00CD556D /* OwnerViewCell.m in Sources */,

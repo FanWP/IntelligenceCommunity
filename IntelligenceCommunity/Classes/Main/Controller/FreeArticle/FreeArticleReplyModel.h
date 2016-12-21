@@ -47,6 +47,9 @@
 /** 设置回复的高度 */
 @property (nonatomic,assign) CGFloat contentH;
 
+/** 设置评论还是回复  0-no-评论  1-yes-回复 */
+@property (nonatomic,assign) BOOL flag;
+
 
 
 

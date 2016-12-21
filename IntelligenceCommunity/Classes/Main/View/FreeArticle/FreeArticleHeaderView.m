@@ -19,7 +19,6 @@
 
 @interface FreeArticleHeaderView ()
 
-@property(nonatomic,strong) CALayer *lineLayer;
 
 //用户头像
 @property(nonatomic,strong) UIImageView *userImageView;
@@ -43,7 +42,7 @@
 @property(nonatomic,strong) UIButton *thumbUpButton;
 @property(nonatomic,strong) UILabel *thumbUpCountLabel;
 //评论、数量
-@property(nonatomic,strong) UIButton *commentsButton;
+
 @property(nonatomic,strong) UILabel *commentCountLabel;
 
 //物品信息
@@ -261,10 +260,6 @@
         _communityContentLabel.userInteractionEnabled = YES;
         [self.communityContentLabel addGestureRecognizer:tap];
         
-        //分割线
-        _lineLayer = [[CALayer alloc] init];
-        _lineLayer.backgroundColor = [UIColor grayColor].CGColor;
-        [self.layer addSublayer:_lineLayer];
 
     }
 
@@ -279,7 +274,7 @@
     _freeArticleModel = freeArticleModel;
     
     [self.userImageView load:freeArticleModel.images placeholderImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"]];
-    self.userNameLabel.text = freeArticleModel.likeUserid;
+    self.userNameLabel.text = freeArticleModel.nickname;
     self.uploadTimeLabel.text = freeArticleModel.createTime;
     
     //是否支持交换
@@ -304,7 +299,7 @@
     self.oldPriceLabel.text = [NSString stringWithFormat:@"原价%@",freeArticleModel.srcPrice];
     
     //设置点赞数据
-    self.thumbUpCountLabel.text = freeArticleModel.number;
+    self.thumbUpCountLabel.text = [NSString stringWithFormat:@"%ld",(long)freeArticleModel.number];
     
     NSString *str = [NSString stringWithFormat:@",%@,",UserID];
     
@@ -363,7 +358,6 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
 
-    _lineLayer.frame = CGRectMake(0, self.bounds.size.height-5, self.width, 8);
 }
 
 
@@ -373,8 +367,17 @@
 - (void)thumbUpButtonClick:(UIButton *)button
 {
     button.selected = !button.selected;
-
+    if (button.selected)
+    {
+        self.freeArticleModel.number += 1;
+    }else
+    {
+        self.freeArticleModel.number -= 1;
     
+    }
+    //设置点赞数据
+    self.thumbUpCountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.freeArticleModel.number];
+
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     parmas[@"userId"] = UserID;
     parmas[@"sessionId"] = SessionID;
@@ -407,7 +410,7 @@
 //回复
 -(void)commentsButtonClick
 {
-    MJRefreshLog(@"回复");
+    
 }
 
 //点击文字的时候进行跳转

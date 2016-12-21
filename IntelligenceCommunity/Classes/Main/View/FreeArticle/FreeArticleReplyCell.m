@@ -47,6 +47,7 @@
 {
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     }
     return self;
@@ -60,11 +61,12 @@
     _replyModel = replyModel;
 
     //设置内容
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 0, KWidth - 20, replyModel.contentH)];
-    view.backgroundColor = [UIColor lightGrayColor];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 0, KWidth - 20, replyModel.contentH + 10)];
+    view.backgroundColor = MJRefreshColor(223, 227, 224);
     [self.contentView addSubview:view];
     
-    UILabel *commentLable = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, view.width - 16, 30)];
+    UILabel *commentLable = [[UILabel alloc] initWithFrame:CGRectMake(7, 0, view.width - 12, replyModel.contentH)];
+    commentLable.centerY = view.height * 0.5;
     commentLable.numberOfLines = 0;
     commentLable.font = UIFont13;
     commentLable.attributedText = replyModel.attrText;

@@ -27,27 +27,28 @@
 {
     
     NSMutableAttributedString *attrReply = [[NSMutableAttributedString alloc] init];
-    if (self.replyToUserNickName == nil || self.replyToUserNickName.length == 0) {//评论
+    if (_flag) {//评论
         
-        NSString *reply = [NSString stringWithFormat:@"%@%@",self.userNickName,self.conment];
+        NSString *reply = [NSString stringWithFormat:@"%@：%@",self.userNickName,self.conment];
         attrReply = [[NSMutableAttributedString alloc]initWithString:reply];
         
-        [attrReply addAttributes:@{NSForegroundColorAttributeName : [UIColor greenColor],
+        [attrReply addAttributes:@{NSForegroundColorAttributeName : MJRefreshColor(75, 190, 43),
                                    NSFontAttributeName : UIFont13
                                    
                                    } range:[reply rangeOfString:self.userNickName]];
-
+        [attrReply addAttributes:@{NSFontAttributeName : UIFont13} range:NSMakeRange(0, reply.length)];
+        
     }else//回复
     {
         NSString *reply = [NSString stringWithFormat:@"%@回复%@：%@",self.userNickName,self.replyToUserNickName,self.conment];
         attrReply = [[NSMutableAttributedString alloc] initWithString:reply];
-        [attrReply addAttributes:@{NSForegroundColorAttributeName : [UIColor greenColor]} range:[reply rangeOfString:self.userNickName]];
-        [attrReply addAttributes:@{NSForegroundColorAttributeName : [UIColor greenColor]} range:[reply rangeOfString:self.replyToUserNickName]];
-        
+        [attrReply addAttributes:@{NSForegroundColorAttributeName : MJRefreshColor(75, 190, 43)} range:[reply rangeOfString:self.userNickName]];
+        [attrReply addAttributes:@{NSForegroundColorAttributeName : MJRefreshColor(75, 190, 43)} range:[reply rangeOfString:self.replyToUserNickName]];
+        [attrReply addAttributes:@{NSFontAttributeName : UIFont13} range:NSMakeRange(0, reply.length)];
     }
-
+    
     return attrReply;
-
+    
 }
 
 
@@ -56,9 +57,11 @@
     CGSize maxSize = CGSizeMake(KWidth - 32, MAXFLOAT);
     
     CGFloat contentH = [self.attrText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
-
+    
+    //    MJRefreshLog(@"contentH---:%f",contentH);
+    
     return contentH;
-
+    
 }
 
 

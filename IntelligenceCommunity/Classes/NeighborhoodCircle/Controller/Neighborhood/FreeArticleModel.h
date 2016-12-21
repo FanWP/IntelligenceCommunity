@@ -51,7 +51,7 @@
 
 
 /** 点赞的数量 */
-@property (nonatomic,copy) NSString *number;
+@property (nonatomic,assign) NSInteger number;
 
 
 

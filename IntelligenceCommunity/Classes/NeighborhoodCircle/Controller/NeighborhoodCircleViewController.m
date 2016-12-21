@@ -181,7 +181,8 @@
 
 
 - (void)initializeComponent{
-
+    
+    [self.headerView removeFromSuperview];
     
     NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), 50) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
 
