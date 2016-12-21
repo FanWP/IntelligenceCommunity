@@ -401,18 +401,16 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"sessionid"] = SessionID;
     parmas[@"type"] = @"2";
     parmas[@"conment"] = self.replyTextView.text;
+    
     //判断是回复还是评论
     if (self.isReply) {//回复
         parmas[@"targetId"] = self.replyModel.targetId;
         parmas[@"replyToUserId"] = self.replyModel.replyToUserId;
-    }else//评论
+    }else               //评论
     {
         parmas[@"targetId"] = self.commonModel.ID;
         parmas[@"replyToUserId"] = self.replyModel.userid;
     }
-    
-    
-    
     
     NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];
     MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
@@ -429,11 +427,10 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
             [self.replyView removeFromSuperview];
             [HUD showSuccessMessage:@"发布成功"];
         }
-
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         MJRefreshLog(@"error---%@",error);
     }];
-
 
 }
 
@@ -446,7 +443,6 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 #pragma mark=====创建输入框，弹出键盘======
 -(void)setupKeyboard
 {
-
     [self.replyView removeFromSuperview];
     
     

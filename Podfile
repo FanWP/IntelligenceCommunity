@@ -17,5 +17,6 @@ pod 'SVProgressHUD', '~> 2.0.3'
 pod 'MJRefresh', '~> 3.1.12'
 pod 'NJKWebViewProgress', '~> 0.2.3'
 pod 'FSCalendar', '~> 2.5.1'
+pod 'IQKeyboardManager', '~> 4.0.7'
 
 end

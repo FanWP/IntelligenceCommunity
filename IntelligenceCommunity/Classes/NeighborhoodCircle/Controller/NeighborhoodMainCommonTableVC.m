@@ -123,21 +123,21 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 }
 
--(void)neighborhoodCircleCell:(NeighborhoodCircleCell *)neighborhoodCircleCell clickButtonWithTag:(NSInteger)tag{
-    if (tag == 1) {
-        NSLog(@"点击了对话按钮");
-    }else if (tag == 2){
-        NSLog(@"点击了点赞按钮");
-        neighborhoodCircleCell.thumbUpButton.selected = !neighborhoodCircleCell.thumbUpButton.selected;
-        if (neighborhoodCircleCell.thumbUpButton.selected) {
-        }else{
-        }
-    }else if (tag == 3){
-        NSLog(@"点击了评论按钮");
-    }
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:neighborhoodCircleCell];
-    NSLog(@"indexPath.row===%ld",indexPath.row);
-}
+//-(void)neighborhoodCircleCell:(NeighborhoodCircleCell *)neighborhoodCircleCell clickButtonWithTag:(NSInteger)tag{
+//    if (tag == 1) {
+//        NSLog(@"点击了对话按钮");
+//    }else if (tag == 2){
+//        NSLog(@"点击了点赞按钮");
+//        neighborhoodCircleCell.thumbUpButton.selected = !neighborhoodCircleCell.thumbUpButton.selected;
+//        if (neighborhoodCircleCell.thumbUpButton.selected) {
+//        }else{
+//        }
+//    }else if (tag == 3){
+//        NSLog(@"点击了评论按钮");
+//    }
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:neighborhoodCircleCell];
+//    NSLog(@"indexPath.row===%ld",indexPath.row);
+//}
 
 #pragma mark--delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -146,21 +146,22 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return _NeighborhoodArr.count;
+    return 260;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+//    return _NeighborhoodArr.count;
     
-    return 10;
+    return 20;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NeighborhoodCircleCell *cell = [tableView dequeueReusableCellWithIdentifier:NeighborhoodCircleCellID  forIndexPath:indexPath];
     cell.delegate = self;
     if (indexPath.row == 0) {
-        cell.userNameLabel.text = @"咖啡小猫";
+//        cell.userNameLabel.text = @"咖啡小猫";
     }else{
-        cell.userNameLabel.text = @"咖啡大猫";
+//        cell.userNameLabel.text = @"咖啡大猫";
     }
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;

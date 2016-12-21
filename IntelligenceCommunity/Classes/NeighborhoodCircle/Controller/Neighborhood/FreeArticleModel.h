@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface FreeArticleModel : NSObject
 
 
@@ -26,7 +27,7 @@
 /** 图像 */
 @property (nonatomic,copy) NSString *images;
 
-/** 创建时间 */
+/** 点赞的人的ID */
 @property (nonatomic,copy) NSString *likeUserid;
 
 

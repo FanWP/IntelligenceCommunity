@@ -34,6 +34,10 @@
 /** <#房源信息#> */
 @property (nonatomic,copy) NSString *replyToUserId;
 
+
+/** 创建时间 */
+@property (nonatomic,copy) NSString *createTime;
+
 @end
 
 
