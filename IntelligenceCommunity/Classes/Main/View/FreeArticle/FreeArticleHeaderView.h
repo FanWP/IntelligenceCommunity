@@ -20,4 +20,6 @@
 /** 传入导航控制器 */
 @property (nonatomic,strong) UINavigationController *nav;
 
+@property(nonatomic,strong) UIButton *commentsButton;
+
 @end

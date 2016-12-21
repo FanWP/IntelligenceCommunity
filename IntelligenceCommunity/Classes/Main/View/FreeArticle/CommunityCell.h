@@ -15,10 +15,15 @@
 
 
 @class FreeArticleModel;
+@class FreeArticleReplyModel;
 
 @interface CommunityCell : UITableViewCell
 
 /** 传入cell的模型 */
 @property (nonatomic,strong) FreeArticleModel *freeArticleModel;
+
+
+
+
 
 @end

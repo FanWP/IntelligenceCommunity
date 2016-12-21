@@ -9,6 +9,7 @@
 #import "FreeArticleViewController.h"
 #import "CommunityCell.h"
 #import "FreeArticleHeaderView.h"  //单元格顶部的发布详情
+#import "FreeArticleReplyCell.h"   //底部评论的cell
 
 
 #import "SearchViewController.h"    //关键字搜索
@@ -17,6 +18,7 @@
 
 
 #import "FreeArticleModel.h"
+#import "FreeArticleReplyModel.h"
 
 NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
@@ -36,28 +38,47 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 /** 当前页 */
 @property (nonatomic,assign) NSInteger pageNum;
 
+//评论回复
+/** 回复的输入框 */
+@property (nonatomic,weak) UIView *replyView;
+/** 回复的输入框 */
+@property (nonatomic,weak) UITextView *replyTextView;
+/** 回复消息的模型 */
+@property (nonatomic,strong) FreeArticleReplyModel *replyModel;
+/** 发送按钮 */
+@property (nonatomic,weak) UIButton *sendBtn;
+/** 评论对应的模型 */
+@property (nonatomic,strong) FreeArticleModel *commonModel;
+
+/** 标记设置回复或者是评论 isReply  是否是回复 */
+@property (nonatomic,assign) BOOL isReply;
+
+
 @end
 
 @implementation FreeArticleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     [self defaultViewStyle];
 
     self.title = @"闲置物品处理";
     [self defaultViewStyle];
 
     [self initializeComponent];
-    
-    
+
     [self setupRefresh];
     
     //添加搜索框
     [self addSearchBar];
 
-    
     [self setupRightBar];
+
+    //监听键盘
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    //监听文本框
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:nil];
     
 }
 
@@ -104,25 +125,47 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"pageNum"] = @(self.pageNum);
     parmas[@"pageSize"] = @(self.pageSize);
     
+    MJRefreshLog(@"parmas---:%@",parmas);
     
-    NSString*url = @"find/sellingThings/list";
+    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
     
-    [[RequestManager manager] JSONRequestWithType:Smart_community urlString:url method:RequestMethodPost timeout:30 parameters:parmas success:^(id  _Nullable responseObject) {
+    
+    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_header endRefreshing];
-        
         MJRefreshLog(@"闲置物品下拉显示成功：%@",responseObject);
+
+        //把数据保存到沙盒里的plist文件
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *plistPath1= [paths objectAtIndex:0];
+        
+        NSLog(@"%@",plistPath1);
+        //得到完整的路径名
+        NSString *fileName = [plistPath1 stringByAppendingPathComponent:@"cityCode.plist"];
+
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ([fm createFileAtPath:fileName contents:nil attributes:nil] ==YES) {
+            
+            [responseObject writeToFile:fileName atomically:YES];
+            NSLog(@"文件写入完成");
+        }
+
         _FreeArticleArr = [FreeArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
         
         if (_FreeArticleArr.count > 0) {
             self.pageNum++;
             [self.tableView reloadData];
         }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-    } faile:^(NSError * _Nullable error) {
         MJRefreshLog(@"闲置物品下拉失败:%@",error);
         [self.tableView.mj_header endRefreshing];
+        
     }];
+    
+
 }
 
 //上拉刷新
@@ -137,11 +180,11 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"pageNum"] = @(self.pageNum);
     parmas[@"pageSize"] = @(self.pageSize);
     
+    MJRefreshLog(@"parmas---:%@",parmas);
+    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
     
-    NSString*url = @"find/sellingThings/list";
-    
-    [[RequestManager manager] JSONRequestWithType:Smart_community urlString:url method:RequestMethodPost timeout:30 parameters:parmas success:^(id  _Nullable responseObject) {
-        
+    [[AFHTTPSessionManager manager]POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self.tableView.mj_header endRefreshing];
         MJRefreshLog(@"闲置物品加载更多显示成功：%@",responseObject);
         NSArray *arr = [FreeArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
@@ -151,13 +194,13 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
             self.pageNum++;
             [self.tableView reloadData];
         }
-    } faile:^(NSError * _Nullable error) {
-        MJRefreshLog(@"闲置物品加载更多失败:%@",error);
         
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        MJRefreshLog(@"闲置物品加载更多失败:%@",error);
         [self.tableView.mj_header endRefreshing];
     }];
-    
-    
+ 
 }
 
 
@@ -179,7 +222,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 -(void)initializeComponent{
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     _tableView.x = 0;
     _tableView.y = 44;
     _tableView.height = KHeight - _tableView.y;
@@ -192,6 +235,9 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     [_tableView registerClass:[CommunityCell class] forCellReuseIdentifier:communityCellIdentifier];
 }
+
+
+
 #pragma mark--delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -199,47 +245,138 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    //设置假数据
+    FreeArticleModel *model = _FreeArticleArr[section];
+    return model.friendsRefList.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    //设置数据
+    FreeArticleModel *model = _FreeArticleArr[indexPath.section];
+    FreeArticleReplyModel *replyModel = model.friendsRefList[indexPath.row];
+    return replyModel.contentH + 10;
     
-    return 0;
+    
+//    FreeArticleReplyModel *modelReply = [[FreeArticleReplyModel alloc] init];
+//    modelReply.userNickName = @"我也是醉了";
+//    modelReply.flag = YES;
+//    modelReply.replyToUserNickName = @"你就是醉了";
+//    modelReply.conment = @"你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了";
+//    return modelReply.contentH + 10;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    //设置假数据
+    //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
-    return model.contentH + 200;
+    return model.contentH + 190;
 }
 
+//设置底部分割线的高度
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 8;
+}
 
+//顶部的用户头像和内容
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    //设置假数据
+
+    
+    //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
     FreeArticleHeaderView *header = [[FreeArticleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 350)];
+    header.commentsButton.tag = section;
+    [header.commentsButton addTarget:self action:@selector(commentsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     header.freeArticleModel = model;
     header.nav = self.navigationController;
     return header;
-    
-    
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIImageView *footer = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 8)];
+//    footer.backgroundColor = MJRefreshColor(238, 238, 238);
+    footer.backgroundColor = [UIColor lightGrayColor];
+    return footer;
 
 }
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-
+    FreeArticleReplyCell *cell = [FreeArticleReplyCell cellWithTableView:tableView];
+    
+    FreeArticleModel *model = _FreeArticleArr[indexPath.section];
+    cell.replyModel = model.friendsRefList[indexPath.row];
+    
+    
+//    FreeArticleReplyModel *modelReply = [[FreeArticleReplyModel alloc] init];
+//    modelReply.userNickName = @"我也是醉了";
+//    modelReply.flag = YES;
+//    modelReply.replyToUserNickName = @"你就是醉了";
+//    modelReply.conment = @"你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了你真的是醉了";
+//        cell.replyModel = modelReply;
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    //设置跳转并传入模型数据
-    FreeArticleDetailTableVC *VC = [[FreeArticleDetailTableVC alloc] init];
-    VC.model = self.FreeArticleArr[indexPath.row];
-    [self.navigationController pushViewController:VC animated:YES];
- 
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
+    [self.replyView removeFromSuperview];
+
 }
+
+
+#pragma mark===== 回复评论=============
+//点击回复评论
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    //创建并弹出键盘
+    self.isReply = YES;
+    [self setupKeyboard];
+    FreeArticleModel *model = _FreeArticleArr[indexPath.section];
+    self.replyModel = model.friendsRefList[indexPath.row];
+}
+
+-(void)commentsButtonClick:(UIButton *)button
+{
+    self.commonModel = _FreeArticleArr[button.tag];
+    
+    self.isReply = NO;
+    //创建并弹出键盘
+    [self setupKeyboard];
+    
+}
+
+
+
+/**
+ * 键盘的frame发生改变时调用（显示、隐藏等）
+ */
+- (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+
+    NSDictionary *userInfo = notification.userInfo;
+    // 动画的持续时间
+    
+    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 键盘的frame
+    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    // 执行动画
+    [UIView animateWithDuration:duration animations:^{
+        self.replyView.y = keyboardF.origin.y - 44;
+    }];
+}
+
+
+-(void)textDidChange
+{
+    self.sendBtn.enabled = [self.replyTextView hasText];
+}
+
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     
     SearchViewController *searchController = [[SearchViewController alloc] init];
@@ -247,17 +384,91 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     searchController.searchBlock = ^(NSString *string){
         self.keywordSearchString = string;
         NSLog(@"%@",self.keywordSearchString);
-        
     };
-    
-    
+
     [self.navigationController pushViewController:searchController animated:YES];
     return NO;
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+//发送按钮的点击事件
+-(void)sendBtnClick:(UIButton *)button
+{
+    [self.view endEditing:YES];
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userId"] = UserID;
+    parmas[@"sessionid"] = SessionID;
+    parmas[@"type"] = @"2";
+    parmas[@"conment"] = self.replyTextView.text;
+    
+    //判断是回复还是评论
+    if (self.isReply) {//回复
+        parmas[@"targetId"] = self.replyModel.targetId;
+        parmas[@"replyToUserId"] = self.replyModel.replyToUserId;
+    }else               //评论
+    {
+        parmas[@"targetId"] = self.commonModel.ID;
+        parmas[@"replyToUserId"] = self.replyModel.userid;
+    }
+    
+    NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];
+    MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
+    
+    [HUD showMessage:@"数据提交中"];
+    [[AFHTTPSessionManager manager]POST:url parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        MJRefreshLog(@"responseObject---%@",responseObject);
+        
+        NSNumber *num = responseObject[@"resultCode"];
+        if ([num integerValue] == 1000) {//发布成功
+            [self.replyView removeFromSuperview];
+            [HUD showSuccessMessage:@"发布成功"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        MJRefreshLog(@"error---%@",error);
+    }];
+
+}
+
+//移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark=====创建输入框，弹出键盘======
+-(void)setupKeyboard
+{
+    [self.replyView removeFromSuperview];
+    
+    
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    self.replyView = replyView;
+    
+    //设置输入框
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 44)];
+    self.replyTextView = textView;
+    textView.font = UIFontLarge;
+    
+    [replyView addSubview:textView];
+    
+    replyView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:replyView];
+    [textView becomeFirstResponder];
+    
+    //设置都发送按钮
+    UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(KWidth - 80, 0, 80, 44)];
+    sendBtn.backgroundColor = [UIColor redColor];
+    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [sendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    sendBtn.enabled = NO;
+    self.sendBtn = sendBtn;
+    [sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [replyView addSubview:sendBtn];
 }
 
 

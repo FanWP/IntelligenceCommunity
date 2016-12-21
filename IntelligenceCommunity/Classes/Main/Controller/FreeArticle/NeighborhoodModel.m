@@ -1,69 +1,17 @@
 //
-//  FreeArticleModel.m
+//  NeighborhoodModel.m
 //  IntelligenceCommunity
 //
-//  Created by youyousiji on 16/12/15.
+//  Created by youyousiji on 16/12/20.
 //  Copyright © 2016年 mumu. All rights reserved.
-//  限制物品的接收模型
+//
 
-#import "FreeArticleModel.h"
+#import "NeighborhoodModel.h"
 #import "NSDate+Extension.h"
-#import "SmartCommunityPhotosView.h"
 
-#import "FreeArticleReplyModel.h" //评论回复
-
-@implementation FreeArticleModel
+@implementation NeighborhoodModel
 
 
-+(NSDictionary *)mj_replacedKeyFromPropertyName
-{
-    return @{ @"ID" : @"id" };
-
-}
-
-
-+(NSDictionary *)mj_objectClassInArray
-{
-    
-    return @{
-             @"friendsRefList":[FreeArticleReplyModel class]
-             };
-}
-
-
-
--(NSArray *)imagesArr
-{
-    if (!_imagesArr) {
-        
-        NSArray *arr = [self.images componentsSeparatedByString:@","];
-        _imagesArr = arr;
-    }
-    return _imagesArr;
-}
-
-
--(CGFloat)contentH
-{
-    //计算文字内容的高度
-    if (!_contentH)
-    {
-        CGSize maxSize = CGSizeMake(KWidth - 20, MAXFLOAT);
-        
-        //计算图片的高度
-        CGFloat imageH = [SmartCommunityPhotosView sizeWithCount:self.imagesArr.count].height;
-        
-        NSString *str = _content;
-        
-        CGFloat textH = [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFont15} context:nil].size.height;
-        
-//        _contentH = imageH + textH + 115;
-        _contentH = textH + 115;
-//        MJRefreshLog(@"contentH--%f",_contentH);
-        
-    }
-    return _contentH;
-}
 
 
 -(NSString *)createTime
@@ -116,7 +64,7 @@
         fmt.dateFormat = @"yyyy-MM-dd HH:mm";
         return [fmt stringFromDate:createDate];
     }
-
+    
 }
 
 

@@ -8,6 +8,36 @@
 
 #import "NeighborhoodCircleCell.h"
 
+#import "NeighborhoodModel.h"
+
+
+
+@interface NeighborhoodCircleCell ()
+
+
+//用户头像
+@property(nonatomic,strong) UIImageView *userImageView;
+//用户名
+@property(nonatomic,strong) UILabel *userNameLabel;
+//发布时间
+@property(nonatomic,strong) UILabel *uploadTimeLabel;
+//对话按钮
+@property(nonatomic,strong) UIButton *dialogueButton;
+//图片
+@property(nonatomic,strong) UIImageView *imageView_1;
+@property(nonatomic,strong) UIImageView *imageView_2;
+@property(nonatomic,strong) UIImageView *imageView_3;
+
+//动态内容
+@property(nonatomic,strong) UILabel *dynamicLabel;
+
+//点赞、评论
+@property(nonatomic,strong) UIButton *thumbUpButton;
+@property(nonatomic,strong) UIButton *commentsButton;
+
+
+
+@end
 @implementation NeighborhoodCircleCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -180,5 +210,42 @@
 
     // Configure the view for the selected state
 }
+
+//传值
+-(void)setNeiborhoodModel:(NeighborhoodModel *)neiborhoodModel
+{
+    _neiborhoodModel = neiborhoodModel;
+    //头像
+    [self.userImageView load:neiborhoodModel.headImage placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    //昵称
+    self.userNameLabel.text = neiborhoodModel.userNickName;
+    //发布时间
+    self.uploadTimeLabel.text = neiborhoodModel.createTime;
+    
+
+    /*
+     //用户头像
+     @property(nonatomic,strong) UIImageView *userImageView;
+     //用户名
+     @property(nonatomic,strong) UILabel *userNameLabel;
+     //发布时间
+     @property(nonatomic,strong) UILabel *uploadTimeLabel;
+     //对话按钮
+     @property(nonatomic,strong) UIButton *dialogueButton;
+     //图片
+     @property(nonatomic,strong) UIImageView *imageView_1;
+     @property(nonatomic,strong) UIImageView *imageView_2;
+     @property(nonatomic,strong) UIImageView *imageView_3;
+     
+     //动态内容
+     @property(nonatomic,strong) UILabel *dynamicLabel;
+     
+     //点赞、评论
+     @property(nonatomic,strong) UIButton *thumbUpButton;
+     @property(nonatomic,strong) UIButton *commentsButton;
+     */
+
+}
+
 
 @end

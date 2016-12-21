@@ -1,8 +1,5 @@
-//
-//  XMGPlaceholderTextView.m
-//  01-百思不得姐
-//
-//  Created by xiaomage on 15/8/5.
+
+//  Created by youyousiji on 16/12/17.
 //  Copyright (c) 2015年 小码哥. All rights reserved.
 //
 
