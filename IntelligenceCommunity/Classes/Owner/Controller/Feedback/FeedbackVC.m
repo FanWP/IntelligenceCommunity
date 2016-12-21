@@ -26,6 +26,44 @@
     [self initializeComponent];
 }
 
+- (void)dataHandFeedback
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"userId"] = UserID;
+    parameters[@"receive"] = _feedbackContentTextView.text;
+    parameters[@"sessionId"] = SessionID;
+    
+    ICLog_2(@"提交意见参数：%@",parameters);
+    
+    NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/suggestion",Smart_community_URL];
+    
+    [[AFHTTPSessionManager manager] POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"提交意见返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            _feedbackContentTextView.text = @"";
+            
+            [HUD showSuccessMessage:@"提交成功"];
+        }
+        else
+        {
+            [HUD showErrorMessage:@"提交失败"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        [HUD showErrorMessage:@"提交失败"];
+        
+        ICLog_2(@"提交意见错误：%@",error);
+    }];
+}
+
 - (void)initializeComponent
 {
     // 意见描述
@@ -70,6 +108,15 @@
         make.height.mas_offset(44);
     }];
     
+    
+    // 添加提交意见的点击事件
+    [_handFeedbackButton addTarget:self action:@selector(handFeedbackAction) forControlEvents:(UIControlEventTouchUpInside)];
+    
+}
+
+- (void)handFeedbackAction
+{
+    [self dataHandFeedback];
 }
 
 - (void)didReceiveMemoryWarning {

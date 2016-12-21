@@ -50,11 +50,11 @@
 - (void)dataFindRepairStatus
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"sessionId"] = @"sessionId";
+    parameters[@"sessionId"] = SessionID;
     self.pageNum = 1;// 页数初始值为1
     parameters[@"pageNum"] = @(_pageNum);
     parameters[@"pageSize"] = @"10";
-    parameters[@"userId"] = @"1";
+    parameters[@"userId"] = UserID;
     
     NSString *urlString = [NSString stringWithFormat:@"%@pro_api/find/repairRef/list",Smart_community_URL];
 

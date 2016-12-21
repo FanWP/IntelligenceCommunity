@@ -10,7 +10,9 @@
 #import "OwnerViewCell.h"
 #import "OwnerHeaderView.h"
 
+#import "SettingTableVC.h"// 设置
 #import "HouseAuthorityVC.h"// 房屋认证
+#import "ReceiveAddressTableVC.h"// 收货地址
 #import "FeedbackVC.h"// 意见反馈
 
 NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
@@ -35,13 +37,23 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     
     [self initializeComponent];
     [self createData];
-    
+    [self leftItemSetting];// 设置
 }
+
+- (void)leftItemSetting
+{    
+    self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"houses"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] style:(UIBarButtonItemStylePlain) target:self action:@selector(leftItemSettingAction)];
+}
+- (void)leftItemSettingAction
+{
+    SettingTableVC *settingTableVC = [[SettingTableVC alloc] init];
+    [self.navigationController pushViewController:settingTableVC animated:YES];
+}
+
+
 -(void)initializeComponent{
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -84,7 +96,14 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 50;
+    if (indexPath.row == 0)
+    {
+        return 60;
+    }
+    else
+    {
+        return 40;
+    }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -130,7 +149,8 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 }
 //收货地址
 -(void)shipAddress:(NSIndexPath *)indexPath{
-    
+    ReceiveAddressTableVC *receiveAddressTableVC = [[ReceiveAddressTableVC alloc] init];
+    [self.navigationController pushViewController:receiveAddressTableVC animated:YES];
 }
 //我的购物车
 -(void)ownerShoppingChart:(NSIndexPath *)indexPath{
@@ -142,15 +162,6 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     [self.navigationController pushViewController:feedbackVC animated:YES];
 }
 
-//- (NSArray<UIImage *> *)leftImagesArray
-//{
-//    if (!_leftImagesArray)
-//    {
-//        _leftImagesArray = @[[UIImage imageNamed:@"houses"],[UIImage imageNamed:@"Payment"],[UIImage imageNamed:@"Orders"],[UIImage imageNamed:@"address"],[UIImage imageNamed:@"shopping cart"],[UIImage imageNamed:@"opinion"]];
-//    }
-//    
-//    return _leftImagesArray;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

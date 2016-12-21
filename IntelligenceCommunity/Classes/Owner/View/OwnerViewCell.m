@@ -30,8 +30,8 @@
     [_leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
         make.bottom.mas_equalTo(-5);
-        make.left.mas_equalTo(10);
-        make.width.mas_equalTo(50);
+        make.left.mas_equalTo(15);
+        make.width.mas_equalTo(40);
     }];
     
     _titleLabel = [[UILabel alloc] init];
@@ -42,7 +42,7 @@
     [self addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(_leftImageView.mas_centerY);
-        make.left.equalTo(_leftImageView.mas_right).offset(5);
+        make.left.equalTo(_leftImageView.mas_right);
         make.width.mas_equalTo(100);
         make.height.mas_equalTo(30);
     }];
