@@ -9,6 +9,8 @@
 #import "NeighborhoodModel.h"
 #import "NSDate+Extension.h"
 
+#import "SmartCommunityPhotosView.h"
+
 @implementation NeighborhoodModel
 
 
@@ -65,6 +67,43 @@
         return [fmt stringFromDate:createDate];
     }
     
+}
+
+
+//标题
+-(CGSize)titlewSize
+{
+    
+    CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
+    CGSize  size = [_title boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFont15} context:nil].size;
+    return size;
+}
+
+-(CGSize)photosSize
+{
+    NSArray *arr = [_images componentsSeparatedByString:@","];
+    return  [SmartCommunityPhotosView sizeWithCount:arr.count];
+}
+
+-(CGSize)commenSize
+{
+    CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
+    CGSize  size = [_content boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
+    return size;
+}
+
+-(CGSize)actionTimeSize
+{
+    CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
+    CGSize  size = [_actionTime boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
+    return size;
+}
+
+-(CGSize)addressSize
+{
+    CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
+    CGSize  size = [_address boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
+    return size;
 }
 
 

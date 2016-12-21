@@ -10,14 +10,20 @@
 
 @interface NeighborhoodModel : NSObject
 
+/** 活动的主题 */
+@property (nonatomic,copy) NSString *title;
 
 /** 当前用户昵称 */
 @property (nonatomic,copy) NSString *userNickName;
 /** 头像 */
 @property (nonatomic,copy) NSString *headImage;
+
+/** 图片 */
+@property (nonatomic,copy) NSString *images;
+
 /** 回复评论目标的头像 */
 @property (nonatomic,copy) NSString *replyToUserHeadImage;
-/** 头像 */
+/** ID */
 @property (nonatomic,copy) NSString *ID;
 /** 目标用户ID */
 @property (nonatomic,copy) NSString *targetId;
@@ -26,7 +32,7 @@
 /** 设置评论还是回复  0-no-评论  1-yes-回复 */
 @property (nonatomic,assign) BOOL flag;
 /** 内容 */
-@property (nonatomic,copy) NSString *conment;
+@property (nonatomic,copy) NSString *content;
 /**  */
 @property (nonatomic,copy) NSString *replyToUserNickName;
 /** 1 朋友圈  2闲置物品处理 */
@@ -37,8 +43,37 @@
 
 /** 创建时间 */
 @property (nonatomic,copy) NSString *createTime;
+/** 约活动的时间 */
+@property (nonatomic,copy) NSString *actionTime;
+/** 约活动的地点 */
+@property (nonatomic,copy) NSString *address;
+
+
+
+
+/** 额外属性*/
+
+/** 标题的尺寸 */
+@property (nonatomic,assign) CGSize titlewSize;
+
+/** 图像的尺寸 */
+@property (nonatomic,assign) CGSize photosSize;
+
+/** 内容的尺寸 */
+@property (nonatomic,assign) CGSize commenSize;
+/** 时间的尺寸 */
+@property (nonatomic,assign) CGSize actionTimeSize;
+/** 地点的尺寸 */
+@property (nonatomic,assign) CGSize addressSize;
+
+
 
 @end
+
+
+
+
+
 
 
 

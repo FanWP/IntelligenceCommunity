@@ -11,6 +11,10 @@
 #import "NeighborhoodModel.h"
 
 
+#import "SmartCommunityPhotosView.h"
+
+
+
 
 @interface NeighborhoodCircleCell ()
 
@@ -21,19 +25,28 @@
 @property(nonatomic,strong) UILabel *userNameLabel;
 //发布时间
 @property(nonatomic,strong) UILabel *uploadTimeLabel;
+
+/** 活动的主题 */
+@property (nonatomic,weak) UILabel *titleLable;
+
 //对话按钮
 @property(nonatomic,strong) UIButton *dialogueButton;
-//图片
-@property(nonatomic,strong) UIImageView *imageView_1;
-@property(nonatomic,strong) UIImageView *imageView_2;
-@property(nonatomic,strong) UIImageView *imageView_3;
-
 //动态内容
 @property(nonatomic,strong) UILabel *dynamicLabel;
+//活动时间
+@property(nonatomic,strong) UILabel *actionTimeLabel;
+//活动地点
+@property(nonatomic,strong) UILabel *addressLabel;
 
-//点赞、评论
+// 删除 、点赞、评论
+/** 删除点赞评论的容器 */
+@property (nonatomic,weak) UIView *commentBtnView;
 @property(nonatomic,strong) UIButton *thumbUpButton;
 @property(nonatomic,strong) UIButton *commentsButton;
+@property(nonatomic,strong) UIButton *deleteteButton;
+
+/** 中间的头像view  根据图像的个数计算尺寸 */
+@property (nonatomic,strong) SmartCommunityPhotosView *photosView;
 
 
 
@@ -57,34 +70,35 @@
     _userImageView = [[UIImageView alloc] init];
     _userImageView.contentMode = UIViewContentModeScaleAspectFill;
     _userImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
-    
+    _userImageView.layer.cornerRadius = 23;
+    _userImageView.layer.masksToBounds = YES;
     [self addSubview:_userImageView];
     [_userImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(10);
-        make.left.mas_offset(10);
-        make.width.height.mas_offset(50);
+        make.top.mas_offset(12);
+        make.left.mas_offset(16);
+        make.width.height.mas_offset(45);
     }];
 //    //用户名
 //    @property(nonatomic,strong) UILabel *userNameLabel;
     _userNameLabel = [[UILabel alloc] init];
-    _userNameLabel.text = @"咖啡小猫";
-    _userNameLabel.textColor = [UIColor grayColor];
+//    _userNameLabel.text = @"咖啡小猫";
+    _userNameLabel.textColor = [UIColor blackColor];
     _userNameLabel.textAlignment = NSTextAlignmentLeft;
-    _userNameLabel.font = UIFontNormal;
+    _userNameLabel.font = UIFontLarge;
     [self addSubview:_userNameLabel];
     [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_userImageView.mas_top);
-        make.left.equalTo(_userImageView.mas_right).offset(20);
+        make.left.equalTo(_userImageView.mas_right).offset(12);
         make.width.mas_offset(100);
         make.height.mas_offset(20);
     }];
 //    //发布时间
 //    @property(nonatomic,strong) UILabel *uploadTimeLabel;
     _uploadTimeLabel = [[UILabel alloc] init];
-    _uploadTimeLabel.text = @"1分钟前";
-    _uploadTimeLabel.textColor = [UIColor grayColor];
+ //   _uploadTimeLabel.text = @"1分钟前";
+    _uploadTimeLabel.textColor = MJRefreshColor(132, 132, 132); //32 195 162
     _uploadTimeLabel.textAlignment = NSTextAlignmentLeft;
-    _uploadTimeLabel.font = UIFontNormal;
+    _uploadTimeLabel.font = UIFontSmall;
     [self addSubview:_uploadTimeLabel];
     [_uploadTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_userNameLabel.mas_left);
@@ -96,90 +110,114 @@
 //    @property(nonatomic,strong) UIButton *dialogueButton;
     _dialogueButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_dialogueButton setTitle:@"对话" forState:UIControlStateNormal];
-    _dialogueButton.backgroundColor = [UIColor greenColor];
+    
+    _dialogueButton.backgroundColor = [UIColor clearColor];
     _dialogueButton.layer.masksToBounds = YES;
-    _dialogueButton.layer.cornerRadius = 10;
+    _dialogueButton.layer.cornerRadius = 5;
     _dialogueButton.layer.borderWidth = 1;
-    _dialogueButton.layer.borderColor = [UIColor grayColor].CGColor;
+    _dialogueButton.layer.borderColor = GreenColer.CGColor;
+    [_dialogueButton setTitleColor:GreenColer forState:UIControlStateNormal];
     [self addSubview:_dialogueButton];
     [_dialogueButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(_userImageView.mas_centerY);
-        make.right.mas_equalTo(-20);
+        make.right.mas_equalTo(-16);
         make.width.mas_equalTo(80);
         make.height.mas_equalTo(30);
     }];
+    
+    //主题
+    UILabel *titleLable = [[UILabel alloc] init];
+    titleLable.font = UIFont15;
+    titleLable.numberOfLines = 0;
+//    titleLable.text = @"标题";
+//    titleLable.backgroundColor = [UIColor redColor];
+    self.titleLable = titleLable;
+    [self addSubview:titleLable];
+    [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_userImageView.mas_bottom).offset(12);
+        make.left.mas_equalTo(16);
+        make.right.mas_equalTo(-16);
+        make.width.mas_equalTo(KWidth - 32);
+        
+    }];
+
 //    //图片
-//    @property(nonatomic,strong) UIImageView *imageView_1;
-//    @property(nonatomic,strong) UIImageView *imageView_2;
-//    @property(nonatomic,strong) UIImageView *imageView_3;
-    _imageView_1 = [[UIImageView alloc] init];
-    _imageView_1.contentMode = UIViewContentModeScaleAspectFill;
-    _imageView_1.image = [UIImage imageNamed:@"3.jpg"];
-    _imageView_1.clipsToBounds = YES;
-    [self addSubview:_imageView_1];
-    [_imageView_1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_userImageView.mas_bottom).offset(10);
-        make.left.mas_equalTo(10);
-        make.width.height.mas_equalTo((ScreenWidth -40)/3);
-    }];
+    SmartCommunityPhotosView *photosView = [[SmartCommunityPhotosView alloc] init];
+    self.photosView = photosView;
+    [self addSubview:photosView];
+
     
-    _imageView_2 = [[UIImageView alloc] init];
-    _imageView_2.contentMode = UIViewContentModeScaleAspectFill;
-    _imageView_2.image = [UIImage imageNamed:@"3.jpg"];
-    _imageView_2.clipsToBounds = YES;
-    [self addSubview:_imageView_2];
-    [_imageView_2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.width.height.mas_equalTo(_imageView_1);
-        make.left.equalTo(_imageView_1.mas_right).offset(10);
-    }];
-    
-    _imageView_3 = [[UIImageView alloc] init];
-    _imageView_3.contentMode = UIViewContentModeScaleAspectFill;
-    _imageView_3.clipsToBounds = YES;
-    _imageView_3.image = [UIImage imageNamed:@"3.jpg"];
-    [self addSubview:_imageView_3];
-    [_imageView_3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.width.height.mas_equalTo(_imageView_1);
-        make.left.equalTo(_imageView_2.mas_right).offset(10);
-    }];
-//    //动态内容
-//    @property(nonatomic,strong) UILabel *dynamicLabel;
+    //    //动态内容
+    //    @property(nonatomic,strong) UILabel *dynamicLabel;
     _dynamicLabel = [[UILabel alloc] init];
-    _dynamicLabel.text = @"家里新买的栀子花终于开了";
+ //   _dynamicLabel.text = @"家里新买的栀子花终于开了";
     _dynamicLabel.textColor = [UIColor grayColor];
     _dynamicLabel.textAlignment = NSTextAlignmentLeft;
     _dynamicLabel.font = UIFontNormal;
-    _dynamicLabel.numberOfLines = 1;
+    _dynamicLabel.numberOfLines = 0;
     _dynamicLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [self addSubview:_dynamicLabel];
-    [_dynamicLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_imageView_1.mas_bottom).offset(5);
-        make.left.mas_equalTo(10);
-        make.right.mas_equalTo(self.mas_centerX);
-        make.height.mas_equalTo(30);
-    }];
-//    //点赞、评论
+    
+    /*
+     @property(nonatomic,strong) UILabel *actionTimeLabel;
+     @property(nonatomic,strong) UILabel *addressLabel;
+     */
+    //时间
+    UILabel *actionTimeLabel = [[UILabel alloc] init];
+    actionTimeLabel.numberOfLines = 0;
+    actionTimeLabel.font = UIFontNormal;
+    self.actionTimeLabel = actionTimeLabel;
+    [self addSubview:actionTimeLabel];
+    
+    //地点
+    UILabel *addressLabel = [[UILabel alloc] init];
+    addressLabel.numberOfLines = 0;
+    addressLabel.font = UIFontNormal;
+    self.addressLabel = addressLabel;
+    [self addSubview:addressLabel];
+    
+
+
+//    // 删除 点赞、评论
 //    @property(nonatomic,strong) UIButton *thumbUpButton;
     //    @property(nonatomic,strong) UIButton *commentsButton;
+    UIView *commentBtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 35)];
+    self.commentBtnView = commentBtnView;
+    [self addSubview:commentBtnView];
+    
+    //评论
     _commentsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_commentsButton setImage:[UIImage imageNamed:@"compose_emoticonbutton_background"] forState:UIControlStateNormal];
-    [self addSubview:_commentsButton];
-    [_commentsButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-20);
-        make.centerY.mas_equalTo(_dynamicLabel.mas_centerY);
-        make.width.mas_equalTo(30);
-        make.height.mas_equalTo(30);
-    }];
+    [_commentsButton setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
+    _commentsButton.width = 30;
+    _commentsButton.x = KWidth - 16 - _commentsButton.width;
+    _commentsButton.height = 35;
+    _commentsButton.y = 0;
+    [commentBtnView addSubview:_commentsButton];
+
     
     //点赞
     _thumbUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_thumbUpButton setImage:[UIImage imageNamed:@"compose_emoticonbutton_background"] forState:UIControlStateNormal];
-    [self addSubview:_thumbUpButton];
-    [_thumbUpButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(_dynamicLabel.mas_centerY);
-        make.right.equalTo(_commentsButton.mas_left).offset(-5);
-        make.width.height.mas_equalTo(_commentsButton);
-    }];
+    [_thumbUpButton setImage:[UIImage imageNamed:@"praise"] forState:UIControlStateNormal];
+    [_thumbUpButton setImage:[UIImage imageNamed:@"praise2"] forState:UIControlStateSelected];
+    [_thumbUpButton addTarget:self action:@selector(thumbUpButtonBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    _thumbUpButton.width = 30;
+    _thumbUpButton.x = KWidth - 16 - _commentsButton.width - 100;
+    _thumbUpButton.height = 35;
+    _thumbUpButton.y = 0;
+    [commentBtnView addSubview:_thumbUpButton];
+    
+    
+    //删除
+    _deleteteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_deleteteButton setTitle:@"删除" forState:UIControlStateNormal];
+    _deleteteButton.width = 90;
+    _deleteteButton.x = 16;//239 143 88
+    _deleteteButton.height = 35;
+    _deleteteButton.y = 0;
+    [_deleteteButton setTitleColor:MJRefreshColor(239, 143, 88) forState:UIControlStateNormal];
+    _deleteteButton.titleLabel.font = UIFont17;
+    [commentBtnView addSubview:_deleteteButton];
+
     
 
     //对话按钮 @property(nonatomic,strong) UIButton *dialogueButton;
@@ -221,6 +259,49 @@
     self.userNameLabel.text = neiborhoodModel.userNickName;
     //发布时间
     self.uploadTimeLabel.text = neiborhoodModel.createTime;
+    //对话按钮
+    
+    //标题
+    self.titleLable.text = neiborhoodModel.title;
+    //计算位置
+    self.titleLable.size = neiborhoodModel.titlewSize;
+    
+    //图片
+    NSArray *arr = [neiborhoodModel.images componentsSeparatedByString:@","];
+    self.photosView.photos = arr;
+    //计算图片的尺寸
+    self.photosView.size = neiborhoodModel.photosSize;
+    self.photosView.y = CGRectGetMaxY(_titleLable.frame) + 12;
+
+    //动态内容
+    self.dynamicLabel.text = neiborhoodModel.content;
+    //计算内容尺寸
+    _dynamicLabel.size = neiborhoodModel.commenSize;
+    _dynamicLabel.x = 16;
+    _dynamicLabel.y = CGRectGetMaxY(_photosView.frame) + 12;
+    
+    //时间
+    self.actionTimeLabel.text = [NSString stringWithFormat:@"时间：%@",neiborhoodModel.actionTime];
+    self.actionTimeLabel.size = neiborhoodModel.actionTimeSize;
+    self.actionTimeLabel.x = 16;
+    self.actionTimeLabel.y = CGRectGetMaxY(_dynamicLabel.frame) + 8;
+    
+    //地点
+    self.addressLabel.text = [NSString stringWithFormat:@"地点：%@",neiborhoodModel.address];
+    self.addressLabel.size = neiborhoodModel.addressSize;
+    self.addressLabel.x = 16;
+    self.addressLabel.y = CGRectGetMaxY(_actionTimeLabel.frame) + 8;
+    
+    
+    //删除、点赞，评论
+    _commentBtnView.x = 0;
+    _commentBtnView.y = CGRectGetMaxY(_addressLabel.frame) + 12;
+    
+    
+    
+    
+    
+    
     
 
     /*
@@ -244,6 +325,14 @@
      @property(nonatomic,strong) UIButton *thumbUpButton;
      @property(nonatomic,strong) UIButton *commentsButton;
      */
+
+}
+
+//点赞的点击事件
+-(void)thumbUpButtonBtnClick:(UIButton *)button
+{
+    MJRefreshLog(@"点赞");
+    button.selected = !button.selected;
 
 }
 
