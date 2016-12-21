@@ -8,6 +8,8 @@
 
 #import "HouseAuthorityTelNumberVC.h"
 
+#import "BindHouseVC.h"// 绑定房屋
+
 @interface HouseAuthorityTelNumberVC ()
 
 @property (nonatomic,strong) UILabel *phoneNumberLabel;// 手机号
@@ -31,12 +33,12 @@
     // 请输入业主手机号
     _phoneNumberLabel = [[UILabel alloc] init];
     _phoneNumberLabel.text = @"请输入业主手机号";
-    _phoneNumberLabel.font = UIFontNormal;
+    _phoneNumberLabel.font = UIFont15;
     [self.view addSubview:_phoneNumberLabel];
     [_phoneNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(15);
-        make.top.mas_offset(64 + 15);
-        make.right.mas_offset(-15);
+        make.left.mas_offset(35);
+        make.top.mas_offset(64 + 41);
+        make.right.mas_offset(-35);
         make.height.mas_offset(30);
     }];
     
@@ -49,9 +51,9 @@
     [self.view addSubview:_phoneNumberTF];
     [_phoneNumberTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_phoneNumberLabel.mas_left);
-        make.top.equalTo(_phoneNumberLabel.mas_bottom).offset(10);
+        make.top.equalTo(_phoneNumberLabel.mas_bottom).offset(16);
         make.right.equalTo(_phoneNumberLabel.mas_right);
-        make.height.equalTo(_phoneNumberLabel.mas_height);
+        make.height.mas_offset(35);
     }];
     
     
@@ -60,11 +62,11 @@
     _changedPhoneNumButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [_changedPhoneNumButton setTitle:@"若业主已更换手机号，请点击联系我们" forState:(UIControlStateNormal)];
     [_changedPhoneNumButton setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
-    [_changedPhoneNumButton.titleLabel setFont:UIFontSmall];
+    [_changedPhoneNumButton.titleLabel setFont:UIFont13];
     [self.view addSubview:_changedPhoneNumButton];
     [_changedPhoneNumButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_phoneNumberLabel.mas_left);
-        make.top.equalTo(_phoneNumberTF.mas_bottom).offset(20);
+        make.top.equalTo(_phoneNumberTF.mas_bottom).offset(42);
         make.right.equalTo(_phoneNumberLabel.mas_right);
         make.height.equalTo(_phoneNumberLabel.mas_height);
     }];
@@ -75,13 +77,13 @@
     _nextStepButton.backgroundColor = HexColor(0x04c5a1);
     [_nextStepButton setTitle:@"下一步" forState:(UIControlStateNormal)];
     _nextStepButton.layer.cornerRadius = 5.0;
-    [_nextStepButton.titleLabel setFont:UIFontNormal];
+    [_nextStepButton.titleLabel setFont:UIFontLarge];
     [self.view addSubview:_nextStepButton];
     [_nextStepButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(40);
-        make.top.equalTo(_changedPhoneNumButton.mas_bottom).offset(40);
-        make.right.mas_offset(-40);
-        make.height.mas_offset(44);
+        make.left.mas_offset(15);
+        make.right.mas_offset(-15);
+        make.bottom.mas_offset(-44 + 21);
+        make.height.mas_offset(49);
     }];
     
     // 添加已更换手机号的点击事件
@@ -100,6 +102,8 @@
 // 下一步的点击事件
 - (void)nextStepAction
 {
+    BindHouseVC *bindHouseVC = [[BindHouseVC alloc] init];
+    [self.navigationController pushViewController:bindHouseVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -244,8 +244,8 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"description"] = _repairContentTextView.text;
-    parameters[@"sessionId"] = @"sessionId";
-    parameters[@"userId"] = @"1";
+    parameters[@"sessionId"] = SessionID;
+    parameters[@"userId"] = UserID;
     
     ICLog_2(@"提交报修参数：%@",parameters);
     

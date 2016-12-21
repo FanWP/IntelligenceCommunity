@@ -11,7 +11,6 @@
 #import "HouseAuthorityTelNumberVC.h"// 添加房屋-输入业主手机号
 
 
-
 @interface HouseAuthorityVC ()
 {
     NSMutableArray *_data;
@@ -60,9 +59,9 @@
     }];
     
     
-    CGFloat menuX = 90;
-    CGFloat menuWidth = KWidth - 2 * 40 - 40 - 10;
-    CGFloat menuHeight = 30;
+//    CGFloat menuX = 90;
+//    CGFloat menuWidth = KWidth - 2 * 40 - 40 - 10;
+//    CGFloat menuHeight = 30;
     // 选择几栋
 //    CGFloat ridgepoleMenuY = 64 + 40;
 //    DropDownView *ridgepoleMenu = [[DropDownView alloc] initWithOrigin:CGPointMake(menuX, ridgepoleMenuY) width:menuWidth andHeight:menuHeight];
