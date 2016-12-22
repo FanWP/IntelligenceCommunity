@@ -49,7 +49,8 @@
     }];
     
     
-   // 收货地址 receiveAddressLabel;
+
+    // 收货地址 receiveAddressLabel;
     _receiveAddressLabel = [[UILabel alloc] init];
     _receiveAddressLabel.font = UIFont13;
     _receiveAddressLabel.text = @"陕西省西安市雁塔区高新三路财富中心";
@@ -60,6 +61,7 @@
         make.right.mas_offset(-12);
         make.height.mas_offset(30);
     }];
+    
     
     
    //  lineView;
