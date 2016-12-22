@@ -2,12 +2,11 @@
 //  SettingHeaderPictureCell.m
 //  IntelligenceCommunity
 //
-//  Created by Beibei on 16/12/20.
+//  Created by Beibei on 16/12/22.
 //  Copyright © 2016年 mumu. All rights reserved.
 //
 
 #import "SettingHeaderPictureCell.h"
-
 
 @implementation SettingHeaderPictureCell
 
@@ -19,6 +18,7 @@
     if (self)
     {
         [self initializeComponent];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -34,23 +34,23 @@
     [self.contentView addSubview:_settingHeaderLabel];
     [_settingHeaderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(15);
-        make.top.mas_offset(5);
+        make.centerY.equalTo(self.contentView.mas_centerY);
         make.width.offset(80);
         make.height.offset(30);
     }];
     
     
     _settingHeaderImageView = [[UIImageView alloc] init];
-    _settingHeaderImageView.contentMode = UIViewContentModeCenter;
+    _settingHeaderImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _settingHeaderImageView.layer.cornerRadius = 60 / 2;
+    _settingHeaderImageView.layer.masksToBounds = YES;
     [self.contentView addSubview:_settingHeaderImageView];
     [_settingHeaderImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_settingHeaderLabel.mas_right);
         make.right.mas_offset(-15);
-        make.top.equalTo(_settingHeaderLabel.mas_top);
+        make.width.mas_offset(60);
+        make.height.mas_offset(60);
         make.centerY.equalTo(_settingHeaderLabel.mas_centerY);
-        make.height.equalTo(_settingHeaderLabel.mas_height);
     }];
-    
 }
 
 

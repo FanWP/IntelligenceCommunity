@@ -26,9 +26,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"绑定房屋";
 
     [self initializeComponent];
 
+}
+
+- (void)dataGetCaptchaBindHouse
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"buildNumber"] = @"1";
+    parameters[@"unitNumber"] = @"2";
+    parameters[@"roomNumber"] = @"3";
+    parameters[@"phoneLast4Bit"] = @"4202";
+    parameters[@"sessionId"] = SessionID;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@send/bunding/code",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"验证码返回：%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        ICLog_2(@"验证码错误：%@",error);
+    }];
+    
 }
 
 - (void)initializeComponent
@@ -48,7 +75,7 @@
     
     // 手机号码 phoneNumberLabel;
     _phoneNumberLabel = [[UILabel alloc] init];
-    _phoneNumberLabel.text = @"18789494201";
+    _phoneNumberLabel.text = @"18789494202";
 //    _phoneNumberLabel.text = [NSString stringWithFormat:@"%@",];
     _phoneNumberLabel.font = UIFontLarge;
     [self.view addSubview:_phoneNumberLabel];
@@ -169,6 +196,56 @@
     
     [_ownerButton addTarget:self action:@selector(ownerAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [_familyMemberButton addTarget:self action:@selector(familyMemberActon:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    [_captchaButton addTarget:self action:@selector(getCaptchaAction) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    [_finishButton addTarget:self action:@selector(finishBindHouseAction) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+- (void)getCaptchaAction
+{
+    [self dataGetCaptchaBindHouse];
+}
+
+- (void)finishBindHouseAction
+{
+//    check/bunding/code
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"buildNumber"] = @"";
+    parameters[@"unitNumber"] = @"";
+    parameters[@"roomNumber"] = @"";
+    parameters[@"checkCode"] = _captchaTF.text;
+    parameters[@"sessionId"] = SessionID;
+    parameters[@"userId"] = UserID;
+    
+    ICLog_2(@"绑定房屋参数：%@",parameters);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@check/bunding/code",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"绑定房屋返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            [HUD showSuccessMessage:@"绑定成功"];
+        }
+        else
+        {
+            [HUD showErrorMessage:@"绑定失败"];
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        [HUD showErrorMessage:@"绑定失败"];
+        ICLog_2(@"绑定房屋错误：%@",error);
+    }];
 }
 
 - (void)ownerAction:(UIButton *)button

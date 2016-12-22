@@ -21,6 +21,7 @@
     
     [self rightItemSave];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)rightItemSave
@@ -29,12 +30,13 @@
 }
 - (void)saveSignatureAction
 {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)initializeComponent
 {
     _signatureTextView = [[YYPlaceholderTextView alloc] init];
-    _signatureTextView.placeholder = @"请输入签名";
+    _signatureTextView.placeholder = @"   请输入签名";
     _signatureTextView.font = UIFontSmall;
     _signatureTextView.layer.borderWidth = 1.0;
     _signatureTextView.layer.cornerRadius = 5.0;

@@ -131,7 +131,6 @@
 		71D3A78A1E0A3245002C2F1C /* SignatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7891E0A3245002C2F1C /* SignatureVC.m */; };
 		71D3A78D1E0A49A8002C2F1C /* ReceiveAddressTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */; };
 		71D3A7961E0A4A72002C2F1C /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7931E0A4A72002C2F1C /* SettingCell.m */; };
-		71D3A7971E0A4A72002C2F1C /* SettingHeaderPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */; };
 		71EFEB741E04D97700CE467A /* HouseAuthorityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */; };
 		71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB761E04DC2100CE467A /* FeedbackVC.m */; };
 		71EFEB7A1E04E73700CE467A /* MyShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB791E04E73700CE467A /* MyShoppingCartVC.m */; };
@@ -140,6 +139,10 @@
 		71EFEB841E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB831E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m */; };
 		71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB861E05245500CE467A /* NoticeListTableVC.m */; };
 		71EFEB8B1E05265A00CE467A /* NoticeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB8A1E05265A00CE467A /* NoticeListCell.m */; };
+		71F099701E0B6B56008FD3EE /* EditReceiveAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F0996F1E0B6B56008FD3EE /* EditReceiveAddressVC.m */; };
+		71F099731E0B78E8008FD3EE /* AddReceiveAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F099721E0B78E8008FD3EE /* AddReceiveAddressVC.m */; };
+		71F099761E0B971D008FD3EE /* ReceiveAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F099751E0B971D008FD3EE /* ReceiveAddressModel.m */; };
+		71F099791E0BC7F5008FD3EE /* SettingHeaderPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F099781E0BC7F5008FD3EE /* SettingHeaderPictureCell.m */; };
 		B2DF503E12DEBB83D31B2323 /* libPods-IntelligenceCommunity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */; };
 		D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D702430D1E04CA610033B78C /* Foundation+Log.m */; };
 		D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D70243101E04CC340033B78C /* FreeArticleHeaderView.m */; };
@@ -438,8 +441,6 @@
 		71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressTableVC.m; sourceTree = "<group>"; };
 		71D3A7921E0A4A72002C2F1C /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
 		71D3A7931E0A4A72002C2F1C /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
-		71D3A7941E0A4A72002C2F1C /* SettingHeaderPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingHeaderPictureCell.h; sourceTree = "<group>"; };
-		71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingHeaderPictureCell.m; sourceTree = "<group>"; };
 		71EFEB721E04D97700CE467A /* HouseAuthorityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityVC.h; sourceTree = "<group>"; };
 		71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityVC.m; sourceTree = "<group>"; };
 		71EFEB751E04DC2100CE467A /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
@@ -456,6 +457,14 @@
 		71EFEB861E05245500CE467A /* NoticeListTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListTableVC.m; sourceTree = "<group>"; };
 		71EFEB891E05265A00CE467A /* NoticeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListCell.h; sourceTree = "<group>"; };
 		71EFEB8A1E05265A00CE467A /* NoticeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListCell.m; sourceTree = "<group>"; };
+		71F0996E1E0B6B56008FD3EE /* EditReceiveAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditReceiveAddressVC.h; sourceTree = "<group>"; };
+		71F0996F1E0B6B56008FD3EE /* EditReceiveAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditReceiveAddressVC.m; sourceTree = "<group>"; };
+		71F099711E0B78E8008FD3EE /* AddReceiveAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReceiveAddressVC.h; sourceTree = "<group>"; };
+		71F099721E0B78E8008FD3EE /* AddReceiveAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReceiveAddressVC.m; sourceTree = "<group>"; };
+		71F099741E0B971D008FD3EE /* ReceiveAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiveAddressModel.h; path = IntelligenceCommunity/Classes/Owner/Controller/ReceiveAddress/ReceiveAddressModel.h; sourceTree = SOURCE_ROOT; };
+		71F099751E0B971D008FD3EE /* ReceiveAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiveAddressModel.m; path = IntelligenceCommunity/Classes/Owner/Controller/ReceiveAddress/ReceiveAddressModel.m; sourceTree = SOURCE_ROOT; };
+		71F099771E0BC7F5008FD3EE /* SettingHeaderPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingHeaderPictureCell.h; sourceTree = "<group>"; };
+		71F099781E0BC7F5008FD3EE /* SettingHeaderPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingHeaderPictureCell.m; sourceTree = "<group>"; };
 		A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.debug.xcconfig"; sourceTree = "<group>"; };
 		D702430D1E04CA610033B78C /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		D702430F1E04CC340033B78C /* FreeArticleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleHeaderView.h; sourceTree = "<group>"; };
@@ -1204,6 +1213,8 @@
 		18B002F41DE2E6F100D8FE56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				71F099741E0B971D008FD3EE /* ReceiveAddressModel.h */,
+				71F099751E0B971D008FD3EE /* ReceiveAddressModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1291,8 +1302,8 @@
 			children = (
 				71D3A7921E0A4A72002C2F1C /* SettingCell.h */,
 				71D3A7931E0A4A72002C2F1C /* SettingCell.m */,
-				71D3A7941E0A4A72002C2F1C /* SettingHeaderPictureCell.h */,
-				71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */,
+				71F099771E0BC7F5008FD3EE /* SettingHeaderPictureCell.h */,
+				71F099781E0BC7F5008FD3EE /* SettingHeaderPictureCell.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1349,6 +1360,10 @@
 			children = (
 				71D3A78B1E0A49A8002C2F1C /* ReceiveAddressTableVC.h */,
 				71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */,
+				71F099711E0B78E8008FD3EE /* AddReceiveAddressVC.h */,
+				71F099721E0B78E8008FD3EE /* AddReceiveAddressVC.m */,
+				71F0996E1E0B6B56008FD3EE /* EditReceiveAddressVC.h */,
+				71F0996F1E0B6B56008FD3EE /* EditReceiveAddressVC.m */,
 			);
 			path = ReceiveAddress;
 			sourceTree = "<group>";
@@ -1713,11 +1728,11 @@
 				18B0027F1DE2C9D700D8FE56 /* ViewController.m in Sources */,
 				1840713B1DF7FA30000DA659 /* ServiceProvidersListModel.m in Sources */,
 				187A23851DEC318C00D921FC /* PropertyFeeBillingDetailViewCell.m in Sources */,
-				71D3A7971E0A4A72002C2F1C /* SettingHeaderPictureCell.m in Sources */,
 				1857BD271DF68EE200E5F1DE /* ShoppingCartViewCell.m in Sources */,
 				180897181DE59E9A0049A180 /* RepairsViewController.m in Sources */,
 				71D3A77E1E0A16B0002C2F1C /* ILSettingArrowItem.m in Sources */,
 				D730E1E91E0B61EF0056A20A /* RepairModel.m in Sources */,
+				71F099701E0B6B56008FD3EE /* EditReceiveAddressVC.m in Sources */,
 				71D3A7821E0A16B0002C2F1C /* ILSettingLabelItem.m in Sources */,
 				D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */,
 				184B1D111DE6E0F500F8F56E /* SearchViewController.m in Sources */,
@@ -1743,6 +1758,7 @@
 				184B1D351DE6E5C000F8F56E /* WUPreviewViewController.m in Sources */,
 				187A237F1DEC292200D921FC /* PropertyFeeHistoryVC.m in Sources */,
 				D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */,
+				71F099791E0BC7F5008FD3EE /* SettingHeaderPictureCell.m in Sources */,
 				185ADBC81DE4122800CD556D /* AdvertiseViewCell.m in Sources */,
 				710C17A61E0905F000FF215E /* SettingTableVC.m in Sources */,
 				71A20A8B1E03B58A00067125 /* HouseImageCell.m in Sources */,
@@ -1814,6 +1830,7 @@
 				D730E1E51E0B5DD10056A20A /* Const.m in Sources */,
 				187A23881DEC329A00D921FC /* PropertyFeeBillingVC.m in Sources */,
 				184AB4571DED18B200DC1A54 /* PropertyFeeListModel.m in Sources */,
+				71F099731E0B78E8008FD3EE /* AddReceiveAddressVC.m in Sources */,
 				184071341DF7D61B000DA659 /* UITableViewCell+HYBMasonryAutoCellHeight.m in Sources */,
 				187A23821DEC295900D921FC /* PropertyFeeHistoryViewCell.m in Sources */,
 				184FF9E01DF9680E005FD46E /* CommodityInfoViewCell.m in Sources */,
@@ -1834,6 +1851,7 @@
 				D71BC1301E0389900093357C /* MJPropertyType.m in Sources */,
 				184B1D2E1DE6E5C000F8F56E /* WUAlbumAsset.m in Sources */,
 				D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */,
+				71F099761E0B971D008FD3EE /* ReceiveAddressModel.m in Sources */,
 				D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */,
 				D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */,
 				1857BD1E1DF68E7500E5F1DE /* RightTableViewCell.m in Sources */,
