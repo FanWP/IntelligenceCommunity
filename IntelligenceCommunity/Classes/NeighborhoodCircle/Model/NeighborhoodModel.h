@@ -33,7 +33,7 @@
 @property (nonatomic,assign) BOOL flag;
 /** 内容 */
 @property (nonatomic,copy) NSString *content;
-/**  */
+/** 1 约 2生活分享 3寻物招领 不传就是查询所有 */
 @property (nonatomic,copy) NSString *replyToUserNickName;
 /** 1 朋友圈  2闲置物品处理 */
 @property (nonatomic,assign) BOOL type;
@@ -49,16 +49,21 @@
 @property (nonatomic,copy) NSString *address;
 
 
+/** 评论的数组 */
+@property (nonatomic,strong) NSArray *friendsRef;
+
+
+
+
+
 
 
 /** 额外属性*/
 
 /** 标题的尺寸 */
 @property (nonatomic,assign) CGSize titlewSize;
-
 /** 图像的尺寸 */
 @property (nonatomic,assign) CGSize photosSize;
-
 /** 内容的尺寸 */
 @property (nonatomic,assign) CGSize commenSize;
 /** 时间的尺寸 */
@@ -66,6 +71,8 @@
 /** 地点的尺寸 */
 @property (nonatomic,assign) CGSize addressSize;
 
+/** 计算所有内容的高度 */
+@property (nonatomic,assign) CGFloat allContentH;
 
 
 @end

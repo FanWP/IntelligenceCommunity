@@ -10,6 +10,10 @@
 #import "NeighborhoodCircleCell.h"
 
 #import "NeighborhoodModel.h"
+#import "FreeArticleReplyModel.h"
+
+#import "NeiborhoodHeaderView.h"
+#import "FreeArticleReplyCell.h"
 
 
 
@@ -52,8 +56,6 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     
     //结束上拉刷新
     [self.tableView.mj_footer endRefreshing];
-    
-    
     self.pageSize = 10;
     self.pageNum = 1;
     
@@ -62,11 +64,14 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     parmas[@"sessionId"] = SessionID;
     parmas[@"pageNum"] = @(self.pageNum);
     parmas[@"pageSize"] = @(self.pageSize);
+    if (self.NeighborhoodType != 0) {
+        parmas[@"type"] = @(self.NeighborhoodType);
+    }
     
-    MJRefreshLog(@"parmas---:%@",parmas);
     
     NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
     
+    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",parmas,newurl);
     
     [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -102,11 +107,6 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         [self.tableView.mj_header endRefreshing];
         
     }];
-    
-
-    
-    
-
 
 }
 
@@ -118,71 +118,114 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 
-}
-
-//-(void)neighborhoodCircleCell:(NeighborhoodCircleCell *)neighborhoodCircleCell clickButtonWithTag:(NSInteger)tag{
-//    if (tag == 1) {
-//        NSLog(@"点击了对话按钮");
-//    }else if (tag == 2){
-//        NSLog(@"点击了点赞按钮");
-//        neighborhoodCircleCell.thumbUpButton.selected = !neighborhoodCircleCell.thumbUpButton.selected;
-//        if (neighborhoodCircleCell.thumbUpButton.selected) {
-//        }else{
-//        }
-//    }else if (tag == 3){
-//        NSLog(@"点击了评论按钮");
-//    }
-//    NSIndexPath *indexPath = [self.tableView indexPathForCell:neighborhoodCircleCell];
-//    NSLog(@"indexPath.row===%ld",indexPath.row);
-//}
 
 #pragma mark--delegate
+
+
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 1;
+    return _NeighborhoodArr.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 800;
-}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-//    return _NeighborhoodArr.count;
+    NeighborhoodModel *model = _NeighborhoodArr[section];
+    NSArray *arr = model.friendsRef;
     
-    return 20;
+    return arr.count;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //    //设置数据
+    NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
+    FreeArticleReplyModel *replyModel = model.friendsRef[indexPath.row];
+    return replyModel.contentH + 10;
+
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    NeighborhoodModel *model = _NeighborhoodArr[section];
+
+//    NeighborhoodModel *model = [[NeighborhoodModel alloc] init];
+//    model.images = @"805288420863245";
+//    if (section == 1) {
+//        model.images = @"88080880,3245";
+//    }else if (section == 2) {
+//        model.images = @"80528,84880,3245";
+//    }else if (section == 3){
+//        model.images = @"8052808,0,880,3245";
+//    }else if (section == 4){
+//        model.images = @"8052808,0,8,80,3245";
+//    }
+//    model.title = @"作为一项苹果独立发布的支持型开发语言，已经有了数个应用演示及合作开发公司的测试，相信将在未来得到更广泛的应用。某种意义上Swift作为苹果的新商业战略，将吸引更多的开发者入门，从而增强App Store和Mac Store本来就已经实力雄厚的应用数量基础。";
+//    model.userNickName = @"大猫爱小雨";
+//    model.createTime = @"2016-12-19 15:11:36";
+//    model.content = @"Swift是苹果公司在WWDC2014上发布的全新开发语言。从演示视频及随后在appstore上线的标准文档看来，语法内容混合了OC,JS,Python，语法简单，使用方便，并可与OC混合使用。";
+//    model.actionTime = @"周天周天晚上周天晚上周天晚----=上周天晚上周天晚上周天晚上晚上";
+//    model.address = @"财富上周天晚上周天晚----=上周天晚上周天晚上周天中心";
+//        return model.allContentH - 75;
+
+    return model.allContentH ;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 8;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 8)];
+//    imgView.backgroundColor = MJRefreshColor(238, 238, 238);
+    imgView.backgroundColor = [UIColor lightGrayColor];
+    
+    return imgView;
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NeiborhoodHeaderView *header = [NeiborhoodHeaderView headerWithTableView:tableView];
+    
+    NeighborhoodModel *model = _NeighborhoodArr[section];
+//    NeighborhoodModel *model = [[NeighborhoodModel alloc] init];
+//    model.images = @"805288420863245";
+//    if (section == 1) {
+//        model.images = @"88080880,3245";
+//    }else if (section == 2) {
+//        model.images = @"80528,84880,3245";
+//    }else if (section == 3){
+//        model.images = @"8052808,0,880,3245";
+//    }else if (section == 4){
+//        model.images = @"8052808,0,8,80,3245";
+//    }
+//    model.title = @"作为一项苹果独立发布的支持型开发语言，已经有了数个应用演示及合作开发公司的测试，相信将在未来得到更广泛的应用。某种意义上Swift作为苹果的新商业战略，将吸引更多的开发者入门，从而增强App Store和Mac Store本来就已经实力雄厚的应用数量基础。";
+//    model.userNickName = @"大猫爱小雨";
+//    model.createTime = @"2016-12-19 15:11:36";
+//    model.content = @"Swift是苹果公司在WWDC2014上发布的全新开发语言。从演示视频及随后在appstore上线的标准文档看来，语法内容混合了OC,JS,Python，语法简单，使用方便，并可与OC混合使用。";
+//    model.actionTime = @"周天周天晚上周天晚上周天晚----=上周天晚上周天晚上周天晚上晚上";
+//    model.address = @"财富上周天晚上周天晚----=上周天晚上周天晚上周天中心";
+    
+    header.neiborhoodModel = model;
+
+    return header;
+}
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NeighborhoodCircleCell *cell = [tableView dequeueReusableCellWithIdentifier:NeighborhoodCircleCellID  forIndexPath:indexPath];
-    cell.delegate = self;
-    
-    NeighborhoodModel *model = [[NeighborhoodModel alloc] init];
-      model.images = @"805288420863245";
-    if (indexPath.row == 1) {
-            model.images = @"88080880,3245";
-    }else if (indexPath.row == 2) {
-          model.images = @"80528,84880,3245";
-    }else if (indexPath.row == 3){
-                model.images = @"8052808,0,880,3245";
-    }else if (indexPath.row == 4){
-         model.images = @"8052808,0,8,80,3245";
-    }
-    model.title = @"8t408042180t4890419090y32805480y23085y80528050825y520880528052308085y80528050825y520880528052308";
-    model.userNickName = @"大猫爱小雨";
-    model.createTime = @"2016-12-19 15:11:36";
-    model.content = @"我的内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容";
-    model.actionTime = @"周天周天晚上周天晚上周天晚----=上周天晚上周天晚上周天晚上晚上";
-    model.address = @"财富上周天晚上周天晚----=上周天晚上周天晚上周天中心";
-    cell.neiborhoodModel = model;
-    
-
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    
+    FreeArticleReplyCell *cell = [FreeArticleReplyCell cellWithTableView:tableView];
+    NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
+    cell.replyModel = model.friendsRef[indexPath.row];
     return cell;
 }
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ICLog_2(@"%ld",indexPath.row);

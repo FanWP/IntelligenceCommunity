@@ -83,6 +83,15 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [HUD dismiss];
+
+}
+
+
 -(void)addSearchBar
 {
     UIView *searchView = [[UIView alloc] initWithFrame:CGRectMake(10, 64, KWidth - 20, 44)];
@@ -124,6 +133,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"sessionId"] = SessionID;
     parmas[@"pageNum"] = @(self.pageNum);
     parmas[@"pageSize"] = @(self.pageSize);
+    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
     
     MJRefreshLog(@"parmas---:%@",parmas);
     
@@ -136,20 +146,20 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         [self.tableView.mj_header endRefreshing];
         MJRefreshLog(@"闲置物品下拉显示成功：%@",responseObject);
 
-        //把数据保存到沙盒里的plist文件
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *plistPath1= [paths objectAtIndex:0];
-        
-        NSLog(@"%@",plistPath1);
-        //得到完整的路径名
-        NSString *fileName = [plistPath1 stringByAppendingPathComponent:@"cityCode.plist"];
-
-        NSFileManager *fm = [NSFileManager defaultManager];
-        if ([fm createFileAtPath:fileName contents:nil attributes:nil] ==YES) {
-            
-            [responseObject writeToFile:fileName atomically:YES];
-            NSLog(@"文件写入完成");
-        }
+//        //把数据保存到沙盒里的plist文件
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *plistPath1= [paths objectAtIndex:0];
+//        
+//        NSLog(@"%@",plistPath1);
+//        //得到完整的路径名
+//        NSString *fileName = [plistPath1 stringByAppendingPathComponent:@"cityCode.plist"];
+//
+//        NSFileManager *fm = [NSFileManager defaultManager];
+//        if ([fm createFileAtPath:fileName contents:nil attributes:nil] ==YES) {
+//            
+//            [responseObject writeToFile:fileName atomically:YES];
+//            NSLog(@"文件写入完成");
+//        }
 
         _FreeArticleArr = [FreeArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
         
@@ -179,6 +189,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"sessionId"] = SessionID;
     parmas[@"pageNum"] = @(self.pageNum);
     parmas[@"pageSize"] = @(self.pageSize);
+    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
     
     MJRefreshLog(@"parmas---:%@",parmas);
     NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
@@ -245,7 +256,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    //设置假数据
+    //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
     return model.friendsRefList.count;
 }

@@ -12,6 +12,6 @@
 
 
 /** 设置邻里圈的单元格的枚举类型--- 邻里 约 生活分享  失物招领 */
-@property (nonatomic,assign) NeighborhoodCircleType type;
+@property (nonatomic,assign) NeighborhoodCircleType NeighborhoodType;
 
 @end
