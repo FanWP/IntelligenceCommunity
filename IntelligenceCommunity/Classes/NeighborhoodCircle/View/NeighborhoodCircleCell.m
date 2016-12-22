@@ -127,19 +127,17 @@
     
     //主题
     UILabel *titleLable = [[UILabel alloc] init];
+    titleLable.y = 69;
+    titleLable.x = 16;
+    titleLable.width = KWidth - 32;
+    titleLable.height = 20;
     titleLable.font = UIFont15;
     titleLable.numberOfLines = 0;
-//    titleLable.text = @"标题";
+    //    titleLable.text = @"标题";
 //    titleLable.backgroundColor = [UIColor redColor];
     self.titleLable = titleLable;
     [self addSubview:titleLable];
-    [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_userImageView.mas_bottom).offset(12);
-        make.left.mas_equalTo(16);
-        make.right.mas_equalTo(-16);
-        make.width.mas_equalTo(KWidth - 32);
-        
-    }];
+
 
 //    //图片
     SmartCommunityPhotosView *photosView = [[SmartCommunityPhotosView alloc] init];
@@ -262,47 +260,46 @@
     //对话按钮
     
     //标题
-    self.titleLable.text = neiborhoodModel.title;
-    //计算位置
-    self.titleLable.size = neiborhoodModel.titlewSize;
     
-    //图片
-    NSArray *arr = [neiborhoodModel.images componentsSeparatedByString:@","];
-    self.photosView.photos = arr;
+    //计算位置
+    self.titleLable.y = CGRectGetMaxY(_userImageView.frame) + 12;
+    self.titleLable.x = 16;
+    self.titleLable.size = neiborhoodModel.titlewSize;
+    self.titleLable.text = neiborhoodModel.title;
+    
     //计算图片的尺寸
+    self.photosView.x = 16;
     self.photosView.size = neiborhoodModel.photosSize;
     self.photosView.y = CGRectGetMaxY(_titleLable.frame) + 12;
+    NSArray *arr = [neiborhoodModel.images componentsSeparatedByString:@","];
+    self.photosView.photos = arr;
 
-    //动态内容
-    self.dynamicLabel.text = neiborhoodModel.content;
+
     //计算内容尺寸
     _dynamicLabel.size = neiborhoodModel.commenSize;
     _dynamicLabel.x = 16;
     _dynamicLabel.y = CGRectGetMaxY(_photosView.frame) + 12;
+    //动态内容
+    self.dynamicLabel.text = neiborhoodModel.content;
     
     //时间
-    self.actionTimeLabel.text = [NSString stringWithFormat:@"时间：%@",neiborhoodModel.actionTime];
     self.actionTimeLabel.size = neiborhoodModel.actionTimeSize;
     self.actionTimeLabel.x = 16;
     self.actionTimeLabel.y = CGRectGetMaxY(_dynamicLabel.frame) + 8;
+    self.actionTimeLabel.text = [NSString stringWithFormat:@"时间：%@",neiborhoodModel.actionTime];
     
     //地点
-    self.addressLabel.text = [NSString stringWithFormat:@"地点：%@",neiborhoodModel.address];
     self.addressLabel.size = neiborhoodModel.addressSize;
     self.addressLabel.x = 16;
     self.addressLabel.y = CGRectGetMaxY(_actionTimeLabel.frame) + 8;
+    self.addressLabel.text = [NSString stringWithFormat:@"地点：%@",neiborhoodModel.address];
     
     
     //删除、点赞，评论
     _commentBtnView.x = 0;
     _commentBtnView.y = CGRectGetMaxY(_addressLabel.frame) + 12;
     
-    
-    
-    
-    
-    
-    
+
 
     /*
      //用户头像

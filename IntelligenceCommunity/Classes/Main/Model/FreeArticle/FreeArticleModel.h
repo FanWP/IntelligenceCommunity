@@ -69,7 +69,7 @@
 /** 头像 */
 @property (nonatomic,copy) NSString *headimage;
 /** 用户名 */
-@property (nonatomic,copy) NSString *nickname;
+@property (nonatomic,copy) NSString *nickName;
 
 /** 用户的回复列表 */
 @property (nonatomic,strong) NSArray *friendsRefList;

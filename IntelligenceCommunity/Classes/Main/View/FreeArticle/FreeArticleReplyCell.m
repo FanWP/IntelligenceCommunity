@@ -15,6 +15,9 @@
 /** 回复消息的内容 */
 @property (nonatomic,weak) UILabel *commentLable;
 
+/** 设置回复的容器 */
+@property (nonatomic,weak) UIView *replyView;
+
 @end
 
 @implementation FreeArticleReplyCell
@@ -48,6 +51,21 @@
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        //设置内容
+        UIView *view = [[UIView alloc] init];
+        view.backgroundColor = MJRefreshColor(223, 227, 224);
+        self.replyView = view;
+        [self.contentView addSubview:view];
+        
+        UILabel *commentLable = [[UILabel alloc] init];
+        commentLable.centerY = view.height * 0.5;
+        commentLable.numberOfLines = 0;
+        commentLable.font = UIFont13;
+        self.commentLable = commentLable;
+        [view addSubview:commentLable];
+
 
     }
     return self;
@@ -61,19 +79,10 @@
     _replyModel = replyModel;
 
     //设置内容
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 0, KWidth - 20, replyModel.contentH + 10)];
-    view.backgroundColor = MJRefreshColor(223, 227, 224);
-    [self.contentView addSubview:view];
-    
-    UILabel *commentLable = [[UILabel alloc] initWithFrame:CGRectMake(7, 0, view.width - 12, replyModel.contentH)];
-    commentLable.centerY = view.height * 0.5;
-    commentLable.numberOfLines = 0;
-    commentLable.font = UIFont13;
-    commentLable.attributedText = replyModel.attrText;
-    self.commentLable = commentLable;
-    [view addSubview:commentLable];
-
-    
+    self.replyView.frame = CGRectMake(10, 0, KWidth - 20, replyModel.contentH + 10);
+    self.commentLable.frame = CGRectMake(7, 0, _replyView.width - 12, replyModel.contentH);
+    _commentLable.centerY = _replyView.height * 0.5;
+    _commentLable.attributedText = replyModel.attrText;
 }
 
 @end

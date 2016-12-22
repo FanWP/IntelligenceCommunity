@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RootTabBarController.h"
 #import "RootNavigationController.h"
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -19,21 +20,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    
-    
-    ///564654654654564
 
-    //mumu
-
-    ////    ///6546546546
     
     [self initUI];
     
-    
-    
+    [self keyboardConfig];
+
     return YES;
 }
+
+-(void)keyboardConfig {
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.shouldShowTextFieldPlaceholder = NO;
+    manager.toolbarTintColor = ThemeColor;
+}
+
 //初始化UI
 -(void)initUI{
     

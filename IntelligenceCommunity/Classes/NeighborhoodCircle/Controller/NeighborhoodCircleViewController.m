@@ -12,6 +12,7 @@
 #import "NeighborhoodMainCommonTableVC.h" //公共的控制器
 #import "NeighborhoodMessageTableVC.h"  //邻里圈消息的控制器
 #import "neighborhoodSendMessageVC.h"  //邻里圈发活动  动态
+#import "neiborhoodSendAppointVC.h"    //邻里圈约活动的发布
 
 @interface NeighborhoodCircleViewController ()<UIScrollViewDelegate>
 
@@ -56,7 +57,7 @@
 
     // 底部的scrollView
     [self setupContentView];
-    self.title = @"邻里圈";
+    self.tabBarController.navigationItem.title = @"邻里圈";
     
     //右上角的
     [self setupRightBar];
@@ -78,8 +79,7 @@
     [coverView addGestureRecognizer:tap];
     self.coverView = coverView;
     [self.view addSubview:coverView];
-    
-    
+
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-down"]];
     imgView.x = KWidth - imgView.width - 5;
     imgView.y = 64;
@@ -127,6 +127,8 @@
         case 2://约活动
         {
             MJRefreshLog(@"约活动");
+            neiborhoodSendAppointVC * vc = [[neiborhoodSendAppointVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 3://发动态
@@ -160,20 +162,20 @@
 
 - (void)setupChildVces
 {
-    NeighborhoodMainCommonTableVC *NeighborhoodVC = [[NeighborhoodMainCommonTableVC alloc] init];
-    NeighborhoodVC.type = Neighborhood;//邻里
+    NeighborhoodMainCommonTableVC *NeighborhoodVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
+    NeighborhoodVC.NeighborhoodType = Neighborhood;//邻里
     [self addChildViewController:NeighborhoodVC];
     
-    NeighborhoodMainCommonTableVC *NeighborhoodAppointmentVC = [[NeighborhoodMainCommonTableVC alloc] init];
-    NeighborhoodAppointmentVC.type = NeighborhoodAppointment;//约
+    NeighborhoodMainCommonTableVC *NeighborhoodAppointmentVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
+    NeighborhoodAppointmentVC.NeighborhoodType = NeighborhoodAppointment;//约
     [self addChildViewController:NeighborhoodAppointmentVC];
     
-    NeighborhoodMainCommonTableVC *NeighborhoodShareLifeVC = [[NeighborhoodMainCommonTableVC alloc] init];
-    NeighborhoodShareLifeVC.type = NeighborhoodShareLife;//生活分享
+    NeighborhoodMainCommonTableVC *NeighborhoodShareLifeVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
+    NeighborhoodShareLifeVC.NeighborhoodType = NeighborhoodShareLife;//生活分享
     [self addChildViewController:NeighborhoodShareLifeVC];
     
-    NeighborhoodMainCommonTableVC *NeighborhoodLostFoundVC = [[NeighborhoodMainCommonTableVC alloc] init];
-    NeighborhoodLostFoundVC.type = NeighborhoodLostFound;//失物招领
+    NeighborhoodMainCommonTableVC *NeighborhoodLostFoundVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
+    NeighborhoodLostFoundVC.NeighborhoodType = NeighborhoodLostFound;//失物招领
     [self addChildViewController:NeighborhoodLostFoundVC];
 
 }
@@ -184,11 +186,13 @@
     
     [self.headerView removeFromSuperview];
     
-    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), 50) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
+    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, KWidth, 43) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
 
         [self titleClick:(index - 1)];
         NSLog(@"%ld",index);
     }];
+    headerView.titleSelectColor = GreenColer;
+    headerView.titleFont = UIFont17;
     
     self.headerView = headerView;
     [self.view addSubview:headerView];
@@ -218,8 +222,8 @@
     UIScrollView *contentView = [[UIScrollView alloc] init];
 //    contentView.frame = self.view.bounds;
     contentView.mj_x = 0;
-    contentView.mj_y = 64;
-    contentView.mj_h = self.view.bounds.size.height - 64 - 44;
+    contentView.mj_y = 44;
+    contentView.mj_h = self.view.bounds.size.height - 44 - 44;
     contentView.mj_w = self.view.mj_w;
     contentView.delegate = self;
     contentView.pagingEnabled = YES;
@@ -241,7 +245,7 @@
     UIViewController *vc = self.childViewControllers[index];
     vc.view.mj_x = scrollView.contentOffset.x;
     vc.view.mj_y = 0; // 设置控制器view的y值为0(默认是20)
-    vc.view.mj_h = scrollView.height; // 设置控制器view的height值为整个屏幕的高度(默认是比屏幕高度少个20)
+    vc.view.mj_h = scrollView.height - 20; // 设置控制器view的height值为整个屏幕的高度(默认是比屏幕高度少个20)
     [scrollView addSubview:vc.view];
 }
 

@@ -86,9 +86,6 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
 
 -(void)rightBarClick
 {
-    
-    
-    
     MJRefreshLog(@"发布");
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = SessionID;
