@@ -310,6 +310,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     cell.replyModel = model.friendsRefList[indexPath.row];
     
     
+    
 //    FreeArticleReplyModel *modelReply = [[FreeArticleReplyModel alloc] init];
 //    modelReply.userNickName = @"我也是醉了";
 //    modelReply.flag = YES;
@@ -329,16 +330,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
 
 #pragma mark===== 回复评论=============
-//点击回复评论
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    //创建并弹出键盘
-    self.isReply = YES;
-    [self setupKeyboard];
-    FreeArticleModel *model = _FreeArticleArr[indexPath.section];
-    self.replyModel = model.friendsRefList[indexPath.row];
-}
+
 
 -(void)commentsButtonClick:(UIButton *)button
 {
@@ -392,6 +384,25 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 
 
+//点击回复评论
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([_replyModel.userid isEqualToString:UserID]) {//自己给自己回复
+        [HUD showErrorMessage:@"您不能给自己回复！"];
+        [self.replyView removeFromSuperview];
+        MJRefreshLog(@"自己");
+        return;
+    }else
+    {
+        //创建并弹出键盘
+        self.isReply = YES;
+        [self setupKeyboard];
+        FreeArticleModel *model = _FreeArticleArr[indexPath.section];
+        _replyModel = model.friendsRefList[indexPath.row];
+    }
+}
+
+
 //发送按钮的点击事件
 -(void)sendBtnClick:(UIButton *)button
 {
@@ -403,13 +414,13 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"conment"] = self.replyTextView.text;
     
     //判断是回复还是评论
-    if (self.isReply) {//回复
+    if (_isReply) {//回复
         parmas[@"targetId"] = self.replyModel.targetId;
-        parmas[@"replyToUserId"] = self.replyModel.replyToUserId;
-    }else               //评论
+        parmas[@"replyToUserId"] = self.replyModel.userid;
+    }else //评论
     {
         parmas[@"targetId"] = self.commonModel.ID;
-        parmas[@"replyToUserId"] = self.replyModel.userid;
+//        parmas[@"replyToUserId"] = @"0";
     }
     
     NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];

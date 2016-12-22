@@ -146,7 +146,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 260;
+    return 800;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -158,12 +158,27 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     
     NeighborhoodCircleCell *cell = [tableView dequeueReusableCellWithIdentifier:NeighborhoodCircleCellID  forIndexPath:indexPath];
     cell.delegate = self;
-    if (indexPath.row == 0) {
-//        cell.userNameLabel.text = @"咖啡小猫";
-    }else{
-//        cell.userNameLabel.text = @"咖啡大猫";
-    }
     
+    NeighborhoodModel *model = [[NeighborhoodModel alloc] init];
+      model.images = @"805288420863245";
+    if (indexPath.row == 1) {
+            model.images = @"88080880,3245";
+    }else if (indexPath.row == 2) {
+          model.images = @"80528,84880,3245";
+    }else if (indexPath.row == 3){
+                model.images = @"8052808,0,880,3245";
+    }else if (indexPath.row == 4){
+         model.images = @"8052808,0,8,80,3245";
+    }
+    model.title = @"8t408042180t4890419090y32805480y23085y80528050825y520880528052308085y80528050825y520880528052308";
+    model.userNickName = @"大猫爱小雨";
+    model.createTime = @"2016-12-19 15:11:36";
+    model.content = @"我的内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容";
+    model.actionTime = @"周天周天晚上周天晚上周天晚----=上周天晚上周天晚上周天晚上晚上";
+    model.address = @"财富上周天晚上周天晚----=上周天晚上周天晚上周天中心";
+    cell.neiborhoodModel = model;
+    
+
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
     return cell;

@@ -77,6 +77,8 @@ typedef enum : NSUInteger {
 
 
 
+#define GreenColer MJRefreshColor(32, 195, 162)
+
 
 
 
