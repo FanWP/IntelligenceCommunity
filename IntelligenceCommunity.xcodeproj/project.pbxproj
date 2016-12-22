@@ -132,7 +132,6 @@
 		71D3A78D1E0A49A8002C2F1C /* ReceiveAddressTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */; };
 		71D3A7961E0A4A72002C2F1C /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7931E0A4A72002C2F1C /* SettingCell.m */; };
 		71D3A7971E0A4A72002C2F1C /* SettingHeaderPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */; };
-		71EFEB6A1E04D1D600CE467A /* RepairModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB691E04D1D600CE467A /* RepairModel.m */; };
 		71EFEB741E04D97700CE467A /* HouseAuthorityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */; };
 		71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB761E04DC2100CE467A /* FeedbackVC.m */; };
 		71EFEB7A1E04E73700CE467A /* MyShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB791E04E73700CE467A /* MyShoppingCartVC.m */; };
@@ -148,7 +147,6 @@
 		D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89C71E027FED00BCE03C /* neighborhoodSendMessageVC.m */; };
 		D70A89CD1E028A4500BCE03C /* CommunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89CA1E028A4500BCE03C /* CommunityCell.m */; };
 		D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89CC1E028A4500BCE03C /* MaterialsAreadlySaleView.m */; };
-		D70A89D11E028BB400BCE03C /* FreeArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D70A89D01E028BB400BCE03C /* FreeArticleModel.m */; };
 		D71BC12B1E0389900093357C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D71BC1131E0389900093357C /* LICENSE */; };
 		D71BC12C1E0389900093357C /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1171E0389900093357C /* MJExtensionConst.m */; };
 		D71BC12D1E0389900093357C /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1191E0389900093357C /* MJFoundation.m */; };
@@ -161,7 +159,12 @@
 		D71BC1341E0389900093357C /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1271E0389900093357C /* NSObject+MJProperty.m */; };
 		D71BC1351E0389910093357C /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1291E0389900093357C /* NSString+MJExtension.m */; };
 		D71BC1361E0389910093357C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D71BC12A1E0389900093357C /* README.md */; };
-		D71BC1391E0393DE0093357C /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = D71BC1381E0393DE0093357C /* Const.m */; };
+		D730E1E11E0B5CA70056A20A /* FreeArticleReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D730E1E01E0B5CA70056A20A /* FreeArticleReplyCell.m */; };
+		D730E1E51E0B5DD10056A20A /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = D730E1E41E0B5DD10056A20A /* Const.m */; };
+		D730E1E91E0B61EF0056A20A /* RepairModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D730E1E81E0B61EF0056A20A /* RepairModel.m */; };
+		D730E1ED1E0B62B40056A20A /* FreeArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D730E1EC1E0B62B40056A20A /* FreeArticleModel.m */; };
+		D730E1F11E0B62ED0056A20A /* NeighborhoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D730E1F01E0B62ED0056A20A /* NeighborhoodModel.m */; };
+		D730E1F51E0B63830056A20A /* FreeArticleReplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D730E1F41E0B63830056A20A /* FreeArticleReplyModel.m */; };
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
 		D73C21331E076D8800D90FFB /* FreeArticleAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */; };
 		D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */; };
@@ -437,8 +440,6 @@
 		71D3A7931E0A4A72002C2F1C /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		71D3A7941E0A4A72002C2F1C /* SettingHeaderPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingHeaderPictureCell.h; sourceTree = "<group>"; };
 		71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingHeaderPictureCell.m; sourceTree = "<group>"; };
-		71EFEB681E04D1D600CE467A /* RepairModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepairModel.h; path = IntelligenceCommunity/Classes/Other/WUAlbum/RepairModel.h; sourceTree = SOURCE_ROOT; };
-		71EFEB691E04D1D600CE467A /* RepairModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RepairModel.m; path = IntelligenceCommunity/Classes/Other/WUAlbum/RepairModel.m; sourceTree = SOURCE_ROOT; };
 		71EFEB721E04D97700CE467A /* HouseAuthorityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityVC.h; sourceTree = "<group>"; };
 		71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityVC.m; sourceTree = "<group>"; };
 		71EFEB751E04DC2100CE467A /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
@@ -467,8 +468,6 @@
 		D70A89CA1E028A4500BCE03C /* CommunityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityCell.m; sourceTree = "<group>"; };
 		D70A89CB1E028A4500BCE03C /* MaterialsAreadlySaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialsAreadlySaleView.h; sourceTree = "<group>"; };
 		D70A89CC1E028A4500BCE03C /* MaterialsAreadlySaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialsAreadlySaleView.m; sourceTree = "<group>"; };
-		D70A89CF1E028BB400BCE03C /* FreeArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeArticleModel.h; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/FreeArticleModel.h; sourceTree = SOURCE_ROOT; };
-		D70A89D01E028BB400BCE03C /* FreeArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FreeArticleModel.m; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/FreeArticleModel.m; sourceTree = SOURCE_ROOT; };
 		D71BC1131E0389900093357C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D71BC1151E0389900093357C /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
 		D71BC1161E0389900093357C /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
@@ -492,8 +491,18 @@
 		D71BC1281E0389900093357C /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		D71BC1291E0389900093357C /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 		D71BC12A1E0389900093357C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D71BC1371E0393DE0093357C /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Const.h; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/Const.h; sourceTree = SOURCE_ROOT; };
-		D71BC1381E0393DE0093357C /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Const.m; path = IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/Neighborhood/Const.m; sourceTree = SOURCE_ROOT; };
+		D730E1DF1E0B5CA70056A20A /* FreeArticleReplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleReplyCell.h; sourceTree = "<group>"; };
+		D730E1E01E0B5CA70056A20A /* FreeArticleReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleReplyCell.m; sourceTree = "<group>"; };
+		D730E1E31E0B5DD10056A20A /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		D730E1E41E0B5DD10056A20A /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Const.m; sourceTree = "<group>"; };
+		D730E1E71E0B61EF0056A20A /* RepairModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairModel.h; sourceTree = "<group>"; };
+		D730E1E81E0B61EF0056A20A /* RepairModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairModel.m; sourceTree = "<group>"; };
+		D730E1EB1E0B62B40056A20A /* FreeArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleModel.h; sourceTree = "<group>"; };
+		D730E1EC1E0B62B40056A20A /* FreeArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleModel.m; sourceTree = "<group>"; };
+		D730E1EF1E0B62ED0056A20A /* NeighborhoodModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodModel.h; sourceTree = "<group>"; };
+		D730E1F01E0B62ED0056A20A /* NeighborhoodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodModel.m; sourceTree = "<group>"; };
+		D730E1F31E0B63830056A20A /* FreeArticleReplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleReplyModel.h; sourceTree = "<group>"; };
+		D730E1F41E0B63830056A20A /* FreeArticleReplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleReplyModel.m; sourceTree = "<group>"; };
 		D73533B11E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMainCommonTableVC.h; sourceTree = "<group>"; };
 		D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMainCommonTableVC.m; sourceTree = "<group>"; };
 		D73C21311E076D8800D90FFB /* FreeArticleAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleAddViewController.h; sourceTree = "<group>"; };
@@ -618,6 +627,8 @@
 		1808971D1DE59F2A0049A180 /* FreeArticle */ = {
 			isa = PBXGroup;
 			children = (
+				D730E1DF1E0B5CA70056A20A /* FreeArticleReplyCell.h */,
+				D730E1E01E0B5CA70056A20A /* FreeArticleReplyCell.m */,
 				D70A89C91E028A4500BCE03C /* CommunityCell.h */,
 				D70A89CA1E028A4500BCE03C /* CommunityCell.m */,
 				D70A89CB1E028A4500BCE03C /* MaterialsAreadlySaleView.h */,
@@ -693,15 +704,6 @@
 			path = Community;
 			sourceTree = "<group>";
 		};
-		184AB44F1DED169600DC1A54 /* FreeArticle */ = {
-			isa = PBXGroup;
-			children = (
-				D70A89CF1E028BB400BCE03C /* FreeArticleModel.h */,
-				D70A89D01E028BB400BCE03C /* FreeArticleModel.m */,
-			);
-			path = FreeArticle;
-			sourceTree = "<group>";
-		};
 		184AB4501DED169600DC1A54 /* PayMoney */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,15 +721,6 @@
 				18F573561DED6804000FDBF6 /* PropertyFeeBillingModel.m */,
 			);
 			path = PayMoney;
-			sourceTree = "<group>";
-		};
-		184AB4511DED169600DC1A54 /* Repairs */ = {
-			isa = PBXGroup;
-			children = (
-				71EFEB681E04D1D600CE467A /* RepairModel.h */,
-				71EFEB691E04D1D600CE467A /* RepairModel.m */,
-			);
-			path = Repairs;
 			sourceTree = "<group>";
 		};
 		184B1CF51DE6CC5300F8F56E /* HUD */ = {
@@ -978,6 +971,7 @@
 		18B002AB1DE2DA6200D8FE56 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D730E1E21E0B5DD10056A20A /* User */,
 				18B002AD1DE2DC0100D8FE56 /* Main */,
 				18B002AF1DE2DC0100D8FE56 /* OfficialRecommendation */,
 				18B002AC1DE2DC0100D8FE56 /* Key */,
@@ -985,7 +979,6 @@
 				18B002B01DE2DC0100D8FE56 /* Owner */,
 				18B002B11DE2DC9B00D8FE56 /* Other */,
 				18B002B21DE2DC9B00D8FE56 /* Root */,
-				18B002B31DE2DC9B00D8FE56 /* User */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1013,7 +1006,7 @@
 		18B002AE1DE2DC0100D8FE56 /* NeighborhoodCircle */ = {
 			isa = PBXGroup;
 			children = (
-				18B002DE1DE2E50900D8FE56 /* Model */,
+				D730E1EE1E0B62ED0056A20A /* Model */,
 				18B002DF1DE2E50900D8FE56 /* View */,
 				18B002D91DE2E50900D8FE56 /* Controller */,
 			);
@@ -1023,7 +1016,7 @@
 		18B002AF1DE2DC0100D8FE56 /* OfficialRecommendation */ = {
 			isa = PBXGroup;
 			children = (
-				18B002EE1DE2E6A400D8FE56 /* Model */,
+				D730E1F21E0B63300056A20A /* Model */,
 				18B002EF1DE2E6A400D8FE56 /* View */,
 				18B002EB1DE2E6A400D8FE56 /* Controller */,
 			);
@@ -1066,15 +1059,6 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
-		18B002B31DE2DC9B00D8FE56 /* User */ = {
-			isa = PBXGroup;
-			children = (
-				D71BC1371E0393DE0093357C /* Const.h */,
-				D71BC1381E0393DE0093357C /* Const.m */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
 		18B002B41DE2DCFF00D8FE56 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1107,10 +1091,10 @@
 		18B002D61DE2E4B500D8FE56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D730E1EA1E0B62B40056A20A /* FreeArticle */,
+				D730E1E61E0B61EF0056A20A /* Repairs */,
 				184AB44E1DED169600DC1A54 /* Community */,
-				184AB44F1DED169600DC1A54 /* FreeArticle */,
 				184AB4501DED169600DC1A54 /* PayMoney */,
-				184AB4511DED169600DC1A54 /* Repairs */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1147,13 +1131,6 @@
 				D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		18B002DE1DE2E50900D8FE56 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		18B002DF1DE2E50900D8FE56 /* View */ = {
@@ -1197,13 +1174,6 @@
 				18B002ED1DE2E6A400D8FE56 /* OfficialRecommendationViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		18B002EE1DE2E6A400D8FE56 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		18B002EF1DE2E6A400D8FE56 /* View */ = {
@@ -1473,6 +1443,51 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		D730E1E21E0B5DD10056A20A /* User */ = {
+			isa = PBXGroup;
+			children = (
+				D730E1E31E0B5DD10056A20A /* Const.h */,
+				D730E1E41E0B5DD10056A20A /* Const.m */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		D730E1E61E0B61EF0056A20A /* Repairs */ = {
+			isa = PBXGroup;
+			children = (
+				D730E1E71E0B61EF0056A20A /* RepairModel.h */,
+				D730E1E81E0B61EF0056A20A /* RepairModel.m */,
+			);
+			path = Repairs;
+			sourceTree = "<group>";
+		};
+		D730E1EA1E0B62B40056A20A /* FreeArticle */ = {
+			isa = PBXGroup;
+			children = (
+				D730E1F31E0B63830056A20A /* FreeArticleReplyModel.h */,
+				D730E1F41E0B63830056A20A /* FreeArticleReplyModel.m */,
+				D730E1EB1E0B62B40056A20A /* FreeArticleModel.h */,
+				D730E1EC1E0B62B40056A20A /* FreeArticleModel.m */,
+			);
+			path = FreeArticle;
+			sourceTree = "<group>";
+		};
+		D730E1EE1E0B62ED0056A20A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D730E1EF1E0B62ED0056A20A /* NeighborhoodModel.h */,
+				D730E1F01E0B62ED0056A20A /* NeighborhoodModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D730E1F21E0B63300056A20A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FD8C0431E9B21BD24E03FFC3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1676,6 +1691,7 @@
 				184C99CB1DEFD41200588FFD /* HelpCenterViewController.m in Sources */,
 				184FF9DA1DF95BAB005FD46E /* DeterminePayViewController.m in Sources */,
 				184B1CF81DE6CC7000F8F56E /* HUD.m in Sources */,
+				D730E1F11E0B62ED0056A20A /* NeighborhoodModel.m in Sources */,
 				184071351DF7D61B000DA659 /* UITableView+HYBCacheHeight.m in Sources */,
 				184B1D0E1DE6E0CD00F8F56E /* WebViewController.m in Sources */,
 				187A23791DEC0E3700D921FC /* PropertyFeeOtherInfoHeaderView.m in Sources */,
@@ -1701,6 +1717,7 @@
 				1857BD271DF68EE200E5F1DE /* ShoppingCartViewCell.m in Sources */,
 				180897181DE59E9A0049A180 /* RepairsViewController.m in Sources */,
 				71D3A77E1E0A16B0002C2F1C /* ILSettingArrowItem.m in Sources */,
+				D730E1E91E0B61EF0056A20A /* RepairModel.m in Sources */,
 				71D3A7821E0A16B0002C2F1C /* ILSettingLabelItem.m in Sources */,
 				D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */,
 				184B1D111DE6E0F500F8F56E /* SearchViewController.m in Sources */,
@@ -1708,6 +1725,7 @@
 				D71BC1351E0389910093357C /* NSString+MJExtension.m in Sources */,
 				71D3A77F1E0A16B0002C2F1C /* ILSettingGroup.m in Sources */,
 				71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */,
+				D730E1ED1E0B62B40056A20A /* FreeArticleModel.m in Sources */,
 				71D3A7841E0A16B0002C2F1C /* ILSettingTextFieldItem.m in Sources */,
 				710CA4121E0A4F75008565F9 /* OwnerViewController.m in Sources */,
 				D71BC12F1E0389900093357C /* MJPropertyKey.m in Sources */,
@@ -1721,7 +1739,6 @@
 				18B002D81DE2E4B500D8FE56 /* MainViewController.m in Sources */,
 				185ADBEF1DE44ECA00CD556D /* NeighborhoodCircleCell.m in Sources */,
 				187A23701DEBD51900D921FC /* PropertyFeeViewController.m in Sources */,
-				71EFEB6A1E04D1D600CE467A /* RepairModel.m in Sources */,
 				18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */,
 				184B1D351DE6E5C000F8F56E /* WUPreviewViewController.m in Sources */,
 				187A237F1DEC292200D921FC /* PropertyFeeHistoryVC.m in Sources */,
@@ -1734,7 +1751,6 @@
 				18B002EA1DE2E65500D8FE56 /* KeyViewController.m in Sources */,
 				185ADBCF1DE4135100CD556D /* SectionModel.m in Sources */,
 				1857BD1F1DF68E7500E5F1DE /* PopTableViewCustom.m in Sources */,
-				D71BC1391E0393DE0093357C /* Const.m in Sources */,
 				71D3A7801E0A16B0002C2F1C /* ILSettingItem.m in Sources */,
 				71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */,
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
@@ -1764,9 +1780,9 @@
 				18466EA71DFAA4B5009541D6 /* DeterminePayToCommodityDetailVC.m in Sources */,
 				185ADBDF1DE414DC00CD556D /* UIView+MyExtension.m in Sources */,
 				184B1D141DE6E12F00F8F56E /* SearchHistory.m in Sources */,
+				D730E1E11E0B5CA70056A20A /* FreeArticleReplyCell.m in Sources */,
 				187A237C1DEC176C00D921FC /* SpecialOffersListViewCell.m in Sources */,
 				710CA40D1E0A4F08008565F9 /* OwnerViewCell.m in Sources */,
-				D70A89D11E028BB400BCE03C /* FreeArticleModel.m in Sources */,
 				710CA4101E0A4F5A008565F9 /* OwnerHeaderView.m in Sources */,
 				D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */,
 				D71BC1361E0389910093357C /* README.md in Sources */,
@@ -1775,6 +1791,7 @@
 				18466EAA1DFAB015009541D6 /* PayMentViewController.m in Sources */,
 				71D3A7811E0A16B0002C2F1C /* ILSettingCell.m in Sources */,
 				185ADBC51DE3E43400CD556D /* ServiceListCell.m in Sources */,
+				D730E1F51E0B63830056A20A /* FreeArticleReplyModel.m in Sources */,
 				180897151DE59E620049A180 /* CommunityViewController.m in Sources */,
 				184B1D2C1DE6E5C000F8F56E /* UIImage+Aspect.m in Sources */,
 				71EFEB7D1E04E7AD00CE467A /* MyOrdersVC.m in Sources */,
@@ -1794,6 +1811,7 @@
 				D71BC1311E0389900093357C /* NSObject+MJClass.m in Sources */,
 				187383CD1DF1676A0088544A /* ServiceProvidersListViewCell.m in Sources */,
 				18B002BA1DE2DDA900D8FE56 /* Common.m in Sources */,
+				D730E1E51E0B5DD10056A20A /* Const.m in Sources */,
 				187A23881DEC329A00D921FC /* PropertyFeeBillingVC.m in Sources */,
 				184AB4571DED18B200DC1A54 /* PropertyFeeListModel.m in Sources */,
 				184071341DF7D61B000DA659 /* UITableViewCell+HYBMasonryAutoCellHeight.m in Sources */,
