@@ -151,9 +151,11 @@
     
     _receiveAddressModel = _receiveAddressArray[indexPath.row];
     
+    cell.defaultAddressButton.tag = indexPath.row;
+    
     cell.receiverLabel.text = [NSString stringWithFormat:@"收货人：%@",_receiveAddressModel.person];
     cell.receiverPhoneNumLabel.text = _receiveAddressModel.telephone;
-    cell.receiveAddressLabel.text = _receiveAddressModel.area;
+    cell.receiveAddressLabel.text = [NSString stringWithFormat:@"%@%@",_receiveAddressModel.area,_receiveAddressModel.address];
     
     [cell.defaultAddressButton addTarget:self action:@selector(changeDefautAddressAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
@@ -167,6 +169,85 @@
 - (void)changeDefautAddressAction:(UIButton *)button
 {
     button.selected = !button.selected;
+    
+    if (button.selected == NO)
+    {
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"userId"] = UserID;
+        parameters[@"type"] = @"0";
+        parameters[@"id"] = @"24";
+        
+        ICLog_2(@"编辑备用地址参数:%@",parameters);
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@save/update/address",URL_17_mall_api];
+        
+        [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             ICLog_2(@"编辑备用地址返回：%@",responseObject);
+             
+             NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+             
+             if (resultCode == 1000)
+             {
+                 [HUD showSuccessMessage:@"编辑成功"];
+                 
+                 _receiveAddressModel = nil;
+             }
+             else
+             {
+                 [HUD showErrorMessage:@"编辑失败"];
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         {
+             [HUD showErrorMessage:@"编辑失败"];
+             
+             ICLog_2(@"编辑备用地址返回错误：%@",error);
+             
+         }];
+    }
+    else
+    {
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"userId"] = UserID;
+        parameters[@"type"] = @"1";
+        parameters[@"id"] = @"24";
+        
+        ICLog_2(@"编辑默认地址参数:%@",parameters);
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@save/update/address",URL_17_mall_api];
+        
+        [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             ICLog_2(@"编辑默认地址返回：%@",responseObject);
+             
+             NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+             
+             if (resultCode == 1000)
+             {
+                 [HUD showSuccessMessage:@"编辑成功"];
+                 
+                 _receiveAddressModel = nil;
+             }
+             else
+             {
+                 [HUD showErrorMessage:@"编辑失败"];
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         {
+             [HUD showErrorMessage:@"编辑失败"];
+             
+             ICLog_2(@"编辑默认地址返回错误：%@",error);
+             
+         }];
+    }
 }
 
 - (void)editAddressAction
