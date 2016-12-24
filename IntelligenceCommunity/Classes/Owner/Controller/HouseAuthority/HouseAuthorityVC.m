@@ -8,23 +8,24 @@
 
 #import "HouseAuthorityVC.h"
 
+#import "DMDropDownMenu.h"// 下拉选项
 #import "HouseAuthorityTelNumberVC.h"// 添加房屋-输入业主手机号
 
+#import "HouseAuthorityModel.h"
 
-@interface HouseAuthorityVC ()
-{
-    NSMutableArray *_data;
-    NSMutableArray *_data2;
-    NSMutableArray *_data3;
-    
-    NSInteger _currentDataIndex;
-    NSInteger _currentData2Index;
-    NSInteger _currentData3Index;
-}
+@interface HouseAuthorityVC ()<DMDropDownMenuDelegate>
+
 @property (nonatomic,strong) UILabel *ridgepoleLabel;// 栋
+@property (nonatomic,strong) DMDropDownMenu *ridgepoleView;// 选择几栋
 @property (nonatomic,strong) UILabel *unitLabel;// 单元
+@property (nonatomic,strong) DMDropDownMenu *unitView;// 选择单元
 @property (nonatomic,strong) UILabel *roomNumberLabel;// 房号
+@property (nonatomic,strong) DMDropDownMenu *roomNumberView;// 选择房号
 @property (nonatomic,strong) UIButton *nextStepButton;// 下一步
+
+@property (nonatomic,strong) NSArray *ridgepoleArray;// 楼栋数组
+@property (nonatomic,strong) NSArray *unitArray;// 单元数组
+@property (nonatomic,strong) NSArray *roomNumberArray;// 房号数组
 
 @end
 
@@ -37,11 +38,137 @@
     
     [self initializeComponent];
     
-    _data = [NSMutableArray arrayWithObjects:@"1栋", @"2栋", @"3栋", @"4栋", @"5栋", @"6栋", @"7栋", nil];
-    _data2 = [NSMutableArray arrayWithObjects:@"1单元", @"2单元", @"3单元", @"4单元", @"5单元", @"6单元", @"7单元", nil];
-    _data3 = [NSMutableArray arrayWithObjects:@"1号房", @"2号房", @"3号房", @"4号房", @"5号房", @"6号房", @"7号房", nil];
+    _ridgepoleArray = [NSArray array];
+    _unitArray = [NSArray array];
+    _roomNumberArray = [NSArray array];
     
 }
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self dataRidgepole];
+//    [self dataUnit];
+//    [self dataRoom];
+}
+
+
+- (void)selectIndex:(NSInteger)index AtDMDropDownMenu:(DMDropDownMenu *)dmDropDownMenu
+{
+    NSLog(@"dropDownMenu:%@ index:%ld",dmDropDownMenu,index);
+}
+
+
+- (void)dataRidgepole
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"type"] = @"0";
+    parameters[@"sessionId"] = SessionID;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@find/house/type/list",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"楼栋号返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            _ridgepoleArray = [HouseAuthorityModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+        }
+        else
+        {
+            _ridgepoleArray = nil;
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        _ridgepoleArray = nil;
+        
+        ICLog_2(@"楼栋号错误：%@",error);
+    }];
+}
+
+
+- (void)dataUnit
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"type"] = @"1";
+    parameters[@"buildNumber"] = @"1";
+    parameters[@"sessionId"] = SessionID;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@find/house/type/list",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+     {
+         ICLog_2(@"单元号返回：%@",responseObject);
+         
+         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+         
+         if (resultCode == 1000)
+         {
+             _unitArray = responseObject[@"body"];
+         }
+         else
+         {
+             _unitArray = nil;
+         }
+
+         
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+         _unitArray = nil;
+         
+         ICLog_2(@"单元号错误：%@",error);
+     }];
+}
+
+
+- (void)dataRoom
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"type"] = @"1";
+    parameters[@"buildNumber"] = @"1";
+    parameters[@"unitNumber"] = @"1";
+    parameters[@"sessionId"] = SessionID;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@find/house/type/list",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+     {
+         ICLog_2(@"房号返回：%@",responseObject);
+         
+         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+         
+         if (resultCode == 1000)
+         {
+             _roomNumberArray = responseObject[@"body"];
+         }
+         else
+         {
+             _roomNumberArray = nil;
+         }
+         
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+         _roomNumberArray = nil;
+         
+         ICLog_2(@"房号错误：%@",error);
+     }];
+}
+
 
 
 - (void)initializeComponent
@@ -49,91 +176,89 @@
     // 栋
     _ridgepoleLabel = [[UILabel alloc] init];
     _ridgepoleLabel.text = @"楼栋";
-    _ridgepoleLabel.font = UIFontNormal;
+    _ridgepoleLabel.font = UIFont15;
     [self.view addSubview:_ridgepoleLabel];
     [_ridgepoleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(40);
-        make.top.offset(64 + 40);
-        make.width.offset(40);
+        make.left.offset(35);
+        make.right.mas_offset(-35);
+        make.top.offset(64 + 42);
         make.height.offset(30);
     }];
     
     
-//    CGFloat menuX = 90;
-//    CGFloat menuWidth = KWidth - 2 * 40 - 40 - 10;
-//    CGFloat menuHeight = 30;
+    
     // 选择几栋
-//    CGFloat ridgepoleMenuY = 64 + 40;
-//    DropDownView *ridgepoleMenu = [[DropDownView alloc] initWithOrigin:CGPointMake(menuX, ridgepoleMenuY) width:menuWidth andHeight:menuHeight];
-//    ridgepoleMenu.tag = 111;
-//    ridgepoleMenu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
-//    ridgepoleMenu.separatorColor = [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1.0];
-//    ridgepoleMenu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
-//    ridgepoleMenu.dataSource = self;
-//    ridgepoleMenu.delegate = self;
-//    [self.view addSubview:ridgepoleMenu];
+    NSArray * dmArray1 = [NSArray arrayWithObjects:@"iPhone",@"iMac",@"iTouch",@"MacBook Air 13寸",@"MacBook Air 15 寸",@"MacBook Pro 13 寸",@"MacBook Pro 15 寸", nil];
+    NSArray * dmArray2 = [NSArray arrayWithObjects:@"今晚与你记住蒲公英今晚与你记住蒲公英今晚与你记住蒲公英",@"今晚偏偏想起风的清劲",@"今晚偏偏想起风的清劲",@"回忆不在受制于我 我承认",@"回忆也许是你的", nil];
+    
+    CGFloat ridgepoleViewY = 64 + 42 + 30 + 16;
+    CGFloat width = KWidth - 2 * 35;
+    _ridgepoleView = [[DMDropDownMenu alloc] initWithFrame:CGRectMake(35, ridgepoleViewY, width, 35)];
+    _ridgepoleView.delegate = self;
+    [_ridgepoleView setListArray:dmArray1];
+    [self.view addSubview:_ridgepoleView];
 
+    
     
     // 单元
     _unitLabel = [[UILabel alloc] init];
     _unitLabel.text = @"单元";
-    _unitLabel.font = UIFontNormal;
+    _unitLabel.font = UIFont15;
     [self.view addSubview:_unitLabel];
     [_unitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_ridgepoleLabel.mas_left);
-        make.top.equalTo(_ridgepoleLabel.mas_bottom).offset(10);
+        make.top.equalTo(_ridgepoleView.mas_bottom).offset(42);
         make.width.equalTo(_ridgepoleLabel.mas_width);
         make.height.equalTo(_ridgepoleLabel.mas_height);
     }];
     
     
-    // 选择几单元
-//    CGFloat unitMenuY = ridgepoleMenuY + menuHeight + 10;
-//    DropDownView *unitMenu = [[DropDownView alloc] initWithOrigin:CGPointMake(menuX, unitMenuY) width:menuWidth andHeight:menuHeight];
-//    unitMenu.tag = 112;
-//    unitMenu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
-//    unitMenu.separatorColor = [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1.0];
-//    unitMenu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
-//    unitMenu.dataSource = self;
-//    unitMenu.delegate = self;
-//    [self.view addSubview:unitMenu];
+    
+    // 选择单元
+    CGFloat unitViewY = ridgepoleViewY + 35 + 42 + 30 + 16;
+    _unitView = [[DMDropDownMenu alloc] initWithFrame:CGRectMake(35, unitViewY, width, 35)];
+    _unitView.delegate = self;
+    [_unitView setListArray:dmArray2];
+    [self.view addSubview:_unitView];
+    
+    
+    
     
     // 房号
     _roomNumberLabel = [[UILabel alloc] init];
     _roomNumberLabel.text = @"房号";
-    _roomNumberLabel.font = UIFontNormal;
+    _roomNumberLabel.font = UIFont15;
     [self.view addSubview:_roomNumberLabel];
     [_roomNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_ridgepoleLabel.mas_left);
-        make.top.equalTo(_unitLabel.mas_bottom).offset(10);
+        make.top.equalTo(_unitView.mas_bottom).offset(42);
         make.width.equalTo(_ridgepoleLabel.mas_width);
         make.height.equalTo(_ridgepoleLabel.mas_height);
     }];
+
     
     
-    // 选择几号房
-//    CGFloat roomNumberMenuY = unitMenuY + menuHeight + 10;
-//    DropDownView *roomNumberMenu = [[DropDownView alloc] initWithOrigin:CGPointMake(menuX, roomNumberMenuY) width:menuWidth andHeight:menuHeight];
-//    roomNumberMenu.tag = 113;
-//    roomNumberMenu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
-//    roomNumberMenu.separatorColor = [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1.0];
-//    roomNumberMenu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
-//    roomNumberMenu.dataSource = self;
-//    roomNumberMenu.delegate = self;
-//    [self.view addSubview:roomNumberMenu];
+    // 选择房号
+    CGFloat roomNumberViewY = unitViewY + 35 + 42 + 30 + 16;
+    _roomNumberView = [[DMDropDownMenu alloc] initWithFrame:CGRectMake(35, roomNumberViewY, width, 35)];
+    _roomNumberView.delegate = self;
+    [_roomNumberView setListArray:dmArray1];
+    [self.view addSubview:_roomNumberView];
+    
     
     
     // 下一步
     _nextStepButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     _nextStepButton.backgroundColor = HexColor(0x04c5a1);
+    [_nextStepButton.titleLabel setFont:UIFontLarge];
     [_nextStepButton setTitle:@"下一步" forState:(UIControlStateNormal)];
     _nextStepButton.layer.cornerRadius = 5.0;
     [self.view addSubview:_nextStepButton];
     [_nextStepButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(40);
-        make.top.equalTo(_roomNumberLabel.mas_bottom).offset(40);
-        make.right.offset(-40);
-        make.height.offset(44);
+        make.left.offset(15);
+        make.right.offset(-15);
+        make.bottom.offset(-44 + 21);
+        make.height.offset(49);
     }];
     
     
@@ -149,114 +274,6 @@
     [self.navigationController pushViewController:houseAuthorityTelNumberVC animated:YES];
 }
 
-
-
-//- (NSInteger)numberOfColumnsInMenu:(DropDownView *)menu {
-//    
-//    return 1;
-//}
-//
-//-(BOOL)displayByCollectionViewInColumn:(NSInteger)column{
-//    
-//    return NO;
-//}
-//
-//-(BOOL)haveRightTableViewInColumn:(NSInteger)column{
-//
-//    return NO;
-//}
-//
-//-(CGFloat)widthRatioOfLeftColumn:(NSInteger)column{
-//
-//    return 1;
-//}
-//
-//-(NSInteger)currentLeftSelectedRow:(NSInteger)column{
-//    if (self.view.tag == 111)
-//    {
-//        return _currentDataIndex;
-//    }
-//    else if (self.view.tag == 112)
-//    {
-//        return _currentData2Index;
-//    }
-//    else if (self.view.tag == 113)
-//    {
-//        return _currentData3Index;
-//    }
-//
-//    return _currentDataIndex;
-//}
-//
-//- (NSInteger)menu:(DropDownView *)menu numberOfRowsInColumn:(NSInteger)column leftOrRight:(NSInteger)leftOrRight leftRow:(NSInteger)leftRow{
-//    if (self.view.tag == 111)
-//    {
-//        return _data.count;
-//    }
-//    else if (self.view.tag == 112)
-//    {
-//        return _data2.count;
-//    }
-//    else if (self.view.tag == 113)
-//    {
-//        return _data3.count;
-//    }
-//
-//    return _data.count;
-//}
-//
-//- (NSString *)menu:(DropDownView *)menu titleForColumn:(NSInteger)column{
-//    if (self.view.tag == 111)
-//    {
-//        return _data[0];
-//    }
-//    else if (self.view.tag == 112)
-//    {
-//        return _data[0];
-//    }
-//    else if (self.view.tag == 113)
-//    {
-//        return _data[0];
-//    }
-//
-//    return _data[0];
-//}
-//
-//- (NSString *)menu:(DropDownView *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
-//    
-//    if (self.view.tag == 111)
-//    {
-//        return _data[indexPath.row];
-//    }
-//    else if (self.view.tag == 112)
-//    {
-//        return _data2[indexPath.row];
-//    }
-//    else if (self.view.tag == 113)
-//    {
-//        return _data3[indexPath.row];
-//    }
-//    return _data[indexPath.row];
-//}
-//
-//- (void)menu:(DropDownView *)menu didSelectRowAtIndexPath:(JSIndexPath *)indexPath {
-//    
-//    if (self.view.tag == 111)
-//    {
-//        _currentDataIndex = indexPath.row;
-//    }
-//    else if (self.view.tag == 112)
-//    {
-//        _currentDataIndex = indexPath.row;
-//    }
-//    else if (self.view.tag == 113)
-//    {
-//        _currentDataIndex = indexPath.row;
-//    }
-//
-//    _currentDataIndex = indexPath.row;
-//    
-//}
 
 
 - (void)didReceiveMemoryWarning {

@@ -115,6 +115,13 @@
 		710CA4101E0A4F5A008565F9 /* OwnerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CA40F1E0A4F5A008565F9 /* OwnerHeaderView.m */; };
 		710CA4121E0A4F75008565F9 /* OwnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CA4111E0A4F75008565F9 /* OwnerViewController.m */; };
 		710CA4151E0A50FC008565F9 /* ReceiveAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CA4141E0A50FC008565F9 /* ReceiveAddressCell.m */; };
+		710F6E201E0CC0F5006D7BED /* DMDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E1F1E0CC0F5006D7BED /* DMDropDownMenu.m */; };
+		710F6E231E0CD496006D7BED /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E221E0CD496006D7BED /* HouseAuthorityModel.m */; };
+		710F6E261E0CF578006D7BED /* HouseMembersTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E251E0CF578006D7BED /* HouseMembersTableVC.m */; };
+		710F6E2A1E0CF7D1006D7BED /* HouseMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E291E0CF7D1006D7BED /* HouseMembersCell.m */; };
+		710F6E2D1E0D0900006D7BED /* HouseListTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E2C1E0D0900006D7BED /* HouseListTableVC.m */; };
+		710F6E301E0D091D006D7BED /* HouseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E2F1E0D091D006D7BED /* HouseListCell.m */; };
+		710F6E331E0D25EB006D7BED /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E321E0D25EB006D7BED /* HouseModel.m */; };
 		711CBE3E1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 711CBE3D1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m */; };
 		71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A841E0390F500067125 /* RepairStatusTableVC.m */; };
 		71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A871E0391E900067125 /* RepairStatusCell.m */; };
@@ -131,7 +138,6 @@
 		71D3A78A1E0A3245002C2F1C /* SignatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7891E0A3245002C2F1C /* SignatureVC.m */; };
 		71D3A78D1E0A49A8002C2F1C /* ReceiveAddressTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */; };
 		71D3A7961E0A4A72002C2F1C /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7931E0A4A72002C2F1C /* SettingCell.m */; };
-		71D3A7971E0A4A72002C2F1C /* SettingHeaderPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */; };
 		71EFEB741E04D97700CE467A /* HouseAuthorityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */; };
 		71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB761E04DC2100CE467A /* FeedbackVC.m */; };
 		71EFEB7A1E04E73700CE467A /* MyShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB791E04E73700CE467A /* MyShoppingCartVC.m */; };
@@ -140,6 +146,10 @@
 		71EFEB841E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB831E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m */; };
 		71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB861E05245500CE467A /* NoticeListTableVC.m */; };
 		71EFEB8B1E05265A00CE467A /* NoticeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB8A1E05265A00CE467A /* NoticeListCell.m */; };
+		71F099701E0B6B56008FD3EE /* EditReceiveAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F0996F1E0B6B56008FD3EE /* EditReceiveAddressVC.m */; };
+		71F099731E0B78E8008FD3EE /* AddReceiveAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F099721E0B78E8008FD3EE /* AddReceiveAddressVC.m */; };
+		71F099761E0B971D008FD3EE /* ReceiveAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F099751E0B971D008FD3EE /* ReceiveAddressModel.m */; };
+		71F099791E0BC7F5008FD3EE /* SettingHeaderPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F099781E0BC7F5008FD3EE /* SettingHeaderPictureCell.m */; };
 		B2DF503E12DEBB83D31B2323 /* libPods-IntelligenceCommunity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */; };
 		D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D702430D1E04CA610033B78C /* Foundation+Log.m */; };
 		D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D70243101E04CC340033B78C /* FreeArticleHeaderView.m */; };
@@ -428,6 +438,20 @@
 		710CA4111E0A4F75008565F9 /* OwnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerViewController.m; sourceTree = "<group>"; };
 		710CA4131E0A50FC008565F9 /* ReceiveAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveAddressCell.h; sourceTree = "<group>"; };
 		710CA4141E0A50FC008565F9 /* ReceiveAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressCell.m; sourceTree = "<group>"; };
+		710F6E1E1E0CC0F5006D7BED /* DMDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMDropDownMenu.h; sourceTree = "<group>"; };
+		710F6E1F1E0CC0F5006D7BED /* DMDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMDropDownMenu.m; sourceTree = "<group>"; };
+		710F6E211E0CD496006D7BED /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HouseAuthorityModel.h; path = IntelligenceCommunity/Classes/Root/HouseAuthorityModel.h; sourceTree = SOURCE_ROOT; };
+		710F6E221E0CD496006D7BED /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HouseAuthorityModel.m; path = IntelligenceCommunity/Classes/Root/HouseAuthorityModel.m; sourceTree = SOURCE_ROOT; };
+		710F6E241E0CF578006D7BED /* HouseMembersTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseMembersTableVC.h; sourceTree = "<group>"; };
+		710F6E251E0CF578006D7BED /* HouseMembersTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseMembersTableVC.m; sourceTree = "<group>"; };
+		710F6E281E0CF7D1006D7BED /* HouseMembersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseMembersCell.h; sourceTree = "<group>"; };
+		710F6E291E0CF7D1006D7BED /* HouseMembersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseMembersCell.m; sourceTree = "<group>"; };
+		710F6E2B1E0D0900006D7BED /* HouseListTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseListTableVC.h; sourceTree = "<group>"; };
+		710F6E2C1E0D0900006D7BED /* HouseListTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListTableVC.m; sourceTree = "<group>"; };
+		710F6E2E1E0D091D006D7BED /* HouseListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseListCell.h; sourceTree = "<group>"; };
+		710F6E2F1E0D091D006D7BED /* HouseListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListCell.m; sourceTree = "<group>"; };
+		710F6E311E0D25EB006D7BED /* HouseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HouseModel.h; path = IntelligenceCommunity/Classes/Owner/View/HouseAuthority/HouseModel.h; sourceTree = SOURCE_ROOT; };
+		710F6E321E0D25EB006D7BED /* HouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HouseModel.m; path = IntelligenceCommunity/Classes/Owner/View/HouseAuthority/HouseModel.m; sourceTree = SOURCE_ROOT; };
 		711CBE3C1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityTelNumberVC.h; sourceTree = "<group>"; };
 		711CBE3D1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityTelNumberVC.m; sourceTree = "<group>"; };
 		71A20A831E0390F500067125 /* RepairStatusTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusTableVC.h; sourceTree = "<group>"; };
@@ -460,8 +484,6 @@
 		71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressTableVC.m; sourceTree = "<group>"; };
 		71D3A7921E0A4A72002C2F1C /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
 		71D3A7931E0A4A72002C2F1C /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
-		71D3A7941E0A4A72002C2F1C /* SettingHeaderPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingHeaderPictureCell.h; sourceTree = "<group>"; };
-		71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingHeaderPictureCell.m; sourceTree = "<group>"; };
 		71EFEB721E04D97700CE467A /* HouseAuthorityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityVC.h; sourceTree = "<group>"; };
 		71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityVC.m; sourceTree = "<group>"; };
 		71EFEB751E04DC2100CE467A /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
@@ -478,6 +500,14 @@
 		71EFEB861E05245500CE467A /* NoticeListTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListTableVC.m; sourceTree = "<group>"; };
 		71EFEB891E05265A00CE467A /* NoticeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListCell.h; sourceTree = "<group>"; };
 		71EFEB8A1E05265A00CE467A /* NoticeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListCell.m; sourceTree = "<group>"; };
+		71F0996E1E0B6B56008FD3EE /* EditReceiveAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditReceiveAddressVC.h; sourceTree = "<group>"; };
+		71F0996F1E0B6B56008FD3EE /* EditReceiveAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditReceiveAddressVC.m; sourceTree = "<group>"; };
+		71F099711E0B78E8008FD3EE /* AddReceiveAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReceiveAddressVC.h; sourceTree = "<group>"; };
+		71F099721E0B78E8008FD3EE /* AddReceiveAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReceiveAddressVC.m; sourceTree = "<group>"; };
+		71F099741E0B971D008FD3EE /* ReceiveAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiveAddressModel.h; path = IntelligenceCommunity/Classes/Owner/Controller/ReceiveAddress/ReceiveAddressModel.h; sourceTree = SOURCE_ROOT; };
+		71F099751E0B971D008FD3EE /* ReceiveAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiveAddressModel.m; path = IntelligenceCommunity/Classes/Owner/Controller/ReceiveAddress/ReceiveAddressModel.m; sourceTree = SOURCE_ROOT; };
+		71F099771E0BC7F5008FD3EE /* SettingHeaderPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingHeaderPictureCell.h; sourceTree = "<group>"; };
+		71F099781E0BC7F5008FD3EE /* SettingHeaderPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingHeaderPictureCell.m; sourceTree = "<group>"; };
 		A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.debug.xcconfig"; sourceTree = "<group>"; };
 		D702430D1E04CA610033B78C /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		D702430F1E04CC340033B78C /* FreeArticleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeArticleHeaderView.h; sourceTree = "<group>"; };
@@ -1111,6 +1141,7 @@
 		18B002B21DE2DC9B00D8FE56 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				710F6E1D1E0CC0F5006D7BED /* DMDropDownMenu */,
 				D730E1FC1E0BCC120056A20A /* IQKeyboardManager */,
 				71D3A7691E0A16B0002C2F1C /* ILSetting */,
 				D71BC1121E0389900093357C /* MJExtension */,
@@ -1274,6 +1305,12 @@
 		18B002F41DE2E6F100D8FE56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				71F099741E0B971D008FD3EE /* ReceiveAddressModel.h */,
+				71F099751E0B971D008FD3EE /* ReceiveAddressModel.m */,
+				710F6E211E0CD496006D7BED /* HouseAuthorityModel.h */,
+				710F6E221E0CD496006D7BED /* HouseAuthorityModel.m */,
+				710F6E311E0D25EB006D7BED /* HouseModel.h */,
+				710F6E321E0D25EB006D7BED /* HouseModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1285,6 +1322,26 @@
 				71A20A871E0391E900067125 /* RepairStatusCell.m */,
 			);
 			path = Repairs;
+			sourceTree = "<group>";
+		};
+		710F6E1D1E0CC0F5006D7BED /* DMDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				710F6E1E1E0CC0F5006D7BED /* DMDropDownMenu.h */,
+				710F6E1F1E0CC0F5006D7BED /* DMDropDownMenu.m */,
+			);
+			path = DMDropDownMenu;
+			sourceTree = "<group>";
+		};
+		710F6E271E0CF5A9006D7BED /* HouseAuthority */ = {
+			isa = PBXGroup;
+			children = (
+				710F6E281E0CF7D1006D7BED /* HouseMembersCell.h */,
+				710F6E291E0CF7D1006D7BED /* HouseMembersCell.m */,
+				710F6E2E1E0D091D006D7BED /* HouseListCell.h */,
+				710F6E2F1E0D091D006D7BED /* HouseListCell.m */,
+			);
+			path = HouseAuthority;
 			sourceTree = "<group>";
 		};
 		71D3A7691E0A16B0002C2F1C /* ILSetting */ = {
@@ -1341,6 +1398,7 @@
 				710CA40B1E0A4F08008565F9 /* OwnerViewCell.m */,
 				710CA4091E0A4F08008565F9 /* OwnerHeaderView.h */,
 				710CA40F1E0A4F5A008565F9 /* OwnerHeaderView.m */,
+				710F6E271E0CF5A9006D7BED /* HouseAuthority */,
 				71D3A7901E0A4A04002C2F1C /* ReceiveAddress */,
 				71D3A7911E0A4A04002C2F1C /* Setting */,
 			);
@@ -1361,8 +1419,8 @@
 			children = (
 				71D3A7921E0A4A72002C2F1C /* SettingCell.h */,
 				71D3A7931E0A4A72002C2F1C /* SettingCell.m */,
-				71D3A7941E0A4A72002C2F1C /* SettingHeaderPictureCell.h */,
-				71D3A7951E0A4A72002C2F1C /* SettingHeaderPictureCell.m */,
+				71F099771E0BC7F5008FD3EE /* SettingHeaderPictureCell.h */,
+				71F099781E0BC7F5008FD3EE /* SettingHeaderPictureCell.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1385,6 +1443,10 @@
 				711CBE3D1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m */,
 				710C17A11E08CE9100FF215E /* BindHouseVC.h */,
 				710C17A21E08CE9100FF215E /* BindHouseVC.m */,
+				710F6E241E0CF578006D7BED /* HouseMembersTableVC.h */,
+				710F6E251E0CF578006D7BED /* HouseMembersTableVC.m */,
+				710F6E2B1E0D0900006D7BED /* HouseListTableVC.h */,
+				710F6E2C1E0D0900006D7BED /* HouseListTableVC.m */,
 			);
 			path = HouseAuthority;
 			sourceTree = "<group>";
@@ -1419,6 +1481,10 @@
 			children = (
 				71D3A78B1E0A49A8002C2F1C /* ReceiveAddressTableVC.h */,
 				71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */,
+				71F099711E0B78E8008FD3EE /* AddReceiveAddressVC.h */,
+				71F099721E0B78E8008FD3EE /* AddReceiveAddressVC.m */,
+				71F0996E1E0B6B56008FD3EE /* EditReceiveAddressVC.h */,
+				71F0996F1E0B6B56008FD3EE /* EditReceiveAddressVC.m */,
 			);
 			path = ReceiveAddress;
 			sourceTree = "<group>";
@@ -1880,12 +1946,12 @@
 				18B0027F1DE2C9D700D8FE56 /* ViewController.m in Sources */,
 				1840713B1DF7FA30000DA659 /* ServiceProvidersListModel.m in Sources */,
 				187A23851DEC318C00D921FC /* PropertyFeeBillingDetailViewCell.m in Sources */,
-				71D3A7971E0A4A72002C2F1C /* SettingHeaderPictureCell.m in Sources */,
 				1857BD271DF68EE200E5F1DE /* ShoppingCartViewCell.m in Sources */,
 				180897181DE59E9A0049A180 /* RepairsViewController.m in Sources */,
 				D730E2311E0BCC130056A20A /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				71D3A77E1E0A16B0002C2F1C /* ILSettingArrowItem.m in Sources */,
 				D730E1E91E0B61EF0056A20A /* RepairModel.m in Sources */,
+				71F099701E0B6B56008FD3EE /* EditReceiveAddressVC.m in Sources */,
 				71D3A7821E0A16B0002C2F1C /* ILSettingLabelItem.m in Sources */,
 				D702430E1E04CA610033B78C /* Foundation+Log.m in Sources */,
 				184B1D111DE6E0F500F8F56E /* SearchViewController.m in Sources */,
@@ -1900,18 +1966,23 @@
 				185ADBEC1DE4442200CD556D /* NeighborhoodCircleHeaderView.m in Sources */,
 				184071251DF7ACF1000DA659 /* CommodityDetailViewController.m in Sources */,
 				D730E2271E0BCC130056A20A /* IQUIView+Hierarchy.m in Sources */,
+				710F6E261E0CF578006D7BED /* HouseMembersTableVC.m in Sources */,
 				1808971B1DE59EAF0049A180 /* PayMoneyViewController.m in Sources */,
 				71D3A77D1E0A16B0002C2F1C /* ILBaseTableViewController.m in Sources */,
 				18B002C01DE2DF0800D8FE56 /* RootNavigationController.m in Sources */,
 				D71BC12C1E0389900093357C /* MJExtensionConst.m in Sources */,
+				710F6E231E0CD496006D7BED /* HouseAuthorityModel.m in Sources */,
+				710F6E301E0D091D006D7BED /* HouseListCell.m in Sources */,
 				D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */,
 				18B002D81DE2E4B500D8FE56 /* MainViewController.m in Sources */,
 				185ADBEF1DE44ECA00CD556D /* NeighborhoodCircleCell.m in Sources */,
 				187A23701DEBD51900D921FC /* PropertyFeeViewController.m in Sources */,
 				18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */,
 				184B1D351DE6E5C000F8F56E /* WUPreviewViewController.m in Sources */,
+				710F6E2A1E0CF7D1006D7BED /* HouseMembersCell.m in Sources */,
 				187A237F1DEC292200D921FC /* PropertyFeeHistoryVC.m in Sources */,
 				D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */,
+				71F099791E0BC7F5008FD3EE /* SettingHeaderPictureCell.m in Sources */,
 				185ADBC81DE4122800CD556D /* AdvertiseViewCell.m in Sources */,
 				D730E2241E0BCC130056A20A /* IQNSArray+Sort.m in Sources */,
 				710C17A61E0905F000FF215E /* SettingTableVC.m in Sources */,
@@ -1928,6 +1999,7 @@
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				D730E22D1E0BCC130056A20A /* IQBarButtonItem.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
+				710F6E201E0CC0F5006D7BED /* DMDropDownMenu.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
 				71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */,
 				D71BC1331E0389900093357C /* NSObject+MJKeyValue.m in Sources */,
@@ -1990,15 +2062,18 @@
 				D730E1F81E0B745E0056A20A /* NeiborhoodHeaderView.m in Sources */,
 				D71BC1311E0389900093357C /* NSObject+MJClass.m in Sources */,
 				187383CD1DF1676A0088544A /* ServiceProvidersListViewCell.m in Sources */,
+				710F6E331E0D25EB006D7BED /* HouseModel.m in Sources */,
 				18B002BA1DE2DDA900D8FE56 /* Common.m in Sources */,
 				D730E2381E0BD1290056A20A /* UWDatePickerView.m in Sources */,
 				D730E1E51E0B5DD10056A20A /* Const.m in Sources */,
 				187A23881DEC329A00D921FC /* PropertyFeeBillingVC.m in Sources */,
 				184AB4571DED18B200DC1A54 /* PropertyFeeListModel.m in Sources */,
+				71F099731E0B78E8008FD3EE /* AddReceiveAddressVC.m in Sources */,
 				184071341DF7D61B000DA659 /* UITableViewCell+HYBMasonryAutoCellHeight.m in Sources */,
 				187A23821DEC295900D921FC /* PropertyFeeHistoryViewCell.m in Sources */,
 				184FF9E01DF9680E005FD46E /* CommodityInfoViewCell.m in Sources */,
 				184FF9DD1DF95D75005FD46E /* DeterminePaySendAddressCell.m in Sources */,
+				710F6E2D1E0D0900006D7BED /* HouseListTableVC.m in Sources */,
 				184B1D171DE6E16700F8F56E /* SearchResultsView.m in Sources */,
 				184071381DF7EEBF000DA659 /* CommunityServiceTypeModel.m in Sources */,
 				1840712E1DF7D503000DA659 /* CommodityDetailBottomViewCell.m in Sources */,
@@ -2016,6 +2091,7 @@
 				D71BC1301E0389900093357C /* MJPropertyType.m in Sources */,
 				184B1D2E1DE6E5C000F8F56E /* WUAlbumAsset.m in Sources */,
 				D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */,
+				71F099761E0B971D008FD3EE /* ReceiveAddressModel.m in Sources */,
 				D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */,
 				D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */,
 				1857BD1E1DF68E7500E5F1DE /* RightTableViewCell.m in Sources */,

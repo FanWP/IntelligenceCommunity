@@ -32,7 +32,7 @@
 {
     // 请输入业主手机号
     _phoneNumberLabel = [[UILabel alloc] init];
-    _phoneNumberLabel.text = @"请输入业主手机号";
+    _phoneNumberLabel.text = @"请输入业主手机号后4位：";
     _phoneNumberLabel.font = UIFont15;
     [self.view addSubview:_phoneNumberLabel];
     [_phoneNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -45,7 +45,7 @@
     
     // 输入手机号
     _phoneNumberTF = [[UITextField alloc] init];
-    _phoneNumberTF.placeholder = @"请输入手机号码:";
+    _phoneNumberTF.placeholder = @"请输入手机号后4位";
     _phoneNumberTF.font = UIFontSmall;
     _phoneNumberTF.borderStyle = UITextBorderStyleRoundedRect;
     [self.view addSubview:_phoneNumberTF];

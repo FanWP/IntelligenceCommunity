@@ -27,7 +27,7 @@
    // 收货人 receiverLabel;
     _receiverLabel = [[UILabel alloc] init];
     _receiverLabel.font = UIFont13;
-    _receiverLabel.text = @"收货人：张三";
+//    _receiverLabel.text = @"收货人：张三";
     [self.contentView addSubview:_receiverLabel];
     [_receiverLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(12);
@@ -39,7 +39,7 @@
    // 收货人手机号 receiverPhoneNumLabel;
     _receiverPhoneNumLabel = [[UILabel alloc] init];
     _receiverPhoneNumLabel.font = UIFont13;
-    _receiverPhoneNumLabel.text = @"18789494949";
+//    _receiverPhoneNumLabel.text = @"18789494949";
     _receiverPhoneNumLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:_receiverPhoneNumLabel];
     [_receiverPhoneNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -49,10 +49,11 @@
     }];
     
     
-   // 收货地址 receiveAddressLabel;
+
+    // 收货地址 receiveAddressLabel;
     _receiveAddressLabel = [[UILabel alloc] init];
     _receiveAddressLabel.font = UIFont13;
-    _receiveAddressLabel.text = @"陕西省西安市雁塔区高新三路财富中心";
+//    _receiveAddressLabel.text = @"陕西省西安市雁塔区高新三路财富中心";
     [self.contentView addSubview:_receiveAddressLabel];
     [_receiveAddressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(12);
@@ -60,6 +61,7 @@
         make.right.mas_offset(-12);
         make.height.mas_offset(30);
     }];
+    
     
     
    //  lineView;
