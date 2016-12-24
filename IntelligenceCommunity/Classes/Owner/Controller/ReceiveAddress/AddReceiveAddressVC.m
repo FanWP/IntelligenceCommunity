@@ -8,12 +8,14 @@
 
 #import "AddReceiveAddressVC.h"
 
+#import "AddressPickView.h"
+
 @interface AddReceiveAddressVC ()
 
 @property (nonatomic,strong) UITextField *nameTextField;// 姓名
 @property (nonatomic,strong) UITextField *phoneNumberTF;// 手机号
-@property (nonatomic,strong) UILabel *label;// 暂时占位
-@property (nonatomic,strong) UITextField *detailAddressTF;// 具体地址
+@property (nonatomic,strong) UILabel *areaLabel;// 地区
+@property (nonatomic,strong) YYPlaceholderTextView *detailAddressTextView;// 具体地址
 
 @end
 
@@ -21,11 +23,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.navigationItem.title = @"添加地址";
     
     [self initializeComponent];
-
+    
     [self rightItemSaveAddress];
 }
 
@@ -38,12 +42,12 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[@"userId"] = UserID;
-    parameters[@"address"] = _detailAddressTF.text;
+    parameters[@"address"] = _detailAddressTextView.text;
     parameters[@"type"] = @"1";
     parameters[@"person"] = _nameTextField.text;
     parameters[@"telephone"] = _phoneNumberTF.text;
-    parameters[@"area"] = _label.text;
-//    parameters[@"id"] = @"";
+    parameters[@"area"] = _areaLabel.text;
+    //    parameters[@"id"] = @"";
     
     ICLog_2(@"添加地址参数:%@",parameters);
     
@@ -52,32 +56,31 @@
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-    {
-        ICLog_2(@"添加地址返回：%@",responseObject);
-        
-        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
-        
-        if (resultCode == 1000)
-        {
-            [HUD showSuccessMessage:@"添加成功"];
-            
-            _nameTextField.text = @"";
-            _phoneNumberTF.text = @"";
-            _label.text = @"";
-            _detailAddressTF.text = @"";
-        }
-        else
-        {
-            [HUD showErrorMessage:@"添加失败"];
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
-    {
-        [HUD showErrorMessage:@"添加失败"];
-        
-        ICLog_2(@"添加地址返回错误：%@",error);
-        
-    }];
+     {
+         ICLog_2(@"添加地址返回：%@",responseObject);
+         
+         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+         
+         if (resultCode == 1000)
+         {
+             [HUD showSuccessMessage:@"添加成功"];
+             
+             _nameTextField.text = @"";
+             _phoneNumberTF.text = @"";
+             _areaLabel.text = @"";
+             _detailAddressTextView.text = @"";
+         }
+         else
+         {
+             [HUD showErrorMessage:@"添加失败"];
+         }
+         
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+         [HUD showErrorMessage:@"添加失败"];
+         
+         ICLog_2(@"添加地址返回错误：%@",error);
+     }];
 }
 
 
@@ -111,29 +114,47 @@
     
     
     
-    _label = [[UILabel alloc] init];
-    _label.text = @"陕西省西安市高新区";
-    _label.font = UIFont13;
-    [self.view addSubview:_label];
-    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+    _areaLabel = [[UILabel alloc] init];
+    _areaLabel.text = @"请选择地区";
+    _areaLabel.tag = 150;
+    _areaLabel.font = UIFont13;
+    _areaLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAddressPickView)];
+    [_areaLabel addGestureRecognizer:tap];
+    [self.view addSubview:_areaLabel];
+    [_areaLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(_nameTextField);
         make.top.equalTo(_phoneNumberTF.mas_bottom).offset(12);
     }];
     
     
     
-    _detailAddressTF = [[UITextField alloc] init];
-    _detailAddressTF.placeholder = @"具体地址";
-    _detailAddressTF.font = UIFont13;
-    _detailAddressTF.borderStyle = UITextBorderStyleRoundedRect;
-    _detailAddressTF.layer.cornerRadius = 5.0;
-    [self.view addSubview:_detailAddressTF];
-    [_detailAddressTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    _detailAddressTextView = [[YYPlaceholderTextView alloc] init];
+    _detailAddressTextView.placeholder = @"具体地址";
+    _detailAddressTextView.font = UIFont13;
+    _detailAddressTextView.layer.borderColor = HexColor(0xe5e5e5).CGColor;
+    _detailAddressTextView.layer.borderWidth = 1.0;
+    _detailAddressTextView.layer.cornerRadius = 5.0;
+    [self.view addSubview:_detailAddressTextView];
+    [_detailAddressTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(_nameTextField);
-        make.top.equalTo(_label.mas_bottom).offset(12);
+        make.top.equalTo(_areaLabel.mas_bottom).offset(12);
         make.height.mas_offset(80);
     }];
 }
+
+- (void)showAddressPickView
+{
+    [self.view endEditing:YES];
+    
+    AddressPickView *addressPickView = [AddressPickView shareInstance];
+    [self.view addSubview:addressPickView];
+    addressPickView.block = ^(NSString *province,NSString *city,NSString *town)
+    {
+        _areaLabel.text = [NSString stringWithFormat:@"%@ %@ %@",province,city,town];
+    };
+}
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -142,13 +163,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
