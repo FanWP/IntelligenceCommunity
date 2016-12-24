@@ -13,6 +13,8 @@
 #import "NeighborhoodMessageTableVC.h"  //邻里圈消息的控制器
 #import "neighborhoodSendMessageVC.h"  //邻里圈发活动  动态
 #import "neiborhoodSendAppointVC.h"    //邻里圈约活动的发布
+#import "NeiborhoodLookingForThingsVC.h"    //邻里圈寻物招领的发布
+
 
 @interface NeighborhoodCircleViewController ()<UIScrollViewDelegate>
 
@@ -113,7 +115,6 @@
     }
 }
 
-
 -(void)rightBarClick:(UIButton *)button
 {
     switch (button.tag) {
@@ -126,7 +127,6 @@
         }
         case 2://约活动
         {
-            MJRefreshLog(@"约活动");
             neiborhoodSendAppointVC * vc = [[neiborhoodSendAppointVC alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -135,12 +135,13 @@
         {
             neighborhoodSendMessageVC *vc = [[neighborhoodSendMessageVC alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
-            MJRefreshLog(@"发动态");
+            
             break;
         }
         case 4://寻物招领
         {
-            MJRefreshLog(@"寻物招领");
+            NeiborhoodLookingForThingsVC *vc = [[NeiborhoodLookingForThingsVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
             

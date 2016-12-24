@@ -1,12 +1,12 @@
 //
-//  neighborhoodSendMessageVC.m
+//  NeiborhoodLooking ForThingsVC.m
 //  IntelligenceCommunity
 //
-//  Created by youyousiji on 16/12/15.
+//  Created by youyousiji on 16/12/24.
 //  Copyright © 2016年 mumu. All rights reserved.
 //
 
-#import "neighborhoodSendMessageVC.h"
+#import "NeiborhoodLookingForThingsVC.h"
 #import "YYPlaceholderTextView.h"
 
 //添加附件
@@ -16,13 +16,15 @@
 #import "UIImage+Aspect.h"
 #import "UIImage+FixOrientation.h"
 
-
-@interface neighborhoodSendMessageVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HouseImageCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,WUAlbumDelegate,WUImageBrowseViewDelegate,UIViewControllerPreviewingDelegate>
+@interface NeiborhoodLookingForThingsVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HouseImageCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,WUAlbumDelegate,WUImageBrowseViewDelegate,UIViewControllerPreviewingDelegate>
 
 /** 右上角的发布按钮 */
 @property (nonatomic,strong) UIButton *publishBtn;
 /** 用户的输入框 */
 @property (nonatomic,strong) YYPlaceholderTextView *contentTextView;
+
+/** 标题的输入框 */
+@property (nonatomic,weak) UITextField *titleText;
 
 
 
@@ -40,18 +42,19 @@
 
 @end
 
-@implementation neighborhoodSendMessageVC
-    NSString *const commImageViewAddID = @"HouseImageViewCellIdentifieruyt";
+@implementation NeiborhoodLookingForThingsVC
+
+NSString *const coViewAddID = @"HouseImageViewCellIdentifieruyt";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.title = @"动态";
+    self.title = @"寻物招领";
     
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.view.backgroundColor = MJRefreshColor(240, 240, 242);
-
+    //    self.view.backgroundColor = MJRefreshColor(240, 240, 242);
+    
     
     //设置发送按钮
     [self setupRightBar];
@@ -64,7 +67,6 @@
 
 - (void)setupRightBar
 {
-    
     UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
     [button setTitle:@"发布" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(publishBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -81,11 +83,12 @@
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;
     parameters[@"content"] = _contentTextView.text;
-    parameters[@"type"] = @"2";
-
+    parameters[@"type"] = @"3";
+    parameters[@"title"] = _titleText.text;
+    
     NSString *urlString = [NSString stringWithFormat:@"%@smart_community/save/update/upload/friendsCircle",Smart_community_URL];
     
-    ICLog_2(@"动态发布：%@  URL---%@",parameters,urlString);
+    ICLog_2(@"寻物招领发布：%@  URL---%@",parameters,urlString);
     
     
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -116,15 +119,15 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        ICLog_2(@"邻里圈发布动态请求返回：%@",responseObject);
+        ICLog_2(@"寻物招领发布动态请求返回：%@",responseObject);
         
         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
         
         if (resultCode == 1000)
         {
-            ICLog_2(@"邻里圈发布动态请求返回：");
+            ICLog_2(@"寻物招领发布动态请求返回：");
             
-            [HUD showSuccessMessage:@"邻里圈发布动态请求返回请求成功"];
+            [HUD showSuccessMessage:@"邻里圈寻物招领-发布动态请求返回请求成功"];
             
 #warning todo
             //清空数据
@@ -136,22 +139,34 @@
         }
         else
         {
-            [HUD showErrorMessage:@"邻里圈发布动态请求返回失败"];
+            [HUD showErrorMessage:@"邻里圈寻物招领发布动态请求返回失败"];
             
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        ICLog_2(@"邻里圈发布动态请求返回请求失败：%@",error);
+        ICLog_2(@"邻里圈寻物招领发布动态请求返回请求失败：%@",error);
     }];
-
+    
     
 }
 
 - (void)setupControls
 {
+    
+    //标题
+    UITextField *titleText = [[UITextField alloc] initWithFrame:CGRectMake(16, 76, KWidth - 32, 35)];
+    titleText.placeholder = @" 输入标题";
+    //    titleText.backgroundColor = [UIColor redColor];
+    titleText.layer.borderColor = graryColor174.CGColor;
+    titleText.layer.cornerRadius = 5;
+    titleText.layer.masksToBounds = YES;
+    titleText.layer.borderWidth = 1;
+    self.titleText = titleText;
+    [self.view addSubview:titleText];
+
     //设置输入框
-    YYPlaceholderTextView *view = [[YYPlaceholderTextView alloc] initWithFrame:CGRectMake(16, 76, KWidth - 32, 130)];
+    YYPlaceholderTextView *view = [[YYPlaceholderTextView alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(titleText.frame) + 12, KWidth - 32, 130)];
     view.backgroundColor = [UIColor whiteColor];
     view.placeholder = @"说点什么...";
     view.layer.borderColor = graryColor174.CGColor;
@@ -218,7 +233,7 @@
     _collectionView.alwaysBounceVertical = YES;
     _collectionView.backgroundColor = [UIColor clearColor];
     
-    [_collectionView registerClass:[HouseImageCell class] forCellWithReuseIdentifier:commImageViewAddID];
+    [_collectionView registerClass:[HouseImageCell class] forCellWithReuseIdentifier:coViewAddID];
     
     if(SystemVersion >= 9.0) {
         UILongPressGestureRecognizer *collectionViewLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewLongPress:)];
@@ -364,7 +379,7 @@
 
 
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    HouseImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:commImageViewAddID forIndexPath:indexPath];
+    HouseImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:coViewAddID forIndexPath:indexPath];
     cell.delegate = self;
     
     SectionModel *s = _dataArray[indexPath.section];
@@ -529,11 +544,6 @@
     [s.mutableCells insertObjects:array atIndexes:[NSIndexSet indexSetWithIndexesInRange:(NSRange){s.mutableCells.count - 1,array.count}]];
     [_collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
 }
-
-
-
-
-
 
 
 @end

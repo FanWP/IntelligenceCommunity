@@ -33,16 +33,16 @@
 @property (nonatomic,assign) BOOL flag;
 /** 内容 */
 @property (nonatomic,copy) NSString *content;
-/** 1 约 2生活分享 3寻物招领 不传就是查询所有 */
+/** 1 约 */
 @property (nonatomic,copy) NSString *replyToUserNickName;
-/** 1 朋友圈  2闲置物品处理 */
-@property (nonatomic,assign) BOOL type;
+/** 1 约 2生活分享 3寻物招领 不传就是查询所有 */
+@property (nonatomic,assign) NSInteger type;
 /** <#房源信息#> */
 @property (nonatomic,copy) NSString *replyToUserId;
 
 
 /** 创建时间 */
-@property (nonatomic,copy) NSString *createTime;
+@property (nonatomic,copy) NSString *createtime;
 /** 约活动的时间 */
 @property (nonatomic,copy) NSString *actionTime;
 /** 约活动的地点 */

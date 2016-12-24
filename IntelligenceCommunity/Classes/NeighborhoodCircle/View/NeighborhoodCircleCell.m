@@ -256,7 +256,7 @@
     //昵称
     self.userNameLabel.text = neiborhoodModel.userNickName;
     //发布时间
-    self.uploadTimeLabel.text = neiborhoodModel.createTime;
+    self.uploadTimeLabel.text = neiborhoodModel.createtime;
     //对话按钮
     
     //标题

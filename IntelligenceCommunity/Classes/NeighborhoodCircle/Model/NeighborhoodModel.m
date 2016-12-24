@@ -32,7 +32,7 @@
 
 
 
--(NSString *)createTime
+-(NSString *)createtime
 {
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     // 如果是真机调试，转换这种欧美时间，需要设置locale
@@ -51,7 +51,7 @@
     // 	createTime = 2016-12-29 14:19:03,
     
     // 微博的创建日期
-    NSDate *createDate = [fmt dateFromString:_createTime];
+    NSDate *createDate = [fmt dateFromString:_createtime];
     // 当前时间
     NSDate *now = [NSDate date];
     
@@ -90,8 +90,14 @@
 -(CGSize)titlewSize
 {
     if (_titlewSize.width) return _titlewSize;
+
+    NSString *title = self.type == 2 ? _content : _title;
+    
+//    MJRefreshLog(@"title----%@",title);
+    
+    
     CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
-    CGSize  size = [_title boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFont15} context:nil].size;
+    CGSize  size = [title boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFont15} context:nil].size;
     return size;
 }
 
@@ -141,33 +147,71 @@
 -(CGFloat)allContentH
 {
     if (_allContentH) return _allContentH;
-    //顶部的头像
-    CGFloat imgH = 45 + 24;
     
-    //标题的高度
-    CGFloat titleH = self.titlewSize.height  + 12;
     
-    //中间的头像
-    CGFloat photosH = self.photosSize.height + 12;
-    
-    //内容
-    CGFloat contentH = self.commenSize.height + 8;
-    
-    //时间
-    CGFloat timeH = 0;
-    timeH = self.titlewSize.height + 8;
+    if (self.type == 2) {
+        //顶部的头像
+        CGFloat imgH = 45 + 24;
+        
+        //标题的高度
+        CGFloat titleH = self.titlewSize.height  + 12;
+        
+        //中间的头像
+        CGFloat photosH = self.photosSize.height ;
 
-    
-    //地点
-    CGFloat addressH = 0;
-    addressH  = self.addressSize.height ;
+        //底部的三个按钮
+        CGFloat btnsH = 38;
+        
+        _allContentH = imgH + titleH + photosH + btnsH;
 
-    
-    
-    //底部的三个按钮
-    CGFloat btnsH = 38;
+    }else if (self.type == 3)
+    {
+        //顶部的头像
+        CGFloat imgH = 45 + 24;
+        
+        //标题的高度
+        CGFloat titleH = self.titlewSize.height  + 12;
+        
+        //中间的头像
+        CGFloat photosH = self.photosSize.height + 12;
+        
+        //内容
+        CGFloat contentH = self.commenSize.height ;
 
-    _allContentH = imgH + titleH + photosH + contentH + timeH + addressH + btnsH;
+        //底部的三个按钮
+        CGFloat btnsH = 38;
+        
+        _allContentH = imgH + titleH + photosH + contentH + btnsH;
+    
+    }else
+    {
+        //顶部的头像
+        CGFloat imgH = 45 + 24;
+        
+        //标题的高度
+        CGFloat titleH = self.titlewSize.height  + 12;
+        
+        //中间的头像
+        CGFloat photosH = self.photosSize.height + 12;
+        
+        //内容
+        CGFloat contentH = self.commenSize.height + 8;
+        
+        //时间
+        CGFloat timeH = 0;
+        timeH = self.titlewSize.height + 8;
+        
+        
+        //地点
+        CGFloat addressH = 0;
+        addressH  = self.addressSize.height ;
+
+        //底部的三个按钮
+        CGFloat btnsH = 38;
+        
+        _allContentH = imgH + titleH + photosH + contentH + timeH + addressH + btnsH;
+
+    }
     return _allContentH;
 
 }

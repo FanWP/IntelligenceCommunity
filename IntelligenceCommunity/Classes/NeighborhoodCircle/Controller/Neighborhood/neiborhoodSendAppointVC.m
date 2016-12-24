@@ -83,20 +83,23 @@
 -(void)rightBarClick
 {
     MJRefreshLog(@"发布");
-
+    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;
-    //    parameters[@"price"] = _priceText.text;
-    //    parameters[@"title"] = _titleText.text;
+    parameters[@"title"] = _titleText.text;
+//    parameters[@"actionTime"] = _dateText.text;
+     parameters[@"actionTime"] = @"2016-12-31 12:22:34";
     
+    parameters[@"address"] = _addressText.text;
+    parameters[@"content"] = _contentTextView.text;
+    parameters[@"type"] = @"1";
+
     
-    ICLog_2(@"动态发布：%@",parameters);
+    NSString *urlString = [NSString stringWithFormat:@"%@smart_community/save/update/upload/friendsCircle",Smart_community_URL];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@smart_community/save/update/upload/sellingThings",Smart_community_URL];
-    
-    ICLog_2(@"闲置物品接口：%@",urlString);
-    
+    ICLog_2(@"约发布：%@ URL---:%@",parameters,urlString);
+
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         _repairImagesArray = [NSMutableArray arrayWithArray:[self getImagesWithSection:0]];
@@ -124,15 +127,15 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        ICLog_2(@"提交报修请求返回：%@",responseObject);
+        ICLog_2(@"约请求返回：%@",responseObject);
         
         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
         
         if (resultCode == 1000)
         {
-            ICLog_2(@"增加闲置物品请求成功：");
+            ICLog_2(@"约发布请求成功：");
             
-            [HUD showSuccessMessage:@"增加闲置物品请求成功"];
+            [HUD showSuccessMessage:@"月发布请求成功"];
             
 #warning todo
             //清空数据
@@ -144,13 +147,13 @@
         }
         else
         {
-            [HUD showErrorMessage:@"提交报修失败"];
+            [HUD showErrorMessage:@"约发布失败"];
             
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        ICLog_2(@"提交报修请求失败：%@",error);
+        ICLog_2(@"约发布请求失败：%@",error);
     }];
 
     
@@ -622,16 +625,16 @@
 - (void)getSelectDate:(NSString *)date type:(DateType)type button:(UIButton *)button{
     
     NSLog(@"时间 : %@",date);
-
+    
     if (button.tag != 1) {
         return;
     }
     
-
+    
     switch (type) {
         case DateTypeOfStart:
             // TODO 日期确定选择
-            self.dateText.text = date;
+            self.dateText.text = [NSString stringWithFormat:@"%@",date];
             break;
             
         case DateTypeOfEnd:

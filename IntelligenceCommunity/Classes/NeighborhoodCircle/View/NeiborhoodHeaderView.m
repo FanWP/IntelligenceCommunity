@@ -38,8 +38,8 @@
 /** 删除点赞评论的容器 */
 @property (nonatomic,weak) UIView *commentBtnView;
 @property(nonatomic,strong) UIButton *thumbUpButton;
-@property(nonatomic,strong) UIButton *commentsButton;
-@property(nonatomic,strong) UIButton *deleteteButton;
+
+
 
 /** 中间的头像view  根据图像的个数计算尺寸 */
 @property (nonatomic,strong) SmartCommunityPhotosView *photosView;
@@ -242,14 +242,20 @@
     //昵称
     self.userNameLabel.text = neiborhoodModel.userNickName;
     //发布时间
-    self.uploadTimeLabel.text = neiborhoodModel.createTime;
+    self.uploadTimeLabel.text = neiborhoodModel.createtime;
     //对话按钮
     
     //标题计算位置
     self.titleLable.y = 69;
     self.titleLable.x = 16;
     self.titleLable.size = neiborhoodModel.titlewSize;
-    self.titleLable.text = neiborhoodModel.title;
+    if (neiborhoodModel.type == 2) {//生活分享
+        self.titleLable.text = neiborhoodModel.content;
+    }else{
+        self.titleLable.text = neiborhoodModel.title;
+    }
+
+
     
     //计算图片的尺寸
     self.photosView.x = 8;
@@ -264,7 +270,7 @@
     _dynamicLabel.y = CGRectGetMaxY(_photosView.frame) + 12;
     //动态内容
     self.dynamicLabel.text = neiborhoodModel.content;
-    
+
     //时间
     self.actionTimeLabel.size = neiborhoodModel.actionTimeSize;
     self.actionTimeLabel.x = 16;
@@ -279,10 +285,39 @@
     self.addressLabel.y = CGRectGetMaxY(_actionTimeLabel.frame) + 8;
     self.addressLabel.text = [NSString stringWithFormat:@"地点：%@",neiborhoodModel.address];
     
+    if (neiborhoodModel.type == 2) {//约
+        self.dynamicLabel.hidden = YES;
+        self.actionTimeLabel.hidden = YES;
+        self.addressLabel.hidden = YES;
+        
+        //删除、点赞，评论
+        _commentBtnView.x = 0;
+        _commentBtnView.y = CGRectGetMaxY(_photosView.frame);
+        
+    }else if (neiborhoodModel.type == 3){//生活分享
+        self.actionTimeLabel.hidden = YES;
+        self.addressLabel.hidden = YES;
+        
+        //删除、点赞，评论
+        _commentBtnView.x = 0;
+        _commentBtnView.y = CGRectGetMaxY(_dynamicLabel.frame);
     
-    //删除、点赞，评论
-    _commentBtnView.x = 0;
-    _commentBtnView.y = CGRectGetMaxY(_addressLabel.frame);
+    }else
+    {
+        self.dynamicLabel.hidden = NO;
+        self.actionTimeLabel.hidden = NO;
+        self.addressLabel.hidden = NO;
+        
+        //删除、点赞，评论
+        _commentBtnView.x = 0;
+        _commentBtnView.y = CGRectGetMaxY(_addressLabel.frame);
+
+    }
+    
+    
+//    //删除、点赞，评论
+//    _commentBtnView.x = 0;
+//    _commentBtnView.y = CGRectGetMaxY(_addressLabel.frame);
     
     
     
@@ -347,12 +382,49 @@
 - (void)dialogueButtonClick
 {
     MJRefreshLog(@"对话");
+    
+    
+    
+//    //获取公钥
+//    NSDictionary *parmas = [NSMutableDictionary dictionary];
+//    NSString *url = @"http://192.168.1.23:8080/smart_community/unlogin/sendpubkeyservlet";
+//    [[AFHTTPSessionManager manager]POST:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+//        
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        
+//        MJRefreshLog(@"%@",responseObject);
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        MJRefreshLog(@"%@",error);
+//        
+//    }];
+//    
+    
+    
+    //获取验证码
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userPhone"] = @"18092456642";
+    NSString *url1 = @"http://192.168.1.23:8080/smart_community/unlogin/send/check/code";
+    [[AFHTTPSessionManager manager]POST:url1 parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        MJRefreshLog(@"获取验证码---:%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        MJRefreshLog(@"获取验证码--:%@",error);
+    }];
+    
+    
+    
+    
+    
+    
 }
 
 //删除按钮的点击事件
 - (void)deleteteButtonClick
 {
-    MJRefreshLog(@"删除");
+
+    MJRefreshLog(@"0000--删除");
 }
 
 @end
