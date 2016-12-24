@@ -5,7 +5,7 @@
 //  Created by youyousiji on 16/12/22.
 //  Copyright © 2016年 mumu. All rights reserved.
 //
-
+#import "RSA.h"
 #import "NeiborhoodHeaderView.h"
 #import "NeighborhoodModel.h"
 
@@ -385,7 +385,12 @@
     
     
     
-//    //获取公钥
+    //获取公钥
+    
+    /*
+     pubKey = MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoKNwoOrJQguazWyH+apdVlq6zJDx7bVDV5Fq2pxs9uPuGCeTH803TSA+pOguNCZ1Og6+XuP/FkqyN3etdu9qFQqkSsNDZzPBWhwG9bnNLLpnO/hDS4PVLg0pLNZFl1Pbi/TYhFxg2w+YQU1FW4P/9pWHbgE2YG+gWO+MC9ee2LwIDAQAB
+
+     */
 //    NSDictionary *parmas = [NSMutableDictionary dictionary];
 //    NSString *url = @"http://192.168.1.23:8080/smart_community/unlogin/sendpubkeyservlet";
 //    [[AFHTTPSessionManager manager]POST:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -401,16 +406,78 @@
 //    
     
     
-    //获取验证码
+//    //获取验证码
+//    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+//    parmas[@"userPhone"] = @"18092456642";
+//    NSString *url1 = @"http://192.168.1.23:8080/smart_community/unlogin/send/check/code";
+//    [[AFHTTPSessionManager manager]POST:url1 parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+//        
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        MJRefreshLog(@"获取验证码---:%@",responseObject);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        MJRefreshLog(@"获取验证码--:%@",error);
+//    }];
+
+    
+//    
+    NSString *psw = @"qqq111";
+    NSString *pubKey = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoKNwoOrJQguazWyH+apdVlq6zJDx7bVDV5Fq2pxs9uPuGCeTH803TSA+pOguNCZ1Og6+XuP/FkqyN3etdu9qFQqkSsNDZzPBWhwG9bnNLLpnO/hDS4PVLg0pLNZFl1Pbi/TYhFxg2w+YQU1FW4P/9pWHbgE2YG+gWO+MC9ee2LwIDAQAB";
+    NSString *password = [RSA encryptString:psw publicKey:pubKey];
+//
+//    //注册
+//    NSMutableDictionary *parmas1 = [NSMutableDictionary dictionary];
+//    parmas1[@"userPhone"] = @"18092456642";
+//    parmas1[@"passWord"] = password;
+//    parmas1[@"checkCode"] = @"894094";
+//    NSString *url2 = @"http://192.168.1.23:8080/smart_community/unlogin/register";
+//    
+//    MJRefreshLog(@"parmas1--:%@url--:%@",parmas1,url2);
+//    
+//    [[AFHTTPSessionManager manager]POST:url2 parameters:parmas1 progress:^(NSProgress * _Nonnull uploadProgress) {
+//        
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        MJRefreshLog(@"注册成功---:%@",responseObject);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        MJRefreshLog(@"注册失败--:%@",error);
+//    }];
+    
+    
+    
+//    //    //登录
+//    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+//    parmas[@"userPhone"] = @"18092456642";
+//    parmas[@"passWord"] = password;
+//    NSString *url1 = @"http://192.168.1.23:8080/smart_community//unlogin/userlogin";
+//        MJRefreshLog(@"parmas--:%@url--:%@",parmas,url1);
+//    
+//        [[AFHTTPSessionManager manager]POST:url1 parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+//    
+//        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//            MJRefreshLog(@"用户登录---:%@",responseObject);
+//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//            MJRefreshLog(@"用户登录失败--:%@",error);
+//        }];
+    
+    
+    NSString *session = @"2A08B3EA2BB41BE3B914D072D6B94CA795379C34C5477E62818F03FEC887D34F";
+    NSString *sessionId = [RSA encryptString:session publicKey:pubKey];
+    
+    
+    NSString *RsaSessionID = @"w/u4EKU32dryicnUAMKE9cBUr4bbEGDIRE00ppoWNmTh+R577T1ukKzY/oofyxELwZffoB9gqWpQUZDnIAoJF1D4UAYpRjwUDp+JgwmhdxXwTwF509uN1jLxZmQCfmZsogkFomOrI5kN5M7yztjVw1IsFAhbgAdl6i2noQTSofk=";
+    
+    
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     parmas[@"userPhone"] = @"18092456642";
-    NSString *url1 = @"http://192.168.1.23:8080/smart_community/unlogin/send/check/code";
+    parmas[@"passWord"] = password;
+    NSString *url1 = @"http://192.168.1.23:8080/smart_community//unlogin/userlogin";
+    MJRefreshLog(@"parmas--:%@url--:%@",parmas,url1);
+    
     [[AFHTTPSessionManager manager]POST:url1 parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        MJRefreshLog(@"获取验证码---:%@",responseObject);
+        MJRefreshLog(@"用户登录---:%@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        MJRefreshLog(@"获取验证码--:%@",error);
+        MJRefreshLog(@"用户登录失败--:%@",error);
     }];
     
     

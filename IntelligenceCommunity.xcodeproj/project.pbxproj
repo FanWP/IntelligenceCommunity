@@ -196,6 +196,7 @@
 		D730E2341E0BCC130056A20A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D730E2231E0BCC130056A20A /* README.md */; };
 		D730E2381E0BD1290056A20A /* UWDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D730E2361E0BD1290056A20A /* UWDatePickerView.m */; };
 		D730E2391E0BD1290056A20A /* UWDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D730E2371E0BD1290056A20A /* UWDatePickerView.xib */; };
+		D731E5A01E0E67B400802F53 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = D731E59F1E0E67B400802F53 /* RSA.m */; };
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
 		D739559F1E0E187100987516 /* NeiborhoodLookingForThingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D739559E1E0E187100987516 /* NeiborhoodLookingForThingsVC.m */; };
 		D73C21331E076D8800D90FFB /* FreeArticleAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */; };
@@ -595,6 +596,9 @@
 		D730E2351E0BD1290056A20A /* UWDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWDatePickerView.h; sourceTree = "<group>"; };
 		D730E2361E0BD1290056A20A /* UWDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWDatePickerView.m; sourceTree = "<group>"; };
 		D730E2371E0BD1290056A20A /* UWDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UWDatePickerView.xib; sourceTree = "<group>"; };
+		D731E59E1E0E67B400802F53 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
+		D731E59F1E0E67B400802F53 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		D731E5A11E0E6AD800802F53 /* IntelligenceCommunity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntelligenceCommunity.entitlements; sourceTree = "<group>"; };
 		D73533B11E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborhoodMainCommonTableVC.h; sourceTree = "<group>"; };
 		D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborhoodMainCommonTableVC.m; sourceTree = "<group>"; };
 		D739559D1E0E187100987516 /* NeiborhoodLookingForThingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeiborhoodLookingForThingsVC.h; sourceTree = "<group>"; };
@@ -965,6 +969,8 @@
 		185ADBD01DE4149500CD556D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D731E59E1E0E67B400802F53 /* RSA.h */,
+				D731E59F1E0E67B400802F53 /* RSA.m */,
 				D730E2351E0BD1290056A20A /* UWDatePickerView.h */,
 				D730E2361E0BD1290056A20A /* UWDatePickerView.m */,
 				D730E2371E0BD1290056A20A /* UWDatePickerView.xib */,
@@ -1018,6 +1024,7 @@
 		18B002761DE2C9D700D8FE56 /* IntelligenceCommunity */ = {
 			isa = PBXGroup;
 			children = (
+				D731E5A11E0E6AD800802F53 /* IntelligenceCommunity.entitlements */,
 				18B0027A1DE2C9D700D8FE56 /* AppDelegate.h */,
 				18B0027B1DE2C9D700D8FE56 /* AppDelegate.m */,
 				18B0027D1DE2C9D700D8FE56 /* ViewController.h */,
@@ -1795,8 +1802,13 @@
 				TargetAttributes = {
 					18B002731DE2C9D700D8FE56 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = QL2W84V672;
+						DevelopmentTeam = 2JS4PPTR7V;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					18B0028C1DE2C9D700D8FE56 = {
 						CreatedOnToolsVersion = 8.1;
@@ -2019,6 +2031,7 @@
 				185ADBDC1DE414AA00CD556D /* UIImage+FixOrientation.m in Sources */,
 				18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */,
 				D71BC1341E0389900093357C /* NSObject+MJProperty.m in Sources */,
+				D731E5A01E0E67B400802F53 /* RSA.m in Sources */,
 				18B002F91DE2EE6D00D8FE56 /* HeaderView.m in Sources */,
 				18B003041DE3045600D8FE56 /* NoticeCell.m in Sources */,
 				184B1D011DE6CCB800F8F56E /* CacheImage.m in Sources */,
@@ -2251,7 +2264,8 @@
 			baseConfigurationReference = A5207BDECBEEFDAF6154B701 /* Pods-IntelligenceCommunity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QL2W84V672;
+				CODE_SIGN_ENTITLEMENTS = IntelligenceCommunity/IntelligenceCommunity.entitlements;
+				DEVELOPMENT_TEAM = 2JS4PPTR7V;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = IntelligenceCommunity/ICPrefixHeader.pch;
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
@@ -2271,7 +2285,8 @@
 			baseConfigurationReference = DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QL2W84V672;
+				CODE_SIGN_ENTITLEMENTS = IntelligenceCommunity/IntelligenceCommunity.entitlements;
+				DEVELOPMENT_TEAM = 2JS4PPTR7V;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = IntelligenceCommunity/ICPrefixHeader.pch;
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
