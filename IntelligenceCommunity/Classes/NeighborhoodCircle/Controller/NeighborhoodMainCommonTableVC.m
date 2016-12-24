@@ -29,6 +29,21 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 /** 当前页 */
 @property (nonatomic,assign) NSInteger pageNum;
 
+//评论回复
+/** 回复的输入框 */
+@property (nonatomic,weak) UIView *replyView;
+/** 回复的输入框 */
+@property (nonatomic,weak) UITextView *replyTextView;
+/** 回复消息的模型 */
+@property (nonatomic,strong) FreeArticleReplyModel *replyModel;
+/** 发送按钮 */
+@property (nonatomic,weak) UIButton *sendBtn;
+/** 评论对应的模型 */
+@property (nonatomic,strong) NeighborhoodModel *commonModel;
+
+/** 标记设置回复或者是评论 isReply  是否是回复 */
+@property (nonatomic,assign) BOOL isReply;
+
 
 @end
 
@@ -39,7 +54,12 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     
     [self setupRefresh];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self.tableView registerClass:[NeighborhoodCircleCell class] forCellReuseIdentifier:NeighborhoodCircleCellID];
+
+    //监听文本框
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChanged) name:UITextViewTextDidChangeNotification object:nil];
 }
 
 
@@ -149,26 +169,6 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     NeighborhoodModel *model = _NeighborhoodArr[section];
-
-//    NeighborhoodModel *model = [[NeighborhoodModel alloc] init];
-//    model.images = @"805288420863245";
-//    if (section == 1) {
-//        model.images = @"88080880,3245";
-//    }else if (section == 2) {
-//        model.images = @"80528,84880,3245";
-//    }else if (section == 3){
-//        model.images = @"8052808,0,880,3245";
-//    }else if (section == 4){
-//        model.images = @"8052808,0,8,80,3245";
-//    }
-//    model.title = @"作为一项苹果独立发布的支持型开发语言，已经有了数个应用演示及合作开发公司的测试，相信将在未来得到更广泛的应用。某种意义上Swift作为苹果的新商业战略，将吸引更多的开发者入门，从而增强App Store和Mac Store本来就已经实力雄厚的应用数量基础。";
-//    model.userNickName = @"大猫爱小雨";
-//    model.createTime = @"2016-12-19 15:11:36";
-//    model.content = @"Swift是苹果公司在WWDC2014上发布的全新开发语言。从演示视频及随后在appstore上线的标准文档看来，语法内容混合了OC,JS,Python，语法简单，使用方便，并可与OC混合使用。";
-//    model.actionTime = @"周天周天晚上周天晚上周天晚----=上周天晚上周天晚上周天晚上晚上";
-//    model.address = @"财富上周天晚上周天晚----=上周天晚上周天晚上周天中心";
-//        return model.allContentH - 75;
-
     return model.allContentH ;
 }
 
@@ -191,26 +191,12 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NeiborhoodHeaderView *header = [NeiborhoodHeaderView headerWithTableView:tableView];
+    header.deleteteButton.tag = section;
+    [header.deleteteButton addTarget:self action:@selector(deleteteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [header.commentsButton addTarget:self action:@selector(commentsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     NeighborhoodModel *model = _NeighborhoodArr[section];
-//    NeighborhoodModel *model = [[NeighborhoodModel alloc] init];
-//    model.images = @"805288420863245";
-//    if (section == 1) {
-//        model.images = @"88080880,3245";
-//    }else if (section == 2) {
-//        model.images = @"80528,84880,3245";
-//    }else if (section == 3){
-//        model.images = @"8052808,0,880,3245";
-//    }else if (section == 4){
-//        model.images = @"8052808,0,8,80,3245";
-//    }
-//    model.title = @"作为一项苹果独立发布的支持型开发语言，已经有了数个应用演示及合作开发公司的测试，相信将在未来得到更广泛的应用。某种意义上Swift作为苹果的新商业战略，将吸引更多的开发者入门，从而增强App Store和Mac Store本来就已经实力雄厚的应用数量基础。";
-//    model.userNickName = @"大猫爱小雨";
-//    model.createTime = @"2016-12-19 15:11:36";
-//    model.content = @"Swift是苹果公司在WWDC2014上发布的全新开发语言。从演示视频及随后在appstore上线的标准文档看来，语法内容混合了OC,JS,Python，语法简单，使用方便，并可与OC混合使用。";
-//    model.actionTime = @"周天周天晚上周天晚上周天晚----=上周天晚上周天晚上周天晚上晚上";
-//    model.address = @"财富上周天晚上周天晚----=上周天晚上周天晚上周天中心";
-    
+
     header.neiborhoodModel = model;
 
     return header;
@@ -225,11 +211,170 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     return cell;
 }
 
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
+    [self.replyView removeFromSuperview];
     
-    ICLog_2(@"%ld",indexPath.row);
 }
+
+
+#pragma mark===== 回复评论=============
+-(void)commentsButtonClick:(UIButton *)button
+{
+    self.commonModel = _NeighborhoodArr[button.tag];
+    
+    self.isReply = NO;
+    //创建并弹出键盘
+    [self setupKeyboard];
+    
+}
+
+
+-(void)textDidChanged
+{
+    self.sendBtn.enabled = [self.replyTextView hasText];
+}
+
+//点击回复评论
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+        ICLog_2(@"%ld",indexPath.row);
+    if ([_replyModel.userid isEqualToString:UserID]) {//自己给自己回复
+        [HUD showErrorMessage:@"您不能给自己回复！"];
+        [self.replyView removeFromSuperview];
+        MJRefreshLog(@"自己");
+        return;
+    }else
+    {
+        //创建并弹出键盘
+        self.isReply = YES;
+        [self setupKeyboard];
+        NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
+        _replyModel = model.friendsRef[indexPath.row];
+    }
+}
+
+
+//发送按钮的点击事件
+-(void)sendBtnClick:(UIButton *)button
+{
+    [self.view endEditing:YES];
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userId"] = UserID;
+    parmas[@"sessionid"] = SessionID;
+    parmas[@"type"] = @"1";
+    parmas[@"conment"] = self.replyTextView.text;
+    
+    //判断是回复还是评论
+    if (_isReply) {//回复
+        parmas[@"targetId"] = self.replyModel.targetId;
+        parmas[@"replyToUserId"] = self.replyModel.userid;
+    }else //评论
+    {
+        parmas[@"targetId"] = self.commonModel.ID;
+        //        parmas[@"replyToUserId"] = @"0";
+    }
+    
+    NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];
+    MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
+    
+    [HUD showMessage:@"数据提交中"];
+    [[AFHTTPSessionManager manager]POST:url parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        MJRefreshLog(@"responseObject---%@",responseObject);
+        
+        NSNumber *num = responseObject[@"resultCode"];
+        if ([num integerValue] == 1000) {//发布成功
+            [self.replyView removeFromSuperview];
+            [HUD showSuccessMessage:@"发布成功"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        MJRefreshLog(@"error---%@",error);
+    }];
+    
+}
+
+//移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark=====创建输入框，弹出键盘======
+-(void)setupKeyboard
+{
+    [self.replyView removeFromSuperview];
+    
+    
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    replyView.backgroundColor = [UIColor whiteColor];
+    self.replyView = replyView;
+    [self.view addSubview:replyView];
+    
+    //设置输入框
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 34)];
+    textView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    self.replyTextView = textView;
+    textView.backgroundColor = [UIColor clearColor];
+    textView.font = UIFontLarge;
+    
+    [replyView addSubview:textView];
+    
+    
+    
+    [textView becomeFirstResponder];
+    
+    //设置都发送按钮
+    UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(KWidth - 80, 0, 80, 44)];
+    sendBtn.backgroundColor = [UIColor redColor];
+    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [sendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    sendBtn.enabled = NO;
+    self.sendBtn = sendBtn;
+    [sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [replyView addSubview:sendBtn];
+}
+
+
+-(void)deleteteButtonClick:(UIButton *)button
+{
+    MJRefreshLog(@"删除");
+    
+    NeighborhoodModel *model = _NeighborhoodArr[button.tag];
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"sessionId"] = SessionID;
+    parmas[@"userId"] = UserID;
+    parmas[@"ids"] = model.ID;
+    
+    NSString *url = [NSString stringWithFormat:@"%@smart_community/delete/friendsCircle",Smart_community_URL];
+    
+    MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
+    [[AFHTTPSessionManager manager]POST:url parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        MJRefreshLog(@"responseObject--:%@",responseObject);
+        NSNumber *num = responseObject[@"resultCode"];
+        if ([num integerValue] == 1000) {//删除成功
+            
+//            NSIndexSet *set = [NSIndexSet indexSetWithIndex:button.tag];
+//            
+//            [self.tableView deleteSections:set withRowAnimation:UITableViewRowAnimationRight];
+            
+            MJRefreshLog(@"删除成功");
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        MJRefreshLog(@"responseObject--:%@",error);
+    }];
+}
+
+
+
+
 
 
 @end

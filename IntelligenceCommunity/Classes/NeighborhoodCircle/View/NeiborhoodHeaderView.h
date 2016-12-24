@@ -16,5 +16,8 @@
 
 +(instancetype)headerWithTableView:(UITableView *)tableView;
 
+@property(nonatomic,strong) UIButton *deleteteButton;
+@property(nonatomic,strong) UIButton *commentsButton;
+
 
 @end

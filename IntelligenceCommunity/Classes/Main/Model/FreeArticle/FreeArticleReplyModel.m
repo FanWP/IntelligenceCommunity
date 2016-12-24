@@ -13,13 +13,13 @@
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
-
+    
     return @{
              
              @"ID" : @"id"
              
              };
-
+    
 }
 
 
@@ -46,9 +46,7 @@
         [attrReply addAttributes:@{NSForegroundColorAttributeName : MJRefreshColor(75, 190, 43)} range:[reply rangeOfString:self.replyToUserNickName]];
         [attrReply addAttributes:@{NSFontAttributeName : UIFont13} range:NSMakeRange(0, reply.length)];
     }
-    
     return attrReply;
-    
 }
 
 

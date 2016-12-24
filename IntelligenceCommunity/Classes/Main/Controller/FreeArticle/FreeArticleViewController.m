@@ -76,7 +76,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     [self setupRightBar];
 
     //监听键盘
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     //监听文本框
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:nil];
     
@@ -354,27 +354,6 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 
 
-
-/**
- * 键盘的frame发生改变时调用（显示、隐藏等）
- */
-- (void)keyboardWillChangeFrame:(NSNotification *)notification
-{
-
-    NSDictionary *userInfo = notification.userInfo;
-    // 动画的持续时间
-    
-    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    // 键盘的frame
-    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
-    // 执行动画
-    [UIView animateWithDuration:duration animations:^{
-        self.replyView.y = keyboardF.origin.y - 44;
-    }];
-}
-
-
 -(void)textDidChange
 {
     self.sendBtn.enabled = [self.replyTextView hasText];
@@ -469,17 +448,20 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     
     UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
+    [self.view addSubview:replyView];
     
     //设置输入框
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 44)];
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 34)];
+    textView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.replyTextView = textView;
+    textView.backgroundColor = [UIColor clearColor];
     textView.font = UIFontLarge;
     
     [replyView addSubview:textView];
+
     
-    replyView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:replyView];
     [textView becomeFirstResponder];
     
     //设置都发送按钮
