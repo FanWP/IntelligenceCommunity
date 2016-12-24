@@ -148,8 +148,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     if (self.NeighborhoodType != 0) {
         parmas[@"type"] = @(self.NeighborhoodType);
     }
-    
-    
+
     NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
     
     MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",parmas,newurl);
