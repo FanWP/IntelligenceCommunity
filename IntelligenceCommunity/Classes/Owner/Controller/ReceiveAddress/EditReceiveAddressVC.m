@@ -8,14 +8,16 @@
 
 #import "EditReceiveAddressVC.h"
 
+#import "AddressPickView.h"
+
 #import "ReceiveAddressModel.h"
 
 @interface EditReceiveAddressVC ()<UITextFieldDelegate>
 
 @property (nonatomic,strong) UITextField *nameTextField;// 姓名
 @property (nonatomic,strong) UITextField *phoneNumberTF;// 手机号
-@property (nonatomic,strong) UITextField *areaTF;// 区域
-@property (nonatomic,strong) UITextField *detailAddressTF;// 具体地址
+@property (nonatomic,strong) UILabel *areaLabel;// 地区
+@property (nonatomic,strong) YYPlaceholderTextView *detailAddressTextView;// 具体地址
 
 @end
 
@@ -23,9 +25,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.navigationItem.title = @"编辑地址";
-
+    
     [self initializeComponent];
     
     [self rightItemSaveAddress];
@@ -40,11 +44,11 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[@"userId"] = UserID;
-    parameters[@"address"] = _detailAddressTF.text;
+    parameters[@"address"] = _detailAddressTextView.text;
     parameters[@"type"] = @"1";
     parameters[@"person"] = _nameTextField.text;
     parameters[@"telephone"] = _phoneNumberTF.text;
-    parameters[@"area"] = _areaTF.text;
+    parameters[@"area"] = _areaLabel.text;
     parameters[@"id"] = _receiveAddressModel.ID;
     
     ICLog_2(@"编辑地址参数:%@",parameters);
@@ -112,28 +116,32 @@
     
     
     
-    _areaTF = [[UITextField alloc] init];
-    _areaTF.placeholder = @"请输入区域";
-    _areaTF.font = UIFont13;
-    _areaTF.tag = 122;
-    [self.view addSubview:_areaTF];
-    [_areaTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    _areaLabel = [[UILabel alloc] init];
+    _areaLabel.text = @"请选择地区";
+    _areaLabel.tag = 150;
+    _areaLabel.font = UIFont13;
+    _areaLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAddressPickView)];
+    [_areaLabel addGestureRecognizer:tap];
+    [self.view addSubview:_areaLabel];
+    [_areaLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(_nameTextField);
         make.top.equalTo(_phoneNumberTF.mas_bottom).offset(12);
     }];
     
     
     
-    _detailAddressTF = [[UITextField alloc] init];
-    _detailAddressTF.placeholder = @"具体地址";
-    _detailAddressTF.tag = 123;
-    _detailAddressTF.font = UIFont13;
-    _detailAddressTF.borderStyle = UITextBorderStyleRoundedRect;
-    _detailAddressTF.layer.cornerRadius = 5.0;
-    [self.view addSubview:_detailAddressTF];
-    [_detailAddressTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    _detailAddressTextView = [[YYPlaceholderTextView alloc] init];
+    _detailAddressTextView.placeholder = @"具体地址";
+    _detailAddressTextView.tag = 123;
+    _detailAddressTextView.font = UIFont13;
+    _detailAddressTextView.layer.borderColor = HexColor(0xe5e5e5).CGColor;
+    _detailAddressTextView.layer.borderWidth = 1.0;
+    _detailAddressTextView.layer.cornerRadius = 5.0;
+    [self.view addSubview:_detailAddressTextView];
+    [_detailAddressTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(_nameTextField);
-        make.top.equalTo(_areaTF.mas_bottom).offset(12);
+        make.top.equalTo(_areaLabel.mas_bottom).offset(12);
         make.height.mas_offset(80);
     }];
     
@@ -141,11 +149,24 @@
     {
         _nameTextField.text = _receiveAddressModel.person;
         _phoneNumberTF.text = _receiveAddressModel.telephone;
-        _areaTF.text = _receiveAddressModel.area;
-        _detailAddressTF.text = _receiveAddressModel.address;
+        _areaLabel.text = _receiveAddressModel.area;
+        _detailAddressTextView.text = _receiveAddressModel.address;
     }
 }
 
+
+- (void)showAddressPickView
+{
+    [self.view endEditing:YES];
+    
+    AddressPickView *addressPickView = [AddressPickView shareInstance];
+    [self.view addSubview:addressPickView];
+    addressPickView.block = ^(NSString *province,NSString *city,NSString *town)
+    {
+        _areaLabel.text = [NSString stringWithFormat:@"%@ %@ %@",province,city,town];
+        
+    };
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

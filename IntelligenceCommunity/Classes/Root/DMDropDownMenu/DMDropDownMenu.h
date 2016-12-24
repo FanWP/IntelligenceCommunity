@@ -23,12 +23,12 @@
 @property(nonatomic,strong)NSString     *arrowImageName;
 @property(nonatomic,strong)UIButton     *menuBtn;
 @property(nonatomic,strong)UITableView  *menuTableView;
-@property(nonatomic,strong)NSArray      *listArr;
+@property(nonatomic,strong)NSMutableArray      *listArr;
 @property(nonatomic,assign)BOOL         isOpen;
 @property(nonatomic,assign)id<DMDropDownMenuDelegate>delegate;
 
 - (void)p_setUpView;
-- (void)setListArray:(NSArray *)arr;
+- (void)setListArray:(NSMutableArray *)arr;
 - (void)tapAction;
 - (void)setTitle:(NSString *)str;
 - (void)setTitleHeight:(CGFloat)height;

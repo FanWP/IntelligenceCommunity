@@ -12,10 +12,13 @@
 #define DEGREES_TO_RADIANS(angle) ((angle)/180.0 *M_PI)
 #define kBorderColor [UIColor colorWithRed:219/255.0 green:217/255.0 blue:216/255.0 alpha:1]
 
+@interface DMDropDownMenu ()
+
+@end
 
 @implementation DMDropDownMenu
 
-- (id)initWithFrame:(CGRect)frame 
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -30,11 +33,12 @@
     
 }
 
-- (void)setListArray:(NSArray *)arr
+- (void)setListArray:(NSMutableArray *)arr
 {
     self.listArr = arr;
     _curText.text = self.listArr[0];
 }
+
 
 - (void)p_setUpView
 {
@@ -158,7 +162,7 @@
         label.textAlignment = NSTextAlignmentLeft;
         label.font = UIFontNormal;
         label.tag = 1000;
-//        label.numberOfLines = 0;
+        //        label.numberOfLines = 0;
         [cell addSubview:label];
         
         UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(10, self.frame.size.height + 5, cell.frame.size.width - 20, 0.5)];
@@ -184,9 +188,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSString * string = self.listArr[indexPath.row];
-//    CGRect bounds = [string boundingRectWithSize:CGSizeMake(self.frame.size.width - 20, 200) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14] } context:NULL];
-//    NSLog(@"%f",bounds.size.height);
+    //    NSString * string = self.listArr[indexPath.row];
+    //    CGRect bounds = [string boundingRectWithSize:CGSizeMake(self.frame.size.width - 20, 200) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14] } context:NULL];
+    //    NSLog(@"%f",bounds.size.height);
     return 35;
 }
 

@@ -123,6 +123,10 @@
 		710F6E301E0D091D006D7BED /* HouseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E2F1E0D091D006D7BED /* HouseListCell.m */; };
 		710F6E331E0D25EB006D7BED /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 710F6E321E0D25EB006D7BED /* HouseModel.m */; };
 		711CBE3E1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 711CBE3D1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m */; };
+		714A95F81E0E81E600B55338 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714A95F21E0E81E600B55338 /* Address.plist */; };
+		714A95F91E0E81E600B55338 /* AddressPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 714A95F41E0E81E600B55338 /* AddressPickView.m */; };
+		714A95FA1E0E81E600B55338 /* citys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714A95F51E0E81E600B55338 /* citys.plist */; };
+		714A95FB1E0E81E600B55338 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 714A95F71E0E81E600B55338 /* UIViewExt.m */; };
 		71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A841E0390F500067125 /* RepairStatusTableVC.m */; };
 		71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A871E0391E900067125 /* RepairStatusCell.m */; };
 		71A20A8B1E03B58A00067125 /* HouseImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A8A1E03B58A00067125 /* HouseImageCell.m */; };
@@ -453,6 +457,12 @@
 		710F6E321E0D25EB006D7BED /* HouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HouseModel.m; path = IntelligenceCommunity/Classes/Owner/View/HouseAuthority/HouseModel.m; sourceTree = SOURCE_ROOT; };
 		711CBE3C1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityTelNumberVC.h; sourceTree = "<group>"; };
 		711CBE3D1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityTelNumberVC.m; sourceTree = "<group>"; };
+		714A95F21E0E81E600B55338 /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Address.plist; sourceTree = "<group>"; };
+		714A95F31E0E81E600B55338 /* AddressPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickView.h; sourceTree = "<group>"; };
+		714A95F41E0E81E600B55338 /* AddressPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickView.m; sourceTree = "<group>"; };
+		714A95F51E0E81E600B55338 /* citys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citys.plist; sourceTree = "<group>"; };
+		714A95F61E0E81E600B55338 /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
+		714A95F71E0E81E600B55338 /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExt.m; sourceTree = "<group>"; };
 		71A20A831E0390F500067125 /* RepairStatusTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusTableVC.h; sourceTree = "<group>"; };
 		71A20A841E0390F500067125 /* RepairStatusTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairStatusTableVC.m; sourceTree = "<group>"; };
 		71A20A861E0391E900067125 /* RepairStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusCell.h; sourceTree = "<group>"; };
@@ -1138,6 +1148,7 @@
 		18B002B21DE2DC9B00D8FE56 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				714A95F11E0E81E600B55338 /* AddressPick */,
 				710F6E1D1E0CC0F5006D7BED /* DMDropDownMenu */,
 				D730E1FC1E0BCC120056A20A /* IQKeyboardManager */,
 				71D3A7691E0A16B0002C2F1C /* ILSetting */,
@@ -1339,6 +1350,19 @@
 				710F6E2F1E0D091D006D7BED /* HouseListCell.m */,
 			);
 			path = HouseAuthority;
+			sourceTree = "<group>";
+		};
+		714A95F11E0E81E600B55338 /* AddressPick */ = {
+			isa = PBXGroup;
+			children = (
+				714A95F21E0E81E600B55338 /* Address.plist */,
+				714A95F31E0E81E600B55338 /* AddressPickView.h */,
+				714A95F41E0E81E600B55338 /* AddressPickView.m */,
+				714A95F51E0E81E600B55338 /* citys.plist */,
+				714A95F61E0E81E600B55338 /* UIViewExt.h */,
+				714A95F71E0E81E600B55338 /* UIViewExt.m */,
+			);
+			path = AddressPick;
 			sourceTree = "<group>";
 		};
 		71D3A7691E0A16B0002C2F1C /* ILSetting */ = {
@@ -1830,6 +1854,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				714A95FA1E0E81E600B55338 /* citys.plist in Resources */,
 				D730E2321E0BCC130056A20A /* IQKeyboardManager.bundle in Resources */,
 				184B1D0D1DE6E0CD00F8F56E /* index.html in Resources */,
 				184B1D341DE6E5C000F8F56E /* WUImagePicker.bundle in Resources */,
@@ -1839,6 +1864,7 @@
 				185ADBE91DE4408500CD556D /* 3.jpg in Resources */,
 				D71BC12B1E0389900093357C /* LICENSE in Resources */,
 				18B002841DE2C9D700D8FE56 /* Assets.xcassets in Resources */,
+				714A95F81E0E81E600B55338 /* Address.plist in Resources */,
 				18B002821DE2C9D700D8FE56 /* Main.storyboard in Resources */,
 				D730E2391E0BD1290056A20A /* UWDatePickerView.xib in Resources */,
 			);
@@ -1955,6 +1981,7 @@
 				71D3A77F1E0A16B0002C2F1C /* ILSettingGroup.m in Sources */,
 				71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */,
 				D730E1ED1E0B62B40056A20A /* FreeArticleModel.m in Sources */,
+				714A95FB1E0E81E600B55338 /* UIViewExt.m in Sources */,
 				71D3A7841E0A16B0002C2F1C /* ILSettingTextFieldItem.m in Sources */,
 				710CA4121E0A4F75008565F9 /* OwnerViewController.m in Sources */,
 				D71BC12F1E0389900093357C /* MJPropertyKey.m in Sources */,
@@ -1989,6 +2016,7 @@
 				D730E2261E0BCC130056A20A /* IQUITextFieldView+Additions.m in Sources */,
 				185ADBCF1DE4135100CD556D /* SectionModel.m in Sources */,
 				1857BD1F1DF68E7500E5F1DE /* PopTableViewCustom.m in Sources */,
+				714A95F91E0E81E600B55338 /* AddressPickView.m in Sources */,
 				71D3A7801E0A16B0002C2F1C /* ILSettingItem.m in Sources */,
 				71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */,
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
