@@ -10,7 +10,6 @@
 
 @interface FeedbackVC ()
 
-@property (nonatomic,strong) UILabel *suggestionDescribeLabel;// 意见描述
 @property (nonatomic,strong) YYPlaceholderTextView *feedbackContentTextView;// 输入意见内容
 @property (nonatomic,strong) UIButton *handFeedbackButton;// 提交意见
 
@@ -22,6 +21,8 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"意见反馈";
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self initializeComponent];
 }
@@ -66,19 +67,6 @@
 
 - (void)initializeComponent
 {
-    // 意见描述
-    _suggestionDescribeLabel = [[UILabel alloc] init];
-    _suggestionDescribeLabel.font = UIFontNormal;
-    _suggestionDescribeLabel.text = @"意见描述";
-    [self.view addSubview:_suggestionDescribeLabel];
-    [_suggestionDescribeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_offset(15);
-        make.top.mas_offset(10 + 64);
-        make.right.mas_offset(-15);
-        make.height.mas_offset(30);
-    }];
-    
-    
     // 输入意见内容
     _feedbackContentTextView = [[YYPlaceholderTextView alloc] init];
     _feedbackContentTextView.placeholder = @"  请输入要反馈的意见内容...";
@@ -88,9 +76,9 @@
     _feedbackContentTextView.layer.borderColor = HexColor(0xe5e5e5).CGColor;
     [self.view addSubview:_feedbackContentTextView];
     [_feedbackContentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_suggestionDescribeLabel.mas_left);
-        make.top.equalTo(_suggestionDescribeLabel.mas_bottom).offset(10);
-        make.right.equalTo(_suggestionDescribeLabel.mas_right);
+        make.left.mas_offset(15);
+        make.top.mas_offset(64 + 10);
+        make.right.mas_offset(-15);
         make.height.mas_offset(150);
     }];
     

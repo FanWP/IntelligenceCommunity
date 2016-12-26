@@ -107,6 +107,9 @@
    // 编辑地址 editAddressButton;
     _editAddressButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [_editAddressButton setTitle:@"编辑" forState:(UIControlStateNormal)];
+    _editAddressButton.layer.borderWidth = 1;
+    _editAddressButton.layer.borderColor = HexColor(0x8a8a8a).CGColor;
+    _editAddressButton.layer.cornerRadius = 5.0;
     [_editAddressButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     [_editAddressButton.titleLabel setFont:UIFont13];
     [self.contentView addSubview:_editAddressButton];
@@ -122,6 +125,9 @@
    // 删除地址 deleteAddressButton;
     _deleteAddressButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [_deleteAddressButton setTitle:@"删除" forState:(UIControlStateNormal)];
+    _deleteAddressButton.layer.borderWidth = 1;
+    _deleteAddressButton.layer.borderColor = HexColor(0x8a8a8a).CGColor;
+    _deleteAddressButton.layer.cornerRadius = 5.0;
     [_deleteAddressButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     [_deleteAddressButton.titleLabel setFont:UIFont13];
     [self.contentView addSubview:_deleteAddressButton];

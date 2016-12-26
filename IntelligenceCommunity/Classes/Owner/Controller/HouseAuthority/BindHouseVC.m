@@ -57,8 +57,16 @@
     {
         ICLog_2(@"验证码错误：%@",error);
     }];
-    
 }
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [HUD dismiss];
+}
+
 
 - (void)initializeComponent
 {
@@ -120,14 +128,14 @@
     _ownerButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [_ownerButton setTitle:@"业主" forState:(UIControlStateNormal)];
     [_ownerButton.titleLabel setFont:UIFontNormal];
-    _ownerButton.selected = YES;
+    _ownerButton.enabled = NO;
     [_ownerButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     [_ownerButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
     [_ownerButton setBackgroundImage:[UIImage imageNamed:@"owner_normal"] forState:(UIControlStateNormal)];
-    [_ownerButton setBackgroundImage:[UIImage imageNamed:@"owner_selected"] forState:(UIControlStateSelected)];
+    [_ownerButton setBackgroundImage:[UIImage imageNamed:@"owner_selected"] forState:(UIControlStateDisabled)];
     [self.view addSubview:_ownerButton];
     [_ownerButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_identifierLabel.mas_right).offset(8);
+        make.left.equalTo(_identifierLabel.mas_right).offset(3);
         make.centerY.equalTo(_identifierLabel.mas_centerY);
         make.width.mas_offset(94);
         make.height.mas_offset(33);
@@ -141,7 +149,7 @@
     [_familyMemberButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     [_familyMemberButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
     [_familyMemberButton setBackgroundImage:[UIImage imageNamed:@"familyMember_normal"] forState:(UIControlStateNormal)];
-    [_familyMemberButton setBackgroundImage:[UIImage imageNamed:@"familyMember_selected"] forState:(UIControlStateSelected)];
+    [_familyMemberButton setBackgroundImage:[UIImage imageNamed:@"familyMember_selected"] forState:(UIControlStateDisabled)];
     [self.view addSubview:_familyMemberButton];
     [_familyMemberButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_ownerButton.mas_right);
@@ -155,12 +163,13 @@
     _captchaTF = [[UITextField alloc] init];
     _captchaTF.placeholder = @"请输入收到的验证码";
     _captchaTF.font = UIFont13;
+    _captchaTF.keyboardType = UIKeyboardTypeNumberPad;
     _captchaTF.borderStyle = UITextBorderStyleRoundedRect;
     [self.view addSubview:_captchaTF];
     [_captchaTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_roomNumberLabel.mas_left);
         make.top.equalTo(_identifierLabel.mas_bottom).offset(38);
-        make.width.mas_offset(190);
+        make.width.mas_offset(150);
         make.height.mas_offset(36);
     }];
     
@@ -212,19 +221,28 @@
 
 - (void)finishBindHouseAction
 {
-//    check/bunding/code
-    
-    HouseMembersTableVC *houseMembersTableVC = [[HouseMembersTableVC alloc] init];
-    [self.navigationController pushViewController:houseMembersTableVC animated:YES];
+//    HouseMembersTableVC *houseMembersTableVC = [[HouseMembersTableVC alloc] init];
+//    [self.navigationController pushViewController:houseMembersTableVC animated:YES];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"buildNumber"] = @"";
-    parameters[@"unitNumber"] = @"";
-    parameters[@"roomNumber"] = @"";
-    parameters[@"checkCode"] = _captchaTF.text;
+    parameters[@"buildNumber"] = @"1";
+    parameters[@"unitNumber"] = @"1";
+    parameters[@"roomNumber"] = @"1";
+//    parameters[@"checkCode"] = _captchaTF.text;
+    parameters[@"checkCode"] = @"122323";
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;
+    NSString *houseRole;
+    if (_ownerButton.enabled == NO)
+    {
+        houseRole = @"0";
+    }
+    else
+    {
+        houseRole = @"1";
+    }
+    parameters[@"houseRole"] = houseRole;
     
     ICLog_2(@"绑定房屋参数：%@",parameters);
     
@@ -240,7 +258,8 @@
         
         if (resultCode == 1000)
         {
-            [HUD showSuccessMessage:@"绑定成功"];
+            HouseMembersTableVC *houseMembersTableVC = [[HouseMembersTableVC alloc] init];
+            [self.navigationController pushViewController:houseMembersTableVC animated:YES];
         }
         else
         {
@@ -256,13 +275,16 @@
 
 - (void)ownerAction:(UIButton *)button
 {
-    button.selected = !button.selected;
+    button.enabled = NO;
     
+    _familyMemberButton.enabled = YES;
 }
 
 - (void)familyMemberActon:(UIButton *)button
 {
-    button.selected = !button.selected;
+    button.enabled = NO;
+    
+    _ownerButton.enabled = YES;
 }
 
 

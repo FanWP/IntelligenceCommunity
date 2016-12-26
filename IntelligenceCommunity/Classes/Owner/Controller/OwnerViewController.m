@@ -12,6 +12,7 @@
 
 #import "SettingTableVC.h"// 设置
 #import "HouseAuthorityVC.h"// 房屋认证
+#import "MyOrdersVC.h"// 我的订单
 #import "ReceiveAddressTableVC.h"// 收货地址
 #import "FeedbackVC.h"// 意见反馈
 
@@ -32,7 +33,16 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     [super viewWillAppear:animated];
     self.tabBarController.navigationItem.title = @"我的";
     
+    [self leftItemSetting];// 设置
+    
     _leftImagesArray = @[[UIImage imageNamed:@"houses"],[UIImage imageNamed:@"Payment"],[UIImage imageNamed:@"Orders"],[UIImage imageNamed:@"address"],[UIImage imageNamed:@"shopping cart"],[UIImage imageNamed:@"opinion"]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.tabBarController.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)viewDidLoad {
@@ -40,7 +50,6 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     
     [self initializeComponent];
     [self createData];
-    [self leftItemSetting];// 设置
 }
 
 - (void)leftItemSetting
@@ -145,7 +154,8 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
 }
 //我的订单
 -(void)ownerOrder:(NSIndexPath *)indexPath{
-    
+    MyOrdersVC *myOrdersVC = [[MyOrdersVC alloc] init];
+    [self.navigationController pushViewController:myOrdersVC animated:YES];
 }
 //收货地址
 -(void)shipAddress:(NSIndexPath *)indexPath{

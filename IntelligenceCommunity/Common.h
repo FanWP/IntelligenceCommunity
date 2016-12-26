@@ -28,6 +28,7 @@
 #define UIFont17 [Common systemFontOfSize:17]
 #define UIFont15 [Common systemFontOfSize:15]
 #define UIFont13 [Common systemFontOfSize:13]
+#define UIFont11 [Common systemFontOfSize:11]
 
 extern NSString *const CommonRegexEmail;
 extern NSString *const CommonRegexMoney;
