@@ -46,10 +46,6 @@
     
     [self dataRidgepole];
     
-    [self dataUnit];
-    
-    [self dataRoom];
-    
     [self initializeComponent];
     
     _nilArray = [NSArray array];
@@ -73,7 +69,6 @@
         
         [self dataUnit];
         
-        [self dataRoom];
     }
     else if ([dmDropDownMenu isEqual:_unitView])
     {
@@ -118,6 +113,8 @@
              }
              
              [_ridgepoleView setListArray:_ridgepoleArray];
+             
+             [self dataUnit];
          }
          
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
@@ -133,6 +130,10 @@
 - (void)dataUnit
 {
     [_unitArray removeAllObjects];
+    
+    [_unitView removeFromSuperview];
+    
+    [self.view addSubview:_unitView];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
@@ -164,6 +165,8 @@
              }
              
              [_unitView setListArray:_unitArray];
+             
+             [self dataRoom];
          }
          else
          {
@@ -183,6 +186,10 @@
 - (void)dataRoom
 {
     [_roomNumberArray removeAllObjects];
+    
+    [_roomNumberView removeFromSuperview];
+    
+    [self.view addSubview:_roomNumberView];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
@@ -247,12 +254,7 @@
     
     
     
-    
-    
-    //    // 选择几栋
-    NSArray * dmArray1 = [NSArray arrayWithObjects:@"iPhone",@"iMac",@"iTouch",@"MacBook Air 13寸",@"MacBook Air 15 寸",@"MacBook Pro 13 寸",@"MacBook Pro 15 寸", nil];
-    NSArray * dmArray2 = [NSArray arrayWithObjects:@"今晚与你记住蒲公英今晚与你记住蒲公英今晚与你记住蒲公英",@"今晚偏偏想起风的清劲",@"今晚偏偏想起风的清劲",@"回忆不在受制于我 我承认",@"回忆也许是你的", nil];
-    //
+    // 选择几栋
     CGFloat ridgepoleViewY = 64 + 42 + 30 + 16;
     CGFloat width = KWidth - 2 * 35;
     _ridgepoleView = [[DMDropDownMenu alloc] initWithFrame:CGRectMake(35, ridgepoleViewY, width, 35)];

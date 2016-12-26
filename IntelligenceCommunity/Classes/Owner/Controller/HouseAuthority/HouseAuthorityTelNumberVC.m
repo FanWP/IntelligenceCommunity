@@ -47,6 +47,7 @@
     _phoneNumberTF = [[UITextField alloc] init];
     _phoneNumberTF.placeholder = @"请输入手机号后4位";
     _phoneNumberTF.font = UIFontSmall;
+    _phoneNumberTF.keyboardType = UIKeyboardTypeNumberPad;
     _phoneNumberTF.borderStyle = UITextBorderStyleRoundedRect;
     [self.view addSubview:_phoneNumberTF];
     [_phoneNumberTF mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -8,7 +8,12 @@
 
 #import "MyOrdersVC.h"
 
-@interface MyOrdersVC ()
+#import "NeighborhoodCircleHeaderView.h"
+
+
+@interface MyOrdersVC ()<UIScrollViewDelegate>
+
+@property (nonatomic,strong) UIView *orderHeaderView;
 
 @end
 
@@ -17,6 +22,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self initializeComponent];
+}
+
+- (void)initializeComponent{
+    
+    [_orderHeaderView removeFromSuperview];
+    
+    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, KWidth, 43) titles:@[@"全部",@"待付款",@"待收货"] clickBlick:^void(NSInteger index) {
+        
+        [self titleClick:(index - 1)];
+        
+        NSLog(@"%ld",index);
+    }];
+    headerView.titleSelectColor = GreenColer;
+    headerView.titleFont = UIFontLargest;
+    
+    _orderHeaderView = headerView;
+    [self.view addSubview:headerView];
+}
+
+- (void)titleClick:(NSInteger)index
+{
+    //设置顶部的标题改变
+//    _orderHeaderView.defaultIndex = index + 1;
+//    self.NeighborhoodType = index + 1;
+    
+    
+    // 滚动
+//    CGPoint offset = self.contentView.contentOffset;
+//    offset.x = index * self.contentView.mj_w;
+//    [self.contentView setContentOffset:offset animated:YES];
 }
 
 - (void)dataMyOrders

@@ -28,6 +28,7 @@
 #define UIFont17 [Common systemFontOfSize:17]
 #define UIFont15 [Common systemFontOfSize:15]
 #define UIFont13 [Common systemFontOfSize:13]
+#define UIFont11 [Common systemFontOfSize:11]
 
 #define kGetHorizontalDistance(Horizontal_PX)  ((ScreenWidth*Horizontal_PX)/750)
 #define kGetVerticalDistance(Vertical_PX) ((ScreenHeight*Vertical_PX)/1334)

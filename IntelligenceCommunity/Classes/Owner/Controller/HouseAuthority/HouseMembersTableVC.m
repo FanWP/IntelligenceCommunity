@@ -120,7 +120,7 @@
     {
         cell.identifierLabel.text = @"身份：家庭成员";
     }
-    else
+    else 
     {
         cell.identifierLabel.text = @"身份：租户";
     }

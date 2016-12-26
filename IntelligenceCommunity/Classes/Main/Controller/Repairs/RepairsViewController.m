@@ -56,6 +56,8 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.navigationItem.title = @"报修";
     
     [self initializeComponent];// 初始化
@@ -136,7 +138,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
         make.left.equalTo(_repairContentLabel.mas_left);
         make.top.equalTo(_repairContentLabel.mas_bottom).offset(13);
         make.right.equalTo(_repairContentLabel.mas_right);
-        make.height.mas_offset(151);
+        make.height.mas_offset(100);
     }];
     
     
@@ -166,7 +168,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
         make.left.equalTo(_householdInfoLabel.mas_left);
         make.top.equalTo(_attachmentLabel.mas_bottom).offset(13);
         make.right.equalTo(_householdInfoLabel.mas_right);
-        make.height.mas_offset(202);
+        make.height.mas_offset(130);
     }];
     
     
@@ -215,9 +217,9 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
 {
     // 报修图片的view
     CGFloat bottomX = 17;
-    CGFloat bottomY = 380;
+    CGFloat bottomY = 330;
     CGFloat bottomWidth = KWidth - 2 * bottomX;
-    CGFloat bottomHeight = 200;
+    CGFloat bottomHeight = 120;
     _bottomView = [[UIView alloc] initWithFrame:CGRectMake(bottomX,bottomY, bottomWidth, bottomHeight)];
     [self.view addSubview:_bottomView];
     [self createData];
