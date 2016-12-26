@@ -153,13 +153,45 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
     NSURLSessionDataTask *dataTask = [self dataTaskWithManager:[self sessionManager] url:urlRequest success:success faile:faile];
     [dataTask resume];
 }
+#pragma mark--原生session请求
+-(void)SessionRequestWithType:(RequestMethodType)requestMethodType  requestWithURLString:(NSString *)urlString  requestType:(RequestMethod)requestType  requestParameters:(NSDictionary *)parameters  success:(RequestSuccess)success faile:(RequestFaile)faile{
+    
+    //服务器
+    //    NSString *serviceURL = @"http://192.168.1.4:8080/pro_api/";
+    
+    NSString *serviceURL = [NSString stringWithFormat:@"%@pro_api/",Smart_community_URL];   //李宇
+    if (requestMethodType == Pro_api) {
+        serviceURL = [NSString stringWithFormat:@"%@pro_api/",Smart_community_URL];   //李宇
+    }else if (requestMethodType == Smart_community){
+        serviceURL = [NSString stringWithFormat:@"%@smart_community/",Smart_community_URL];
+    }else if (requestMethodType == Mall_api){
+        serviceURL = [NSString stringWithFormat:@"%@mall_api/",Smart_community_URL];
+    }
+    
+    NSString *RequestURL = [serviceURL stringByAppendingString:[NSString stringWithFormat:@"%@",urlString]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:RequestURL]];
+    
+    if (requestType == RequestMethodPost) {
+        request.HTTPMethod = @"POST";
+        if (parameters && parameters.count) {
+            request.HTTPBody = [[RequestManager manager] dictionaryTransformParameters:parameters];
+        }
+    }else{
+        request.HTTPMethod = @"GET";
+        //GET请求
+    }
+    request.timeoutInterval = 30;
+    
+    [[RequestManager manager] dataRequestWithRequest:request success:success faile:faile];
+    
+}
+
 -(void)requestWithURLString:(NSString *)urlString  requestType:(RequestMethod)requestType  requestParameters:(NSDictionary *)parameters  success:(RequestSuccess)success faile:(RequestFaile)faile{
     
     //服务器
 //    NSString *serviceURL = @"http://192.168.1.4:8080/pro_api/";
     
-    NSString *serviceURL = @"http://192.168.1.18:8080/pro_api/";   //李宇
-
+    NSString *serviceURL = @"http://192.168.1.17/smart_community/";   //李宇
     
     NSString *RequestURL = [serviceURL stringByAppendingString:[NSString stringWithFormat:@"%@",urlString]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:RequestURL]];

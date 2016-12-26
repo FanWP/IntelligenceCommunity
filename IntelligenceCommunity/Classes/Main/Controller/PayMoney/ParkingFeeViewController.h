@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//停车费
+//停车费缴费明细
 @interface ParkingFeeViewController : UIViewController
 
 

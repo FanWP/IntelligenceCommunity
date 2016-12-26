@@ -38,7 +38,7 @@
 //    @property(nonatomic,strong) UILabel *commodityLabel;
     _commodityImageView = [[UIImageView alloc] init];
     _commodityImageView.contentMode = UIViewContentModeCenter;
-    _commodityImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _commodityImageView.image = [UIImage imageNamed:@"shop"];
     [self.contentView addSubview:_commodityImageView];
     [_commodityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
@@ -73,7 +73,7 @@
 //    @property(nonatomic,strong) UILabel *convenientLabel;
     _convenientImageView = [[UIImageView alloc] init];
     _convenientImageView.contentMode = UIViewContentModeCenter;
-    _convenientImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _convenientImageView.image = [UIImage imageNamed:@"Convenience"];
     [self.contentView addSubview:_convenientImageView];
     [_convenientImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.height.mas_equalTo(_commodityImageView);
@@ -103,7 +103,7 @@
 //    @property(nonatomic,strong) UILabel *delicacyLabel;
     _delicacyImageView = [[UIImageView alloc] init];
     _delicacyImageView.contentMode = UIViewContentModeCenter;
-    _delicacyImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _delicacyImageView.image = [UIImage imageNamed:@"Food"];
     [self.contentView addSubview:_delicacyImageView];
     [_delicacyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.height.mas_equalTo(_commodityImageView);
@@ -132,7 +132,7 @@
 //    @property(nonatomic,strong) UILabel *entertainmentLabel;
     _entertainmentImageView = [[UIImageView alloc] init];
     _entertainmentImageView.contentMode = UIViewContentModeCenter;
-    _entertainmentImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _entertainmentImageView.image = [UIImage imageNamed:@"entertainment"];
     [self.contentView addSubview:_entertainmentImageView];
     [_entertainmentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.height.mas_equalTo(_commodityImageView);

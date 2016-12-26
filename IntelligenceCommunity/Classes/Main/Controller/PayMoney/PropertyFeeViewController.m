@@ -61,7 +61,7 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
     [self createData];
     
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] style:UIBarButtonItemStylePlain target:self action:@selector(propertyFeeHistoryList:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"List"] style:UIBarButtonItemStylePlain target:self action:@selector(propertyFeeHistoryList:)];
     
     //物业费明细
     [self dataRequest];
@@ -74,8 +74,12 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
 #pragma mark--物业费明细
 -(void)dataRequest{
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
-    [[RequestManager manager] requestWithURLString:[NSString stringWithFormat:@"find/user/profee?userId=1"] requestType:RequestMethodGet requestParameters:parametersDic success:^(id  _Nullable responseObject) {
+    [parametersDic setValue:@"1" forKey:@"userId"];
+    
+    [HUD showProgress:@"正在加载数据"];
+    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/user/profee" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
         
+        [HUD dismiss];
         ICLog_2(@"PropertyFeeViewController---%@",responseObject);
         
         if ([responseObject[@"resultCode"] integerValue] == 1000) {
@@ -102,7 +106,8 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
         });
         
     } faile:^(NSError * _Nullable error) {
-        
+        [HUD dismiss];
+
     }];
 }
 /**
@@ -312,24 +317,14 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
         [_tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
+#pragma mark--优惠活动
 -(void)userSelectButtonWithSpecialOffersListViewCell:(SpecialOffersListViewCell *)cell{
     
-//    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-//    ICLog(@"%ld",indexPath.row);
-//    cell.selectButton.selected = !cell.selectButton.selected;
-//    if (cell.selectButton.selected) {
-//        
-//        [cell.selectButton setImage:[UIImage imageNamed:@"chooseEast"] forState:UIControlStateNormal];
-//
-//    }else{
-//        
-//        [cell.selectButton setImage:[UIImage imageNamed:@"chooseEastSelect"] forState:UIControlStateNormal];
-//    }
     for (int i = 0; i < _specialOffersListMArray.count; i++) {
         
         SpecialOffersListViewCell *allCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:6]];
         allCell.selectButton.selected = NO;
-        [allCell.selectButton setImage:[UIImage imageNamed:@"chooseEast"] forState:UIControlStateNormal];
+        [allCell.selectButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
         
     }
     
@@ -339,25 +334,21 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
     cell.selectButton.selected = !cell.selectButton.selected;
     if (cell.selectButton.selected) {
         
-        [cell.selectButton setImage:[UIImage imageNamed:@"chooseEastSelect"] forState:UIControlStateNormal];
+        [cell.selectButton setImage:[UIImage imageNamed:@"choice"] forState:UIControlStateNormal];
         
     }else{
         
-        [cell.selectButton setImage:[UIImage imageNamed:@"chooseEast"] forState:UIControlStateNormal];
+        [cell.selectButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
     }
-    
+    [HUD showProgress:@"数据正在加载"];
     NSMutableDictionary *parametersDictionary = [NSMutableDictionary dictionary];
-//    [[RequestManager manager] JSONRequest:@"find/propertyfee/bydiscount?userId=27&discountId=2&houseId=1" method:RequestMethodGet timeout:10 parameters:parametersDictionary success:^(id  _Nullable responseObject) {
-//        
-//        ICLog_2(@"%@",responseObject);
-//
-//        
-//    } faile:^(NSError * _Nullable error) {
-//        
-//    }];
-    
-    [[RequestManager manager] requestWithURLString:@"find/propertyfee/bydiscount?userId=27&discountId=2&houseId=1" requestType:RequestMethodGet requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
+    [parametersDictionary setValue:@"27" forKey:@"userId"];
+    [parametersDictionary setValue:@"2" forKey:@"discountId"];
+    [parametersDictionary setValue:@"1" forKey:@"houseId"];
+
+    [[RequestManager manager] SessionRequestWithType:Pro_api requestWithURLString:@"find/propertyfee/bydiscount" requestType:RequestMethodPost requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
         
+        [HUD dismiss];
         ICLog_2(@"%@",responseObject);
         if ([responseObject[@"body"][@"resultCode"] integerValue] == 1000) {
             
@@ -371,11 +362,11 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
-    } faile:^(NSError * _Nullable error) {
         
+    } faile:^(NSError * _Nullable error) {
         ICLog_2(@"%@",error);
-    }];
 
+    }];
     
 }
 

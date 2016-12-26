@@ -30,7 +30,7 @@
 //    @property(nonatomic,strong) UIButton *selectButton;
     _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _selectButton.selected = YES;
-    [_selectButton setImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] forState:UIControlStateNormal];
+    [_selectButton setImage:[UIImage imageNamed:@"Selected"] forState:UIControlStateNormal];
     [_selectButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_selectButton];
     [_selectButton mas_makeConstraints:^(MASConstraintMaker *make) {

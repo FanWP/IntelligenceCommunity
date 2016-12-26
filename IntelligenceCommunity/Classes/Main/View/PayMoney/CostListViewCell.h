@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//缴费列表
+//缴费界面列表
 @interface CostListViewCell : UITableViewCell
 
 @property(nonatomic,strong) UIImageView *leftImageView;
