@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.navigationItem.title = @"添加房屋";
     
     [self initializeComponent];
@@ -32,7 +32,7 @@
 {
     // 请输入业主手机号
     _phoneNumberLabel = [[UILabel alloc] init];
-    _phoneNumberLabel.text = @"请输入业主手机号";
+    _phoneNumberLabel.text = @"请输入业主手机号后4位：";
     _phoneNumberLabel.font = UIFont15;
     [self.view addSubview:_phoneNumberLabel];
     [_phoneNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -45,7 +45,7 @@
     
     // 输入手机号
     _phoneNumberTF = [[UITextField alloc] init];
-    _phoneNumberTF.placeholder = @"请输入手机号码:";
+    _phoneNumberTF.placeholder = @"请输入手机号后4位";
     _phoneNumberTF.font = UIFontSmall;
     _phoneNumberTF.borderStyle = UITextBorderStyleRoundedRect;
     [self.view addSubview:_phoneNumberTF];
@@ -97,6 +97,15 @@
 // 已更换手机号的点击事件
 - (void)changedPhoneNumAction
 {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"是否拨打18092456642？" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"呼叫" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18092456642"]];
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 // 下一步的点击事件
@@ -112,13 +121,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

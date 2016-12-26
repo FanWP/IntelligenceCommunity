@@ -8,9 +8,20 @@
 
 #import "ReceiveAddressTableVC.h"
 
-#import "ReceiveAddressCell.h"
+#import "AddReceiveAddressVC.h"// 添加地址
+#import "EditReceiveAddressVC.h"// 编辑地址
+
+#import "ReceiveAddressCell.h"// 收货地址列表cell
+
+#import "ReceiveAddressModel.h"
 
 @interface ReceiveAddressTableVC ()
+
+@property (nonatomic,strong) UIView *addReceiveAddressView;
+@property (nonatomic,strong) UIButton *addReceiveAddressButton;// 添加地址
+
+@property (nonatomic,strong) ReceiveAddressModel *receiveAddressModel;
+@property (nonatomic,strong) NSMutableArray *receiveAddressArray;// 接收收货地址数据的数组
 
 @end
 
@@ -22,7 +33,71 @@
     self.navigationItem.title = @"收货地址";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self rightItemAddAddress];
 }
+
+
+- (void)rightItemAddAddress
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"➕" style:(UIBarButtonItemStylePlain) target:self action:@selector(addReceiveAddressAction)];
+}
+
+- (void)addReceiveAddressAction
+{
+    AddReceiveAddressVC *addReceiveAddressVC = [[AddReceiveAddressVC alloc] init];
+    [self.navigationController pushViewController:addReceiveAddressVC animated:YES];
+}
+
+- (void)dataReceiveAddressList
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"userId"] = UserID;
+    parameters[@"sessionId"] = SessionID;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@find/address/list",URL_17_mall_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+     {
+         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+         
+         ICLog_2(@"收货列表返回：%@",responseObject[@"body"]);
+         
+         if (resultCode == 1000)
+         {
+             _receiveAddressArray = [ReceiveAddressModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+             
+             [self.tableView reloadData];
+         }
+         
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+         ICLog_2(@"收货列表错误：：%@",error);
+     }];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self dataReceiveAddressList];
+}
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [HUD dismiss];
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -36,7 +111,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return _receiveAddressArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -44,28 +119,9 @@
     return 120;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectZero];
-//    
-//    return headerView;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 1)
-//    {
-//        return 1;
-//    }
-//    else
-//    {
-//        return 15;
-//    }
-//}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     static NSString *identifier = @"cell";
     
     ReceiveAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -76,53 +132,192 @@
         cell = [[ReceiveAddressCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
         
     }
-
+    
+    _receiveAddressModel = _receiveAddressArray[indexPath.row];
+    
+    cell.defaultAddressButton.tag = indexPath.row;
+    cell.editAddressButton.tag = indexPath.row;
+    
+    if ([_receiveAddressModel.type isEqual:@"1"])
+    {
+        cell.defaultAddressButton.selected = YES;
+    }
+    else
+    {
+        cell.defaultAddressButton.selected = NO;
+    }
+    
+    cell.receiverLabel.text = [NSString stringWithFormat:@"收货人：%@",_receiveAddressModel.person];
+    cell.receiverPhoneNumLabel.text = _receiveAddressModel.telephone;
+    cell.receiveAddressLabel.text = [NSString stringWithFormat:@"%@%@",_receiveAddressModel.area,_receiveAddressModel.address];
+    
+    [cell.defaultAddressButton addTarget:self action:@selector(changeDefautAddressAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    [cell.editAddressButton addTarget:self action:@selector(editAddressAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    [cell.deleteAddressButton addTarget:self action:@selector(deleteAddressAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)changeDefautAddressAction:(UIButton *)button
+{
+    [self.tableView reloadData];
+    
+    button.selected = !button.selected;
+    
+    _receiveAddressModel = _receiveAddressArray[button.tag];
+    
+    if (button.selected == NO)
+    {
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"userId"] = UserID;
+        parameters[@"type"] = @"0";
+        parameters[@"id"] = _receiveAddressModel.ID;
+        
+        ICLog_2(@"编辑备用地址参数:%@",parameters);
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@save/update/address",URL_17_mall_api];
+        
+        [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             ICLog_2(@"编辑备用地址返回：%@",responseObject);
+             
+             NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+             
+             if (resultCode == 1000)
+             {
+                 [HUD showSuccessMessage:@"编辑成功"];
+                 
+                 _receiveAddressModel = nil;
+                 
+                 [self dataReceiveAddressList];
+             }
+             else
+             {
+                 [HUD showErrorMessage:@"编辑失败"];
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         {
+             [HUD showErrorMessage:@"编辑失败"];
+             
+             ICLog_2(@"编辑备用地址返回错误：%@",error);
+             
+         }];
+    }
+    else
+    {
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"userId"] = UserID;
+        parameters[@"type"] = @"1";
+        parameters[@"id"] = _receiveAddressModel.ID;
+        
+        ICLog_2(@"编辑默认地址参数:%@",parameters);
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@save/update/address",URL_17_mall_api];
+        
+        [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             ICLog_2(@"编辑默认地址返回：%@",responseObject);
+             
+             NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+             
+             if (resultCode == 1000)
+             {
+                 [HUD showSuccessMessage:@"编辑成功"];
+                 
+                 _receiveAddressModel = nil;
+                 
+                 [self dataReceiveAddressList];
+             }
+             else
+             {
+                 [HUD showErrorMessage:@"编辑失败"];
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         {
+             [HUD showErrorMessage:@"编辑失败"];
+             
+             ICLog_2(@"编辑默认地址返回错误：%@",error);
+             
+         }];
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)editAddressAction:(UIButton *)button
+{
+    EditReceiveAddressVC *editReceiveAddressVC = [[EditReceiveAddressVC alloc] init];
+    editReceiveAddressVC.receiveAddressModel = _receiveAddressArray[button.tag];
+    [self.navigationController pushViewController:editReceiveAddressVC animated:YES];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)deleteAddressAction:(UIButton *)button
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    _receiveAddressModel = _receiveAddressArray[button.tag];
+    
+    parameters[@"ids"] = _receiveAddressModel.ID;
+    parameters[@"userId"] = UserID;
+    parameters[@"sessionId"] = SessionID;
+    
+    ICLog_2(@"删除地址参数：%@",parameters);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@delete/address",URL_17_mall_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+     {
+         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+         
+         if (resultCode == 1000)
+         {
+             [HUD showSuccessMessage:@"删除成功"];
+             
+             [self dataReceiveAddressList];
+         }
+         
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+         ICLog_2(@"删除错误：%@",error);
+     }];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

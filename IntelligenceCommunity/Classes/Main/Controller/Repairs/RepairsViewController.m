@@ -249,7 +249,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     
     ICLog_2(@"提交报修参数：%@",parameters);
     
-    NSString *urlString = [NSString stringWithFormat:@"%@pro_api/save/update/upload/repair",Smart_community_URL];
+    NSString *urlString = [NSString stringWithFormat:@"%@save/update/upload/repair",URL_17_pro_api];
     
     ICLog_2(@"提交报修接口：%@",urlString);
     

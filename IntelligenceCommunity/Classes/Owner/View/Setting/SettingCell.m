@@ -17,6 +17,7 @@
     if (self)
     {
         [self initializeComponent];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     

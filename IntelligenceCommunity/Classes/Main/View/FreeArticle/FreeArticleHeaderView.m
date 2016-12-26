@@ -274,8 +274,8 @@
     _freeArticleModel = freeArticleModel;
     
     [self.userImageView load:freeArticleModel.images placeholderImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"]];
-    self.userNameLabel.text = freeArticleModel.nickname;
-    self.uploadTimeLabel.text = freeArticleModel.createTime;
+    _userNameLabel.text = freeArticleModel.nickName;
+    _uploadTimeLabel.text = freeArticleModel.createTime;
     
     //是否支持交换
     if (freeArticleModel.change == 1) {

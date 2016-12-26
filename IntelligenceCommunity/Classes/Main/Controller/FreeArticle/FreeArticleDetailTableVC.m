@@ -55,7 +55,7 @@
     /** 用户昵称 */
     //    @property (nonatomic,weak) UILabel *usernameLable;
     UILabel *username = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(img.frame) + 12, 16, 150, 17)];
-    username.text = self.model.nickname;
+    username.text = self.model.nickName;
     username.font = UIFont17;
     [headerView addSubview:username];
     

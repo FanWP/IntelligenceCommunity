@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, CommunityServiceType) {
 
 
 typedef enum : NSUInteger {
-    Neighborhood = 1,        //邻里圈
+    Neighborhood = 0,        //邻里圈
     NeighborhoodAppointment, //约会
     NeighborhoodShareLife,   //生活分享
     NeighborhoodLostFound,   //失物招领
@@ -70,7 +70,7 @@ typedef enum : NSUInteger {
 
 
 #define UserID @"13"
-#define SessionID @"867023806328056803250868035487086234860234850680230863280638400832"
+#define SessionID @"w/u4EKU32dryicnUAMKE9cBUr4bbEGDIRE00ppoWNmTh+R577T1ukKzY/oofyxELwZffoB9gqWpQUZDnIAoJF1D4UAYpRjwUDp+JgwmhdxXwTwF509uN1jLxZmQCfmZsogkFomOrI5kN5M7yztjVw1IsFAhbgAdl6i2noQTSofk=";
 
 
 #import "Order.h"
@@ -81,6 +81,8 @@ typedef enum : NSUInteger {
 
 
 #define GreenColer MJRefreshColor(32, 195, 162)
+#define graryColor174 MJRefreshColor(174, 174, 174)
+
 
 
 

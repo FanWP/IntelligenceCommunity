@@ -22,6 +22,8 @@
 @property (nonatomic,strong) UIImagePickerController *imagePicker;
 @property (nonatomic,strong) SettingHeaderPictureCell *settingHeaderPictureCell;
 
+@property (nonatomic,strong) UIImage *image;
+
 @end
 
 @implementation SettingTableVC
@@ -34,6 +36,79 @@
     _leftTitleArray = @[@"名称",@"性别",@"生日",@"签名"];
     
     [self creatExitButton];
+    
+    [self rightItemSave];
+}
+
+
+- (void)rightItemSave
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:(UIBarButtonItemStylePlain) target:self action:@selector(settingSaveAction)];
+}
+- (void)settingSaveAction
+{
+//    upload/update/userinfo
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"sessionId"] = SessionID;
+//    parameters[@"account"] = @"";
+    parameters[@"username"] = @"蓓蓓";
+    parameters[@"id"] = @"1";
+//    parameters[@"nickname"] = @"";
+    parameters[@"type"] = @"0";
+    parameters[@"sex"] = @"1";
+//    parameters[@"address"] = @"";
+//    parameters[@"email"] = @"";
+//    parameters[@"identity"] = @"";
+    parameters[@"referee"] = @"123";
+//    parameters[@"headimage"] = @"";
+//    parameters[@"description"] = @"234567876543";
+    
+    ICLog_2(@"编辑资料参数：%@",parameters);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@smart_community/upload/update/userinfo",Smart_community_URL];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData)
+    {
+//        NSData *data = UIImageJPEGRepresentation(self.settingHeaderPictureCell.imageView.image, 0.5);
+//        
+//        if (data != nil)
+//        {
+//            [formData appendPartWithFileData:data name:@"headimage" fileName:@"img.jpg" mimeType:@"image/jpeg"];
+//        }
+
+        NSData *data = UIImageJPEGRepresentation(_image, 0.5);
+        
+        if (data != nil)
+        {
+            [formData appendPartWithFileData:data name:@"headimage" fileName:@"img.jpg" mimeType:@"image/jpeg"];
+        }
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"编辑资料返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            [HUD showSuccessMessage:@"编辑资料成功"];
+        }
+        else
+        {
+            [HUD showErrorMessage:@"编辑资料失败"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        [HUD showErrorMessage:@"编辑资料失败"];
+        
+        ICLog_2(@"编辑资料失败：%@",error);
+        
+    }];
 }
 
 
@@ -95,7 +170,7 @@
         
         self.settingHeaderPictureCell.settingHeaderLabel.text = @"头像";
         
-        self.settingHeaderPictureCell.settingHeaderImageView.image = [UIImage imageNamed:@"address"];
+        self.settingHeaderPictureCell.settingHeaderImageView.image = _image;
         
         return self.settingHeaderPictureCell;
     }
@@ -146,11 +221,11 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
         
         UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"相册中选择" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            [self getCameraImage];
+            [self getPhotoLibraryImage];
         }];
         
         UIAlertAction *photoLibiaryAction = [UIAlertAction actionWithTitle:@"拍照" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            [self getPhotoLibraryImage];
+            [self getCameraImage];
         }];
         
         UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
@@ -188,7 +263,7 @@
 - (void)getPhotoLibraryImage
 {
     self.imagePicker = [[UIImagePickerController alloc] init];
-    [self.imagePicker setSourceType:(UIImagePickerControllerSourceTypePhotoLibrary)];
+    [self.imagePicker setSourceType:(UIImagePickerControllerSourceTypeSavedPhotosAlbum)];
     self.imagePicker.delegate = self;
     [self presentViewController:self.imagePicker animated:YES completion:nil];
     
@@ -197,7 +272,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    self.settingHeaderPictureCell.settingHeaderImageView.image = image;
+//    self.settingHeaderPictureCell.settingHeaderImageView.image = image;
+    _image = image;
+    [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

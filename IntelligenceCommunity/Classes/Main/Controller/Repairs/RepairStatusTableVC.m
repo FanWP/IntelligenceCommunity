@@ -56,7 +56,7 @@
     parameters[@"pageSize"] = @"10";
     parameters[@"userId"] = UserID;
     
-    NSString *urlString = [NSString stringWithFormat:@"%@pro_api/find/repairRef/list",Smart_community_URL];
+    NSString *urlString = [NSString stringWithFormat:@"%@find/repairRef/list",URL_17_pro_api];
 
     ICLog_2(@"接口：：%@",urlString);
     

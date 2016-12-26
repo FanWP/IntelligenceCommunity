@@ -8,15 +8,31 @@
 
 #import "NeighborhoodModel.h"
 #import "NSDate+Extension.h"
+#import "FreeArticleReplyModel.h"
 
 #import "SmartCommunityPhotosView.h"
 
 @implementation NeighborhoodModel
 
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName
+{
+    return @{@"ID" : @"id"};
+
+}
+
++(NSDictionary *)mj_objectClassInArray
+{
+    
+    return @{
+             @"friendsRef":[FreeArticleReplyModel class]
+             };
+}
 
 
--(NSString *)createTime
+
+
+-(NSString *)createtime
 {
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     // 如果是真机调试，转换这种欧美时间，需要设置locale
@@ -35,7 +51,7 @@
     // 	createTime = 2016-12-29 14:19:03,
     
     // 微博的创建日期
-    NSDate *createDate = [fmt dateFromString:_createTime];
+    NSDate *createDate = [fmt dateFromString:_createtime];
     // 当前时间
     NSDate *now = [NSDate date];
     
@@ -73,20 +89,28 @@
 //标题
 -(CGSize)titlewSize
 {
+    if (_titlewSize.width) return _titlewSize;
+
+    NSString *title = self.type == 2 ? _content : _title;
+    
+//    MJRefreshLog(@"title----%@",title);
+    
     
     CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
-    CGSize  size = [_title boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFont15} context:nil].size;
+    CGSize  size = [title boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFont15} context:nil].size;
     return size;
 }
 
 -(CGSize)photosSize
 {
+    if (_photosSize.width) return _photosSize;
     NSArray *arr = [_images componentsSeparatedByString:@","];
     return  [SmartCommunityPhotosView sizeWithCount:arr.count];
 }
 
 -(CGSize)commenSize
 {
+    if (_commenSize.width) return _commenSize;
     CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
     CGSize  size = [_content boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
     return size;
@@ -94,17 +118,105 @@
 
 -(CGSize)actionTimeSize
 {
+    if (_actionTimeSize.width) return _actionTimeSize;
     CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
-    CGSize  size = [_actionTime boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
+    
+    NSString *actiontimne = _actionTime;
+    if (_actionTime) {
+        actiontimne = [NSString stringWithFormat:@"地址：%@",_actionTime];
+    }
+    CGSize  size = [actiontimne boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
     return size;
 }
 
 -(CGSize)addressSize
 {
+    if (_addressSize.width) return _addressSize;
     CGSize titleSize = CGSizeMake(KWidth - 32, MAXFLOAT);
-    CGSize  size = [_address boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
-    return size;
+    
+    NSString *address = _address;
+    if (_address) {
+     address = [NSString stringWithFormat:@"地址：%@",_address];
+    }
+    CGSize  size = [address boundingRectWithSize:titleSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : UIFontNormal} context:nil].size;
+    _addressSize = size;
+    return _addressSize;
 }
+
+
+-(CGFloat)allContentH
+{
+    if (_allContentH) return _allContentH;
+    
+    
+    if (self.type == 2) {
+        //顶部的头像
+        CGFloat imgH = 45 + 24;
+        
+        //标题的高度
+        CGFloat titleH = self.titlewSize.height  + 12;
+        
+        //中间的头像
+        CGFloat photosH = self.photosSize.height ;
+
+        //底部的三个按钮
+        CGFloat btnsH = 38;
+        
+        _allContentH = imgH + titleH + photosH + btnsH;
+
+    }else if (self.type == 3)
+    {
+        //顶部的头像
+        CGFloat imgH = 45 + 24;
+        
+        //标题的高度
+        CGFloat titleH = self.titlewSize.height  + 12;
+        
+        //中间的头像
+        CGFloat photosH = self.photosSize.height + 12;
+        
+        //内容
+        CGFloat contentH = self.commenSize.height ;
+
+        //底部的三个按钮
+        CGFloat btnsH = 38;
+        
+        _allContentH = imgH + titleH + photosH + contentH + btnsH;
+    
+    }else
+    {
+        //顶部的头像
+        CGFloat imgH = 45 + 24;
+        
+        //标题的高度
+        CGFloat titleH = self.titlewSize.height  + 12;
+        
+        //中间的头像
+        CGFloat photosH = self.photosSize.height + 12;
+        
+        //内容
+        CGFloat contentH = self.commenSize.height + 8;
+        
+        //时间
+        CGFloat timeH = 0;
+        timeH = self.titlewSize.height + 8;
+        
+        
+        //地点
+        CGFloat addressH = 0;
+        addressH  = self.addressSize.height ;
+
+        //底部的三个按钮
+        CGFloat btnsH = 38;
+        
+        _allContentH = imgH + titleH + photosH + contentH + timeH + addressH + btnsH;
+
+    }
+    return _allContentH;
+
+}
+
+
 
 
 @end

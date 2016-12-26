@@ -76,10 +76,19 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     [self setupRightBar];
 
     //监听键盘
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     //监听文本框
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:nil];
     
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [HUD dismiss];
+
 }
 
 
@@ -124,6 +133,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"sessionId"] = SessionID;
     parmas[@"pageNum"] = @(self.pageNum);
     parmas[@"pageSize"] = @(self.pageSize);
+    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
     
     MJRefreshLog(@"parmas---:%@",parmas);
     
@@ -136,20 +146,20 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         [self.tableView.mj_header endRefreshing];
         MJRefreshLog(@"闲置物品下拉显示成功：%@",responseObject);
 
-        //把数据保存到沙盒里的plist文件
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *plistPath1= [paths objectAtIndex:0];
-        
-        NSLog(@"%@",plistPath1);
-        //得到完整的路径名
-        NSString *fileName = [plistPath1 stringByAppendingPathComponent:@"cityCode.plist"];
-
-        NSFileManager *fm = [NSFileManager defaultManager];
-        if ([fm createFileAtPath:fileName contents:nil attributes:nil] ==YES) {
-            
-            [responseObject writeToFile:fileName atomically:YES];
-            NSLog(@"文件写入完成");
-        }
+//        //把数据保存到沙盒里的plist文件
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *plistPath1= [paths objectAtIndex:0];
+//        
+//        NSLog(@"%@",plistPath1);
+//        //得到完整的路径名
+//        NSString *fileName = [plistPath1 stringByAppendingPathComponent:@"cityCode.plist"];
+//
+//        NSFileManager *fm = [NSFileManager defaultManager];
+//        if ([fm createFileAtPath:fileName contents:nil attributes:nil] ==YES) {
+//            
+//            [responseObject writeToFile:fileName atomically:YES];
+//            NSLog(@"文件写入完成");
+//        }
 
         _FreeArticleArr = [FreeArticleModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
         
@@ -179,6 +189,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     parmas[@"sessionId"] = SessionID;
     parmas[@"pageNum"] = @(self.pageNum);
     parmas[@"pageSize"] = @(self.pageSize);
+    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
     
     MJRefreshLog(@"parmas---:%@",parmas);
     NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
@@ -245,7 +256,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    //设置假数据
+    //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
     return model.friendsRefList.count;
 }
@@ -343,27 +354,6 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 }
 
 
-
-/**
- * 键盘的frame发生改变时调用（显示、隐藏等）
- */
-- (void)keyboardWillChangeFrame:(NSNotification *)notification
-{
-
-    NSDictionary *userInfo = notification.userInfo;
-    // 动画的持续时间
-    
-    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    // 键盘的frame
-    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
-    // 执行动画
-    [UIView animateWithDuration:duration animations:^{
-        self.replyView.y = keyboardF.origin.y - 44;
-    }];
-}
-
-
 -(void)textDidChange
 {
     self.sendBtn.enabled = [self.replyTextView hasText];
@@ -458,17 +448,20 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     
     UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
+    [self.view addSubview:replyView];
     
     //设置输入框
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 44)];
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 34)];
+    textView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.replyTextView = textView;
+    textView.backgroundColor = [UIColor clearColor];
     textView.font = UIFontLarge;
     
     [replyView addSubview:textView];
+
     
-    replyView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:replyView];
     [textView becomeFirstResponder];
     
     //设置都发送按钮
