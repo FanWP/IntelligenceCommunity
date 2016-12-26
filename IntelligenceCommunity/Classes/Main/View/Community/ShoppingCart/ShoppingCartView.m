@@ -16,6 +16,13 @@
 NSString *const ShoppingCartViewCellIdentifier = @"shoppingCartViewCellIdentifier";
 @implementation ShoppingCartView
 
+-(instancetype)initWithFrame:(CGRect)frame{
+    self= [super initWithFrame:frame];
+    if (self) {
+        
+    }
+    return self;
+}
 -(void)setShoppingCartMArray:(NSMutableArray *)shoppingCartMArray{
     
     if (!_lableText) {
@@ -39,7 +46,9 @@ NSString *const ShoppingCartViewCellIdentifier = @"shoppingCartViewCellIdentifie
 - (UITableView *)tableView{
     
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - 200, ScreenWidth, 200) style:UITableViewStyleGrouped];
+//        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.bounds.size.height - 200, ScreenWidth, 200) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0, ScreenWidth, self.bounds.size.height) style:UITableViewStyleGrouped];
+
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerNib:[UINib nibWithNibName:@"ShoppingCartCell" bundle:nil] forCellReuseIdentifier:@"ShoppingCartCell"];

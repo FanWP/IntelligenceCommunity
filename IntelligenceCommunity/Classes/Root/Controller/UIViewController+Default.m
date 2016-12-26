@@ -18,7 +18,7 @@ static BOOL canSetBackButtonTitle;
 
 -(void)defaultViewStyle {
     self.view.backgroundColor = ThemeBackgroundColor;
-    
+    self.navigationController.navigationBar.translucent = NO;
     if(canSetBackButtonTitle) {
         if(self.tabBarController == nil) {
             [self.navigationItem setValue:@"" forKey:@"backButtonTitle"];
@@ -27,6 +27,7 @@ static BOOL canSetBackButtonTitle;
             [self.tabBarController.navigationItem setValue:@"" forKey:@"backButtonTitle"];
         }
     }
+    
 }
 
 + (BOOL) isVariableWithClass:(Class) myClass varName:(NSString *)name{	unsigned int outCount, i;

@@ -23,7 +23,8 @@
 //PopTableViewCustomDelegate--查看某件商品的详情
 @interface CommodityListViewController ()<PopTableViewCustomDelegate>
 
-@property(nonatomic,strong) NSMutableArray *dataMArray;
+@property(nonatomic,strong) NSMutableArray *categoryNameMArray; //左边大类目录
+@property(nonatomic,strong) NSMutableArray *dataMArray;         //数据源
 
 @end
 
@@ -35,23 +36,27 @@
     self.navigationController.navigationBar.translucent = NO;
     [self initializeComponent];
     
+    if (!_categoryNameMArray) {
+        _categoryNameMArray = [NSMutableArray new];
+    }
     if (!_dataMArray) {
         _dataMArray = [NSMutableArray new];
     }
 }
 -(void)initializeComponent{
     
+    //顶部店铺基本信息
+    CommodityListHeaderView *headerView = [[CommodityListHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80)];
+    
+    [self.view addSubview:headerView];
     //tableView双表
-    _popTableView = [[PopTableViewCustom alloc] initWithFrame:CGRectMake(0,80, ScreenWidth,ScreenHeight-64) leftArray:nil rightArray:nil];
+    _popTableView = [[PopTableViewCustom alloc] initWithFrame:CGRectMake(0,80, ScreenWidth,ScreenHeight-80-50-10) leftArray:nil rightArray:nil];
     _popTableView.ViewController = self;
     _popTableView.delegate = self;
     [self.view addSubview:_popTableView];
         //数据
     [self dataRequest];
     
-    //顶部店铺基本信息
-    CommodityListHeaderView *headerView = [[CommodityListHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80)];
-    [self.view addSubview:headerView];
     //底部菜单
     _shoppingCartBottomView = [[ShoppingCartBottomView alloc] initWithFrame:CGRectMake(0,ScreenHeight-64-50, ScreenWidth, 50)];
         //购物车列表
@@ -74,10 +79,14 @@
     [[RequestManager manager] SessionRequestWithType:Mall_api requestWithURLString:@"find/vendor/product/for/sale" requestType:RequestMethodPost requestParameters:parametersDic success:^(id  _Nullable responseObject) {
         
         [HUD dismiss];
+        ICLog(@"%@",responseObject);
         for (NSDictionary *dic in responseObject[@"body"]) {        //dic==一个大类
             
-            NSMutableArray *productMArray = [NSMutableArray new];
+            //大目录
+            [_categoryNameMArray addObject:dic[@"typeName"]];
             
+            //数据源
+            NSMutableArray *productMArray = [NSMutableArray new];
             for (NSDictionary *productDic in dic[@"proList"]) {
                 ProListModel *model = [[ProListModel alloc] init];
                 [model setValuesForKeysWithDictionary:productDic];
@@ -91,7 +100,8 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            _popTableView.leftMArray = _dataMArray;
+            _popTableView.categoryNameMArray = _categoryNameMArray;
+            _popTableView.leftMArray = _dataMArray; //数据源
             [_popTableView.leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
         });
         
@@ -143,8 +153,9 @@
     button.selected = !button.selected;
     if (button.selected) {
         self.shoppingCartView =[[ShoppingCartView alloc]init];
-        self.shoppingCartView.frame =CGRectMake(0, (ScreenHeight-50), ScreenWidth,ScreenWidth);
-        
+//        self.shoppingCartView.frame =CGRectMake(0, (ScreenHeight-50), ScreenWidth,ScreenWidth);
+        self.shoppingCartView.frame =CGRectMake(0,ScreenHeight-64, ScreenWidth,200);
+
         UIView *bgView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,self.view.bounds.size.height-CGRectGetHeight(self.shoppingCartBottomView.frame))];
         bgView.alpha = .7;
         bgView.tag = 111;
@@ -157,9 +168,11 @@
         };
         
         [self.shoppingCartView addShoppingCartView:self];
+
         [UIView animateWithDuration:.3 animations:^{
             
-            self.shoppingCartView.frame =CGRectMake(0, (ScreenHeight-CGRectGetHeight(self.shoppingCartBottomView.frame)-ScreenWidth), ScreenWidth,ScreenWidth);
+//            self.shoppingCartView.frame =CGRectMake(0, (ScreenHeight-CGRectGetHeight(self.shoppingCartBottomView.frame)-200), ScreenWidth,200);
+            self.shoppingCartView.frame =CGRectMake(0,ScreenHeight-64-50-200, ScreenWidth,200);
             self.shoppingCartView.shoppingCartMArray = self.popTableView.orderMArray;
         } completion:^(BOOL finished){
             

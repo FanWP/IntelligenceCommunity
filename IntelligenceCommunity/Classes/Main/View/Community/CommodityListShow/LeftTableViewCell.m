@@ -10,7 +10,7 @@
 
 @interface LeftTableViewCell ()
 
-
+@property(nonatomic,strong) CALayer *lineLayer;
 
 @end
 
@@ -29,14 +29,14 @@
     
     __weak typeof(self) weakSelf = self;
     
-    _titleLabel = [[UILabel alloc] init];
-    _titleLabel.text = @"分类名";;
-    _titleLabel.textColor = [UIColor grayColor];
-    _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.highlightedTextColor = [UIColor redColor];
-    _titleLabel.font = UIFontLarge;
-    [self.contentView addSubview:_titleLabel];
-    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    _categoryTitleLabel = [[UILabel alloc] init];
+    _categoryTitleLabel.text = @"分类名";;
+    _categoryTitleLabel.textColor = [UIColor grayColor];
+    _categoryTitleLabel.textAlignment = NSTextAlignmentCenter;
+    _categoryTitleLabel.highlightedTextColor = [UIColor brownColor];
+    _categoryTitleLabel.font = UIFontLarge;
+    [self.contentView addSubview:_categoryTitleLabel];
+    [_categoryTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(weakSelf.mas_centerY);
         make.left.mas_equalTo(5);
         make.right.mas_equalTo(5);
@@ -54,7 +54,15 @@
     self.remarkView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:self.remarkView];
 
+    _lineLayer = [[CALayer alloc] init];
+    _lineLayer.backgroundColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    [self.contentView.layer  addSublayer:_lineLayer];
 }
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    _lineLayer.frame = CGRectMake(0, self.height-1, self.width, 1);
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
@@ -63,8 +71,8 @@
     [super setSelected:selected animated:animated];
     
     self.highlighted = selected;
-    self.titleLabel.highlighted = selected;
-    self.remarkView.backgroundColor = selected ? [UIColor redColor] : [UIColor whiteColor];
+    self.categoryTitleLabel.highlighted = selected;
+    self.remarkView.backgroundColor = selected ? [UIColor brownColor] : [UIColor whiteColor];
 }
 
 @end

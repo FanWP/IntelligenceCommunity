@@ -11,7 +11,7 @@
 @interface LeftTableViewCell : UITableViewCell
 
 //分类名称
-@property(nonatomic,strong) UILabel *titleLabel;
+@property(nonatomic,strong) UILabel *categoryTitleLabel;
 //标记
 @property(nonatomic,strong) UIView *remarkView;
 

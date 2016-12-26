@@ -31,7 +31,9 @@ typedef NS_ENUM(NSUInteger, PayMentType) {
 @property(nonatomic,strong) UILabel *aliPayLabel;
 
 //付款按钮
-@property(nonatomic,strong) UIButton *commitOrderButton;
+@property(nonatomic,strong) UIView *bottomView;
+@property(nonatomic,strong) UIImageView *commitOrderImageView;
+@property(nonatomic,strong) UILabel *commitOrderLabel;
 
 @end
 
@@ -70,7 +72,11 @@ typedef NS_ENUM(NSUInteger, PayMentType) {
     }];
 //    @property(nonatomic,strong) UILabel *totalPriceLabel;
     _totalPriceLabel = [[UILabel alloc] init];
-    _totalPriceLabel.text = @"￥0.00元";
+//    _totalPriceLabel.text = @"￥0.00元";
+    if (_payMentTotalPriceString && _payMentTotalPriceString.length) {
+        
+        _totalPriceLabel.text = [NSString stringWithFormat:@"￥ %@ 元",_payMentTotalPriceString];
+    }
     _totalPriceLabel.textColor = [UIColor redColor];
     _totalPriceLabel.textAlignment = NSTextAlignmentLeft;
     _totalPriceLabel.font = UIFontLarge;
@@ -100,8 +106,9 @@ typedef NS_ENUM(NSUInteger, PayMentType) {
 //    @property(nonatomic,strong) UIButton *wechatPayButton;
 //    @property(nonatomic,strong) UILabel *wechatPayLabel;
     _wechatPayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_wechatPayButton setImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] forState:UIControlStateNormal];
+    [_wechatPayButton setImage:[UIImage imageNamed:@"choice"] forState:UIControlStateNormal];
     _wechatPayButton.tag = 1;
+    _wechatPayButton.selected = YES;
     [_wechatPayButton addTarget:self action:@selector(payMentTypeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_wechatPayButton];
     [_wechatPayButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,7 +133,7 @@ typedef NS_ENUM(NSUInteger, PayMentType) {
 //    @property(nonatomic,strong) UIButton *aliPayButton;
 //    @property(nonatomic,strong) UILabel *aliPayLabel;
     _aliPayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_aliPayButton setImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] forState:UIControlStateNormal];
+    [_aliPayButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
     _aliPayButton.tag = 2;
     [_aliPayButton addTarget:self action:@selector(payMentTypeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_aliPayButton];
@@ -148,31 +155,83 @@ typedef NS_ENUM(NSUInteger, PayMentType) {
     }];
     //付款按钮
 //    @property(nonatomic,strong) UIButton *commitOrderButton;
-    _commitOrderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_commitOrderButton setTitle:@"确认付款" forState:UIControlStateNormal];
-    [_commitOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_commitOrderButton addTarget:self action:@selector(payMentTypeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    _commitOrderButton.backgroundColor = [UIColor orangeColor];
-    _commitOrderButton.tag = 3;
-    _commitOrderButton.layer.cornerRadius = 5;
-    _commitOrderButton.layer.masksToBounds = YES;
-    _commitOrderButton.layer.borderWidth = 1;
-    _commitOrderButton.layer.borderColor = [UIColor grayColor].CGColor;
-    [self.view addSubview:_commitOrderButton];
-    [_commitOrderButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    //付款按钮
+//    @property(nonatomic,strong) UIView *bottomView;
+//    @property(nonatomic,strong) UIImageView *commitOrderImageView;
+//    @property(nonatomic,strong) UILabel *commitOrderLabel;
+    _bottomView = [[UIView alloc] init];
+    _bottomView.backgroundColor = [UIColor orangeColor];
+    _bottomView.layer.borderWidth = 1;
+    _bottomView.layer.borderColor = [UIColor grayColor].CGColor;
+    [self.view addSubview:_bottomView];
+    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_offset(0);
         make.height.mas_offset(49);
     }];
+    _commitOrderLabel = [[UILabel alloc] init];
+    _commitOrderLabel.text = @"确认付款";
+    _commitOrderLabel.textColor = [UIColor whiteColor];
+    _commitOrderLabel.textAlignment = NSTextAlignmentCenter;
+    _commitOrderLabel.font = UIFontLarge;
+    [_bottomView addSubview:_commitOrderLabel];
+    [_commitOrderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(_bottomView.centerX);
+        make.centerY.mas_equalTo(_bottomView.centerY);
+        make.width.mas_offset(80);
+    }];
+    _commitOrderImageView = [[UIImageView alloc] init];
+    _commitOrderImageView.image = [UIImage imageNamed:@"choice"];
+    _commitOrderImageView.contentMode = UIViewContentModeCenter;
+    [_bottomView addSubview:_commitOrderImageView];
+    [_commitOrderImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(_bottomView.centerY);
+        make.right.equalTo(_commitOrderLabel.mas_left).offset(0);
+        make.width.height.mas_offset(30);
+    }];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commitOrderAction:)];
+    tap.numberOfTouchesRequired = 1;
+    tap.numberOfTapsRequired = 1;
+    [_bottomView addGestureRecognizer:tap];
     
 }
 -(void)payMentTypeButtonAction:(UIButton *)button{
     if (button.tag == 1) {
         ICLog_2(@"微信支付");
+        if (_wechatPayButton.selected) {
+            return;
+        }
+        if (_wechatPayButton.selected) {    //默认微信支付
+            
+            [_wechatPayButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
+        }else{
+            [_wechatPayButton setImage:[UIImage imageNamed:@"choice"] forState:UIControlStateNormal];
+        }
+        _wechatPayButton.selected = !_wechatPayButton.selected;
+        
+        //同步支付宝
+        _aliPayButton.selected = NO;
+        [_aliPayButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
     }else if (button.tag == 2){
         ICLog_2(@"支付宝支付");
-    }else{
-        ICLog_2(@"确认付款");
+        if (_aliPayButton.selected) {
+            return;
+        }
+        if (_aliPayButton.selected) {
+            [_aliPayButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
+        }else{
+            [_aliPayButton setImage:[UIImage imageNamed:@"choice"] forState:UIControlStateNormal];
+        }
+        _aliPayButton.selected = !_aliPayButton.selected;
+        //同步微信
+        _wechatPayButton.selected = NO;
+        [_wechatPayButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
     }
+}
+-(void)commitOrderAction:(UITapGestureRecognizer *)sender{
+    ICLog_2(@"确认付款");
+
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -68,7 +68,7 @@
     
 //    @property(nonatomic,strong) UILabel *addressLabel;
     _addressLabel = [[UILabel alloc] init];
-    _addressLabel.text = @"收货地址: 陕西省 西安市  高新区  科技四路  南窑头东区 陕西省 西安市  高新区  科技四路  南窑头东区";
+    _addressLabel.text = @"收货地址: 陕西省/西安市/高新区/科技四路/南窑头东区 ";
     _addressLabel.textColor = [UIColor grayColor];
     _addressLabel.textAlignment = NSTextAlignmentLeft;
     _addressLabel.font = UIFontNormal;
@@ -80,6 +80,28 @@
         make.right.mas_offset(-10);
     }];
     
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.contentView addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_addressLabel.mas_bottom).offset(5);
+        make.left.right.mas_offset(0);
+        make.height.mas_offset(1);
+    }];
+    //送达时间      尽快送达
+//    @property(nonatomic,strong) UILabel *sendTimeLabel;
+//    @property(nonatomic,strong) UILabel *fastSendLabel;
+    _sendTimeLabel = [[UILabel alloc] init];
+    _sendTimeLabel.text = @"送达时间";
+    _sendTimeLabel.textColor = [UIColor grayColor];
+    _sendTimeLabel.textAlignment = NSTextAlignmentLeft;
+    _sendTimeLabel.font = UIFontNormal;
+    [self.contentView addSubview:_sendTimeLabel];
+    [_sendTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(view.mas_bottom).offset(10);
+        make.left.mas_offset(20);
+        make.width.mas_offset(100);
+    }];
     
     _lineLayer = [[CALayer alloc] init];
     _lineLayer.backgroundColor = [UIColor grayColor].CGColor;

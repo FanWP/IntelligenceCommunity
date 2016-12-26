@@ -29,6 +29,8 @@
 #define UIFont15 [Common systemFontOfSize:15]
 #define UIFont13 [Common systemFontOfSize:13]
 
+#define kGetHorizontalDistance(Horizontal_PX)  ((ScreenWidth*Horizontal_PX)/750)
+#define kGetVerticalDistance(Vertical_PX) ((ScreenHeight*Vertical_PX)/1334)
 extern NSString *const CommonRegexEmail;
 extern NSString *const CommonRegexMoney;
 

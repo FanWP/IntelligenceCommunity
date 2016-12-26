@@ -17,4 +17,8 @@
 @property(nonatomic,strong) UILabel *phoneLabel;
 @property(nonatomic,strong) UILabel *addressLabel;
 
+//送达时间      尽快送达
+@property(nonatomic,strong) UILabel *sendTimeLabel;
+@property(nonatomic,strong) UILabel *fastSendLabel;
+
 @end

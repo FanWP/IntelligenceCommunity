@@ -23,8 +23,7 @@
     self.navigationBar.backIndicatorImage = [UIImage imageNamed:@"Root_Back"];
     self.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"Root_Back"];
     
-    
-//    self.navigationBar.barTintColor = ThemeColor;
+    self.navigationBar.barTintColor =  HexColor(0x0dceac);
 }
 
 - (void) setBackgroundColor:(UIColor*)color {

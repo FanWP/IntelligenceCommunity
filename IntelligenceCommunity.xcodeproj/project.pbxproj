@@ -167,6 +167,7 @@
 		18C72B161E10BA52002CB9EF /* HouseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B111E10BA52002CB9EF /* HouseListCell.m */; };
 		18C72B171E10BA52002CB9EF /* HouseMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B131E10BA52002CB9EF /* HouseMembersCell.m */; };
 		18C72B181E10BA52002CB9EF /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B151E10BA52002CB9EF /* HouseModel.m */; };
+		18C72B1B1E10E03D002CB9EF /* CommonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B1A1E10E03D002CB9EF /* CommonHeaderView.m */; };
 		18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573491DED20AB000FDBF6 /* SpecialOffersListModel.m */; };
 		18F5734D1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5734C1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m */; };
 		18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573531DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m */; };
@@ -628,6 +629,8 @@
 		18C72B131E10BA52002CB9EF /* HouseMembersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseMembersCell.m; sourceTree = "<group>"; };
 		18C72B141E10BA52002CB9EF /* HouseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseModel.h; sourceTree = "<group>"; };
 		18C72B151E10BA52002CB9EF /* HouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseModel.m; sourceTree = "<group>"; };
+		18C72B191E10E03D002CB9EF /* CommonHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaderView.h; sourceTree = "<group>"; };
+		18C72B1A1E10E03D002CB9EF /* CommonHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeaderView.m; sourceTree = "<group>"; };
 		18F573481DED20AB000FDBF6 /* SpecialOffersListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialOffersListModel.h; sourceTree = "<group>"; };
 		18F573491DED20AB000FDBF6 /* SpecialOffersListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialOffersListModel.m; sourceTree = "<group>"; };
 		18F5734B1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyFeeOtherInfoModel.h; sourceTree = "<group>"; };
@@ -1221,6 +1224,8 @@
 				1857BD181DF68E7500E5F1DE /* RightTableViewCell.m */,
 				1857BD191DF68E7500E5F1DE /* PopTableViewCustom.h */,
 				1857BD1A1DF68E7500E5F1DE /* PopTableViewCustom.m */,
+				18C72B191E10E03D002CB9EF /* CommonHeaderView.h */,
+				18C72B1A1E10E03D002CB9EF /* CommonHeaderView.m */,
 			);
 			path = CommodityListShow;
 			sourceTree = "<group>";
@@ -2376,6 +2381,7 @@
 				187383C11DF10E5F0088544A /* CommunityServiceHeaderView.m in Sources */,
 				184B1D321DE6E5C000F8F56E /* WUImageBrowseView.m in Sources */,
 				1808970F1DE59DCB0049A180 /* FreeArticleViewController.m in Sources */,
+				18C72B1B1E10E03D002CB9EF /* CommonHeaderView.m in Sources */,
 				187A23731DEBD58800D921FC /* PropertyFeeViewCell.m in Sources */,
 				711CBE3E1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m in Sources */,
 				184C99C81DEFD25700588FFD /* HelpCenterViewCell.m in Sources */,
@@ -2594,8 +2600,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client",
-					"穆慕/IntelligenceCommunity/ALiPaySources",
+					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2635,8 +2640,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client",
-					"穆慕/IntelligenceCommunity/ALiPaySources",
+					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

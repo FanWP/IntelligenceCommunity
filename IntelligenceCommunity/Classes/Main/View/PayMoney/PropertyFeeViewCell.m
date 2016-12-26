@@ -24,16 +24,14 @@
     //费用名称
 //    @property(nonatomic,strong) UILabel *propertyFeeTitleLabel;
     _propertyFeeTitleLabel = [[UILabel alloc] init];
-    _propertyFeeTitleLabel.text = @"费用名称";
-    _propertyFeeTitleLabel.textColor = [UIColor grayColor];
+    _propertyFeeTitleLabel.textColor = [UIColor blackColor];
     _propertyFeeTitleLabel.textAlignment = NSTextAlignmentLeft;
     _propertyFeeTitleLabel.font = UIFontNormal;
     [self addSubview:_propertyFeeTitleLabel];
     [_propertyFeeTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.mas_centerY).offset(0);
-        make.left.mas_offset(150);
-        make.width.mas_offset(150);
-        make.height.mas_offset(30);
+        make.left.mas_offset(kGetHorizontalDistance(30));
+        make.width.mas_offset(100);
     }];
     
     //钱数

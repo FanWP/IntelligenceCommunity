@@ -32,12 +32,13 @@ typedef void(^orderShopping)(NSArray *datasArray);
 
 @property(nonatomic,strong) UIViewController *ViewController;
 
+@property(nonatomic,strong) NSMutableArray *categoryNameMArray;
 @property(nonatomic,strong) NSMutableArray *leftMArray;
 
 @property(nonatomic,strong) NSArray *rightArray;
 
-//当前点击的cell
-@property(nonatomic,assign) NSInteger selectIndex;
+////当前点击的cell
+//@property(nonatomic,assign) NSInteger selectIndex;
 
 //红点
 @property(nonatomic,strong) UIImageView *redView;
