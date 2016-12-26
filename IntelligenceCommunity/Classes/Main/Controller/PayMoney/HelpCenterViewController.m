@@ -52,10 +52,12 @@ NSString *const HelperCenterViewCellIdentifier = @"helperCenterViewCellIdentifie
 -(void)dataRequest{
     
     NSMutableDictionary *parametersDictionary = [NSMutableDictionary new];
-    [[RequestManager manager] JSONRequest:@"find/help/center?pageSize=1" method:RequestMethodGet timeout:10 parameters:parametersDictionary success:^(id  _Nullable responseObject) {
-        
+    [parametersDictionary setValue:@"1" forKey:@"pageSize"];
+    
+    [HUD showProgress:@"正在加载数据"];
+    [[RequestManager manager] SessionRequestWithType:Smart_community requestWithURLString:@"find/help/center" requestType:RequestMethodPost requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
         ICLog_2(@"%@",responseObject);
-        
+        [HUD dismiss];
         for (NSDictionary *dic in responseObject[@"body"]) {
             
             HelpCenterModel *model = [[HelpCenterModel alloc] init];
@@ -66,9 +68,12 @@ NSString *const HelperCenterViewCellIdentifier = @"helperCenterViewCellIdentifie
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
+
     } faile:^(NSError * _Nullable error) {
-        
+        ICLog_2(@"%@",error);
+        [HUD dismiss];
     }];
+    
 }
 #pragma mark--delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

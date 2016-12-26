@@ -38,7 +38,7 @@ NSString *const CommodityDetailBottomViewCellIdentifier = @"commodityDetailBotto
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"商品详情";
-    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.navigationController.navigationBar.translucent = NO;
     
     
     
@@ -61,7 +61,7 @@ NSString *const CommodityDetailBottomViewCellIdentifier = @"commodityDetailBotto
     [_tableView registerClass:[CommodityDetailBottomViewCell class] forCellReuseIdentifier:CommodityDetailBottomViewCellIdentifier];
     
     //底部菜单
-    _shoppingCartBottomView = [[ShoppingCartBottomView alloc] initWithFrame:CGRectMake(0,ScreenHeight-50, ScreenWidth, 50)];
+    _shoppingCartBottomView = [[ShoppingCartBottomView alloc] initWithFrame:CGRectMake(0,ScreenHeight-64-50, ScreenWidth, 50)];
     //购物车列表
     [_shoppingCartBottomView.shoppingCartButton addTarget:self action:@selector(showshoppingCartlist:) forControlEvents:UIControlEventTouchUpInside];
     //去结算

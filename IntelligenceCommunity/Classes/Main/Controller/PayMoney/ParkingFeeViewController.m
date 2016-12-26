@@ -58,9 +58,9 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
     [self createData];
     
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] style:UIBarButtonItemStylePlain target:self action:@selector(propertyFeeHistoryList:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"List"] style:UIBarButtonItemStylePlain target:self action:@selector(propertyFeeHistoryList:)];
     
-    //物业费明细
+    //停车费明细
     [self dataRequest];
 }
 -(void)propertyFeeHistoryList:(UIBarButtonItem *)sender{
@@ -68,10 +68,11 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
     VC.feetype = ParkingFee;
     [self.navigationController pushViewController:VC animated:YES];
 }
-#pragma mark--物业费明细
+#pragma mark--停车费明细
 -(void)dataRequest{
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
-    [[RequestManager manager] requestWithURLString:[NSString stringWithFormat:@"find/user/parkingfee?userId=1"] requestType:RequestMethodGet requestParameters:parametersDic success:^(id  _Nullable responseObject) {
+    [parametersDic setValue:@"1" forKey:@"userId"];
+    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/user/parkingfee" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
         
         ICLog_2(@"PropertyFeeViewController---%@",responseObject);
         
@@ -97,10 +98,11 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
-        
+
     } faile:^(NSError * _Nullable error) {
-        
+        ICLog(@"%@",error);
     }];
+
 }
 /**
  *  创建数据
@@ -309,32 +311,39 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
         [_tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
+#pragma mark--优惠活动
 -(void)userSelectButtonWithSpecialOffersListViewCell:(SpecialOffersListViewCell *)cell{
     
     for (int i = 0; i < _specialOffersListMArray.count; i++) {
         
        SpecialOffersListViewCell *allCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:6]];
         allCell.selectButton.selected = NO;
-        [allCell.selectButton setImage:[UIImage imageNamed:@"chooseEast"] forState:UIControlStateNormal];
+        [allCell.selectButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
         
     }
     
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-    ICLog(@"%ld",indexPath.row);
+    ICLog_2(@"%ld",indexPath.row);
     cell.selectButton.selected = !cell.selectButton.selected;
     if (cell.selectButton.selected) {
         
-        [cell.selectButton setImage:[UIImage imageNamed:@"chooseEastSelect"] forState:UIControlStateNormal];
+        [cell.selectButton setImage:[UIImage imageNamed:@"choice"] forState:UIControlStateNormal];
         
     }else{
         
-        [cell.selectButton setImage:[UIImage imageNamed:@"chooseEast"] forState:UIControlStateNormal];
+        [cell.selectButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
     }
     
     NSMutableDictionary *parametersDictionary = [NSMutableDictionary dictionary];
-    [[RequestManager manager] requestWithURLString:@"find/parkingfee/prepay/discount?type=1&discountId=2&userId=1" requestType:RequestMethodGet requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
-        
+    
+    [parametersDictionary setValue:@"1" forKey:@"type"];
+    [parametersDictionary setValue:@"2" forKey:@"discountId"];
+    [parametersDictionary setValue:@"1" forKey:@"userId"];
+    
+    [HUD showProgress:@"数据正在加载"];
+    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/parkingfee/prepay/discount" method:RequestMethodPost timeout:20 parameters:parametersDictionary success:^(id  _Nullable responseObject) {
+        [HUD dismiss];
         ICLog_2(@"%@",responseObject);
         if ([responseObject[@"resultCode"] integerValue] == 1000) {
             
@@ -349,8 +358,10 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
             [_tableView reloadData];
         });
     } faile:^(NSError * _Nullable error) {
-        
+        [HUD dismiss];
+        ICLog_2(@"%@",error);
     }];
+    
 }
 
 

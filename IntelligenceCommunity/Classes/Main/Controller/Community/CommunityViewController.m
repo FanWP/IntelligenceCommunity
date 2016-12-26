@@ -60,8 +60,11 @@ NSString *const CommunityServiceListCellIdentifier = @"communityServiceListCellI
 }
 -(void)dataRequest{
     
-    [[RequestManager manager] JSONRequest:@"find/communityService/type" method:RequestMethodGet timeout:10 parameters:nil success:^(id  _Nullable responseObject) {
-        
+    NSMutableDictionary *parametersDic = [NSMutableDictionary new];
+    
+    [HUD showProgress:@"数据正在加载"];
+    [[RequestManager manager] SessionRequestWithType:Mall_api requestWithURLString:@"find/communityService/type" requestType:RequestMethodPost requestParameters:parametersDic success:^(id  _Nullable responseObject) {
+        [HUD dismiss];
         ICLog_2(@"%@",responseObject);
         
         if ([responseObject[@"resultCode"] integerValue] == 1000) {
@@ -77,8 +80,11 @@ NSString *const CommunityServiceListCellIdentifier = @"communityServiceListCellI
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
-    } faile:^(NSError * _Nullable error) {
+
         
+    } faile:^(NSError * _Nullable error) {
+        [HUD dismiss];
+        ICLog_2(@"%@",error);
     }];
     
 }

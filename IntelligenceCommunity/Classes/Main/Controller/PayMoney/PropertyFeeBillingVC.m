@@ -49,33 +49,41 @@ NSString *const PropertyFeeBillingDetailCellIdentifier = @"propertyFeeBillingDet
 }
 -(void)dataRequest{
     
-    
+    NSMutableDictionary *parametersDictionary = [NSMutableDictionary dictionary];
+
     NSString *URLString = @"";
     switch (_feetype) {
         case propertyFee:       //物业费接口
             self.navigationItem.title = @"物业缴费记录";
-            URLString = @"find/profee/history/detail?type=1&paymentId=2";
+            [parametersDictionary setValue:@"1" forKey:@"type"];
+            [parametersDictionary setValue:@"2" forKey:@"paymentId"];
+
+            URLString = @"find/profee/history/detail";
             break;
         case ParkingFee:        //停车费接口
             self.navigationItem.title = @"停车缴费记录";
-            URLString = @"find/parkingfee/history/detail?type=2&paymentId=232";
+            [parametersDictionary setValue:@"2" forKey:@"type"];
+            [parametersDictionary setValue:@"232" forKey:@"paymentId"];
+            URLString = @"find/parkingfee/history/detail";
             break;
             
         default:
             break;
     }
-    
-    NSMutableDictionary *parametersDictionary = [NSMutableDictionary dictionary];
-    [[RequestManager manager] JSONRequest:URLString method:RequestMethodGet timeout:30 parameters:parametersDictionary success:^(id  _Nullable responseObject) {
-        
+    [HUD showProgress:@"正在加载数据"];
+    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:URLString method:RequestMethodPost timeout:20 parameters:parametersDictionary success:^(id  _Nullable responseObject) {
+        [HUD dismiss];
         ICLog(@"%@",responseObject);
         [_propertyFeeBillingModel setValuesForKeysWithDictionary:responseObject[@"body"]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
-    } faile:^(NSError * _Nullable error) {
+
         
+    } faile:^(NSError * _Nullable error) {
+        [HUD dismiss];
+        ICLog(@"%@",error);
     }];
 }
 

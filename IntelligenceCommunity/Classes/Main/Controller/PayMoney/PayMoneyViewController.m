@@ -83,16 +83,21 @@ NSString *const CostListViewCellIdentifier = @"costListViewCellIdentifier";
 #pragma mark--获取元素是否支持
 -(void)dataRequest{
     
-    NSMutableDictionary *parametersDic = [NSMutableDictionary new];
-    [[RequestManager manager] requestWithURLString:@"find/surport/paytype/list" requestType:RequestMethodGet requestParameters:parametersDic success:^(id  _Nullable responseObject) {
+    [HUD showProgress:@"正在加载数据"];
+    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/surport/paytype/list" method:RequestMethodPost timeout:20 parameters:nil success:^(id  _Nullable responseObject) {
         
+        [HUD dismiss];
         ICLog_2(@"%@",responseObject);
-        _payTypeDictionary = [NSDictionary dictionaryWithDictionary:responseObject[@"body"]];
+        if ([responseObject[@"resultCode"] integerValue] == 1000) {
+            _payTypeDictionary = [NSDictionary dictionaryWithDictionary:responseObject[@"body"]];
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
+
     } faile:^(NSError * _Nullable error) {
+        [HUD dismiss];
         ICLog_2(@"%@",error);
     }];
 }
@@ -150,7 +155,70 @@ NSString *const CostListViewCellIdentifier = @"costListViewCellIdentifier";
         //停车费
         cell.titleLabel.textColor = [UIColor greenColor];
     }
-    
+    switch (indexPath.section) {
+            
+        case 0:{        //物业费、停车费、水费、电费、燃气费
+            
+            switch (indexPath.row) {
+                case 0:{    //物业费
+                    cell.leftImageView.image = [UIImage imageNamed:@"Property"];
+                    break;
+                }
+                case 1:{    //停车费
+                    cell.leftImageView.image = [UIImage imageNamed:@"parking"];
+                    break;
+                }
+                case 2:{    //水费
+                    cell.leftImageView.image = [UIImage imageNamed:@"water"];
+                    break;
+                }
+                case 3:{    //电费
+                    cell.leftImageView.image = [UIImage imageNamed:@"Electricity"];
+                    break;
+                }
+                case 4:{    //燃气费
+                    cell.leftImageView.image = [UIImage imageNamed:@"Gas"];
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            break;
+        }
+        case 1:{        //暖气费、固话宽带
+            
+            switch (indexPath.row) {
+                case 0:{    //暖气费
+                    cell.leftImageView.image = [UIImage imageNamed:@"Heating"];
+                    break;
+                }
+                case 1:{    //固话宽带
+                    cell.leftImageView.image = [UIImage imageNamed:@"Fixed"];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+        case 2:{        //有限电视、手机充值
+            
+            switch (indexPath.row) {
+                case 0:{    //有限电视
+                    cell.leftImageView.image = [UIImage imageNamed:@"TV"];
+                    break;
+                }
+                case 1:{    //手机充值
+                    cell.leftImageView.image = [UIImage imageNamed:@"Payment"];
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            break;
+        }
+    }
     cell.titleLabel.text = model.title;
     
     

@@ -216,41 +216,41 @@
     HouseMembersTableVC *houseMembersTableVC = [[HouseMembersTableVC alloc] init];
     [self.navigationController pushViewController:houseMembersTableVC animated:YES];
     
-//    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-//    
-//    parameters[@"buildNumber"] = @"";
-//    parameters[@"unitNumber"] = @"";
-//    parameters[@"roomNumber"] = @"";
-//    parameters[@"checkCode"] = _captchaTF.text;
-//    parameters[@"sessionId"] = SessionID;
-//    parameters[@"userId"] = UserID;
-//    
-//    ICLog_2(@"绑定房屋参数：%@",parameters);
-//    
-//    NSString *urlString = [NSString stringWithFormat:@"%@check/bunding/code",URL_17_pro_api];
-//    
-//    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-//        
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-//    {
-//        ICLog_2(@"绑定房屋返回：%@",responseObject);
-//        
-//        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
-//        
-//        if (resultCode == 1000)
-//        {
-//            [HUD showSuccessMessage:@"绑定成功"];
-//        }
-//        else
-//        {
-//            [HUD showErrorMessage:@"绑定失败"];
-//        }
-//
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
-//    {
-//        [HUD showErrorMessage:@"绑定失败"];
-//        ICLog_2(@"绑定房屋错误：%@",error);
-//    }];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"buildNumber"] = @"";
+    parameters[@"unitNumber"] = @"";
+    parameters[@"roomNumber"] = @"";
+    parameters[@"checkCode"] = _captchaTF.text;
+    parameters[@"sessionId"] = SessionID;
+    parameters[@"userId"] = UserID;
+    
+    ICLog_2(@"绑定房屋参数：%@",parameters);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@check/bunding/code",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"绑定房屋返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            [HUD showSuccessMessage:@"绑定成功"];
+        }
+        else
+        {
+            [HUD showErrorMessage:@"绑定失败"];
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        [HUD showErrorMessage:@"绑定失败"];
+        ICLog_2(@"绑定房屋错误：%@",error);
+    }];
 }
 
 - (void)ownerAction:(UIButton *)button

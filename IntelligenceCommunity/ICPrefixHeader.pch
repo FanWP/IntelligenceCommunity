@@ -73,6 +73,9 @@ typedef enum : NSUInteger {
 #define SessionID @"w/u4EKU32dryicnUAMKE9cBUr4bbEGDIRE00ppoWNmTh+R577T1ukKzY/oofyxELwZffoB9gqWpQUZDnIAoJF1D4UAYpRjwUDp+JgwmhdxXwTwF509uN1jLxZmQCfmZsogkFomOrI5kN5M7yztjVw1IsFAhbgAdl6i2noQTSofk=";
 
 
+#import "Order.h"
+#import "DataSigner.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 
 

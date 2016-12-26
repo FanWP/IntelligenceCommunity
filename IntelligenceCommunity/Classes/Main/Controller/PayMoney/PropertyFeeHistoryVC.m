@@ -53,24 +53,38 @@ NSString *const PropertyFeeHistoryCellIdentifier = @"propertyFeeHistoryCellIdent
 #pragma mark--缴费记录
 -(void)dataRequest{
     
+    
+    NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
+    
     NSString *URLString = @"";
     switch (_feetype) {
         case propertyFee:       //物业费接口
             self.navigationItem.title = @"物业缴费记录";
-            URLString = [NSString stringWithFormat:@"find/user/profee/history?userId=%dpageNum=%dpageSize=%d",1,1,1];
+            
+            [parametersDic setValue:@"1" forKey:@"userId"];
+            [parametersDic setValue:@"1" forKey:@"pageNum"];
+            [parametersDic setValue:@"1" forKey:@"pageSize"];
+
+            
+            URLString = @"find/user/profee/history";
             break;
         case ParkingFee:        //停车费接口
             self.navigationItem.title = @"停车缴费记录";
-            URLString = [NSString stringWithFormat:@"/find/user/parkingfee/history?userId=1&pageNum=1&pageSize=10"];
+            [parametersDic setValue:@"1" forKey:@"userId"];
+            [parametersDic setValue:@"1" forKey:@"pageNum"];
+            [parametersDic setValue:@"10" forKey:@"pageSize"];
+            
+            URLString = @"find/user/parkingfee/history";
             break;
             
         default:
             break;
     }
     
-    NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
-    [[RequestManager manager] JSONRequest:URLString method:RequestMethodGet timeout:9 parameters:parametersDic success:^(id  _Nullable responseObject) {
+    [HUD showProgress:@"正在加载数据"];
+    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:URLString method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
         
+        [HUD dismiss];
         ICLog_2(@"%@",responseObject);
         if ([responseObject[@"resultCode"] integerValue] == 1000) {
             
@@ -83,13 +97,10 @@ NSString *const PropertyFeeHistoryCellIdentifier = @"propertyFeeHistoryCellIdent
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
-    } faile:^(NSError * _Nullable error) {
         
+    } faile:^(NSError * _Nullable error) {
+        [HUD dismiss];
     }];
-    
-    
-    
-    
     
 }
 #pragma mark--delegate
@@ -115,26 +126,30 @@ NSString *const PropertyFeeHistoryCellIdentifier = @"propertyFeeHistoryCellIdent
         
         cell.timeLabel.text = model.payTime;
     }
-    //图标
-//    @property(nonatomic,strong) UIImageView *historyImageView;
-    
+
     //钱数
 //    @property(nonatomic,strong) UILabel *priceCountLabel;
     if (model.amount) {
         cell.priceCountLabel.text = [NSString stringWithFormat:@"￥%@",model.amount];
     }
+    //图标
+    //    @property(nonatomic,strong) UIImageView *historyImageView;
     //费用类型
 //    @property(nonatomic,strong) UILabel *priceTypeLabel;
     if (model.type) {
         
         NSString *string = @"";
         switch ([model.type integerValue]) {
-            case 1:
+            case 1:{
+                cell.historyImageView.image = [UIImage imageNamed:@"Property"];
                 string = @"物业费";
                 break;
-            case 2:
+            }
+            case 2:{
+                cell.historyImageView.image = [UIImage imageNamed:@"parking"];
                 string = @"停车费";
                 break;
+            }
                 
             default:
                 break;
