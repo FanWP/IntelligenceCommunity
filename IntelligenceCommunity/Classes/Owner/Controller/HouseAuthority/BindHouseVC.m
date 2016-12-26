@@ -120,6 +120,7 @@
     _ownerButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [_ownerButton setTitle:@"业主" forState:(UIControlStateNormal)];
     [_ownerButton.titleLabel setFont:UIFontNormal];
+    _ownerButton.selected = YES;
     [_ownerButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     [_ownerButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
     [_ownerButton setBackgroundImage:[UIImage imageNamed:@"owner_normal"] forState:(UIControlStateNormal)];

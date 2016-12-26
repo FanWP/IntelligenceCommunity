@@ -135,6 +135,8 @@
 		18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573531DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m */; };
 		18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573561DED6804000FDBF6 /* PropertyFeeBillingModel.m */; };
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
+		710BFB0E1E10B76C00762178 /* DMDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 710BFB0D1E10B76C00762178 /* DMDropDownMenu.m */; };
+		710BFB111E10B77600762178 /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 710BFB101E10B77600762178 /* HouseAuthorityModel.m */; };
 		710C17A31E08CE9100FF215E /* BindHouseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C17A21E08CE9100FF215E /* BindHouseVC.m */; };
 		710C17A61E0905F000FF215E /* SettingTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C17A51E0905F000FF215E /* SettingTableVC.m */; };
 		710CA40D1E0A4F08008565F9 /* OwnerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CA40B1E0A4F08008565F9 /* OwnerViewCell.m */; };
@@ -532,6 +534,10 @@
 		18F573581DED6E58000FDBF6 /* ParkingFeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingFeeViewController.h; sourceTree = "<group>"; };
 		18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingFeeViewController.m; sourceTree = "<group>"; };
 		25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligenceCommunity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		710BFB0C1E10B76C00762178 /* DMDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMDropDownMenu.h; sourceTree = "<group>"; };
+		710BFB0D1E10B76C00762178 /* DMDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMDropDownMenu.m; sourceTree = "<group>"; };
+		710BFB0F1E10B77600762178 /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityModel.h; sourceTree = "<group>"; };
+		710BFB101E10B77600762178 /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityModel.m; sourceTree = "<group>"; };
 		710C17A11E08CE9100FF215E /* BindHouseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindHouseVC.h; sourceTree = "<group>"; };
 		710C17A21E08CE9100FF215E /* BindHouseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindHouseVC.m; sourceTree = "<group>"; };
 		710C17A41E0905F000FF215E /* SettingTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableVC.h; sourceTree = "<group>"; };
@@ -1319,6 +1325,9 @@
 		18B002B21DE2DC9B00D8FE56 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				710BFB0F1E10B77600762178 /* HouseAuthorityModel.h */,
+				710BFB101E10B77600762178 /* HouseAuthorityModel.m */,
+				710BFB0B1E10B76C00762178 /* DMDropDownMenu */,
 				71D3A7691E0A16B0002C2F1C /* ILSetting */,
 				D71BC1121E0389900093357C /* MJExtension */,
 				1840712F1DF7D60C000DA659 /* MasonryAutoLayoutCellHeight */,
@@ -1481,6 +1490,15 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		710BFB0B1E10B76C00762178 /* DMDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				710BFB0C1E10B76C00762178 /* DMDropDownMenu.h */,
+				710BFB0D1E10B76C00762178 /* DMDropDownMenu.m */,
+			);
+			path = DMDropDownMenu;
 			sourceTree = "<group>";
 		};
 		710F30EB1E0264D100E256C6 /* Repairs */ = {
@@ -2087,6 +2105,7 @@
 				71D3A7811E0A16B0002C2F1C /* ILSettingCell.m in Sources */,
 				185ADBC51DE3E43400CD556D /* ServiceListCell.m in Sources */,
 				D730E1F51E0B63830056A20A /* FreeArticleReplyModel.m in Sources */,
+				710BFB0E1E10B76C00762178 /* DMDropDownMenu.m in Sources */,
 				18440FD71E0D2FAB005D684A /* MD5DataSigner.m in Sources */,
 				180897151DE59E620049A180 /* CommunityViewController.m in Sources */,
 				184B1D2C1DE6E5C000F8F56E /* UIImage+Aspect.m in Sources */,
@@ -2126,6 +2145,7 @@
 				18B002C31DE2DF7800D8FE56 /* RootTabBarController.m in Sources */,
 				71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */,
 				187A238C1DEC39CB00D921FC /* RequestManager.m in Sources */,
+				710BFB111E10B77600762178 /* HouseAuthorityModel.m in Sources */,
 				18B002B71DE2DD3B00D8FE56 /* UIViewController+Default.m in Sources */,
 				18440FD51E0D2FAB005D684A /* DataSigner.m in Sources */,
 				184B1D2F1DE6E5C000F8F56E /* WUAlbumGroupViewController.m in Sources */,
@@ -2308,7 +2328,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
+					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2348,7 +2368,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
+					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
