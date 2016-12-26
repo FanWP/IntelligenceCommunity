@@ -24,7 +24,7 @@
 //    @property(nonatomic,strong) UIImageView *selectimageView;
     
     _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_selectButton setImage:[UIImage imageNamed:@"chooseEast"] forState:UIControlStateNormal];
+    [_selectButton setImage:[UIImage imageNamed:@"No choice"] forState:UIControlStateNormal];
     [_selectButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_selectButton];
     [_selectButton mas_makeConstraints:^(MASConstraintMaker *make) {

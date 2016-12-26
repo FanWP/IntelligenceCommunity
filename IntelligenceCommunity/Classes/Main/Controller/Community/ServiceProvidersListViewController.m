@@ -70,8 +70,13 @@ NSString *const ServiceProvidersListViewCellIdentifier = @"serviceProvidersListV
 }
 -(void)dataRequest{
     
-    [[RequestManager manager] JSONRequest:[NSString stringWithFormat:@"find/vendorsInfo?malltypeid=%@",self.serviceTypeID] method:RequestMethodGet timeout:50 parameters:nil success:^(id  _Nullable responseObject) {
+    NSMutableDictionary *parametersDic = [NSMutableDictionary new];
+    [parametersDic setValue:[NSString stringWithFormat:@"%@",self.serviceTypeID] forKey:@"malltypeid"];
+    
+    [HUD showProgress:@"数据正在加载"];
+    [[RequestManager manager] SessionRequestWithType:Mall_api requestWithURLString:@"find/vendorsInfo" requestType:RequestMethodPost requestParameters:parametersDic success:^(id  _Nullable responseObject) {
         
+        [HUD dismiss];
         ICLog_2(@"%@",responseObject);
         if ([responseObject[@"resultCode"] integerValue] == 1000) {
             for (NSDictionary *dic in responseObject[@"body"]) {
@@ -84,8 +89,12 @@ NSString *const ServiceProvidersListViewCellIdentifier = @"serviceProvidersListV
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView reloadData];
         });
-    } faile:^(NSError * _Nullable error) {
         
+
+        
+    } faile:^(NSError * _Nullable error) {
+        [HUD dismiss];
+        ICLog_2(@"%@",error);
     }];
 }
 #pragma mark--delegate

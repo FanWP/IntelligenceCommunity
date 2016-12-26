@@ -44,6 +44,7 @@ typedef void(^RequestFaile)(NSError * _Nullable error);
 
 -(void)setNetworkActivityIndicatorManagerEnabled:(BOOL)isEnabled;
 
+-(void)SessionRequestWithType:(RequestMethodType)requestMethodType  requestWithURLString:(NSString * _Nonnull)urlString  requestType:(RequestMethod)requestType  requestParameters:(NSDictionary * _Nonnull)parameters  success:(_Nonnull RequestSuccess)success faile:(_Nonnull RequestFaile)faile;
 -(void)requestWithURLString:(NSString * _Nonnull)urlString  requestType:(RequestMethod)requestType  requestParameters:(NSDictionary * _Nonnull)parameters  success:(_Nonnull RequestSuccess)success faile:(_Nonnull RequestFaile)faile;
 
 @end

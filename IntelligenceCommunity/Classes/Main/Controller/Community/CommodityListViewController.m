@@ -32,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self defaultViewStyle];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBar.translucent = NO;
     [self initializeComponent];
     
     if (!_dataMArray) {
@@ -42,7 +42,7 @@
 -(void)initializeComponent{
     
     //tableView双表
-    _popTableView = [[PopTableViewCustom alloc] initWithFrame:CGRectMake(0, 64+80, ScreenWidth,ScreenHeight-64) leftArray:nil rightArray:nil];
+    _popTableView = [[PopTableViewCustom alloc] initWithFrame:CGRectMake(0,80, ScreenWidth,ScreenHeight-64) leftArray:nil rightArray:nil];
     _popTableView.ViewController = self;
     _popTableView.delegate = self;
     [self.view addSubview:_popTableView];
@@ -50,10 +50,10 @@
     [self dataRequest];
     
     //顶部店铺基本信息
-    CommodityListHeaderView *headerView = [[CommodityListHeaderView alloc] initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), 80)];
+    CommodityListHeaderView *headerView = [[CommodityListHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80)];
     [self.view addSubview:headerView];
     //底部菜单
-    _shoppingCartBottomView = [[ShoppingCartBottomView alloc] initWithFrame:CGRectMake(0,ScreenHeight-50, ScreenWidth, 50)];
+    _shoppingCartBottomView = [[ShoppingCartBottomView alloc] initWithFrame:CGRectMake(0,ScreenHeight-64-50, ScreenWidth, 50)];
         //购物车列表
     [_shoppingCartBottomView.shoppingCartButton addTarget:self action:@selector(showshoppingCartlist:) forControlEvents:UIControlEventTouchUpInside];
         //去结算
@@ -64,8 +64,16 @@
 }
 - (void)dataRequest{
     
-    [[RequestManager manager] JSONRequest:@"find/vendor/product/for/sale?venderId=1&pageNum=1&pageSize=5" method:RequestMethodGet timeout:10 parameters:nil success:^(id  _Nullable responseObject) {
+    NSMutableDictionary *parametersDic = [NSMutableDictionary new];
+    [parametersDic setValue:@"1" forKey:@"venderId"];
+    [parametersDic setValue:@"1" forKey:@"pageNum"];
+    [parametersDic setValue:@"5" forKey:@"pageSize"];
+    
+    [HUD showProgress:@"数据正在加载"];
+    
+    [[RequestManager manager] SessionRequestWithType:Mall_api requestWithURLString:@"find/vendor/product/for/sale" requestType:RequestMethodPost requestParameters:parametersDic success:^(id  _Nullable responseObject) {
         
+        [HUD dismiss];
         for (NSDictionary *dic in responseObject[@"body"]) {        //dic==一个大类
             
             NSMutableArray *productMArray = [NSMutableArray new];
@@ -87,10 +95,12 @@
             [_popTableView.leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
         });
         
-    } faile:^(NSError * _Nullable error) {
+
         
+    } faile:^(NSError * _Nullable error) {
+        [HUD dismiss];
+        ICLog_2(@"%@",error);
     }];
-    
 }
 //结算
 - (void)goSettlementButtonAction:(UIButton *)button{

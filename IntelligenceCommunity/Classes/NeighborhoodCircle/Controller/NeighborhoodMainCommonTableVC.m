@@ -8,14 +8,13 @@
 
 #import "NeighborhoodMainCommonTableVC.h"
 #import "NeighborhoodCircleCell.h"
+#import "IQKeyboardManager.h"
 
 #import "NeighborhoodModel.h"
 #import "FreeArticleReplyModel.h"
 
 #import "NeiborhoodHeaderView.h"
 #import "FreeArticleReplyCell.h"
-
-
 
 NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
@@ -52,11 +51,15 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     [self setupRefresh];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.tableView registerClass:[NeighborhoodCircleCell class] forCellReuseIdentifier:NeighborhoodCircleCellID];
+    
+    
+//    // 键盘的frame发生改变时发出的通知（位置和尺寸）
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     //监听文本框
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChanged) name:UITextViewTextDidChangeNotification object:nil];
@@ -133,7 +136,44 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 -(void)loadMoreNeighborhood
 {
     
+    //结束上拉刷新
+    [self.tableView.mj_header endRefreshing];
+    self.pageSize = 10;
     
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userId"] = UserID;
+    parmas[@"sessionId"] = SessionID;
+    parmas[@"pageNum"] = @(self.pageNum);
+    parmas[@"pageSize"] = @(self.pageSize);
+    if (self.NeighborhoodType != 0) {
+        parmas[@"type"] = @(self.NeighborhoodType);
+    }
+
+    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
+    
+    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",parmas,newurl);
+    
+    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [self.tableView.mj_footer endRefreshing];
+        MJRefreshLog(@"邻里圈下拉显示成功：%@",responseObject);
+        
+        NSArray *arr = [NeighborhoodModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+        [_NeighborhoodArr addObjectsFromArray:arr];
+        
+        if (arr.count > 0) {
+            self.pageNum++;
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        MJRefreshLog(@"邻里圈下拉失败:%@",error);
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+
 }
 
 
@@ -218,7 +258,6 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     
 }
 
-
 #pragma mark===== 回复评论=============
 -(void)commentsButtonClick:(UIButton *)button
 {
@@ -228,6 +267,26 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     //创建并弹出键盘
     [self setupKeyboard];
     
+}
+
+/**
+ * 键盘的frame发生改变时调用（显示、隐藏等）
+ */
+- (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+    // 如果正在切换键盘，就不要执行后面的代码
+//    if (self.switchingKeybaord) return;
+    
+    NSDictionary *userInfo = notification.userInfo;
+    // 动画的持续时间
+    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 键盘的frame
+    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    // 执行动画
+    [UIView animateWithDuration:duration animations:^{
+        // 工具条的Y值 == 键盘的Y值 - 工具条的高度
+        self.replyView.y = KHeight - keyboardF.origin.y - 44 - 44 - 100;
+    }];
 }
 
 
@@ -310,7 +369,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     [self.replyView removeFromSuperview];
     
     
-    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 100 - 44, KWidth, 44)];
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
     [self.view addSubview:replyView];
@@ -323,7 +382,6 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     textView.font = UIFontLarge;
     
     [replyView addSubview:textView];
-    
     
     
     [textView becomeFirstResponder];
