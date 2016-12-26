@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    为过任务为人情味IP过任务IP其股票日期为i965239-3529-y1959-y529-35
 }
 
 
