@@ -377,18 +377,20 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 //点击回复评论
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    FreeArticleModel *model = _FreeArticleArr[indexPath.section];
+    _replyModel = model.friendsRefList[indexPath.row];
+    
     if ([_replyModel.userid isEqualToString:UserID]) {//自己给自己回复
         [HUD showErrorMessage:@"您不能给自己回复！"];
         [self.replyView removeFromSuperview];
         MJRefreshLog(@"自己");
+        _replyModel = nil;
         return;
     }else
     {
         //创建并弹出键盘
         self.isReply = YES;
         [self setupKeyboard];
-        FreeArticleModel *model = _FreeArticleArr[indexPath.section];
-        _replyModel = model.friendsRefList[indexPath.row];
     }
 }
 

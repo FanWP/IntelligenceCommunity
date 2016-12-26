@@ -93,7 +93,7 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
     parameters[@"price"] = _priceText.text;
     parameters[@"title"] = _titleText.text;
     parameters[@"srcPrice"] = _originPriceText.text; //原价
-    parameters[@"change"] = @(self.exchangBtn.selected ? 1 : 0);         //0 不支持 1支持
+    parameters[@"change"] = @(self.exchangBtn.selected ? 1 : 0);      //0 不支持 1支持
     parameters[@"content"] = _detailText.text;  //物品描述
 
     ICLog_2(@"闲置物品：%@",parameters);
