@@ -131,7 +131,6 @@
 		18B002FB1DE2F1EB00D8FE56 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18B002FA1DE2F1EB00D8FE56 /* 1.jpg */; };
 		18B003041DE3045600D8FE56 /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B003031DE3045600D8FE56 /* NoticeCell.m */; };
 		18C72AA71E10B6D9002CB9EF /* DMDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AA61E10B6D9002CB9EF /* DMDropDownMenu.m */; };
-		18C72AAA1E10B6F4002CB9EF /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AA91E10B6F4002CB9EF /* HouseAuthorityModel.m */; };
 		18C72AAD1E10B781002CB9EF /* neiborhoodSendAppointVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AAC1E10B781002CB9EF /* neiborhoodSendAppointVC.m */; };
 		18C72AB01E10B790002CB9EF /* NeiborhoodLookingForThingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AAF1E10B790002CB9EF /* NeiborhoodLookingForThingsVC.m */; };
 		18C72AD91E10B7D8002CB9EF /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AB51E10B7D8002CB9EF /* IQNSArray+Sort.m */; };
@@ -168,6 +167,7 @@
 		18C72B171E10BA52002CB9EF /* HouseMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B131E10BA52002CB9EF /* HouseMembersCell.m */; };
 		18C72B181E10BA52002CB9EF /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B151E10BA52002CB9EF /* HouseModel.m */; };
 		18C72B1B1E10E03D002CB9EF /* CommonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B1A1E10E03D002CB9EF /* CommonHeaderView.m */; };
+		18C72B1E1E112611002CB9EF /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B1D1E112611002CB9EF /* HouseAuthorityModel.m */; };
 		18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573491DED20AB000FDBF6 /* SpecialOffersListModel.m */; };
 		18F5734D1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5734C1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m */; };
 		18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573531DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m */; };
@@ -561,8 +561,6 @@
 		18B003031DE3045600D8FE56 /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
 		18C72AA51E10B6D9002CB9EF /* DMDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMDropDownMenu.h; path = DMDropDownMenu/DMDropDownMenu.h; sourceTree = "<group>"; };
 		18C72AA61E10B6D9002CB9EF /* DMDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMDropDownMenu.m; path = DMDropDownMenu/DMDropDownMenu.m; sourceTree = "<group>"; };
-		18C72AA81E10B6F4002CB9EF /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityModel.h; sourceTree = "<group>"; };
-		18C72AA91E10B6F4002CB9EF /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityModel.m; sourceTree = "<group>"; };
 		18C72AAB1E10B781002CB9EF /* neiborhoodSendAppointVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neiborhoodSendAppointVC.h; sourceTree = "<group>"; };
 		18C72AAC1E10B781002CB9EF /* neiborhoodSendAppointVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = neiborhoodSendAppointVC.m; sourceTree = "<group>"; };
 		18C72AAE1E10B790002CB9EF /* NeiborhoodLookingForThingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeiborhoodLookingForThingsVC.h; sourceTree = "<group>"; };
@@ -631,6 +629,8 @@
 		18C72B151E10BA52002CB9EF /* HouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseModel.m; sourceTree = "<group>"; };
 		18C72B191E10E03D002CB9EF /* CommonHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaderView.h; sourceTree = "<group>"; };
 		18C72B1A1E10E03D002CB9EF /* CommonHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeaderView.m; sourceTree = "<group>"; };
+		18C72B1C1E112610002CB9EF /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityModel.h; sourceTree = "<group>"; };
+		18C72B1D1E112611002CB9EF /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityModel.m; sourceTree = "<group>"; };
 		18F573481DED20AB000FDBF6 /* SpecialOffersListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialOffersListModel.h; sourceTree = "<group>"; };
 		18F573491DED20AB000FDBF6 /* SpecialOffersListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialOffersListModel.m; sourceTree = "<group>"; };
 		18F5734B1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyFeeOtherInfoModel.h; sourceTree = "<group>"; };
@@ -1438,8 +1438,6 @@
 			children = (
 				18C72AFE1E10BA0F002CB9EF /* AddressPick */,
 				18C72AB11E10B7D8002CB9EF /* IQKeyboardManager */,
-				18C72AA81E10B6F4002CB9EF /* HouseAuthorityModel.h */,
-				18C72AA91E10B6F4002CB9EF /* HouseAuthorityModel.m */,
 				18C72AA51E10B6D9002CB9EF /* DMDropDownMenu.h */,
 				18C72AA61E10B6D9002CB9EF /* DMDropDownMenu.m */,
 				71D3A7691E0A16B0002C2F1C /* ILSetting */,
@@ -1604,6 +1602,8 @@
 		18B002F41DE2E6F100D8FE56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18C72B1C1E112610002CB9EF /* HouseAuthorityModel.h */,
+				18C72B1D1E112611002CB9EF /* HouseAuthorityModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2319,6 +2319,7 @@
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
 				18C72B081E10BA0F002CB9EF /* UIViewExt.m in Sources */,
+				18C72B1E1E112611002CB9EF /* HouseAuthorityModel.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
 				71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */,
 				D71BC1331E0389900093357C /* NSObject+MJKeyValue.m in Sources */,
@@ -2415,7 +2416,6 @@
 				18B002C31DE2DF7800D8FE56 /* RootTabBarController.m in Sources */,
 				71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */,
 				187A238C1DEC39CB00D921FC /* RequestManager.m in Sources */,
-				18C72AAA1E10B6F4002CB9EF /* HouseAuthorityModel.m in Sources */,
 				18B002B71DE2DD3B00D8FE56 /* UIViewController+Default.m in Sources */,
 				18C72AE61E10B7D8002CB9EF /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				18440FD51E0D2FAB005D684A /* DataSigner.m in Sources */,
