@@ -19,7 +19,7 @@
 NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 
-@interface NeighborhoodMainCommonTableVC ()<NeighborhoodCircleCellDelegate>
+@interface NeighborhoodMainCommonTableVC ()<NeighborhoodCircleCellDelegate,UITableViewDataSource,UITableViewDelegate>
 
 /** 保存服务器返回的邻里圈列表数据 */
 @property (nonatomic,strong) NSMutableArray *NeighborhoodArr;
@@ -43,6 +43,9 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 /** 标记设置回复或者是评论 isReply  是否是回复 */
 @property (nonatomic,assign) BOOL isReply;
 
+/** tableVIew */
+@property (nonatomic,strong) UITableView *tableView;
+
 
 @end
 
@@ -51,17 +54,27 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self initializeComponent];
+    
     [self defaultViewStyle];
-    
-    
+
     [self setupRefresh];
-    
-    
-    [self.tableView registerClass:[NeighborhoodCircleCell class] forCellReuseIdentifier:NeighborhoodCircleCellID];
 
     //监听文本框
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChanged) name:UITextViewTextDidChangeNotification object:nil];
 }
+
+-(void)initializeComponent{
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    //    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:_tableView];
+
+}
+
+
 
 
 -(void)setupRefresh
@@ -74,27 +87,10 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 -(void)loadNewNeighborhood
 {
-    
     //结束上拉刷新
     [self.tableView.mj_footer endRefreshing];
-    self.pageSize = 10;
-    self.pageNum = 1;
-    
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    if (self.NeighborhoodType != 0) {
-        parmas[@"type"] = @(self.NeighborhoodType);
-    }
-    
-    
-    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
-    
-    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",parmas,newurl);
-    
-    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",self.parmas,self.neiborhoodURL);
+    [[AFHTTPSessionManager manager] POST:self.neiborhoodURL parameters:_parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_header endRefreshing];
@@ -136,22 +132,13 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     
     //结束上拉刷新
     [self.tableView.mj_header endRefreshing];
-    self.pageSize = 10;
-    
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    if (self.NeighborhoodType != 0) {
-        parmas[@"type"] = @(self.NeighborhoodType);
-    }
 
     NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
     
-    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",parmas,newurl);
+    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",self.parmas,newurl);
+    self.parmas[@"pageNum"] = @(self.pageNum);
     
-    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    [[AFHTTPSessionManager manager] POST:newurl parameters:self.parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_footer endRefreshing];
@@ -172,6 +159,11 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         
     }];
 
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 
@@ -349,7 +341,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
 //    [self.view addSubview:replyView];
-    [[UIApplication sharedApplication].keyWindow addSubview:replyView];
+    [self.view addSubview:replyView];
     
     //设置输入框
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 34)];

@@ -7,6 +7,7 @@
 //
 
 #import "OwnerHeaderView.h"
+#import "MyPublishVC.h"
 
 @implementation OwnerHeaderView
 -(instancetype)initWithFrame:(CGRect)frame {
@@ -111,11 +112,35 @@
     
     [_ownerUploadCountButton setTitle:@"35" forState:(UIControlStateNormal)];
     [_ownerUploadButton setTitle:@"我的发布" forState:(UIControlStateNormal)];
+    [_ownerUploadButton addTarget:self action:@selector(myPublishBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     [_friendCountButton setTitle:@"321" forState:(UIControlStateNormal)];
     [_friendButton setTitle:@"我的好友" forState:(UIControlStateNormal)];
 }
 
+
+-(void)myPublishBtnClick
+{
+    MJRefreshLog(@"发布");
+
+    
+    MyPublishVC *vc = [[MyPublishVC alloc] init];
+    [[self viewController].navigationController pushViewController:vc animated:YES];
+
+
+}
+
+
+
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
 
 
 

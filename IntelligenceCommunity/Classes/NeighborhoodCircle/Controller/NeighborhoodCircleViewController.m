@@ -188,22 +188,54 @@
 
 - (void)setupChildVces
 {
+
+
+    NSString *neiborhoodURL = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
+    
+    
+    for (NSInteger i = 0; i < 4; i++) {
+        
+        NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+        parmas[@"userId"] = UserID;
+        parmas[@"sessionId"] = SessionID;
+        parmas[@"pageNum"] = @"1";
+        parmas[@"pageSize"] = @"10";
+        NeighborhoodMainCommonTableVC *NeighborhoodAppointmentVC = [[NeighborhoodMainCommonTableVC alloc] init];
+        NeighborhoodAppointmentVC.parmas = parmas;//约
+        if (i != 0) {
+            NeighborhoodAppointmentVC.parmas[@"type"] = @(i);
+        }
+        NeighborhoodAppointmentVC.neiborhoodURL = neiborhoodURL;
+        [self addChildViewController:NeighborhoodAppointmentVC];
+
+    }
+    
+    
+    /*
+    
     NeighborhoodMainCommonTableVC *NeighborhoodVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodVC.NeighborhoodType = Neighborhood;//邻里
+    NeighborhoodVC.parmas = parmas;//邻里
+    NeighborhoodVC.neiborhoodURL = neiborhoodURL;
     [self addChildViewController:NeighborhoodVC];
     
     NeighborhoodMainCommonTableVC *NeighborhoodAppointmentVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodAppointmentVC.NeighborhoodType = NeighborhoodAppointment;//约
+    NeighborhoodAppointmentVC.parmas = parmas;//约
+    NeighborhoodAppointmentVC.parmas[@"type"] = @"1";
+    NeighborhoodAppointmentVC.neiborhoodURL = neiborhoodURL;
     [self addChildViewController:NeighborhoodAppointmentVC];
     
     NeighborhoodMainCommonTableVC *NeighborhoodShareLifeVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodShareLifeVC.NeighborhoodType = NeighborhoodShareLife;//生活分享
-    [self addChildViewController:NeighborhoodShareLifeVC];
+    NeighborhoodShareLifeVC.parmas = parmas;
+    NeighborhoodShareLifeVC.parmas[@"type"] = @"2";
+    NeighborhoodShareLifeVC.neiborhoodURL = neiborhoodURL;
+    [self addChildViewController:NeighborhoodShareLifeVC];//生活分享
     
     NeighborhoodMainCommonTableVC *NeighborhoodLostFoundVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodLostFoundVC.NeighborhoodType = NeighborhoodLostFound;//失物招领
-    [self addChildViewController:NeighborhoodLostFoundVC];
-
+    NeighborhoodLostFoundVC.parmas = parmas;
+    NeighborhoodLostFoundVC.parmas[@"type"] = @"3";
+    NeighborhoodLostFoundVC.neiborhoodURL = neiborhoodURL;
+    [self addChildViewController:NeighborhoodLostFoundVC];//失物招领
+     */
 }
 
 

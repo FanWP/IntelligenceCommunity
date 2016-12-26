@@ -71,7 +71,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     [self setupRefresh];
     
     //添加搜索框
-    [self addSearchBar];
+   // [self addSearchBar];
 
     [self setupRightBar];
 
@@ -123,24 +123,24 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     //结束上拉刷新
     [self.tableView.mj_footer endRefreshing];
+
+    if (!_freeArticleURL && !_parmas) {
+        NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+        parmas[@"userId"] = UserID;
+        parmas[@"sessionId"] = SessionID;
+        parmas[@"pageNum"] = @(self.pageNum);
+        parmas[@"pageSize"] = @(self.pageSize);
+        parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
+        self.parmas = parmas;
+        
+        NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
+        self.freeArticleURL = newurl;
+    }
+    
+    MJRefreshLog(@"self.parmas,self--:%@self.freeArticleURL--:%@",self.parmas,self.freeArticleURL);
     
     
-    self.pageSize = 10;
-    self.pageNum = 1;
-    
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
-    
-    MJRefreshLog(@"parmas---:%@",parmas);
-    
-    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
-    
-    
-    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    [[AFHTTPSessionManager manager] POST:self.freeArticleURL parameters:self.parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_header endRefreshing];
@@ -184,17 +184,24 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     //结束下拉刷新
     [self.tableView.mj_header endRefreshing];
     
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
     
-    MJRefreshLog(@"parmas---:%@",parmas);
-    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
+    if (!_freeArticleURL && !_parmas) {
+        NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+        parmas[@"userId"] = UserID;
+        parmas[@"sessionId"] = SessionID;
+        parmas[@"pageNum"] = @(self.pageNum);
+        parmas[@"pageSize"] = @(self.pageSize);
+        parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
+        self.parmas = parmas;
+        
+        NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
+        self.freeArticleURL = newurl;
+    }
     
-    [[AFHTTPSessionManager manager]POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    MJRefreshLog(@"self.parmas,self--:%@self.freeArticleURL--:%@",self.parmas,self.freeArticleURL);
+    
+    
+    [[AFHTTPSessionManager manager]POST:self.freeArticleURL parameters:self.parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self.tableView.mj_header endRefreshing];
         MJRefreshLog(@"闲置物品加载更多显示成功：%@",responseObject);
@@ -235,7 +242,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     _tableView.x = 0;
-    _tableView.y = 44;
+    _tableView.y = 0;
     _tableView.height = KHeight - _tableView.y;
     _tableView.dataSource = self;
     _tableView.delegate = self;
