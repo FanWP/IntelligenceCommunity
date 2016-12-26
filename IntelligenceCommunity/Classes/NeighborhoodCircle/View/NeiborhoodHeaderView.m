@@ -422,7 +422,8 @@
 //    
     NSString *psw = @"qqq111";
     NSString *pubKey = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoKNwoOrJQguazWyH+apdVlq6zJDx7bVDV5Fq2pxs9uPuGCeTH803TSA+pOguNCZ1Og6+XuP/FkqyN3etdu9qFQqkSsNDZzPBWhwG9bnNLLpnO/hDS4PVLg0pLNZFl1Pbi/TYhFxg2w+YQU1FW4P/9pWHbgE2YG+gWO+MC9ee2LwIDAQAB";
-    NSString *password = [RSA encryptString:psw publicKey:pubKey];
+//    NSString *password = [RSA encryptString:psw publicKey:pubKey];
+    NSString *sessionId = @"";
 //
 //    //注册
 //    NSMutableDictionary *parmas1 = [NSMutableDictionary dictionary];
@@ -460,15 +461,16 @@
     
     
     NSString *session = @"2A08B3EA2BB41BE3B914D072D6B94CA795379C34C5477E62818F03FEC887D34F";
-    NSString *sessionId = [RSA encryptString:session publicKey:pubKey];
-    
+//    NSString *sessionId = [RSA encryptString:session publicKey:pubKey];
+//    NSString *sessionId = @"";
+
     
     NSString *RsaSessionID = @"w/u4EKU32dryicnUAMKE9cBUr4bbEGDIRE00ppoWNmTh+R577T1ukKzY/oofyxELwZffoB9gqWpQUZDnIAoJF1D4UAYpRjwUDp+JgwmhdxXwTwF509uN1jLxZmQCfmZsogkFomOrI5kN5M7yztjVw1IsFAhbgAdl6i2noQTSofk=";
     
     
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     parmas[@"userPhone"] = @"18092456642";
-    parmas[@"passWord"] = password;
+//    parmas[@"passWord"] = password;
     NSString *url1 = @"http://192.168.1.23:8080/smart_community//unlogin/userlogin";
     MJRefreshLog(@"parmas--:%@url--:%@",parmas,url1);
     
