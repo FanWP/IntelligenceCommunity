@@ -298,6 +298,8 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 //点击回复评论
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
+    _replyModel = model.friendsRef[indexPath.row];
         ICLog_2(@"%ld",indexPath.row);
     if ([_replyModel.userid isEqualToString:UserID]) {//自己给自己回复
         [HUD showErrorMessage:@"您不能给自己回复！"];
@@ -309,8 +311,6 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         //创建并弹出键盘
         self.isReply = YES;
         [self setupKeyboard];
-        NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
-        _replyModel = model.friendsRef[indexPath.row];
     }
 }
 
