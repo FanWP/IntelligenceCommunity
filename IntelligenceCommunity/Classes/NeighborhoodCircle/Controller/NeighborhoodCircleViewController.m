@@ -28,6 +28,9 @@
 /** 设置右上角的点击 */
 @property (nonatomic,assign) NeighborhoodCircleType NeighborhoodType;
 
+/** 设置右上角的按钮 */
+@property (nonatomic,weak) UIButton *rightBtn;
+
 /** 设置蒙版 */
 @property (nonatomic,weak) UIView *coverView;
 
@@ -46,6 +49,16 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    
+    //右上角的
+    [self setupRightBar];
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 
 }
 
@@ -60,21 +73,33 @@
     // 底部的scrollView
     [self setupContentView];
     self.tabBarController.navigationItem.title = @"邻里圈";
-    
-    //右上角的
-    [self setupRightBar];
-
 }
 
-
+/** 右上角按钮 */
 - (void)setupRightBar
 {
-    self.rightBarImg = [UIImage imageNamed:@"menu"];
-    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.rightBarImg style:UIBarButtonItemStylePlain target:self action:@selector(actiondccd)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(20, 0, 40, 30)];
+    if (  _NeighborhoodType && _NeighborhoodType != 1) {//已经创建过，图标可能要换
+        [button setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    }else{
+        [button setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    }
+    [button addTarget:self action:@selector(actiondccd) forControlEvents:UIControlEventTouchUpInside];
+    self.rightBtn = button;
+    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 - (void)actiondccd
 {
+
+    if ( _NeighborhoodType && _NeighborhoodType != 1) {//点击的是约 生活分享 寻物招领
+        UIButton *button = [[UIButton alloc] init];
+        button.tag = _NeighborhoodType;
+        [self rightBarClick:button];
+        return;
+    }
+    
+    if (_coverView) return;
     UIView *coverView = [[UIView alloc] initWithFrame:self.view.bounds];
     coverView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
     UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
@@ -205,9 +230,16 @@
 {
     //设置顶部的标题改变
     self.headerView.defaultIndex = index + 1;
-    self.NeighborhoodType = index + 1;
+    _NeighborhoodType = index + 1;
+    
 
-
+    if (index != 0) {//邻里
+        [self.rightBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    }else
+    {
+        [self.rightBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    }
+    
     // 滚动
     CGPoint offset = self.contentView.contentOffset;
     offset.x = index * self.contentView.mj_w;

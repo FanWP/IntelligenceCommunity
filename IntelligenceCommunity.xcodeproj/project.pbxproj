@@ -2594,8 +2594,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client",
-					"穆慕/IntelligenceCommunity/ALiPaySources",
+					"/Users/xinlvxing/Desktop/智慧社区/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2635,8 +2634,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client",
-					"穆慕/IntelligenceCommunity/ALiPaySources",
+					"/Users/xinlvxing/Desktop/智慧社区/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

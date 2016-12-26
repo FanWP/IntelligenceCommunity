@@ -38,6 +38,8 @@
 /** 删除点赞评论的容器 */
 @property (nonatomic,weak) UIView *commentBtnView;
 @property(nonatomic,strong) UIButton *thumbUpButton;
+/** 点赞的个数 */
+@property (nonatomic,strong) UILabel *thumbUpCountLabel;
 
 
 
@@ -202,6 +204,12 @@
     _commentsButton.y = 0;
     [commentBtnView addSubview:_commentsButton];
     
+    _thumbUpCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(_commentsButton.x - 30, 0, 30, 35)];
+    _thumbUpCountLabel.textAlignment = NSTextAlignmentCenter;
+    _thumbUpCountLabel.font = UIFontNormal;
+    _thumbUpCountLabel.textColor = [UIColor redColor];
+    [commentBtnView addSubview:_thumbUpCountLabel];
+    
     
     //点赞
     _thumbUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -209,7 +217,7 @@
     [_thumbUpButton setImage:[UIImage imageNamed:@"praise2"] forState:UIControlStateSelected];
     [_thumbUpButton addTarget:self action:@selector(thumbUpButtonBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     _thumbUpButton.width = 30;
-    _thumbUpButton.x = KWidth - 16 - _commentsButton.width - 100;
+    _thumbUpButton.x = KWidth - 16 - _commentsButton.width - 60;
     _thumbUpButton.height = 35;
     _thumbUpButton.y = 0;
     [commentBtnView addSubview:_thumbUpButton];
@@ -219,7 +227,7 @@
     _deleteteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_deleteteButton setTitle:@"删除" forState:UIControlStateNormal];
     _deleteteButton.width = 90;
-    _deleteteButton.x = 17;//239 143 88
+    _deleteteButton.x = 0;//239 143 88
     _deleteteButton.height = 35;
     _deleteteButton.y = 0;
     [_deleteteButton setTitleColor:MJRefreshColor(239, 143, 88) forState:UIControlStateNormal];
@@ -285,6 +293,9 @@
     self.addressLabel.y = CGRectGetMaxY(_actionTimeLabel.frame) + 8;
     self.addressLabel.text = [NSString stringWithFormat:@"地点：%@",neiborhoodModel.address];
     
+    //设置点赞数据
+    self.thumbUpCountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.neiborhoodModel.number];
+    
     if (neiborhoodModel.type == 2) {//约
         self.dynamicLabel.hidden = YES;
         self.actionTimeLabel.hidden = YES;
@@ -313,6 +324,16 @@
         _commentBtnView.y = CGRectGetMaxY(_addressLabel.frame);
 
     }
+    
+    
+    //判断删除按钮的隐藏还是显示
+    if ([neiborhoodModel.userid isEqualToString:UserID]) {//判断是否是当前用户发的动态
+        _deleteteButton.hidden = NO;
+    }else
+    {
+        _deleteteButton.hidden = YES;
+    }
+    
     
     
 //    //删除、点赞，评论
@@ -350,41 +371,43 @@
 {
     MJRefreshLog(@"点赞");
     button.selected = !button.selected;
+    if (button.selected)
+    {
+        self.neiborhoodModel.number += 1;
+    }else
+    {
+        self.neiborhoodModel.number -= 1;
+        
+    }
+    //设置点赞数据
+    self.thumbUpCountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.neiborhoodModel.number];
     
-//    //设置点赞数据
-//    self.thumbUpCountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.neiborhoodModel.number];
-//    
-//    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-//    parmas[@"userId"] = UserID;
-//    parmas[@"sessionId"] = SessionID;
-//    parmas[@"id"] = self.freeArticleModel.ID;
-//    NSString*url = @"likes/cancel/fabulous";
-//    NSString*AFurl = [NSString stringWithFormat:@"%@smart_community/likes/cancel/fabulous",Smart_community_URL];
-//    
-//    
-//    MJRefreshLog(@"%@url---:%@",parmas,url);
-//    
-//    [[AFHTTPSessionManager manager]POST:AFurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
-//        
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        MJRefreshLog(@"%@",responseObject);
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        MJRefreshLog(@"%@",error);
-//    }];
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    parmas[@"userId"] = UserID;
+    parmas[@"sessionId"] = SessionID;
+    parmas[@"id"] = self.neiborhoodModel.ID;
+    NSString*AFurl = [NSString stringWithFormat:@"%@smart_community/likes/fabulous/friendsCircle",Smart_community_URL];
+    
+    
+    MJRefreshLog(@"%@url---:%@",parmas,AFurl);
+    
+    [[AFHTTPSessionManager manager]POST:AFurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        MJRefreshLog(@"%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        MJRefreshLog(@"%@",error);
+    }];
 
-    
-    
-    
 }
 
 //对话按钮的点击事件
 - (void)dialogueButtonClick
 {
     MJRefreshLog(@"对话");
-    
-    
-    
+
     //获取公钥
     
     /*

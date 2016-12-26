@@ -296,7 +296,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
-    FreeArticleHeaderView *header = [[FreeArticleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 350)];
+    FreeArticleHeaderView *header = [FreeArticleHeaderView headerWithTableView:tableView];
     header.commentsButton.tag = section;
     [header.commentsButton addTarget:self action:@selector(commentsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     header.freeArticleModel = model;

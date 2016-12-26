@@ -48,6 +48,9 @@
 /** 约活动的地点 */
 @property (nonatomic,copy) NSString *address;
 
+/** <#Class#> */
+@property (nonatomic,assign) NSInteger number;
+
 
 /** 评论的数组 */
 @property (nonatomic,strong) NSArray *friendsRef;
