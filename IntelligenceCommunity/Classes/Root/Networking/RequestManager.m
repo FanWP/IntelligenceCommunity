@@ -116,6 +116,7 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
 }
 -(void)JSONRequestWithType:(RequestMethodType)requestMethodType urlString:(NSString *)urlString method:(RequestMethod)method timeout:(NSTimeInterval)timeout parameters:(NSMutableDictionary *)parameters success:(RequestSuccess)success faile:(RequestFaile)faile{
 
+    timeout = 5.0;
     NSString *requestMethod = [self requestMethod:method];
     NSError *error;
     

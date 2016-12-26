@@ -28,7 +28,9 @@
 }
 -(void)initializeComponent{
     
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = HexColor(0xffffff);
+    
+    __weak typeof(self) weakSelf = self;
     //标题:缴费明细
 //    @property(nonatomic,strong) UILabel *titleLabel;
     _titleLabel = [[UILabel alloc] init];
@@ -38,23 +40,24 @@
     _titleLabel.font = UIFontNormal;
     [self.contentView addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(10);
-        make.left.mas_offset(10);
-        make.width.mas_offset(80);
+        make.centerY.mas_equalTo(weakSelf.centerY);
+        make.left.mas_offset(kGetHorizontalDistance(30));
+        make.width.mas_offset(100);
         make.height.mas_offset(30);
     }];
 //    @property(nonatomic,strong) UILabel *totalTitleLabel;     //@"明细单"
     _totalTitleLabel = [[UILabel alloc] init];
     _totalTitleLabel.text = @"明细单";
-    _totalTitleLabel.textColor = [UIColor grayColor];
+    _totalTitleLabel.textColor = [UIColor blackColor];
+    _totalTitleLabel.backgroundColor = HexColor(0xeeeeee);
     _totalTitleLabel.textAlignment = NSTextAlignmentLeft;
     _totalTitleLabel.font = UIFontNormal;
     [self.contentView addSubview:_totalTitleLabel];
     [_totalTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_titleLabel.mas_top).offset(0);
-        make.left.equalTo(_titleLabel.mas_right).offset(70);
-        make.width.mas_offset(100);
-        make.height.mas_offset(30);
+        make.centerY.mas_equalTo(weakSelf.centerY);
+        make.left.equalTo(_titleLabel.mas_right).offset(kGetHorizontalDistance(36));
+        make.right.mas_offset(0);
+        make.height.mas_offset(kGetHorizontalDistance(80));
     }];
     
     //分区展开标示

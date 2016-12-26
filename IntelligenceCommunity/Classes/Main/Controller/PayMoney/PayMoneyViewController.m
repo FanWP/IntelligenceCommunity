@@ -33,14 +33,14 @@ NSString *const CostListViewCellIdentifier = @"costListViewCellIdentifier";
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"缴费";
     [self defaultViewStyle];
-
+    self.view.backgroundColor = HexColor(0xeeeeee);
     
     
     [self initializeComponent];
     
     
     _helpCenterButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _helpCenterButton.backgroundColor = ThemeColor;
+    _helpCenterButton.backgroundColor = HexColor(0xeeeeee);
     
     [_helpCenterButton setTitle:@"帮助中心" forState:UIControlStateNormal];
     [_helpCenterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -49,7 +49,7 @@ NSString *const CostListViewCellIdentifier = @"costListViewCellIdentifier";
     [_helpCenterButton bringSubviewToFront:self.view];
     [_helpCenterButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_offset(0);
-        make.height.mas_offset(64);
+        make.height.mas_offset(kGetVerticalDistance(80));
     }];
     
 }
@@ -137,11 +137,11 @@ NSString *const CostListViewCellIdentifier = @"costListViewCellIdentifier";
     return model.cells.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return kGetVerticalDistance(88);
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 20;
+    return kGetVerticalDistance(16);
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CostListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CostListViewCellIdentifier forIndexPath:indexPath];

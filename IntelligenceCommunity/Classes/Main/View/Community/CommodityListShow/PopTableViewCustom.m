@@ -16,9 +16,11 @@
 #import "ProListModel.h"
 #import "LeftTableViewCell.h"
 #import "RightTableViewCell.h"
+#import "CommonHeaderView.h"    //右边分区头
 
 NSString *const LeftTableViewCellIdentifier = @"leftTableViewCellIdentifier";
 NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
+NSString *const CommonHeaderViewIdentifier = @"commonHeaderViewIdentifier";
 
 //CAAnimationDelegate          动画
 //RightTableViewCellDelegate   添加商品/减少商品按钮状态
@@ -30,13 +32,19 @@ NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
 @implementation PopTableViewCustom
 {
     CALayer *_layer;
-    NSInteger _currentSelectIndex;
+    NSInteger _currentSelectIndex;  //动画使用
+    
+    NSInteger _selectIndex;
+    BOOL _isScrollDown;
 }
 -(id)initWithFrame:(CGRect)frame leftArray:(NSArray *)leftArray rightArray:(NSArray *)rightArray{
     
     self = [super initWithFrame:frame];
     if (self) {
         [self initializeComponent];
+        _selectIndex = 0;
+        _isScrollDown = YES;
+        
     }
     return self;
 }
@@ -62,7 +70,7 @@ NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
     
     if (tableView == _leftTableView) {     //左边
         
-        return _leftMArray.count;
+        return _categoryNameMArray.count;
     }else{
         return [_leftMArray[section] count];
     }
@@ -73,46 +81,27 @@ NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
         
         
         LeftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:LeftTableViewCellIdentifier forIndexPath:indexPath];
-        ProListModel *model = [_leftMArray[indexPath.row] firstObject];
-        cell.titleLabel.text = model.productTypeName;
+        if (_categoryNameMArray.count) {
+            
+            cell.categoryTitleLabel.text = _categoryNameMArray[indexPath.row];
+        }
         return cell;
     }else{                                  //右边
         
         RightTableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:RightTableViewCellIdentifier forIndexPath:indexPath];
         cell.delegate = self;
         
-        ProListModel *model = _leftMArray[indexPath.section][indexPath.row];
-        model.indexPath = indexPath;
-        cell.commodityNameLabel.text = model.productname;   //商品名字
-        cell.commodityPriceLabel.text = [NSString stringWithFormat:@"￥%@元/件",[model.price stringValue]];
-        cell.commodityCountLabel.text = model.orderCount;
+        if (_leftMArray.count) {
+            ProListModel *model = _leftMArray[indexPath.section][indexPath.row];
+            model.indexPath = indexPath;
+            cell.commodityNameLabel.text = model.productname;   //商品名字
+            cell.commodityPriceLabel.text = [NSString stringWithFormat:@"￥%@元/件",[model.price stringValue]];
+            cell.commodityCountLabel.text = model.orderCount;
+        }
         return cell;
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    if (tableView == _leftTableView) {
-        
-        [_rightTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.row] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        [_leftTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        
-        _selectIndex = indexPath.row;
-    }else{
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(didSelectTableView:indexPath:)]) {
-            [_delegate didSelectTableView:tableView indexPath:indexPath];
-        }
-    }
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    if (tableView == _rightTableView) {
-        return 10.0f;
-    }else{
-        return .1f;
-    }
-}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableView == _rightTableView) {
@@ -120,25 +109,83 @@ NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
     }
     return 50;
 }
-#pragma mark--scrollViewDelegate 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+#pragma mark--双表联动
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return tableView==_rightTableView ? 30.0f : .1f;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    if (_leftTableView.tracking) {
+    if (tableView==_rightTableView) {
         
-    }else if (_rightTableView.tracking){
-        
-        NSIndexPath *indexPath = [_rightTableView indexPathForRowAtPoint:CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y)];
-        if (indexPath) {
-            
-            //同步左边目录
-            [_leftTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.section inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-            
-            _selectIndex = indexPath.section;
-            
+        CommonHeaderView *headerView = [[CommonHeaderView alloc] initWithReuseIdentifier:CommonHeaderViewIdentifier];
+        if (_categoryNameMArray[section] && [_categoryNameMArray[section] length]) {
+            ICLog_2(@"%@",_categoryNameMArray[section]);
+            headerView.commodityCategoryNameLabel.text = [NSString stringWithFormat:@"%@",_categoryNameMArray[section]];
         }
+        return headerView;
         
     }
+    return nil;
 }
+// TableView分区标题即将展示
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull UIView *)view forSection:(NSInteger)section
+{
+    // 当前的tableView是RightTableView，RightTableView滚动的方向向上，RightTableView是用户拖拽而产生滚动的（（主要判断RightTableView用户拖拽而滚动的，还是点击LeftTableView而滚动的）
+    if ((_rightTableView == tableView) && !_isScrollDown && _rightTableView.dragging)
+    {
+        [self selectRowAtIndexPath:section];
+    }
+}
+
+// TableView分区标题展示结束
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    // 当前的tableView是RightTableView，RightTableView滚动的方向向下，RightTableView是用户拖拽而产生滚动的（（主要判断RightTableView用户拖拽而滚动的，还是点击LeftTableView而滚动的）
+    
+    if ((_rightTableView == tableView) && _isScrollDown && _rightTableView.dragging){
+        if (section == 30) {
+            return;
+            //当处于最后一个分区的时候，用户继续继续向下滚动会 [UITableView _contentOffsetForScrollingToRowAtIndexPath:atScrollPosition:]: row (3) beyond bounds (3) for section (0)
+        }
+        [self selectRowAtIndexPath:section + 1];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (_leftTableView == tableView){
+        _selectIndex = indexPath.row;
+        [_rightTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:_selectIndex] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [_leftTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_selectIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }else{
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(didSelectTableView:indexPath:)]) {
+            [_delegate didSelectTableView:tableView indexPath:indexPath];
+        }
+    }
+    
+    
+}
+
+// 当拖动右边TableView的时候，处理左边TableView
+- (void)selectRowAtIndexPath:(NSInteger)index{
+    [_leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+}
+
+#pragma mark - UISrcollViewDelegate
+// 标记一下RightTableView的滚动方向，是向上还是向下
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    static CGFloat lastOffsetY = 0;
+    
+    UITableView *tableView = (UITableView *) scrollView;
+    if (_rightTableView == tableView){
+        _isScrollDown = lastOffsetY < scrollView.contentOffset.y;
+        lastOffsetY = scrollView.contentOffset.y;
+    }
+}
+
+
 #pragma mark--加减按钮
 -(void)tableViewCell:(RightTableViewCell *)rightTableViewCell buttonWithTag:(NSInteger)tag{
     
@@ -249,18 +296,22 @@ NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
     }
 }
 //数据源
+-(void)setCategoryNameMArray:(NSMutableArray *)categoryNameMArray{
+    _categoryNameMArray = categoryNameMArray;
+    
+
+}
 -(void)setLeftMArray:(NSMutableArray *)leftMArray{
-    
+
     _leftMArray = leftMArray;
-    
     [_leftTableView reloadData];
     [_rightTableView reloadData];
 }
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-    _leftTableView.frame = CGRectMake(0, 0, self.frame.size.width/4,self.bounds.size.height);
-    _rightTableView.frame = CGRectMake(CGRectGetMaxX(_leftTableView.frame), CGRectGetMinY(_leftTableView.frame),ScreenWidth - CGRectGetWidth(_leftTableView.frame),self.bounds.size.height);
+    _leftTableView.frame = CGRectMake(0, 0, self.frame.size.width/4,self.bounds.size.height-50);
+    _rightTableView.frame = CGRectMake(CGRectGetMaxX(_leftTableView.frame), CGRectGetMinY(_leftTableView.frame),ScreenWidth - CGRectGetWidth(_leftTableView.frame),self.bounds.size.height-50);
 }
 #pragma mark--右边目录
 -(void)rightTableViewInit{
@@ -275,7 +326,7 @@ NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
         [self addSubview:_rightTableView];
         
         [_rightTableView registerClass:[RightTableViewCell class] forCellReuseIdentifier:RightTableViewCellIdentifier];
-        
+        [_rightTableView registerClass:[CommonHeaderView class] forHeaderFooterViewReuseIdentifier:CommonHeaderViewIdentifier];
     }
 }
 -(UIImageView *)redView{
@@ -307,7 +358,7 @@ NSString *const RightTableViewCellIdentifier = @"rightTableViewCellIdentifier";
         //        [_layer setCornerRadius:CGRectGetHeight([_layer bounds]) / 2];
         _layer.masksToBounds = YES;
         // 导航64
-        _layer.position = CGPointMake(rect.origin.x, CGRectGetMidY(rect)-64-80);
+        _layer.position = CGPointMake(rect.origin.x, CGRectGetMidY(rect)-80);
         //        [_tableView.layer addSublayer:_layer];
         [self.layer addSublayer:_layer];
         

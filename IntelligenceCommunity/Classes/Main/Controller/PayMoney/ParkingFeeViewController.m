@@ -72,6 +72,7 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
 -(void)dataRequest{
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
     [parametersDic setValue:@"1" forKey:@"userId"];
+    [parametersDic setValue:@"1" forKey:@"sessionId"];
     [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/user/parkingfee" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
         
         ICLog_2(@"PropertyFeeViewController---%@",responseObject);

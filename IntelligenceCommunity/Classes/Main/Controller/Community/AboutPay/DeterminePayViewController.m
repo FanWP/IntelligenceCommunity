@@ -150,11 +150,11 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
             //预留
         }];
     }else{
-//        PayMentViewController *VC = [[PayMentViewController alloc] init];
-//        VC.payMentTotalPriceString = _selectCommodityTotalPriceString;
-//        [self.navigationController pushViewController:VC animated:YES];
+        PayMentViewController *VC = [[PayMentViewController alloc] init];
+        VC.payMentTotalPriceString = _selectCommodityTotalPriceString;
+        [self.navigationController pushViewController:VC animated:YES];
         
-        [self AliPay];
+//        [self AliPay];
     }
 }
 //单个商品的选中/取消操作
@@ -217,7 +217,7 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return indexPath.row==0 ? 100 : 80;
+    return indexPath.row==0 ? 130 : 80;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     

@@ -51,6 +51,8 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
     // Do any additional setup after loading the view.
     [self defaultViewStyle];
     self.navigationItem.title = @"物业缴费记录";
+    self.navigationController.navigationBar.translucent = YES;
+    
     [self defaultViewStyle];
 
     
@@ -75,8 +77,10 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
 -(void)dataRequest{
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
     [parametersDic setValue:@"1" forKey:@"userId"];
-    
+    [parametersDic setValue:@"1" forKey:@"sessionId"];
+
     [HUD showProgress:@"正在加载数据"];
+    
     [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/user/profee" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
         
         [HUD dismiss];
@@ -154,7 +158,6 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
 #pragma mark--delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-//    return _dataArray.count;
     return 7;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -174,7 +177,7 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 60;
+    return kGetVerticalDistance(100);
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -193,15 +196,7 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
         if (model.price && [model.price stringValue].length > 0) {
             
             cell.feeMoneyCountLabel.text = [NSString stringWithFormat:@"￥%@",[model.price stringValue]];
-        }
-//        if (indexPath.row == 0) {
-//            cell.propertyFeeTitleLabel.text = @"公共绿化的养护";
-//        }else if (indexPath.row == 1){
-//            cell.propertyFeeTitleLabel.text = @"车辆停放管理";
-//        }else{
-//            cell.propertyFeeTitleLabel.text = @"物业公共设施维护";
-//        }
-        
+        } 
         return cell;
     }else if (indexPath.section == 6){
         SpecialOffersListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpecialOffersListViewCellIdentifier forIndexPath:indexPath];

@@ -17,7 +17,8 @@
 #import "RepairsViewController.h"     //报修
 #import "PayMoneyViewController.h"    //缴费
 
-
+#import "CommodityListViewController.h" //test
+#import "PayMentViewController.h"
 
 NSString *const NoticeViewCellIdentifier = @"noticeViewCellIdentifier";
 NSString *const ServiceListCellIdentifier = @"ServiceListCellIdentifier";
@@ -33,6 +34,9 @@ NSString *const ServiceListCellIdentifier = @"ServiceListCellIdentifier";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.navigationItem.title = @"智慧社区";
+    
+//    CommodityListViewController *vc = [[CommodityListViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
