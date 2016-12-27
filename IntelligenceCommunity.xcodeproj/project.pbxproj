@@ -156,7 +156,6 @@
 		18C72AF41E10B835002CB9EF /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AF31E10B835002CB9EF /* RSA.m */; };
 		18C72AFB1E10B966002CB9EF /* AddReceiveAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AF61E10B966002CB9EF /* AddReceiveAddressVC.m */; };
 		18C72AFC1E10B966002CB9EF /* EditReceiveAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AF81E10B966002CB9EF /* EditReceiveAddressVC.m */; };
-		18C72AFD1E10B966002CB9EF /* ReceiveAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AFA1E10B966002CB9EF /* ReceiveAddressModel.m */; };
 		18C72B051E10BA0F002CB9EF /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C72AFF1E10BA0F002CB9EF /* Address.plist */; };
 		18C72B061E10BA0F002CB9EF /* AddressPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B011E10BA0F002CB9EF /* AddressPickView.m */; };
 		18C72B071E10BA0F002CB9EF /* citys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C72B021E10BA0F002CB9EF /* citys.plist */; };
@@ -165,14 +164,23 @@
 		18C72B0E1E10BA33002CB9EF /* HouseMembersTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B0C1E10BA33002CB9EF /* HouseMembersTableVC.m */; };
 		18C72B161E10BA52002CB9EF /* HouseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B111E10BA52002CB9EF /* HouseListCell.m */; };
 		18C72B171E10BA52002CB9EF /* HouseMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B131E10BA52002CB9EF /* HouseMembersCell.m */; };
-		18C72B181E10BA52002CB9EF /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B151E10BA52002CB9EF /* HouseModel.m */; };
 		18C72B1B1E10E03D002CB9EF /* CommonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B1A1E10E03D002CB9EF /* CommonHeaderView.m */; };
-		18C72B1E1E112611002CB9EF /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72B1D1E112611002CB9EF /* HouseAuthorityModel.m */; };
 		18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573491DED20AB000FDBF6 /* SpecialOffersListModel.m */; };
 		18F5734D1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5734C1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m */; };
 		18F573541DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573531DED5D9C000FDBF6 /* PropertyFeeHistoryListModel.m */; };
 		18F573571DED6804000FDBF6 /* PropertyFeeBillingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573561DED6804000FDBF6 /* PropertyFeeBillingModel.m */; };
 		18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */; };
+		710135541E12015F0059CE1D /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7101354E1E12015F0059CE1D /* HouseAuthorityModel.m */; };
+		710135551E12015F0059CE1D /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135501E12015F0059CE1D /* HouseModel.m */; };
+		710135561E12015F0059CE1D /* ReceiveAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135531E12015F0059CE1D /* ReceiveAddressModel.m */; };
+		710135671E1217230059CE1D /* MyOrdersDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135621E1217230059CE1D /* MyOrdersDealCell.m */; };
+		710135681E1217230059CE1D /* MyOrdersProductsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135641E1217230059CE1D /* MyOrdersProductsCell.m */; };
+		710135691E1217230059CE1D /* MyOrdersStoreTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135661E1217230059CE1D /* MyOrdersStoreTitleCell.m */; };
+		710135791E1270160059CE1D /* AppraiseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7101356F1E1270160059CE1D /* AppraiseVC.m */; };
+		7101357A1E1270160059CE1D /* AllOrdersTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135721E1270160059CE1D /* AllOrdersTableVC.m */; };
+		7101357B1E1270160059CE1D /* MyOrdersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135741E1270160059CE1D /* MyOrdersVC.m */; };
+		7101357C1E1270160059CE1D /* WaitPaymentTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135761E1270160059CE1D /* WaitPaymentTableVC.m */; };
+		7101357D1E1270160059CE1D /* WaitReceiveTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710135781E1270160059CE1D /* WaitReceiveTableVC.m */; };
 		710C17A31E08CE9100FF215E /* BindHouseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C17A21E08CE9100FF215E /* BindHouseVC.m */; };
 		710C17A61E0905F000FF215E /* SettingTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C17A51E0905F000FF215E /* SettingTableVC.m */; };
 		710CA40D1E0A4F08008565F9 /* OwnerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CA40B1E0A4F08008565F9 /* OwnerViewCell.m */; };
@@ -199,7 +207,6 @@
 		71EFEB741E04D97700CE467A /* HouseAuthorityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB731E04D97700CE467A /* HouseAuthorityVC.m */; };
 		71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB761E04DC2100CE467A /* FeedbackVC.m */; };
 		71EFEB7A1E04E73700CE467A /* MyShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB791E04E73700CE467A /* MyShoppingCartVC.m */; };
-		71EFEB7D1E04E7AD00CE467A /* MyOrdersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB7C1E04E7AD00CE467A /* MyOrdersVC.m */; };
 		71EFEB811E05188400CE467A /* NoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB801E05188400CE467A /* NoticeVC.m */; };
 		71EFEB841E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB831E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m */; };
 		71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EFEB861E05245500CE467A /* NoticeListTableVC.m */; };
@@ -609,8 +616,6 @@
 		18C72AF61E10B966002CB9EF /* AddReceiveAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReceiveAddressVC.m; sourceTree = "<group>"; };
 		18C72AF71E10B966002CB9EF /* EditReceiveAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditReceiveAddressVC.h; sourceTree = "<group>"; };
 		18C72AF81E10B966002CB9EF /* EditReceiveAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditReceiveAddressVC.m; sourceTree = "<group>"; };
-		18C72AF91E10B966002CB9EF /* ReceiveAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveAddressModel.h; sourceTree = "<group>"; };
-		18C72AFA1E10B966002CB9EF /* ReceiveAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressModel.m; sourceTree = "<group>"; };
 		18C72AFF1E10BA0F002CB9EF /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Address.plist; sourceTree = "<group>"; };
 		18C72B001E10BA0F002CB9EF /* AddressPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickView.h; sourceTree = "<group>"; };
 		18C72B011E10BA0F002CB9EF /* AddressPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickView.m; sourceTree = "<group>"; };
@@ -625,12 +630,8 @@
 		18C72B111E10BA52002CB9EF /* HouseListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListCell.m; sourceTree = "<group>"; };
 		18C72B121E10BA52002CB9EF /* HouseMembersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseMembersCell.h; sourceTree = "<group>"; };
 		18C72B131E10BA52002CB9EF /* HouseMembersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseMembersCell.m; sourceTree = "<group>"; };
-		18C72B141E10BA52002CB9EF /* HouseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseModel.h; sourceTree = "<group>"; };
-		18C72B151E10BA52002CB9EF /* HouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseModel.m; sourceTree = "<group>"; };
 		18C72B191E10E03D002CB9EF /* CommonHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaderView.h; sourceTree = "<group>"; };
 		18C72B1A1E10E03D002CB9EF /* CommonHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeaderView.m; sourceTree = "<group>"; };
-		18C72B1C1E112610002CB9EF /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityModel.h; sourceTree = "<group>"; };
-		18C72B1D1E112611002CB9EF /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityModel.m; sourceTree = "<group>"; };
 		18F573481DED20AB000FDBF6 /* SpecialOffersListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialOffersListModel.h; sourceTree = "<group>"; };
 		18F573491DED20AB000FDBF6 /* SpecialOffersListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialOffersListModel.m; sourceTree = "<group>"; };
 		18F5734B1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyFeeOtherInfoModel.h; sourceTree = "<group>"; };
@@ -642,6 +643,28 @@
 		18F573581DED6E58000FDBF6 /* ParkingFeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingFeeViewController.h; sourceTree = "<group>"; };
 		18F573591DED6E58000FDBF6 /* ParkingFeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingFeeViewController.m; sourceTree = "<group>"; };
 		25D20DAF4318C2F602E75ACF /* libPods-IntelligenceCommunity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligenceCommunity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7101354D1E12015F0059CE1D /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityModel.h; sourceTree = "<group>"; };
+		7101354E1E12015F0059CE1D /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityModel.m; sourceTree = "<group>"; };
+		7101354F1E12015F0059CE1D /* HouseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseModel.h; sourceTree = "<group>"; };
+		710135501E12015F0059CE1D /* HouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseModel.m; sourceTree = "<group>"; };
+		710135521E12015F0059CE1D /* ReceiveAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveAddressModel.h; sourceTree = "<group>"; };
+		710135531E12015F0059CE1D /* ReceiveAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressModel.m; sourceTree = "<group>"; };
+		710135611E1217230059CE1D /* MyOrdersDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersDealCell.h; sourceTree = "<group>"; };
+		710135621E1217230059CE1D /* MyOrdersDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersDealCell.m; sourceTree = "<group>"; };
+		710135631E1217230059CE1D /* MyOrdersProductsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersProductsCell.h; sourceTree = "<group>"; };
+		710135641E1217230059CE1D /* MyOrdersProductsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersProductsCell.m; sourceTree = "<group>"; };
+		710135651E1217230059CE1D /* MyOrdersStoreTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersStoreTitleCell.h; sourceTree = "<group>"; };
+		710135661E1217230059CE1D /* MyOrdersStoreTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersStoreTitleCell.m; sourceTree = "<group>"; };
+		7101356E1E1270160059CE1D /* AppraiseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppraiseVC.h; sourceTree = "<group>"; };
+		7101356F1E1270160059CE1D /* AppraiseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppraiseVC.m; sourceTree = "<group>"; };
+		710135711E1270160059CE1D /* AllOrdersTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllOrdersTableVC.h; sourceTree = "<group>"; };
+		710135721E1270160059CE1D /* AllOrdersTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllOrdersTableVC.m; sourceTree = "<group>"; };
+		710135731E1270160059CE1D /* MyOrdersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersVC.h; sourceTree = "<group>"; };
+		710135741E1270160059CE1D /* MyOrdersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersVC.m; sourceTree = "<group>"; };
+		710135751E1270160059CE1D /* WaitPaymentTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitPaymentTableVC.h; sourceTree = "<group>"; };
+		710135761E1270160059CE1D /* WaitPaymentTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitPaymentTableVC.m; sourceTree = "<group>"; };
+		710135771E1270160059CE1D /* WaitReceiveTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveTableVC.h; sourceTree = "<group>"; };
+		710135781E1270160059CE1D /* WaitReceiveTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveTableVC.m; sourceTree = "<group>"; };
 		710C17A11E08CE9100FF215E /* BindHouseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindHouseVC.h; sourceTree = "<group>"; };
 		710C17A21E08CE9100FF215E /* BindHouseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindHouseVC.m; sourceTree = "<group>"; };
 		710C17A41E0905F000FF215E /* SettingTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableVC.h; sourceTree = "<group>"; };
@@ -693,8 +716,6 @@
 		71EFEB761E04DC2100CE467A /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		71EFEB781E04E73700CE467A /* MyShoppingCartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShoppingCartVC.h; sourceTree = "<group>"; };
 		71EFEB791E04E73700CE467A /* MyShoppingCartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShoppingCartVC.m; sourceTree = "<group>"; };
-		71EFEB7B1E04E7AD00CE467A /* MyOrdersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersVC.h; sourceTree = "<group>"; };
-		71EFEB7C1E04E7AD00CE467A /* MyOrdersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersVC.m; sourceTree = "<group>"; };
 		71EFEB7F1E05188400CE467A /* NoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeVC.h; sourceTree = "<group>"; };
 		71EFEB801E05188400CE467A /* NoticeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeVC.m; sourceTree = "<group>"; };
 		71EFEB821E051DD600CE467A /* UILabel+AdjustHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+AdjustHeightAndWidth.h"; sourceTree = "<group>"; };
@@ -1602,8 +1623,8 @@
 		18B002F41DE2E6F100D8FE56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				18C72B1C1E112610002CB9EF /* HouseAuthorityModel.h */,
-				18C72B1D1E112611002CB9EF /* HouseAuthorityModel.m */,
+				7101354C1E12015F0059CE1D /* HouseAuthority */,
+				710135511E12015F0059CE1D /* ReceiveAddress */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1716,10 +1737,65 @@
 				18C72B111E10BA52002CB9EF /* HouseListCell.m */,
 				18C72B121E10BA52002CB9EF /* HouseMembersCell.h */,
 				18C72B131E10BA52002CB9EF /* HouseMembersCell.m */,
-				18C72B141E10BA52002CB9EF /* HouseModel.h */,
-				18C72B151E10BA52002CB9EF /* HouseModel.m */,
 			);
 			path = HouseAuthority;
+			sourceTree = "<group>";
+		};
+		7101354C1E12015F0059CE1D /* HouseAuthority */ = {
+			isa = PBXGroup;
+			children = (
+				7101354D1E12015F0059CE1D /* HouseAuthorityModel.h */,
+				7101354E1E12015F0059CE1D /* HouseAuthorityModel.m */,
+				7101354F1E12015F0059CE1D /* HouseModel.h */,
+				710135501E12015F0059CE1D /* HouseModel.m */,
+			);
+			path = HouseAuthority;
+			sourceTree = "<group>";
+		};
+		710135511E12015F0059CE1D /* ReceiveAddress */ = {
+			isa = PBXGroup;
+			children = (
+				710135521E12015F0059CE1D /* ReceiveAddressModel.h */,
+				710135531E12015F0059CE1D /* ReceiveAddressModel.m */,
+			);
+			path = ReceiveAddress;
+			sourceTree = "<group>";
+		};
+		710135601E1217230059CE1D /* MyOrders */ = {
+			isa = PBXGroup;
+			children = (
+				710135611E1217230059CE1D /* MyOrdersDealCell.h */,
+				710135621E1217230059CE1D /* MyOrdersDealCell.m */,
+				710135631E1217230059CE1D /* MyOrdersProductsCell.h */,
+				710135641E1217230059CE1D /* MyOrdersProductsCell.m */,
+				710135651E1217230059CE1D /* MyOrdersStoreTitleCell.h */,
+				710135661E1217230059CE1D /* MyOrdersStoreTitleCell.m */,
+			);
+			path = MyOrders;
+			sourceTree = "<group>";
+		};
+		7101356D1E1270160059CE1D /* MyOrdersDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				7101356E1E1270160059CE1D /* AppraiseVC.h */,
+				7101356F1E1270160059CE1D /* AppraiseVC.m */,
+			);
+			path = MyOrdersDetailVC;
+			sourceTree = "<group>";
+		};
+		710135701E1270160059CE1D /* MyOrdersList */ = {
+			isa = PBXGroup;
+			children = (
+				710135731E1270160059CE1D /* MyOrdersVC.h */,
+				710135741E1270160059CE1D /* MyOrdersVC.m */,
+				710135711E1270160059CE1D /* AllOrdersTableVC.h */,
+				710135721E1270160059CE1D /* AllOrdersTableVC.m */,
+				710135751E1270160059CE1D /* WaitPaymentTableVC.h */,
+				710135761E1270160059CE1D /* WaitPaymentTableVC.m */,
+				710135771E1270160059CE1D /* WaitReceiveTableVC.h */,
+				710135781E1270160059CE1D /* WaitReceiveTableVC.m */,
+			);
+			path = MyOrdersList;
 			sourceTree = "<group>";
 		};
 		710F30EB1E0264D100E256C6 /* Repairs */ = {
@@ -1781,6 +1857,7 @@
 		71D3A78F1E0A4A04002C2F1C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				710135601E1217230059CE1D /* MyOrders */,
 				18C72B0F1E10BA52002CB9EF /* HouseAuthority */,
 				710CA40A1E0A4F08008565F9 /* OwnerViewCell.h */,
 				710CA40B1E0A4F08008565F9 /* OwnerViewCell.m */,
@@ -1841,8 +1918,8 @@
 		71EFEB6D1E04D90E00CE467A /* MyOrders */ = {
 			isa = PBXGroup;
 			children = (
-				71EFEB7B1E04E7AD00CE467A /* MyOrdersVC.h */,
-				71EFEB7C1E04E7AD00CE467A /* MyOrdersVC.m */,
+				7101356D1E1270160059CE1D /* MyOrdersDetailVC */,
+				710135701E1270160059CE1D /* MyOrdersList */,
 			);
 			path = MyOrders;
 			sourceTree = "<group>";
@@ -1870,8 +1947,6 @@
 				18C72AF61E10B966002CB9EF /* AddReceiveAddressVC.m */,
 				18C72AF71E10B966002CB9EF /* EditReceiveAddressVC.h */,
 				18C72AF81E10B966002CB9EF /* EditReceiveAddressVC.m */,
-				18C72AF91E10B966002CB9EF /* ReceiveAddressModel.h */,
-				18C72AFA1E10B966002CB9EF /* ReceiveAddressModel.m */,
 				71D3A78B1E0A49A8002C2F1C /* ReceiveAddressTableVC.h */,
 				71D3A78C1E0A49A8002C2F1C /* ReceiveAddressTableVC.m */,
 			);
@@ -2235,6 +2310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				710135541E12015F0059CE1D /* HouseAuthorityModel.m in Sources */,
 				184C99CB1DEFD41200588FFD /* HelpCenterViewController.m in Sources */,
 				184FF9DA1DF95BAB005FD46E /* DeterminePayViewController.m in Sources */,
 				184B1CF81DE6CC7000F8F56E /* HUD.m in Sources */,
@@ -2263,6 +2339,7 @@
 				71D3A7871E0A2904002C2F1C /* ChangePWDVC.m in Sources */,
 				18B0027F1DE2C9D700D8FE56 /* ViewController.m in Sources */,
 				18C72ADB1E10B7D8002CB9EF /* IQUITextFieldView+Additions.m in Sources */,
+				7101357B1E1270160059CE1D /* MyOrdersVC.m in Sources */,
 				18C72AD91E10B7D8002CB9EF /* IQNSArray+Sort.m in Sources */,
 				1840713B1DF7FA30000DA659 /* ServiceProvidersListModel.m in Sources */,
 				187A23851DEC318C00D921FC /* PropertyFeeBillingDetailViewCell.m in Sources */,
@@ -2304,6 +2381,7 @@
 				D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */,
 				185ADBC81DE4122800CD556D /* AdvertiseViewCell.m in Sources */,
 				710C17A61E0905F000FF215E /* SettingTableVC.m in Sources */,
+				7101357C1E1270160059CE1D /* WaitPaymentTableVC.m in Sources */,
 				71A20A8B1E03B58A00067125 /* HouseImageCell.m in Sources */,
 				18440FDA1E0D2FAB005D684A /* RSADataSigner.m in Sources */,
 				184B1D311DE6E5C000F8F56E /* WUAlbumViewController.m in Sources */,
@@ -2319,12 +2397,10 @@
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
 				18C72B081E10BA0F002CB9EF /* UIViewExt.m in Sources */,
-				18C72B1E1E112611002CB9EF /* HouseAuthorityModel.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
 				71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */,
 				D71BC1331E0389900093357C /* NSObject+MJKeyValue.m in Sources */,
 				187A23761DEBFC8800D921FC /* PropertyFeeHeaderView.m in Sources */,
-				18C72AFD1E10B966002CB9EF /* ReceiveAddressModel.m in Sources */,
 				187383C71DF153440088544A /* ServiceProvidersListViewController.m in Sources */,
 				18C72AF01E10B817002CB9EF /* UWDatePickerView.m in Sources */,
 				71EFEB741E04D97700CE467A /* HouseAuthorityVC.m in Sources */,
@@ -2334,6 +2410,7 @@
 				710CA4151E0A50FC008565F9 /* ReceiveAddressCell.m in Sources */,
 				18B002E41DE2E5FA00D8FE56 /* NeighborhoodCircleViewController.m in Sources */,
 				187383C41DF123060088544A /* CommunityServiceListCell.m in Sources */,
+				710135691E1217230059CE1D /* MyOrdersStoreTitleCell.m in Sources */,
 				18C72AE81E10B7D8002CB9EF /* LICENSE.md in Sources */,
 				D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */,
 				185ADBDC1DE414AA00CD556D /* UIImage+FixOrientation.m in Sources */,
@@ -2342,6 +2419,7 @@
 				18B002F91DE2EE6D00D8FE56 /* HeaderView.m in Sources */,
 				18C72AE51E10B7D8002CB9EF /* IQToolbar.m in Sources */,
 				18440FD41E0D2FAB005D684A /* base64.m in Sources */,
+				710135671E1217230059CE1D /* MyOrdersDealCell.m in Sources */,
 				18B003041DE3045600D8FE56 /* NoticeCell.m in Sources */,
 				184B1D011DE6CCB800F8F56E /* CacheImage.m in Sources */,
 				D73C21331E076D8800D90FFB /* FreeArticleAddViewController.m in Sources */,
@@ -2356,15 +2434,17 @@
 				187A237C1DEC176C00D921FC /* SpecialOffersListViewCell.m in Sources */,
 				710CA40D1E0A4F08008565F9 /* OwnerViewCell.m in Sources */,
 				710CA4101E0A4F5A008565F9 /* OwnerHeaderView.m in Sources */,
+				7101357D1E1270160059CE1D /* WaitReceiveTableVC.m in Sources */,
 				D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */,
 				D71BC1361E0389910093357C /* README.md in Sources */,
 				184071221DF7A1BA000DA659 /* CommodityListHeaderView.m in Sources */,
+				710135561E12015F0059CE1D /* ReceiveAddressModel.m in Sources */,
 				18440FDB1E0D2FAB005D684A /* RSADataVerifier.m in Sources */,
 				18C72AAD1E10B781002CB9EF /* neiborhoodSendAppointVC.m in Sources */,
 				18C72B161E10BA52002CB9EF /* HouseListCell.m in Sources */,
 				71EFEB8B1E05265A00CE467A /* NoticeListCell.m in Sources */,
 				18466EAA1DFAB015009541D6 /* PayMentViewController.m in Sources */,
-				18C72B181E10BA52002CB9EF /* HouseModel.m in Sources */,
+				710135551E12015F0059CE1D /* HouseModel.m in Sources */,
 				71D3A7811E0A16B0002C2F1C /* ILSettingCell.m in Sources */,
 				185ADBC51DE3E43400CD556D /* ServiceListCell.m in Sources */,
 				D730E1F51E0B63830056A20A /* FreeArticleReplyModel.m in Sources */,
@@ -2373,8 +2453,8 @@
 				180897151DE59E620049A180 /* CommunityViewController.m in Sources */,
 				184B1D2C1DE6E5C000F8F56E /* UIImage+Aspect.m in Sources */,
 				18C72AEC1E10B7FA002CB9EF /* NeiborhoodHeaderView.m in Sources */,
-				71EFEB7D1E04E7AD00CE467A /* MyOrdersVC.m in Sources */,
 				18F5734D1DED228A000FDBF6 /* PropertyFeeOtherInfoModel.m in Sources */,
+				710135791E1270160059CE1D /* AppraiseVC.m in Sources */,
 				71D3A7961E0A4A72002C2F1C /* SettingCell.m in Sources */,
 				1857BD341DF6C43200E5F1DE /* LeftTableViewCell.m in Sources */,
 				D70A89CD1E028A4500BCE03C /* CommunityCell.m in Sources */,
@@ -2409,7 +2489,9 @@
 				71D3A78D1E0A49A8002C2F1C /* ReceiveAddressTableVC.m in Sources */,
 				18B002F01DE2E6A400D8FE56 /* OfficialRecommendationViewController.m in Sources */,
 				18466EA41DFA77FA009541D6 /* DeterminePayBottomView.m in Sources */,
+				710135681E1217230059CE1D /* MyOrdersProductsCell.m in Sources */,
 				18C72B061E10BA0F002CB9EF /* AddressPickView.m in Sources */,
+				7101357A1E1270160059CE1D /* AllOrdersTableVC.m in Sources */,
 				184B1D331DE6E5C000F8F56E /* WUImageCollectionView.m in Sources */,
 				18C72ADA1E10B7D8002CB9EF /* IQUIScrollView+Additions.m in Sources */,
 				18C72AE01E10B7D8002CB9EF /* IQKeyboardReturnKeyHandler.m in Sources */,
@@ -2600,7 +2682,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
+					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2640,7 +2722,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
+					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

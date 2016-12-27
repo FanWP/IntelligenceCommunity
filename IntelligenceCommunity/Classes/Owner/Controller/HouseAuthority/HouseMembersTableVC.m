@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.backgroundColor = HexColor(0xeeeeee);
+    
     _houseMembersArray = [NSArray array];
     
     _houseArray = [NSArray array];
@@ -97,6 +99,41 @@
     return 106;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+    footerView.backgroundColor = HexColor(0xeeeeee);
+    return footerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headeraView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 35)];
+    
+    headeraView.backgroundColor = HexColor(0xeeeeee);
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, headeraView.width - 30, 35)];
+    
+    titleLabel.font = UIFontNormal;
+    
+    titleLabel.text = _roomNumber;
+    
+    [headeraView addSubview:titleLabel];
+    
+    return headeraView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 35;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *identifier = @"cell";
@@ -131,6 +168,56 @@
     
     return cell;
 }
+
+#pragma mark - 删除
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        _houseAuthorityModel = _houseMembersArray[indexPath.row];
+        
+        
+        parameters[@"sessionId"] = SessionID;
+        parameters[@"userId"] = UserID;
+        
+        ICLog_2(@"删除参数：%@",parameters);
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@delete/member/house",URL_17_pro_api];
+        
+        [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+        {
+            ICLog_2(@"删除返回：%@",responseObject);
+            
+            NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+            
+            if (resultCode == 1000)
+            {
+                [HUD showSuccessMessage:@"删除成功"];
+                
+                [self dataMemberList];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+        {
+            ICLog_2(@"删除失败：%@",error);
+        }];
+    }
+}
+
 
 - (HouseAuthorityModel *)houseAuthorityModel
 {

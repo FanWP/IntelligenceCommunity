@@ -43,6 +43,7 @@
     self.navigationItem.title = @"添加房屋";
     
     _selectRidgepoleNumber = @"1";
+    _selectUnitNumber = @"1";
     
     [self dataRidgepole];
     
@@ -68,7 +69,6 @@
         _selectRidgepoleNumber = _ridgepoleArray[index];
         
         [self dataUnit];
-        
     }
     else if ([dmDropDownMenu isEqual:_unitView])
     {
@@ -76,7 +76,6 @@
         
         [self dataRoom];
     }
-    
 }
 
 
@@ -131,10 +130,6 @@
 {
     [_unitArray removeAllObjects];
     
-    [_unitView removeFromSuperview];
-    
-    [self.view addSubview:_unitView];
-    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[@"type"] = @"1";
@@ -187,13 +182,9 @@
 {
     [_roomNumberArray removeAllObjects];
     
-    [_roomNumberView removeFromSuperview];
-    
-    [self.view addSubview:_roomNumberView];
-    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"type"] = @"1";
+    parameters[@"type"] = @"2";
     parameters[@"buildNumber"] = _selectRidgepoleNumber;
     parameters[@"unitNumber"] = _selectUnitNumber;
     parameters[@"sessionId"] = SessionID;
@@ -248,14 +239,14 @@
     [_ridgepoleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(35);
         make.right.mas_offset(-35);
-        make.top.offset(64 + 42);
+        make.top.offset(44 + 42);
         make.height.offset(30);
     }];
     
     
     
     // 选择几栋
-    CGFloat ridgepoleViewY = 64 + 42 + 30 + 16;
+    CGFloat ridgepoleViewY = 44 + 42 + 30 + 16;
     CGFloat width = KWidth - 2 * 35;
     _ridgepoleView = [[DMDropDownMenu alloc] initWithFrame:CGRectMake(35, ridgepoleViewY, width, 35)];
     _ridgepoleView.delegate = self;
@@ -335,6 +326,13 @@
 - (void)nextStepAction
 {
     HouseAuthorityTelNumberVC *houseAuthorityTelNumberVC = [[HouseAuthorityTelNumberVC alloc] init];
+    _selectRoomNumber = [_roomNumberView getCurrentText];
+    houseAuthorityTelNumberVC.ridgepoleNumber = _selectRidgepoleNumber;
+    houseAuthorityTelNumberVC.unitNumber = _selectUnitNumber;
+    houseAuthorityTelNumberVC.roomNumber = _selectRoomNumber;
+    
+    ICLog_2(@"选择的房间：%@-%@-%@",_selectRidgepoleNumber,_selectUnitNumber,_selectRoomNumber);
+    
     [self.navigationController pushViewController:houseAuthorityTelNumberVC animated:YES];
 }
 

@@ -37,7 +37,7 @@
     [self.view addSubview:_phoneNumberLabel];
     [_phoneNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(35);
-        make.top.mas_offset(64 + 41);
+        make.top.mas_offset(44 + 41);
         make.right.mas_offset(-35);
         make.height.mas_offset(30);
     }];
@@ -112,8 +112,42 @@
 // 下一步的点击事件
 - (void)nextStepAction
 {
-    BindHouseVC *bindHouseVC = [[BindHouseVC alloc] init];
-    [self.navigationController pushViewController:bindHouseVC animated:YES];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"buildNumber"] = _ridgepoleNumber;
+    parameters[@"unitNumber"] = _unitNumber;
+    parameters[@"roomNumber"] = _roomNumber;
+    parameters[@"phoneLast4Bit"] = _phoneNumberTF.text;
+    parameters[@"sessionId"] = SessionID;
+    
+    ICLog_2(@"验证业主手机号后四位参数：%@",parameters);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@check/master/phone",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"验证业主手机号后四位返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            BindHouseVC *bindHouseVC = [[BindHouseVC alloc] init];
+            bindHouseVC.ridgepoleNumber = _ridgepoleNumber;
+            bindHouseVC.unitNumber = _unitNumber;
+            bindHouseVC.roomNumber = _roomNumber;
+            bindHouseVC.phoneLast4Bit = _phoneNumberTF.text;
+            [self.navigationController pushViewController:bindHouseVC animated:YES];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        [HUD showErrorMessage:@"与业主手机号不符"];
+        
+        ICLog_2(@"验证业主手机号后四位错误：%@",error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

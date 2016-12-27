@@ -16,6 +16,7 @@
     
     if (self)
     {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initializeComponent];
     }
     

@@ -11,4 +11,8 @@
 // 房屋认证-输入业主手机号
 @interface HouseAuthorityTelNumberVC : UIViewController
 
+@property (nonatomic,copy) NSString *ridgepoleNumber;
+@property (nonatomic,copy) NSString *unitNumber;
+@property (nonatomic,copy) NSString *roomNumber;
+
 @end
