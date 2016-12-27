@@ -5,12 +5,13 @@
 //  Created by youyousiji on 16/12/22.
 //  Copyright © 2016年 mumu. All rights reserved.
 //
-#import "RSA.h"
+#import "RSA.h"//加密
+
 #import "NeiborhoodHeaderView.h"
-#import "NeighborhoodModel.h"
-
-
 #import "SmartCommunityPhotosView.h"
+
+
+#import "NeighborhoodModel.h"
 
 
 @interface NeiborhoodHeaderView ()
@@ -41,23 +42,21 @@
 /** 点赞的个数 */
 @property (nonatomic,strong) UILabel *thumbUpCountLabel;
 
-
-
 /** 中间的头像view  根据图像的个数计算尺寸 */
 @property (nonatomic,strong) SmartCommunityPhotosView *photosView;
+
 
 @end
 
 @implementation NeiborhoodHeaderView
 
-
 -(instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     if ([super initWithReuseIdentifier:reuseIdentifier]) {
         [self initializeComponent];
+        self.contentView.backgroundColor = [UIColor whiteColor];
     }
     return self;
-
 }
 
 
@@ -69,7 +68,6 @@
     if (header == nil)
     {
         header = [[NeiborhoodHeaderView alloc] initWithReuseIdentifier:ID];
-        header.backgroundColor = [UIColor orangeColor];
     }
     return header;
 }
@@ -333,6 +331,16 @@
     {
         _deleteteButton.hidden = YES;
     }
+    
+    //判断点赞按钮是否是已经点赞
+    NSString *userId = [NSString stringWithFormat:@",%@,",UserID];
+    if ([neiborhoodModel.likeUserid containsString:userId]) {
+        _thumbUpButton.selected = YES;
+    }else{
+        _thumbUpButton.selected = NO;
+    }
+    
+    
     
     
     

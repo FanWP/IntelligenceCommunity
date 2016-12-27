@@ -9,7 +9,7 @@
 #import "neiborhoodSendAppointVC.h"
 #import "YYPlaceholderTextView.h"
 #import "UWDatePickerView.h"
-
+#import "DateTimePickerView.h"
 //添加附件
 #import "SectionModel.h"
 #import "HouseImageCell.h"
@@ -17,7 +17,7 @@
 #import "UIImage+Aspect.h"
 #import "UIImage+FixOrientation.h"
 
-@interface neiborhoodSendAppointVC ()<UITextFieldDelegate,UWDatePickerViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HouseImageCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,WUAlbumDelegate,WUImageBrowseViewDelegate,UIViewControllerPreviewingDelegate>
+@interface neiborhoodSendAppointVC ()<UITextFieldDelegate,UWDatePickerViewDelegate,DateTimePickerViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HouseImageCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,WUAlbumDelegate,WUImageBrowseViewDelegate,UIViewControllerPreviewingDelegate>
 
 /** 标题的输入框 */
 @property (nonatomic,weak) UITextField *titleText;
@@ -30,8 +30,10 @@
 /** 活动时间 */
 @property (nonatomic,weak) UITextField *timeText;
 
-/** 时间选择器 */
+/** 日期选择器 */
 @property (nonatomic,weak) UWDatePickerView *dateView;
+/** 时间选择器 */
+@property (nonatomic,weak) DateTimePickerView *dateTimeView;
 
 
 
@@ -83,18 +85,32 @@
 -(void)rightBarClick
 {
     MJRefreshLog(@"发布");
+    //判断时间
+        NSString *time = nil;
+    if (_dateText.text.length > 0 && _timeText.text.length > 0) {//时间和日期都在
+        time = [NSString stringWithFormat:@"%@ %@:00",_dateText.text,_timeText.text];
+    }else{
+        [HUD showErrorMessage:@"数据输入不全，请核对！"];
+        return;
+    }
+    
+    //判断内容
+    if (!(_contentTextView.text.length > 0 && _titleText.text.length > 0 && _addressText.text.length > 0)) {
+        [HUD showErrorMessage:@"数据输入不全，请核对！"];
+        return;
+    }
+    
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;
     parameters[@"title"] = _titleText.text;
-//    parameters[@"actionTime"] = _dateText.text;
-     parameters[@"actionTime"] = @"2016-12-31 12:22:34";
+    parameters[@"actionTime"] = time;
     
     parameters[@"address"] = _addressText.text;
     parameters[@"content"] = _contentTextView.text;
     parameters[@"type"] = @"1";
-
+    
     
     NSString *urlString = [NSString stringWithFormat:@"%@smart_community/save/update/upload/friendsCircle",Smart_community_URL];
     
@@ -136,8 +152,7 @@
             ICLog_2(@"约发布请求成功：");
             
             [HUD showSuccessMessage:@"月发布请求成功"];
-            
-#warning todo
+
             //清空数据
             
             [_photosView removeFromSuperview];
@@ -167,7 +182,7 @@
 - (void)setupControls
 {
     //标题
-    UITextField *titleText = [[UITextField alloc] initWithFrame:CGRectMake(16, 76, KWidth - 32, 35)];
+    UITextField *titleText = [[UITextField alloc] initWithFrame:CGRectMake(16, 76 - 64, KWidth - 32, 35)];
     titleText.placeholder = @" 输入标题";
 //    titleText.backgroundColor = [UIColor redColor];
     titleText.layer.borderColor = graryColor174.CGColor;
@@ -191,7 +206,7 @@
     
     
     //活动地点
-    UITextField *addressText = [[UITextField alloc] initWithFrame:CGRectMake(16, 430, KWidth - 32, 35)];
+    UITextField *addressText = [[UITextField alloc] initWithFrame:CGRectMake(16, 430 - 64, KWidth - 32, 35)];
     addressText.placeholder = @" 输入活动地点";
     //    titleText.backgroundColor = [UIColor redColor];
     addressText.layer.borderColor = graryColor174.CGColor;
@@ -603,10 +618,10 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if ([textField isEqual:self.dateText]) {
-        
+    if ([textField isEqual:self.dateText]) {//日期
         [self setupdateView];
-        
+    }else if ([textField isEqual:self.timeText]){//时间
+        [self setupdateTimeView];
     }
 
 }
@@ -615,13 +630,25 @@
 {
     [self.dateView removeFromSuperview];
     UWDatePickerView *dateView = [UWDatePickerView instanceDatePickerView];
-    dateView.frame = CGRectMake(0, KHeight - 400, KWidth, 400);
+    dateView.frame = CGRectMake(0, KHeight - 400 - 64, KWidth, 400);
     [self.view addSubview:dateView];
     self.dateView = dateView;
     dateView.delegate = self;
+    [self.view endEditing:YES];
 }
 
-//时间选择器
+-(void)setupdateTimeView
+{
+    [self.dateTimeView removeFromSuperview];
+    DateTimePickerView *dateView = [DateTimePickerView initWithDateTimePickerView];
+    dateView.frame = CGRectMake(0, KHeight - 400 - 64, KWidth, 400);
+    [self.view addSubview:dateView];
+    self.dateTimeView = dateView;
+    dateView.delegate = self;
+    [self.view endEditing:YES];
+}
+
+//日期选择器
 - (void)getSelectDate:(NSString *)date type:(DateType)type button:(UIButton *)button{
     
     NSLog(@"时间 : %@",date);
@@ -644,6 +671,33 @@
             break;
     }
 }
+
+//时间选择器
+-(void)getSelectDateTime:(NSString *)date type:(DateTimeType)type button:(UIButton *)button
+{
+    NSLog(@"时间 : %@",date);
+    
+    if (button.tag != 1) {
+        return;
+    }
+    
+    switch (type) {
+        case DateTypeOfStart:
+            // TODO 日期确定选择
+            self.timeText.text = [NSString stringWithFormat:@"%@",date];
+            break;
+            
+        case DateTypeOfEnd:
+            // TODO 日期取消选择
+            break;
+        default:
+            break;
+    }
+
+
+}
+
+
 
 
 

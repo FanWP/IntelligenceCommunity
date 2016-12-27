@@ -38,7 +38,7 @@
 @property (nonatomic,copy) NSString *targetId;
 
 /** 1 朋友圈  2闲置物品处理 */
-@property (nonatomic,strong) NSArray *type;
+@property (nonatomic,assign) NSInteger type;
 
 
 /** 设置额外属性 */

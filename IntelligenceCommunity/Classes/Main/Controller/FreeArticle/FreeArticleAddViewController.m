@@ -79,6 +79,12 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
     [self setupRightBar];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [HUD dismiss];
+}
+
+
 -(void)setupRightBar
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarClick)];
@@ -92,7 +98,13 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
 
 -(void)rightBarClick
 {
-    MJRefreshLog(@"发布");
+    MJRefreshLog(@"发布闲置物品");
+    
+    if (!(_priceText.text.length > 0 && _titleText.text.length > 0 && _originPriceText.text.length > 0 && _detailText.text.length > 0 )) {
+        [HUD showErrorMessage:@"数据输入不全，请核对"];
+        return;
+    }
+
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;

@@ -40,6 +40,11 @@
 /** <#房源信息#> */
 @property (nonatomic,copy) NSString *replyToUserId;
 
+/** <#房源信息#> */
+@property (nonatomic,copy) NSString *likeUserid;
+
+
+
 
 /** 创建时间 */
 @property (nonatomic,copy) NSString *createtime;
@@ -53,7 +58,7 @@
 
 
 /** 评论的数组 */
-@property (nonatomic,strong) NSArray *friendsRef;
+@property (nonatomic,strong) NSMutableArray *friendsRef;
 
 
 

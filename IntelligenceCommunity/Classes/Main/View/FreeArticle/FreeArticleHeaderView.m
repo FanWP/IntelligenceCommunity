@@ -59,7 +59,7 @@
 {
     if ([super initWithReuseIdentifier:reuseIdentifier]) {
         [self initializeComponent];
-        self.backgroundColor= [UIColor redColor];
+        self.contentView.backgroundColor= [UIColor whiteColor];
     }
     return self;
     
@@ -205,14 +205,14 @@
     //    @property(nonatomic,strong) UIButton *commentsButton;
     //    @property(nonatomic,strong) UILabel *commentCountLabel;
     _communityContentLabel = [[UILabel alloc] init];
-    _communityContentLabel.text = @"108";
+//    _communityContentLabel.text = @"108";
     _communityContentLabel.textColor = [UIColor grayColor];
     _communityContentLabel.textAlignment = NSTextAlignmentCenter;
     _communityContentLabel.font = UIFontSmallest;
     [self addSubview:_communityContentLabel];
     [_communityContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(_priceLabel.mas_centerY);
-        make.right.mas_equalTo(-20);
+        make.right.mas_equalTo(20);
         make.width.height.mas_equalTo(30);
     }];
     

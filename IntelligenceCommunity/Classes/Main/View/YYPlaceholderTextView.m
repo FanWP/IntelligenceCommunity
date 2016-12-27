@@ -1,6 +1,6 @@
 
 //  Created by youyousiji on 16/12/17.
-//  Copyright (c) 2015年 小码哥. All rights reserved.
+//  Copyright . All rights reserved.
 //
 
 #import "YYPlaceholderTextView.h"

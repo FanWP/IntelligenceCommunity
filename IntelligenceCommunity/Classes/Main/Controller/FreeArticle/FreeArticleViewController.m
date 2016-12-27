@@ -53,6 +53,9 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 /** 标记设置回复或者是评论 isReply  是否是回复 */
 @property (nonatomic,assign) BOOL isReply;
 
+/** 记录当前单元格对应的组号，在评论或者回复成功的时候刷新调用 */
+@property (nonatomic,assign) NSInteger currentSession;
+
 
 @end
 
@@ -123,12 +126,13 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     //结束上拉刷新
     [self.tableView.mj_footer endRefreshing];
+    self.pageNum = 1;
+    self.pageSize = 10;
 
     if (!_freeArticleURL && !_parmas) {
         NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
         parmas[@"userId"] = UserID;
         parmas[@"sessionId"] = SessionID;
-        parmas[@"pageNum"] = @(self.pageNum);
         parmas[@"pageSize"] = @(self.pageSize);
         parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
         self.parmas = parmas;
@@ -136,6 +140,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
         self.freeArticleURL = newurl;
     }
+    self.parmas[@"pageNum"] = @(self.pageNum);
     
     MJRefreshLog(@"self.parmas,self--:%@self.freeArticleURL--:%@",self.parmas,self.freeArticleURL);
     
@@ -172,7 +177,6 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         
         MJRefreshLog(@"闲置物品下拉失败:%@",error);
         [self.tableView.mj_header endRefreshing];
-        
     }];
     
 
@@ -304,7 +308,6 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 
-    
     //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
     FreeArticleHeaderView *header = [FreeArticleHeaderView headerWithTableView:tableView];
@@ -358,6 +361,8 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     self.commonModel = _FreeArticleArr[button.tag];
     
+    _currentSession = button.tag;
+    
     self.isReply = NO;
     //创建并弹出键盘
     [self setupKeyboard];
@@ -390,6 +395,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     FreeArticleModel *model = _FreeArticleArr[indexPath.section];
     _replyModel = model.friendsRefList[indexPath.row];
+    _currentSession = indexPath.section;
     
     if ([_replyModel.userid isEqualToString:UserID]) {//自己给自己回复
         [HUD showErrorMessage:@"您不能给自己回复！"];
@@ -440,6 +446,31 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         if ([num integerValue] == 1000) {//发布成功
             [self.replyView removeFromSuperview];
             [HUD showSuccessMessage:@"发布成功"];
+
+            //更改本地数据
+            FreeArticleReplyModel *model = [[FreeArticleReplyModel alloc] init];
+            model.userid = UserID;
+            model.type = 1;
+            model.conment = self.replyTextView.text;
+            model.userNickName = @"本人";
+            if (_isReply) {//回复
+                model.flag = NO;
+                model.targetId = self.replyModel.targetId;
+                model.replyToUserId = self.replyModel.userid;
+                model.replyToUserNickName = self.replyModel.userNickName;
+                FreeArticleModel *model1 = _FreeArticleArr[self.currentSession];
+                [model1.friendsRefList addObject:model];
+            }else{//评论
+                model.flag = YES;
+                model.targetId = self.commonModel.ID;
+                //插入数据
+                [self.commonModel.friendsRefList addObject:model];
+            }
+            
+            
+            NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:_currentSession];
+            [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

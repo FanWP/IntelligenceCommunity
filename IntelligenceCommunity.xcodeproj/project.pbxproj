@@ -230,6 +230,8 @@
 		D73533B31E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D73533B21E022E3C0031C2F6 /* NeighborhoodMainCommonTableVC.m */; };
 		D73C21331E076D8800D90FFB /* FreeArticleAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */; };
 		D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */; };
+		D751053C1E123076007C85B3 /* DateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D751053B1E123076007C85B3 /* DateTimePickerView.m */; };
+		D751053E1E1230A5007C85B3 /* DateTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D751053D1E1230A5007C85B3 /* DateTimePickerView.xib */; };
 		D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD231E04DB450094602C /* NSDate+Extension.m */; };
 		D753AD2D1E04E7680094602C /* SmartCommunityPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2C1E04E7680094602C /* SmartCommunityPhotosView.m */; };
 		D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */; };
@@ -753,6 +755,9 @@
 		D73C21321E076D8800D90FFB /* FreeArticleAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleAddViewController.m; sourceTree = "<group>"; };
 		D73C21341E07714F00D90FFB /* YYPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYPlaceholderTextView.h; sourceTree = "<group>"; };
 		D73C21351E07714F00D90FFB /* YYPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYPlaceholderTextView.m; sourceTree = "<group>"; };
+		D751053A1E123076007C85B3 /* DateTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimePickerView.h; sourceTree = "<group>"; };
+		D751053B1E123076007C85B3 /* DateTimePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTimePickerView.m; sourceTree = "<group>"; };
+		D751053D1E1230A5007C85B3 /* DateTimePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTimePickerView.xib; sourceTree = "<group>"; };
 		D753AD221E04DB450094602C /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		D753AD231E04DB450094602C /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		D753AD2B1E04E7680094602C /* SmartCommunityPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCommunityPhotosView.h; sourceTree = "<group>"; };
@@ -1277,6 +1282,9 @@
 				185ADBD81DE414AA00CD556D /* UIImage+FixOrientation.m */,
 				71EFEB821E051DD600CE467A /* UILabel+AdjustHeightAndWidth.h */,
 				71EFEB831E051DD600CE467A /* UILabel+AdjustHeightAndWidth.m */,
+				D751053A1E123076007C85B3 /* DateTimePickerView.h */,
+				D751053B1E123076007C85B3 /* DateTimePickerView.m */,
+				D751053D1E1230A5007C85B3 /* DateTimePickerView.xib */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2174,6 +2182,7 @@
 				D71BC12B1E0389900093357C /* LICENSE in Resources */,
 				18C72AE71E10B7D8002CB9EF /* IQKeyboardManager.bundle in Resources */,
 				18440FCF1E0D2FAB005D684A /* Icon.png in Resources */,
+				D751053E1E1230A5007C85B3 /* DateTimePickerView.xib in Resources */,
 				18B002841DE2C9D700D8FE56 /* Assets.xcassets in Resources */,
 				18B002821DE2C9D700D8FE56 /* Main.storyboard in Resources */,
 			);
@@ -2263,6 +2272,7 @@
 				184C99CE1DEFF12600588FFD /* HelpCenterModel.m in Sources */,
 				18C72AE41E10B7D8002CB9EF /* IQTitleBarButtonItem.m in Sources */,
 				184B1D2D1DE6E5C000F8F56E /* WUAlbum.m in Sources */,
+				D751053C1E123076007C85B3 /* DateTimePickerView.m in Sources */,
 				18C72B171E10BA52002CB9EF /* HouseMembersCell.m in Sources */,
 				D70A89C51E027D4A00BCE03C /* NeighborhoodMessageTableVC.m in Sources */,
 				D71BC1321E0389900093357C /* NSObject+MJCoding.m in Sources */,
