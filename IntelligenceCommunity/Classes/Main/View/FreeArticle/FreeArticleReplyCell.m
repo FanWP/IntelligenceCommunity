@@ -51,8 +51,7 @@
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
+
         //设置内容
         UIView *view = [[UIView alloc] init];
         view.backgroundColor = MJRefreshColor(223, 227, 224);
@@ -65,7 +64,6 @@
         commentLable.font = UIFont13;
         self.commentLable = commentLable;
         [view addSubview:commentLable];
-
 
     }
     return self;

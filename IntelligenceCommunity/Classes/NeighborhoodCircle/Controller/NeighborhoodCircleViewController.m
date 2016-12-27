@@ -28,6 +28,9 @@
 /** 设置右上角的点击 */
 @property (nonatomic,assign) NeighborhoodCircleType NeighborhoodType;
 
+/** 设置右上角的按钮 */
+@property (nonatomic,weak) UIButton *rightBtn;
+
 /** 设置蒙版 */
 @property (nonatomic,weak) UIView *coverView;
 
@@ -46,6 +49,16 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    
+    //右上角的
+    [self setupRightBar];
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 
 }
 
@@ -60,23 +73,36 @@
     // 底部的scrollView
     [self setupContentView];
     self.tabBarController.navigationItem.title = @"邻里圈";
-    
-    //右上角的
-    [self setupRightBar];
-
 }
 
-
+/** 右上角按钮 */
 - (void)setupRightBar
 {
-    self.rightBarImg = [UIImage imageNamed:@"menu"];
-    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.rightBarImg style:UIBarButtonItemStylePlain target:self action:@selector(actiondccd)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(20, 0, 40, 30)];
+    if (  _NeighborhoodType && _NeighborhoodType != 1) {//已经创建过，图标可能要换
+        [button setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    }else{
+        [button setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    }
+    [button addTarget:self action:@selector(actiondccd) forControlEvents:UIControlEventTouchUpInside];
+    self.rightBtn = button;
+    self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 - (void)actiondccd
 {
+
+    if ( _NeighborhoodType && _NeighborhoodType != 1) {//点击的是约 生活分享 寻物招领
+        UIButton *button = [[UIButton alloc] init];
+        button.tag = _NeighborhoodType;
+        [self rightBarClick:button];
+        return;
+    }
+    
+    if (_coverView) return;
     UIView *coverView = [[UIView alloc] initWithFrame:self.view.bounds];
-    coverView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+//coverView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+    coverView.backgroundColor = [UIColor clearColor];
     UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [coverView addGestureRecognizer:tap];
     self.coverView = coverView;
@@ -84,7 +110,7 @@
 
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-down"]];
     imgView.x = KWidth - imgView.width - 5;
-    imgView.y = 64;
+    imgView.y = 0;
     imgView.userInteractionEnabled  = YES;
     self.NeighborhoodMainView = imgView;
     [self.coverView addSubview:imgView];
@@ -151,7 +177,6 @@
     
     //移除
     [self.coverView removeFromSuperview];
-    
 }
 
 
@@ -163,22 +188,52 @@
 
 - (void)setupChildVces
 {
+
+    NSString *neiborhoodURL = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
+    
+    
+    for (NSInteger i = 0; i < 4; i++) {
+        
+        NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+        parmas[@"userId"] = UserID;
+        parmas[@"sessionId"] = SessionID;
+        parmas[@"pageNum"] = @"1";
+        parmas[@"pageSize"] = @"10";
+        NeighborhoodMainCommonTableVC *NeighborhoodAppointmentVC = [[NeighborhoodMainCommonTableVC alloc] init];
+        NeighborhoodAppointmentVC.parmas = parmas;//约
+        if (i != 0) {
+            NeighborhoodAppointmentVC.parmas[@"type"] = @(i);
+        }
+        NeighborhoodAppointmentVC.neiborhoodURL = neiborhoodURL;
+        [self addChildViewController:NeighborhoodAppointmentVC];
+    }
+    
+    
+    /*
+    
     NeighborhoodMainCommonTableVC *NeighborhoodVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodVC.NeighborhoodType = Neighborhood;//邻里
+    NeighborhoodVC.parmas = parmas;//邻里
+    NeighborhoodVC.neiborhoodURL = neiborhoodURL;
     [self addChildViewController:NeighborhoodVC];
     
     NeighborhoodMainCommonTableVC *NeighborhoodAppointmentVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodAppointmentVC.NeighborhoodType = NeighborhoodAppointment;//约
+    NeighborhoodAppointmentVC.parmas = parmas;//约
+    NeighborhoodAppointmentVC.parmas[@"type"] = @"1";
+    NeighborhoodAppointmentVC.neiborhoodURL = neiborhoodURL;
     [self addChildViewController:NeighborhoodAppointmentVC];
     
     NeighborhoodMainCommonTableVC *NeighborhoodShareLifeVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodShareLifeVC.NeighborhoodType = NeighborhoodShareLife;//生活分享
-    [self addChildViewController:NeighborhoodShareLifeVC];
+    NeighborhoodShareLifeVC.parmas = parmas;
+    NeighborhoodShareLifeVC.parmas[@"type"] = @"2";
+    NeighborhoodShareLifeVC.neiborhoodURL = neiborhoodURL;
+    [self addChildViewController:NeighborhoodShareLifeVC];//生活分享
     
     NeighborhoodMainCommonTableVC *NeighborhoodLostFoundVC = [[NeighborhoodMainCommonTableVC alloc] initWithStyle:UITableViewStyleGrouped];
-    NeighborhoodLostFoundVC.NeighborhoodType = NeighborhoodLostFound;//失物招领
-    [self addChildViewController:NeighborhoodLostFoundVC];
-
+    NeighborhoodLostFoundVC.parmas = parmas;
+    NeighborhoodLostFoundVC.parmas[@"type"] = @"3";
+    NeighborhoodLostFoundVC.neiborhoodURL = neiborhoodURL;
+    [self addChildViewController:NeighborhoodLostFoundVC];//失物招领
+     */
 }
 
 
@@ -187,7 +242,7 @@
     
     [self.headerView removeFromSuperview];
     
-    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, KWidth, 43) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
+    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 43) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
 
         [self titleClick:(index - 1)];
         NSLog(@"%ld",index);
@@ -205,9 +260,16 @@
 {
     //设置顶部的标题改变
     self.headerView.defaultIndex = index + 1;
-    self.NeighborhoodType = index + 1;
+    _NeighborhoodType = index + 1;
+    
 
-
+    if (index != 0) {//邻里
+        [self.rightBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    }else
+    {
+        [self.rightBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    }
+    
     // 滚动
     CGPoint offset = self.contentView.contentOffset;
     offset.x = index * self.contentView.mj_w;

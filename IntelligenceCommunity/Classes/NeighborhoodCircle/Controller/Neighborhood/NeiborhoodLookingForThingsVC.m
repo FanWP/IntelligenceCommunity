@@ -46,11 +46,12 @@
 
 NSString *const coViewAddID = @"HouseImageViewCellIdentifieruyt";
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
+
     self.title = @"寻物招领";
+    
+    [self defaultViewStyle];
     
     self.view.backgroundColor = [UIColor whiteColor];
     //    self.view.backgroundColor = MJRefreshColor(240, 240, 242);
@@ -67,7 +68,7 @@ NSString *const coViewAddID = @"HouseImageViewCellIdentifieruyt";
 
 - (void)setupRightBar
 {
-    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [button setTitle:@"发布" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(publishBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -79,6 +80,12 @@ NSString *const coViewAddID = @"HouseImageViewCellIdentifieruyt";
 
 - (void)publishBtnClick:(UIButton *)button
 {
+    //判断输入是否有空
+    if (!(_contentTextView.text.length > 0 && _titleText.text)) {
+        [HUD showErrorMessage:@"数据输入不全，请核对！"];
+        return;
+    }
+
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;
@@ -155,7 +162,7 @@ NSString *const coViewAddID = @"HouseImageViewCellIdentifieruyt";
 {
     
     //标题
-    UITextField *titleText = [[UITextField alloc] initWithFrame:CGRectMake(16, 76, KWidth - 32, 35)];
+    UITextField *titleText = [[UITextField alloc] initWithFrame:CGRectMake(16, 76 - 64, KWidth - 32, 35)];
     titleText.placeholder = @" 输入标题";
     //    titleText.backgroundColor = [UIColor redColor];
     titleText.layer.borderColor = graryColor174.CGColor;

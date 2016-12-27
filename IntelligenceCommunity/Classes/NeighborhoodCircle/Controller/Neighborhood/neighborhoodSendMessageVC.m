@@ -62,10 +62,16 @@
     
 }
 
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [HUD dismiss];
+}
+
 - (void)setupRightBar
 {
-    
-    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [button setTitle:@"发布" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(publishBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -77,21 +83,21 @@
 
 - (void)publishBtnClick:(UIButton *)button
 {
+    if (!(_contentTextView.text.length > 0 )) {//为空
+        [HUD showErrorMessage:@"数据输入不全，请核对！"];
+        return;
+    }
+
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;
     parameters[@"content"] = _contentTextView.text;
     parameters[@"type"] = @"2";
-
     NSString *urlString = [NSString stringWithFormat:@"%@smart_community/save/update/upload/friendsCircle",Smart_community_URL];
     
     ICLog_2(@"动态发布：%@  URL---%@",parameters,urlString);
-    
-    
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
         _repairImagesArray = [NSMutableArray arrayWithArray:[self getImagesWithSection:0]];
-        
         if(_repairImagesArray && _repairImagesArray.count > 0) {
             for (id item in _repairImagesArray) {
                 NSData *data;
@@ -125,8 +131,7 @@
             ICLog_2(@"邻里圈发布动态请求返回：");
             
             [HUD showSuccessMessage:@"邻里圈发布动态请求返回请求成功"];
-            
-#warning todo
+
             //清空数据
             
             [_photosView removeFromSuperview];
@@ -151,7 +156,7 @@
 - (void)setupControls
 {
     //设置输入框
-    YYPlaceholderTextView *view = [[YYPlaceholderTextView alloc] initWithFrame:CGRectMake(16, 76, KWidth - 32, 130)];
+    YYPlaceholderTextView *view = [[YYPlaceholderTextView alloc] initWithFrame:CGRectMake(16, 76 - 64, KWidth - 32, 130)];
     view.backgroundColor = [UIColor whiteColor];
     view.placeholder = @"说点什么...";
     view.layer.borderColor = graryColor174.CGColor;

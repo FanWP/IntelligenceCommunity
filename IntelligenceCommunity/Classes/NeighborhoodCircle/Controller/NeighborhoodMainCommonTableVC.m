@@ -19,7 +19,7 @@
 NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 
-@interface NeighborhoodMainCommonTableVC ()<NeighborhoodCircleCellDelegate>
+@interface NeighborhoodMainCommonTableVC ()<NeighborhoodCircleCellDelegate,UITableViewDataSource,UITableViewDelegate>
 
 /** 保存服务器返回的邻里圈列表数据 */
 @property (nonatomic,strong) NSMutableArray *NeighborhoodArr;
@@ -43,6 +43,12 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 /** 标记设置回复或者是评论 isReply  是否是回复 */
 @property (nonatomic,assign) BOOL isReply;
 
+/** tableVIew */
+@property (nonatomic,strong) UITableView *tableView;
+
+/** 记录当前单元格对应的组号，在评论或者回复成功的时候刷新调用 */
+@property (nonatomic,assign) NSInteger currentSession;
+
 
 @end
 
@@ -51,19 +57,28 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self initializeComponent];
     
+    [self defaultViewStyle];
+
     [self setupRefresh];
-    
-    
-    [self.tableView registerClass:[NeighborhoodCircleCell class] forCellReuseIdentifier:NeighborhoodCircleCellID];
-    
-    
-//    // 键盘的frame发生改变时发出的通知（位置和尺寸）
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     //监听文本框
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChanged) name:UITextViewTextDidChangeNotification object:nil];
 }
+
+-(void)initializeComponent{
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    _tableView.height = KHeight - 49 - 64;
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    //    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:_tableView];
+    
+}
+
+
 
 
 -(void)setupRefresh
@@ -76,27 +91,14 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 -(void)loadNewNeighborhood
 {
-    
     //结束上拉刷新
     [self.tableView.mj_footer endRefreshing];
-    self.pageSize = 10;
+    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",self.parmas,self.neiborhoodURL);
+    
     self.pageNum = 1;
+    self.parmas[@"pageNum"] = @(self.pageNum);
     
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    if (self.NeighborhoodType != 0) {
-        parmas[@"type"] = @(self.NeighborhoodType);
-    }
-    
-    
-    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
-    
-    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",parmas,newurl);
-    
-    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    [[AFHTTPSessionManager manager] POST:self.neiborhoodURL parameters:_parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_header endRefreshing];
@@ -117,7 +119,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
             NSLog(@"文件写入完成");
         }
         
-        _NeighborhoodArr = [NeighborhoodModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
+        self.NeighborhoodArr = [NeighborhoodModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
         
         if (_NeighborhoodArr.count > 0) {
             self.pageNum++;
@@ -138,33 +140,24 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     
     //结束上拉刷新
     [self.tableView.mj_header endRefreshing];
-    self.pageSize = 10;
-    
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    if (self.NeighborhoodType != 0) {
-        parmas[@"type"] = @(self.NeighborhoodType);
-    }
 
     NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
     
-    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",parmas,newurl);
+    MJRefreshLog(@"邻里圈下拉parmas%@--：url——---:%@",self.parmas,newurl);
+    self.parmas[@"pageNum"] = @(self.pageNum);
     
-    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    [[AFHTTPSessionManager manager] POST:newurl parameters:self.parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_footer endRefreshing];
         MJRefreshLog(@"邻里圈下拉显示成功：%@",responseObject);
         
         NSArray *arr = [NeighborhoodModel mj_objectArrayWithKeyValuesArray:responseObject[@"body"]];
-        [_NeighborhoodArr addObjectsFromArray:arr];
-        
+
         if (arr.count > 0) {
             self.pageNum++;
             [self.tableView reloadData];
+            [self.NeighborhoodArr addObjectsFromArray:arr];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -174,6 +167,11 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         
     }];
 
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 
@@ -186,12 +184,12 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return _NeighborhoodArr.count;
+    return self.NeighborhoodArr.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    NeighborhoodModel *model = _NeighborhoodArr[section];
+    NeighborhoodModel *model = self.NeighborhoodArr[section];
     NSArray *arr = model.friendsRef;
     
     return arr.count;
@@ -200,7 +198,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //    //设置数据
-    NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
+    NeighborhoodModel *model = self.NeighborhoodArr[indexPath.section];
     FreeArticleReplyModel *replyModel = model.friendsRef[indexPath.row];
     return replyModel.contentH + 10;
 
@@ -208,7 +206,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    NeighborhoodModel *model = _NeighborhoodArr[section];
+    NeighborhoodModel *model = self.NeighborhoodArr[section];
     return model.allContentH ;
 }
 
@@ -232,6 +230,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 {
     NeiborhoodHeaderView *header = [NeiborhoodHeaderView headerWithTableView:tableView];
     header.deleteteButton.tag = section;
+    header.commentsButton.tag = section;
     [header.deleteteButton addTarget:self action:@selector(deleteteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [header.commentsButton addTarget:self action:@selector(commentsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -246,7 +245,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     FreeArticleReplyCell *cell = [FreeArticleReplyCell cellWithTableView:tableView];
-    NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
+    NeighborhoodModel *model = self.NeighborhoodArr[indexPath.section];
     cell.replyModel = model.friendsRef[indexPath.row];
     return cell;
 }
@@ -261,6 +260,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 #pragma mark===== 回复评论=============
 -(void)commentsButtonClick:(UIButton *)button
 {
+    _currentSession = button.tag;
     self.commonModel = _NeighborhoodArr[button.tag];
     
     self.isReply = NO;
@@ -268,27 +268,6 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     [self setupKeyboard];
     
 }
-
-/**
- * 键盘的frame发生改变时调用（显示、隐藏等）
- */
-- (void)keyboardWillChangeFrame:(NSNotification *)notification
-{
-    // 如果正在切换键盘，就不要执行后面的代码
-//    if (self.switchingKeybaord) return;
-    
-    NSDictionary *userInfo = notification.userInfo;
-    // 动画的持续时间
-    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    // 键盘的frame
-    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    // 执行动画
-    [UIView animateWithDuration:duration animations:^{
-        // 工具条的Y值 == 键盘的Y值 - 工具条的高度
-        self.replyView.y = KHeight - keyboardF.origin.y - 44 - 44 - 100;
-    }];
-}
-
 
 -(void)textDidChanged
 {
@@ -298,6 +277,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 //点击回复评论
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     NeighborhoodModel *model = _NeighborhoodArr[indexPath.section];
     _replyModel = model.friendsRef[indexPath.row];
         ICLog_2(@"%ld",indexPath.row);
@@ -310,6 +290,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     {
         //创建并弹出键盘
         self.isReply = YES;
+        _currentSession = indexPath.section;//记录点击的组号
         [self setupKeyboard];
     }
 }
@@ -322,7 +303,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     parmas[@"userId"] = UserID;
     parmas[@"sessionid"] = SessionID;
-    parmas[@"type"] = @"1";
+    parmas[@"type"] = @"1";//邻里圈
     parmas[@"conment"] = self.replyTextView.text;
     
     //判断是回复还是评论
@@ -338,7 +319,8 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];
     MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
     
-    [HUD showMessage:@"数据提交中"];
+    [HUD showProgress:@"数据提交中，请等待！"];
+    
     [[AFHTTPSessionManager manager]POST:url parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -348,30 +330,48 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         NSNumber *num = responseObject[@"resultCode"];
         if ([num integerValue] == 1000) {//发布成功
             [self.replyView removeFromSuperview];
+            
             [HUD showSuccessMessage:@"发布成功"];
+            
+            //更改本地数据
+            FreeArticleReplyModel *model = [[FreeArticleReplyModel alloc] init];
+            model.userid = UserID;
+            model.type = 1;
+            model.conment = self.replyTextView.text;
+            model.userNickName = @"本人";
+            if (_isReply) {//回复
+                model.flag = NO;
+                model.targetId = self.replyModel.targetId;
+                model.replyToUserId = self.replyModel.userid;
+                model.replyToUserNickName = self.replyModel.userNickName;
+                NeighborhoodModel *model1 = _NeighborhoodArr[self.currentSession];
+                [model1.friendsRef addObject:model];
+            }else{//评论
+                model.flag = YES;
+                model.targetId = self.commonModel.ID;
+                //插入数据
+                [self.commonModel.friendsRef addObject:model];
+            }
+
+            NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:_currentSession];
+            [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+   
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         MJRefreshLog(@"error---%@",error);
     }];
-    
-}
-
-//移除通知
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark=====创建输入框，弹出键盘======
 -(void)setupKeyboard
 {
     [self.replyView removeFromSuperview];
-    
-    
-    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 100 - 44, KWidth, 44)];
+
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 92 - 44 - 64 - 49, KWidth, 44)];
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
+//    [self.view addSubview:replyView];
     [self.view addSubview:replyView];
     
     //设置输入框
@@ -382,8 +382,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     textView.font = UIFontLarge;
     
     [replyView addSubview:textView];
-    
-    
+
     [textView becomeFirstResponder];
     
     //设置都发送按钮
@@ -430,7 +429,11 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     }];
 }
 
-
+//移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 

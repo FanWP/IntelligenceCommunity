@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NeighborhoodMainCommonTableVC : UITableViewController
+@interface NeighborhoodMainCommonTableVC : UIViewController
 
+/** 请求网址 */
+@property (nonatomic,copy) NSString *neiborhoodURL;
 
-/** 设置邻里圈的单元格的枚举类型--- 邻里 约 生活分享  失物招领 */
-@property (nonatomic,assign) NeighborhoodCircleType NeighborhoodType;
+/** 请求参数 */
+@property (nonatomic,strong) NSMutableDictionary *parmas;
 
 @end

@@ -14,7 +14,8 @@
 - (void) defaultNavigationBarStyle {
     self.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationBar.translucent = YES;
-    self.navigationBar.tintColor = ThemeColor;
+//    self.navigationBar.tintColor = ThemeColor;
+    self.navigationBar.tintColor = MJRefreshColor(122, 122, 122);
     //    self.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor blackColor]};
     
     [self.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
@@ -23,7 +24,8 @@
     self.navigationBar.backIndicatorImage = [UIImage imageNamed:@"Root_Back"];
     self.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"Root_Back"];
     
-    self.navigationBar.barTintColor =  HexColor(0x0dceac);
+//    self.navigationBar.barTintColor =  HexColor(0x0dceac);
+    self.navigationBar.barTintColor = MJRefreshColor(246, 246, 246);
 }
 
 - (void) setBackgroundColor:(UIColor*)color {

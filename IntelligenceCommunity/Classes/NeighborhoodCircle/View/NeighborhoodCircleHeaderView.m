@@ -55,7 +55,7 @@
         line.backgroundColor=[UIColor lightGrayColor];
         [_bgScrollView addSubview:line];
         //step.3选中某个button是的标示线(红色线)
-        _selectLine=[[UIView alloc] initWithFrame:CGRectMake(0, 0, _btn_w, 2)];
+        _selectLine=[[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 2, _btn_w, 2)];
 //                _selectLine=[[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-10, _btn_w, 2)];
         _selectLine.backgroundColor=_titleSelectColor;
         [_bgScrollView addSubview:_selectLine];
@@ -63,7 +63,7 @@
 #pragma mark--根据标题数组的count值创建button并添加到scrollView上面
         for (int i=0; i<titleArray.count; i++) {
             UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame=CGRectMake(_btn_w*i, 2, _btn_w, self.frame.size.height);
+            btn.frame=CGRectMake(_btn_w*i, 0, _btn_w, self.frame.size.height - 2);
             btn.tag=i+1;
             [btn setTitle:titleArray[i] forState:UIControlStateNormal];
             [btn setTitleColor:_titleNomalColor forState:UIControlStateNormal];
