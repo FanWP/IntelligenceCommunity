@@ -49,11 +49,14 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     [super viewDidLoad];
     
     [self initializeComponent];
+    
+    [self defaultViewStyle];
+    
     [self createData];
 }
 
 - (void)leftItemSetting
-{    
+{
     self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"houses"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] style:(UIBarButtonItemStylePlain) target:self action:@selector(leftItemSettingAction)];
 }
 - (void)leftItemSettingAction

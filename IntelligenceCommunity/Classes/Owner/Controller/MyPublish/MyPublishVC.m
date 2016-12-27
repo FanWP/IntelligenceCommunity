@@ -33,6 +33,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self defaultViewStyle];
+    
     [self initializeComponent];
     
     [self setupChildVces];
@@ -50,7 +52,7 @@
     
     [self.headerView removeFromSuperview];
     
-    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, KWidth, 43) titles:@[@"动态",@"活动",@"闲置物品"] clickBlick:^void(NSInteger index) {
+    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 43) titles:@[@"动态",@"活动",@"闲置物品"] clickBlick:^void(NSInteger index) {
         
         [self titleClick:(index - 1)];
         NSLog(@"%ld",index);
@@ -132,7 +134,7 @@
     UIScrollView *contentView = [[UIScrollView alloc] init];
     //    contentView.frame = self.view.bounds;
     contentView.mj_x = 0;
-    contentView.mj_y = 108;
+    contentView.mj_y = 43;
     contentView.mj_h = self.view.bounds.size.height - 44 ;
     contentView.mj_w = self.view.mj_w;
     contentView.delegate = self;

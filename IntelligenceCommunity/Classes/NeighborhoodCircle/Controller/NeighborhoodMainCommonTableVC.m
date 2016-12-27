@@ -66,6 +66,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 
 -(void)initializeComponent{
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    _tableView.height = KHeight - 49 - 64;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     //    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -337,7 +338,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 {
     [self.replyView removeFromSuperview];
 
-    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 88 - 44, KWidth, 44)];
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 92 - 44 - 64 - 49, KWidth, 44)];
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
 //    [self.view addSubview:replyView];
@@ -351,8 +352,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     textView.font = UIFontLarge;
     
     [replyView addSubview:textView];
-    
-    
+
     [textView becomeFirstResponder];
     
     //设置都发送按钮

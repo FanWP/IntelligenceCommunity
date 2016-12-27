@@ -55,7 +55,6 @@
 {
     if ([super initWithReuseIdentifier:reuseIdentifier]) {
         [self initializeComponent];
-        self.backgroundColor= [UIColor redColor];
     }
     return self;
 
@@ -70,6 +69,7 @@
     if (header == nil)
     {
         header = [[NeiborhoodHeaderView alloc] initWithReuseIdentifier:ID];
+        header.backgroundColor = [UIColor orangeColor];
     }
     return header;
 }

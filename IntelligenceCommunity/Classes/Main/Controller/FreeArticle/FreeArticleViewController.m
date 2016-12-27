@@ -224,7 +224,11 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
 - (void)setupRightBar
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarClick)];
+    UIButton *rightbutton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [rightbutton addTarget:self action:@selector(rightBarClick) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
 }
 
 
@@ -243,7 +247,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     _tableView.x = 0;
     _tableView.y = 0;
-    _tableView.height = KHeight - _tableView.y;
+    _tableView.height = KHeight - 49;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -455,8 +459,13 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     [self.replyView removeFromSuperview];
     
-    
     UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    
+    NSString *type = self.parmas[@"type"];
+    if ([type isEqualToString:@"3"]) {//我的发布
+        replyView.y = KHeight -  216  - 44 -64 - 49 - 90;
+    }
+    
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
     [self.view addSubview:replyView];

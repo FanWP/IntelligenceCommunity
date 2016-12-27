@@ -131,7 +131,6 @@
 		18B002FB1DE2F1EB00D8FE56 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18B002FA1DE2F1EB00D8FE56 /* 1.jpg */; };
 		18B003041DE3045600D8FE56 /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B003031DE3045600D8FE56 /* NoticeCell.m */; };
 		18C72AA71E10B6D9002CB9EF /* DMDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AA61E10B6D9002CB9EF /* DMDropDownMenu.m */; };
-		18C72AAA1E10B6F4002CB9EF /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AA91E10B6F4002CB9EF /* HouseAuthorityModel.m */; };
 		18C72AAD1E10B781002CB9EF /* neiborhoodSendAppointVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AAC1E10B781002CB9EF /* neiborhoodSendAppointVC.m */; };
 		18C72AB01E10B790002CB9EF /* NeiborhoodLookingForThingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AAF1E10B790002CB9EF /* NeiborhoodLookingForThingsVC.m */; };
 		18C72AD91E10B7D8002CB9EF /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C72AB51E10B7D8002CB9EF /* IQNSArray+Sort.m */; };
@@ -237,6 +236,8 @@
 		D759D1EC1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */; };
 		D759D1EF1E03BFBB002B9F2D /* CommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */; };
 		D7A159C01E1101C0004D9E73 /* MyPublishVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A159BF1E1101C0004D9E73 /* MyPublishVC.m */; };
+		D7A159C91E1128C2004D9E73 /* CommonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A159C81E1128C2004D9E73 /* CommonHeaderView.m */; };
+		D7A159CC1E112920004D9E73 /* HouseAuthorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A159CB1E112920004D9E73 /* HouseAuthorityModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -561,8 +562,6 @@
 		18B003031DE3045600D8FE56 /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
 		18C72AA51E10B6D9002CB9EF /* DMDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMDropDownMenu.h; path = DMDropDownMenu/DMDropDownMenu.h; sourceTree = "<group>"; };
 		18C72AA61E10B6D9002CB9EF /* DMDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMDropDownMenu.m; path = DMDropDownMenu/DMDropDownMenu.m; sourceTree = "<group>"; };
-		18C72AA81E10B6F4002CB9EF /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityModel.h; sourceTree = "<group>"; };
-		18C72AA91E10B6F4002CB9EF /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityModel.m; sourceTree = "<group>"; };
 		18C72AAB1E10B781002CB9EF /* neiborhoodSendAppointVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neiborhoodSendAppointVC.h; sourceTree = "<group>"; };
 		18C72AAC1E10B781002CB9EF /* neiborhoodSendAppointVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = neiborhoodSendAppointVC.m; sourceTree = "<group>"; };
 		18C72AAE1E10B790002CB9EF /* NeiborhoodLookingForThingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeiborhoodLookingForThingsVC.h; sourceTree = "<group>"; };
@@ -766,6 +765,10 @@
 		D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityDetailCell.m; sourceTree = "<group>"; };
 		D7A159BE1E1101C0004D9E73 /* MyPublishVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPublishVC.h; sourceTree = "<group>"; };
 		D7A159BF1E1101C0004D9E73 /* MyPublishVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPublishVC.m; sourceTree = "<group>"; };
+		D7A159C71E1128C2004D9E73 /* CommonHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaderView.h; sourceTree = "<group>"; };
+		D7A159C81E1128C2004D9E73 /* CommonHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeaderView.m; sourceTree = "<group>"; };
+		D7A159CA1E112920004D9E73 /* HouseAuthorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityModel.h; sourceTree = "<group>"; };
+		D7A159CB1E112920004D9E73 /* HouseAuthorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityModel.m; sourceTree = "<group>"; };
 		DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1216,6 +1219,8 @@
 		1857BD161DF68E6E00E5F1DE /* CommodityListShow */ = {
 			isa = PBXGroup;
 			children = (
+				D7A159C71E1128C2004D9E73 /* CommonHeaderView.h */,
+				D7A159C81E1128C2004D9E73 /* CommonHeaderView.m */,
 				184071201DF7A1BA000DA659 /* CommodityListHeaderView.h */,
 				184071211DF7A1BA000DA659 /* CommodityListHeaderView.m */,
 				1857BD321DF6C43200E5F1DE /* LeftTableViewCell.h */,
@@ -1436,8 +1441,6 @@
 			children = (
 				18C72AFE1E10BA0F002CB9EF /* AddressPick */,
 				18C72AB11E10B7D8002CB9EF /* IQKeyboardManager */,
-				18C72AA81E10B6F4002CB9EF /* HouseAuthorityModel.h */,
-				18C72AA91E10B6F4002CB9EF /* HouseAuthorityModel.m */,
 				18C72AA51E10B6D9002CB9EF /* DMDropDownMenu.h */,
 				18C72AA61E10B6D9002CB9EF /* DMDropDownMenu.m */,
 				71D3A7691E0A16B0002C2F1C /* ILSetting */,
@@ -1603,6 +1606,8 @@
 		18B002F41DE2E6F100D8FE56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D7A159CA1E112920004D9E73 /* HouseAuthorityModel.h */,
+				D7A159CB1E112920004D9E73 /* HouseAuthorityModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2327,6 +2332,7 @@
 				18C72B0D1E10BA33002CB9EF /* HouseListTableVC.m in Sources */,
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
+				D7A159CC1E112920004D9E73 /* HouseAuthorityModel.m in Sources */,
 				18C72B081E10BA0F002CB9EF /* UIViewExt.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
 				71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */,
@@ -2389,6 +2395,7 @@
 				18440FD31E0D2FAB005D684A /* Order.m in Sources */,
 				187383C11DF10E5F0088544A /* CommunityServiceHeaderView.m in Sources */,
 				184B1D321DE6E5C000F8F56E /* WUImageBrowseView.m in Sources */,
+				D7A159C91E1128C2004D9E73 /* CommonHeaderView.m in Sources */,
 				1808970F1DE59DCB0049A180 /* FreeArticleViewController.m in Sources */,
 				187A23731DEBD58800D921FC /* PropertyFeeViewCell.m in Sources */,
 				711CBE3E1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m in Sources */,
@@ -2423,7 +2430,6 @@
 				18B002C31DE2DF7800D8FE56 /* RootTabBarController.m in Sources */,
 				71EFEB771E04DC2100CE467A /* FeedbackVC.m in Sources */,
 				187A238C1DEC39CB00D921FC /* RequestManager.m in Sources */,
-				18C72AAA1E10B6F4002CB9EF /* HouseAuthorityModel.m in Sources */,
 				18B002B71DE2DD3B00D8FE56 /* UIViewController+Default.m in Sources */,
 				18C72AE61E10B7D8002CB9EF /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				18440FD51E0D2FAB005D684A /* DataSigner.m in Sources */,

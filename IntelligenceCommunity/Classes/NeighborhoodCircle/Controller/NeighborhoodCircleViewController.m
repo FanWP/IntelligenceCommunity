@@ -109,7 +109,7 @@
 
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-down"]];
     imgView.x = KWidth - imgView.width - 5;
-    imgView.y = 64;
+    imgView.y = 0;
     imgView.userInteractionEnabled  = YES;
     self.NeighborhoodMainView = imgView;
     [self.coverView addSubview:imgView];
@@ -207,7 +207,6 @@
         }
         NeighborhoodAppointmentVC.neiborhoodURL = neiborhoodURL;
         [self addChildViewController:NeighborhoodAppointmentVC];
-
     }
     
     
@@ -244,7 +243,7 @@
     
     [self.headerView removeFromSuperview];
     
-    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, KWidth, 43) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
+    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 43) titles:@[@"邻里",@"约",@"生活分享",@"寻物招领"] clickBlick:^void(NSInteger index) {
 
         [self titleClick:(index - 1)];
         NSLog(@"%ld",index);

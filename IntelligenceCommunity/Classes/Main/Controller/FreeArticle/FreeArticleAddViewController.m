@@ -65,10 +65,10 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
     [super viewDidLoad];
     
     self.title = @"闲置物品添加";
-
-    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self defaultViewStyle];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 
     [self creatRepairPictureView];
 
@@ -83,6 +83,12 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarClick)];
 }
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 
 -(void)rightBarClick
 {
@@ -175,7 +181,7 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
 {
     // 闲置物品的view
     CGFloat bottomX = 17;
-    CGFloat bottomY = 253 + 12;
+    CGFloat bottomY = 253 + 12 - 64;
     CGFloat bottomWidth = KWidth - 2 * bottomX;
     CGFloat bottomHeight = 200;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(bottomX,bottomY, bottomWidth, bottomHeight)];
@@ -193,7 +199,9 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
 {
     //设置顶部的标题和物品详情
     //标题的输入框
-    UITextField *titleText = [[UITextField alloc] initWithFrame:CGRectMake(16, 64 + 12, KWidth - 32, 35)];
+    CGFloat topY = 0;
+    
+    UITextField *titleText = [[UITextField alloc] initWithFrame:CGRectMake(16, topY + 12, KWidth - 32, 35)];
     titleText.layer.cornerRadius = 5.0;
 //    titleText.textColor = [UIColor grayColor];
     titleText.font = UIFontLarge;
@@ -206,7 +214,7 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
     [self.view addSubview:titleText];
     
     //输入物品详情
-    YYPlaceholderTextView *detailText = [[YYPlaceholderTextView alloc] initWithFrame:CGRectMake(16,64 + 59, KWidth - 32, 130)];
+    YYPlaceholderTextView *detailText = [[YYPlaceholderTextView alloc] initWithFrame:CGRectMake(16,topY + 59, KWidth - 32, 130)];
     detailText.layer.cornerRadius = 5.0;
     detailText.layer.borderWidth = 1.0;
     detailText.layer.masksToBounds = YES;
@@ -216,7 +224,7 @@ NSString *const commImageViewID = @"HouseImageViewCellIdentifier";
     [self.view addSubview:detailText];
 
     //输入物品价格
-    UIView *priceView = [[UIView alloc] initWithFrame:CGRectMake(16, 253 + 24 + 200, KWidth - 32, 123)] ;
+    UIView *priceView = [[UIView alloc] initWithFrame:CGRectMake(16, 253 + 24 + 200 - 64 + topY, KWidth - 32, 123)] ;
 //    priceView.backgroundColor = [UIColor orangeColor];
     self.priceView = priceView;
     [self.view addSubview:priceView];
