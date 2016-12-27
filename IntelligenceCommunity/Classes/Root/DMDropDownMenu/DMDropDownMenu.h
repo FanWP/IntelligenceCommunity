@@ -29,6 +29,7 @@
 
 - (void)p_setUpView;
 - (void)setListArray:(NSMutableArray *)arr;
+- (NSString *)getCurrentText;
 - (void)tapAction;
 - (void)setTitle:(NSString *)str;
 - (void)setTitleHeight:(CGFloat)height;

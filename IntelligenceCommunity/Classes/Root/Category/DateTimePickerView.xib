@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="981-zs-hcV" customClass="DateTimePickerView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rnm-KQ-7rV">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <connections>
+                        <action selector="backGroundBtnClicked:" destination="981-zs-hcV" eventType="touchUpInside" id="zxu-Oh-a12"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7A-LC-Xet">
+                    <rect key="frame" x="5" y="184" width="365" height="300"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="q2k-wf-odg">
+                            <rect key="frame" x="0.0" y="20" width="365" height="216"/>
+                            <date key="date" timeIntervalSinceReferenceDate="460383388.36114901">
+                                <!--2015-08-04 12:16:28 +0000-->
+                            </date>
+                            <locale key="locale" localeIdentifier="zh-Hans"/>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bba-tP-sou">
+                            <rect key="frame" x="25" y="256" width="145.5" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="yNh-rc-5Xs"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.72941176470000002" green="0.72549019609999998" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="removeBtnClick:" destination="981-zs-hcV" eventType="touchUpInside" id="kP7-Kg-IVF"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dq-vN-Wch">
+                            <rect key="frame" x="202.5" y="256" width="145.5" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="4KM-w4-A0H"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="0.35294117650000001" green="0.76470588240000004" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="sureBtnClick:" destination="981-zs-hcV" eventType="touchUpInside" id="dpb-Sh-whJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Bba-tP-sou" secondAttribute="bottom" constant="14" id="5ua-aM-NY5"/>
+                        <constraint firstItem="0dq-vN-Wch" firstAttribute="leading" secondItem="Bba-tP-sou" secondAttribute="trailing" constant="32" id="5xd-dx-pOM"/>
+                        <constraint firstItem="0dq-vN-Wch" firstAttribute="width" secondItem="Bba-tP-sou" secondAttribute="width" id="6aC-hQ-dnk"/>
+                        <constraint firstItem="q2k-wf-odg" firstAttribute="top" secondItem="W7A-LC-Xet" secondAttribute="top" constant="20" id="9I5-Vi-ge7"/>
+                        <constraint firstItem="0dq-vN-Wch" firstAttribute="leading" secondItem="Bba-tP-sou" secondAttribute="trailing" constant="32" id="Obw-9D-u50"/>
+                        <constraint firstAttribute="height" constant="300" id="UdR-Fb-cS8"/>
+                        <constraint firstAttribute="bottom" secondItem="0dq-vN-Wch" secondAttribute="bottom" constant="14" id="Yna-3t-dZf"/>
+                        <constraint firstItem="Bba-tP-sou" firstAttribute="leading" secondItem="W7A-LC-Xet" secondAttribute="leading" constant="25" id="bAC-4D-2dV"/>
+                        <constraint firstAttribute="trailing" secondItem="0dq-vN-Wch" secondAttribute="trailing" constant="17" id="c8q-kA-ZtL"/>
+                        <constraint firstItem="q2k-wf-odg" firstAttribute="leading" secondItem="W7A-LC-Xet" secondAttribute="leading" id="c8r-bA-Iud"/>
+                        <constraint firstItem="0dq-vN-Wch" firstAttribute="top" secondItem="q2k-wf-odg" secondAttribute="bottom" constant="20" id="f5x-Eo-7KQ"/>
+                        <constraint firstAttribute="trailing" secondItem="q2k-wf-odg" secondAttribute="trailing" id="qYV-Zg-gjd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="W7A-LC-Xet" firstAttribute="centerX" secondItem="Rnm-KQ-7rV" secondAttribute="centerX" id="1P0-pR-4pC"/>
+                <constraint firstAttribute="centerY" secondItem="W7A-LC-Xet" secondAttribute="centerY" id="784-zC-WcT"/>
+                <constraint firstItem="W7A-LC-Xet" firstAttribute="leading" secondItem="981-zs-hcV" secondAttribute="leading" constant="80" id="9S8-Wm-rAs"/>
+                <constraint firstAttribute="bottom" secondItem="W7A-LC-Xet" secondAttribute="bottom" constant="50" id="aQV-rf-7hv"/>
+                <constraint firstAttribute="trailing" secondItem="W7A-LC-Xet" secondAttribute="trailing" constant="5" id="aTM-hc-OJu"/>
+                <constraint firstItem="Rnm-KQ-7rV" firstAttribute="top" secondItem="981-zs-hcV" secondAttribute="top" id="cDz-R2-uyq"/>
+                <constraint firstItem="W7A-LC-Xet" firstAttribute="leading" secondItem="981-zs-hcV" secondAttribute="leading" constant="5" id="fa2-HK-URg"/>
+                <constraint firstAttribute="bottom" secondItem="W7A-LC-Xet" secondAttribute="bottom" constant="150" id="fbM-3P-HD0"/>
+                <constraint firstItem="W7A-LC-Xet" firstAttribute="centerY" secondItem="Rnm-KQ-7rV" secondAttribute="centerY" id="gJg-f7-btM"/>
+                <constraint firstAttribute="trailing" secondItem="W7A-LC-Xet" secondAttribute="trailing" constant="80" id="i2J-AL-5Yy"/>
+                <constraint firstItem="Rnm-KQ-7rV" firstAttribute="leading" secondItem="981-zs-hcV" secondAttribute="leading" id="iZs-md-X8h"/>
+                <constraint firstItem="W7A-LC-Xet" firstAttribute="top" secondItem="981-zs-hcV" secondAttribute="top" constant="150" id="j8d-bz-O7e"/>
+                <constraint firstAttribute="centerX" secondItem="W7A-LC-Xet" secondAttribute="centerX" id="mrp-uZ-ebG"/>
+                <constraint firstAttribute="trailing" secondItem="Rnm-KQ-7rV" secondAttribute="trailing" id="owu-6K-fWP"/>
+                <constraint firstAttribute="bottom" secondItem="Rnm-KQ-7rV" secondAttribute="bottom" id="te7-to-0pg"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="9S8-Wm-rAs"/>
+                    <exclude reference="aQV-rf-7hv"/>
+                    <exclude reference="784-zC-WcT"/>
+                    <exclude reference="j8d-bz-O7e"/>
+                    <exclude reference="mrp-uZ-ebG"/>
+                    <exclude reference="fbM-3P-HD0"/>
+                    <exclude reference="i2J-AL-5Yy"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="backGroundBtn" destination="Rnm-KQ-7rV" id="fAs-Pg-Ywj"/>
+                <outlet property="backgVIew" destination="W7A-LC-Xet" id="pgT-zI-XOt"/>
+                <outlet property="cannelBtn" destination="Bba-tP-sou" id="eH1-sr-Flw"/>
+                <outlet property="datePickerView" destination="q2k-wf-odg" id="Z1T-5i-KhV"/>
+                <outlet property="sureBtn" destination="0dq-vN-Wch" id="iwc-7v-yTd"/>
+            </connections>
+            <point key="canvasLocation" x="-439" y="106"/>
+        </view>
+    </objects>
+</document>

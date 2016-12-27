@@ -50,7 +50,7 @@
         CGSize maxSize = CGSizeMake(KWidth - 20, MAXFLOAT);
         
         //计算图片的高度
-        CGFloat imageH = [SmartCommunityPhotosView sizeWithCount:self.imagesArr.count].height;
+     //   CGFloat imageH = [SmartCommunityPhotosView sizeWithCount:self.imagesArr.count].height;
         
         NSString *str = _content;
         

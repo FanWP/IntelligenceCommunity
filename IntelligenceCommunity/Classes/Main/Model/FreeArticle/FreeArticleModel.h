@@ -72,7 +72,7 @@
 @property (nonatomic,copy) NSString *nickName;
 
 /** 用户的回复列表 */
-@property (nonatomic,strong) NSArray *friendsRefList;
+@property (nonatomic,strong) NSMutableArray *friendsRefList;
 
 
 

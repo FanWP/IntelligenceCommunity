@@ -60,6 +60,7 @@
         
         [self initializeComponent];
         self.accessoryType = UITableViewCellAccessoryNone;
+        self.backgroundColor = [UIColor redColor];
     }
     return self;
 }

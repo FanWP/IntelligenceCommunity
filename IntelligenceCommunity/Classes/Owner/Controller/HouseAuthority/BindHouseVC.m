@@ -32,18 +32,54 @@
     self.navigationItem.title = @"绑定房屋";
 
     [self initializeComponent];
+    
+    [self getOwnerPhoneNumber];
+}
 
+- (void)getOwnerPhoneNumber
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"buildNumber"] = _ridgepoleNumber;
+    parameters[@"unitNumber"] = _unitNumber;
+    parameters[@"roomNumber"] = _roomNumber;
+    parameters[@"sessionId"] = SessionID;
+    parameters[@"userId"] = UserID;
+    
+    ICLog_2(@"房屋信息参数：%@",parameters);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@find/house/single",URL_17_pro_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+     {
+         ICLog_2(@"房屋信息返回：%@",responseObject);
+         
+         NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+         
+         if (resultCode == 1000)
+         {
+             _phoneNumberLabel.text = [responseObject[@"body"] objectForKey:@"masterPhone"];
+         }
+         
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+         ICLog_2(@"房屋信息错误：%@",error);
+     }];
 }
 
 - (void)dataGetCaptchaBindHouse
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"buildNumber"] = @"1";
-    parameters[@"unitNumber"] = @"2";
-    parameters[@"roomNumber"] = @"3";
-    parameters[@"phoneLast4Bit"] = @"4202";
+    parameters[@"buildNumber"] = _ridgepoleNumber;
+    parameters[@"unitNumber"] = _unitNumber;
+    parameters[@"roomNumber"] = _roomNumber;
+    parameters[@"phoneLast4Bit"] = _phoneLast4Bit;
     parameters[@"sessionId"] = SessionID;
+    
+    ICLog_2(@"获取验证码参数：%@",parameters);
     
     NSString *urlString = [NSString stringWithFormat:@"%@send/bunding/code",URL_17_pro_api];
     
@@ -51,11 +87,11 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
-        ICLog_2(@"验证码返回：%@",responseObject);
+        ICLog_2(@"获取验证码返回：%@",responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
     {
-        ICLog_2(@"验证码错误：%@",error);
+        ICLog_2(@"获取验证码错误：%@",error);
     }];
 }
 
@@ -72,8 +108,7 @@
 {
     // 几栋几单元几号房 roomNumberLabel;
     _roomNumberLabel = [[UILabel alloc] init];
-    _roomNumberLabel.text = @"一栋一单元";
-//    _roomNumberLabel.text = [NSString stringWithFormat:@"%@",]
+    _roomNumberLabel.text = [NSString stringWithFormat:@"%@栋%@单元%@号",_ridgepoleNumber,_unitNumber,_roomNumber];
     _roomNumberLabel.font = UIFontLarge;
     [self.view addSubview:_roomNumberLabel];
     [_roomNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -259,6 +294,7 @@
         if (resultCode == 1000)
         {
             HouseMembersTableVC *houseMembersTableVC = [[HouseMembersTableVC alloc] init];
+            houseMembersTableVC.roomNumber = _roomNumberLabel.text;
             [self.navigationController pushViewController:houseMembersTableVC animated:YES];
         }
         else

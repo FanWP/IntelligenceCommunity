@@ -62,6 +62,12 @@ typedef enum : NSUInteger {
     NeighborhoodLostFound,   //失物招领
 } NeighborhoodCircleType;
 
+typedef enum : NSUInteger {
+    AllOrders = 0, // 全部订单
+    WaitPayment,   // 待付款
+    WaitReceive   // 待收货
+} MyOrdersType;
+
 
 
 // 屏幕宽、屏幕高

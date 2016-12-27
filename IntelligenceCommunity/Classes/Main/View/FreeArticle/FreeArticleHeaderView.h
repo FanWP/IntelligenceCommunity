@@ -10,10 +10,10 @@
 
 
 @class FreeArticleModel;
-@interface FreeArticleHeaderView : UIView
+@interface FreeArticleHeaderView : UITableViewHeaderFooterView
 
-
-
+/** 快速创建header */
++(instancetype)headerWithTableView:(UITableView *)tableView;
 /** 传入的模型 */
 @property (nonatomic,strong) FreeArticleModel *freeArticleModel;
 

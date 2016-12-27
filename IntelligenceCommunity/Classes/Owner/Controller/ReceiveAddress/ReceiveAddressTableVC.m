@@ -32,6 +32,8 @@
     
     self.navigationItem.title = @"收货地址";
     
+    self.tableView.backgroundColor = HexColor(0xeeeeee);
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self rightItemAddAddress];
@@ -107,16 +109,30 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return _receiveAddressArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _receiveAddressArray.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 120;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 10)];
+    
+    headerView.backgroundColor = HexColor(0xeeeeee);
+    
+    return headerView;
 }
 
 
@@ -133,10 +149,10 @@
         
     }
     
-    _receiveAddressModel = _receiveAddressArray[indexPath.row];
+    _receiveAddressModel = _receiveAddressArray[indexPath.section];
     
-    cell.defaultAddressButton.tag = indexPath.row;
-    cell.editAddressButton.tag = indexPath.row;
+    cell.defaultAddressButton.tag = indexPath.section;
+    cell.editAddressButton.tag = indexPath.section;
     
     if ([_receiveAddressModel.type isEqual:@"1"])
     {
@@ -190,7 +206,7 @@
              
              if (resultCode == 1000)
              {
-                 [HUD showSuccessMessage:@"编辑成功"];
+                 [HUD showSuccessMessage:@"设置成功"];
                  
                  _receiveAddressModel = nil;
                  
@@ -231,7 +247,7 @@
              
              if (resultCode == 1000)
              {
-                 [HUD showSuccessMessage:@"编辑成功"];
+                 [HUD showSuccessMessage:@"默认地址设置成功"];
                  
                  _receiveAddressModel = nil;
                  
@@ -239,7 +255,7 @@
              }
              else
              {
-                 [HUD showErrorMessage:@"编辑失败"];
+                 [HUD showErrorMessage:@"默认地址设置失败"];
              }
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)

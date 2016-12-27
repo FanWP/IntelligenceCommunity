@@ -37,6 +37,7 @@
 {
     self.listArr = arr;
     _curText.text = self.listArr[0];
+    [self.menuTableView reloadData];
 }
 
 
@@ -185,6 +186,12 @@
         [_delegate selectIndex:indexPath.row AtDMDropDownMenu:self];
     }
 }
+
+- (NSString *)getCurrentText
+{
+    return _curText.text;
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

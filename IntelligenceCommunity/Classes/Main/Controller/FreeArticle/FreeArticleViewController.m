@@ -53,6 +53,9 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 /** 标记设置回复或者是评论 isReply  是否是回复 */
 @property (nonatomic,assign) BOOL isReply;
 
+/** 记录当前单元格对应的组号，在评论或者回复成功的时候刷新调用 */
+@property (nonatomic,assign) NSInteger currentSession;
+
 
 @end
 
@@ -71,7 +74,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     [self setupRefresh];
     
     //添加搜索框
-    [self addSearchBar];
+   // [self addSearchBar];
 
     [self setupRightBar];
 
@@ -123,24 +126,26 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     //结束上拉刷新
     [self.tableView.mj_footer endRefreshing];
-    
-    
-    self.pageSize = 10;
     self.pageNum = 1;
+    self.pageSize = 10;
+
+    if (!_freeArticleURL && !_parmas) {
+        NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+        parmas[@"userId"] = UserID;
+        parmas[@"sessionId"] = SessionID;
+        parmas[@"pageSize"] = @(self.pageSize);
+        parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
+        self.parmas = parmas;
+        
+        NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
+        self.freeArticleURL = newurl;
+    }
+    self.parmas[@"pageNum"] = @(self.pageNum);
     
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
-    
-    MJRefreshLog(@"parmas---:%@",parmas);
-    
-    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
+    MJRefreshLog(@"self.parmas,self--:%@self.freeArticleURL--:%@",self.parmas,self.freeArticleURL);
     
     
-    [[AFHTTPSessionManager manager] POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    [[AFHTTPSessionManager manager] POST:self.freeArticleURL parameters:self.parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_header endRefreshing];
@@ -172,7 +177,6 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         
         MJRefreshLog(@"闲置物品下拉失败:%@",error);
         [self.tableView.mj_header endRefreshing];
-        
     }];
     
 
@@ -184,17 +188,24 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     //结束下拉刷新
     [self.tableView.mj_header endRefreshing];
     
-    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    parmas[@"userId"] = UserID;
-    parmas[@"sessionId"] = SessionID;
-    parmas[@"pageNum"] = @(self.pageNum);
-    parmas[@"pageSize"] = @(self.pageSize);
-    parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
     
-    MJRefreshLog(@"parmas---:%@",parmas);
-    NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
+    if (!_freeArticleURL && !_parmas) {
+        NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+        parmas[@"userId"] = UserID;
+        parmas[@"sessionId"] = SessionID;
+        parmas[@"pageNum"] = @(self.pageNum);
+        parmas[@"pageSize"] = @(self.pageSize);
+        parmas[@"type"] = @"2";//1是闲置物品 2是邻里圈
+        self.parmas = parmas;
+        
+        NSString*newurl = [NSString stringWithFormat:@"%@smart_community/find/sellingThings/list",Smart_community_URL];
+        self.freeArticleURL = newurl;
+    }
     
-    [[AFHTTPSessionManager manager]POST:newurl parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
+    MJRefreshLog(@"self.parmas,self--:%@self.freeArticleURL--:%@",self.parmas,self.freeArticleURL);
+    
+    
+    [[AFHTTPSessionManager manager]POST:self.freeArticleURL parameters:self.parmas progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self.tableView.mj_header endRefreshing];
         MJRefreshLog(@"闲置物品加载更多显示成功：%@",responseObject);
@@ -217,7 +228,11 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 
 - (void)setupRightBar
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarClick)];
+    UIButton *rightbutton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [rightbutton addTarget:self action:@selector(rightBarClick) forControlEvents:UIControlEventTouchUpInside];
+    [rightbutton setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightbutton];
 }
 
 
@@ -235,8 +250,8 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     _tableView.x = 0;
-    _tableView.y = 44;
-    _tableView.height = KHeight - _tableView.y;
+    _tableView.y = 0;
+    _tableView.height = KHeight - 49;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -293,10 +308,9 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 
-    
     //设置数据
     FreeArticleModel *model = _FreeArticleArr[section];
-    FreeArticleHeaderView *header = [[FreeArticleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 350)];
+    FreeArticleHeaderView *header = [FreeArticleHeaderView headerWithTableView:tableView];
     header.commentsButton.tag = section;
     [header.commentsButton addTarget:self action:@selector(commentsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     header.freeArticleModel = model;
@@ -347,6 +361,8 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     self.commonModel = _FreeArticleArr[button.tag];
     
+    _currentSession = button.tag;
+    
     self.isReply = NO;
     //创建并弹出键盘
     [self setupKeyboard];
@@ -379,6 +395,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     FreeArticleModel *model = _FreeArticleArr[indexPath.section];
     _replyModel = model.friendsRefList[indexPath.row];
+    _currentSession = indexPath.section;
     
     if ([_replyModel.userid isEqualToString:UserID]) {//自己给自己回复
         [HUD showErrorMessage:@"您不能给自己回复！"];
@@ -429,6 +446,31 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         if ([num integerValue] == 1000) {//发布成功
             [self.replyView removeFromSuperview];
             [HUD showSuccessMessage:@"发布成功"];
+
+            //更改本地数据
+            FreeArticleReplyModel *model = [[FreeArticleReplyModel alloc] init];
+            model.userid = UserID;
+            model.type = 1;
+            model.conment = self.replyTextView.text;
+            model.userNickName = @"本人";
+            if (_isReply) {//回复
+                model.flag = NO;
+                model.targetId = self.replyModel.targetId;
+                model.replyToUserId = self.replyModel.userid;
+                model.replyToUserNickName = self.replyModel.userNickName;
+                FreeArticleModel *model1 = _FreeArticleArr[self.currentSession];
+                [model1.friendsRefList addObject:model];
+            }else{//评论
+                model.flag = YES;
+                model.targetId = self.commonModel.ID;
+                //插入数据
+                [self.commonModel.friendsRefList addObject:model];
+            }
+            
+            
+            NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:_currentSession];
+            [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -448,8 +490,13 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     [self.replyView removeFromSuperview];
     
-    
     UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    
+    NSString *type = self.parmas[@"type"];
+    if ([type isEqualToString:@"3"]) {//我的发布
+        replyView.y = KHeight -  216  - 44 -64 - 49 - 90;
+    }
+    
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
     [self.view addSubview:replyView];

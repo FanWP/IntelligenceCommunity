@@ -11,4 +11,9 @@
 // 绑定房屋
 @interface BindHouseVC : UIViewController
 
+@property (nonatomic,copy) NSString *ridgepoleNumber;
+@property (nonatomic,copy) NSString *unitNumber;
+@property (nonatomic,copy) NSString *roomNumber;
+@property (nonatomic,copy) NSString *phoneLast4Bit;
+
 @end

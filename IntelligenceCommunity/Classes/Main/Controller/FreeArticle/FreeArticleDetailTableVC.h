@@ -11,6 +11,7 @@
 
 
 @class FreeArticleModel;
+
 @interface FreeArticleDetailTableVC : UIViewController
 
 /** 传入的闲置物品详情 */

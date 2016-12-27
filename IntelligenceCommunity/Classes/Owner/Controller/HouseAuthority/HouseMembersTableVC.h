@@ -10,4 +10,6 @@
 
 @interface HouseMembersTableVC : UITableViewController
 
+@property (nonatomic,copy) NSString *roomNumber;
+
 @end
