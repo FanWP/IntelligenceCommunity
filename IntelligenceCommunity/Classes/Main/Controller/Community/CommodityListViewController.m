@@ -46,11 +46,11 @@
 -(void)initializeComponent{
     
     //顶部店铺基本信息
-    CommodityListHeaderView *headerView = [[CommodityListHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80)];
+    CommodityListHeaderView *headerView = [[CommodityListHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), kGetVerticalDistance(196))];
     
     [self.view addSubview:headerView];
     //tableView双表
-    _popTableView = [[PopTableViewCustom alloc] initWithFrame:CGRectMake(0,80, ScreenWidth,ScreenHeight-80-50-10) leftArray:nil rightArray:nil];
+    _popTableView = [[PopTableViewCustom alloc] initWithFrame:CGRectMake(0,kGetVerticalDistance(196), ScreenWidth,ScreenHeight-kGetVerticalDistance(196)-50-10) leftArray:nil rightArray:nil];
     _popTableView.ViewController = self;
     _popTableView.delegate = self;
     [self.view addSubview:_popTableView];
@@ -64,6 +64,7 @@
         //去结算
     [_shoppingCartBottomView.goSettlementButton addTarget:self action:@selector(goSettlementButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_shoppingCartBottomView];
+    
     
     
 }
@@ -149,6 +150,7 @@
 #pragma mark -- 购物车按钮
 - (void)showshoppingCartlist:(UIButton *)button{
     
+    ICLog_2(@"%d",button.selected);
     __weak typeof(self) weakSelf = self;
     button.selected = !button.selected;
     if (button.selected) {
@@ -160,6 +162,13 @@
         bgView.alpha = .7;
         bgView.tag = 111;
         bgView.backgroundColor =[UIColor lightGrayColor];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeShopingCartViewAction:)];
+        tap.numberOfTouchesRequired = 1;
+        tap.numberOfTapsRequired = 1;
+        
+        [bgView addGestureRecognizer:tap];
+        
         [self.view addSubview:bgView];
         self.shoppingCartView.block = ^(NSMutableArray *darasArr,ProListModel *model){
             
@@ -183,6 +192,11 @@
         [self.shoppingCartView removeSubView:self];
     }
     
+}
+#pragma mark--点击移除购物车列表
+-(void)removeShopingCartViewAction:(UITapGestureRecognizer *)tap{
+    [self.shoppingCartView removeSubView:self];
+    _shoppingCartBottomView.shoppingCartButton.selected = NO;
 }
 #pragma mark -- 更新 数量 价钱
 - (void)updateShoppingCartWithMArray:(NSMutableArray *)darasArr model:(ProListModel *)model{

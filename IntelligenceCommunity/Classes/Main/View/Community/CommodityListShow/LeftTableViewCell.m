@@ -22,6 +22,7 @@
         [self initializeComponent];
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = HexColor(0xeeeeee);
     }
     return self;
 }
@@ -31,9 +32,9 @@
     
     _categoryTitleLabel = [[UILabel alloc] init];
     _categoryTitleLabel.text = @"分类名";;
-    _categoryTitleLabel.textColor = [UIColor grayColor];
+    _categoryTitleLabel.textColor = [UIColor blackColor];
     _categoryTitleLabel.textAlignment = NSTextAlignmentCenter;
-    _categoryTitleLabel.highlightedTextColor = [UIColor brownColor];
+    _categoryTitleLabel.highlightedTextColor = HexColor(0xb9d2f1);
     _categoryTitleLabel.font = UIFontLarge;
     [self.contentView addSubview:_categoryTitleLabel];
     [_categoryTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -51,11 +52,12 @@
         make.bottom.mas_equalTo(0);
         make.width.mas_equalTo(5);
     }];
-    self.remarkView.backgroundColor = [UIColor whiteColor];
+    _remarkView.hidden = YES;
+    self.remarkView.backgroundColor = HexColor(0xb9d2f1);
     [self.contentView addSubview:self.remarkView];
 
     _lineLayer = [[CALayer alloc] init];
-    _lineLayer.backgroundColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    _lineLayer.backgroundColor = HexColor(0xdcdcdc).CGColor;
     [self.contentView.layer  addSublayer:_lineLayer];
 }
 -(void)layoutSubviews{
@@ -72,7 +74,8 @@
     
     self.highlighted = selected;
     self.categoryTitleLabel.highlighted = selected;
-    self.remarkView.backgroundColor = selected ? [UIColor brownColor] : [UIColor whiteColor];
+    self.remarkView.hidden = selected ? NO : YES;
+    self.backgroundColor = selected ? [UIColor whiteColor] : HexColor(0xeeeeee);
 }
 
 @end

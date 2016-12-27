@@ -11,6 +11,8 @@
 //列表头视图
 @interface CommodityListHeaderView : UIView
 
+//背景高斯模糊图片
+@property(nonatomic,strong) UIImageView *bottomImageView;
 //店铺展示图片
 @property(nonatomic,strong) UIImageView *storeAdvertiseImageView;
 //店铺名称

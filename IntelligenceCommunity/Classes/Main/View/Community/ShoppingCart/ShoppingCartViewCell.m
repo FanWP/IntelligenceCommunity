@@ -67,20 +67,6 @@
         make.width.mas_equalTo(50);
         make.height.mas_equalTo(_commodityPriceLabel);
     }];
-    
-//    @property(nonatomic,strong) UIImageView *bottomImageView;
-    _bottomImageView = [[UIImageView alloc] init];
-    _bottomImageView.contentMode =  UIViewContentModeScaleAspectFill;
-    _bottomImageView.image = [UIImage imageNamed:@"addAndDeleteBottomView"];
-    [self addSubview:_bottomImageView];
-    _bottomImageView.userInteractionEnabled = YES;
-    [_bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(_commodityNameLabel.mas_centerY);
-        make.right.mas_equalTo(-20);
-        make.width.mas_equalTo(90);
-        make.height.mas_equalTo(30);
-    }];
-    
     //    //➕
     //    @property(nonatomic,strong) UIButton *addCommodityButton;
     _addCommodityButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -89,8 +75,8 @@
     _addCommodityButton.tag = 1;
     [self addSubview:_addCommodityButton];
     [_addCommodityButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(_bottomImageView.mas_centerY);
-        make.right.equalTo(_bottomImageView.mas_right).offset(0);
+        make.centerY.mas_equalTo(weakSelf.mas_centerY);
+        make.right.mas_offset(-10);
         make.width.height.mas_equalTo(30);
     }];
     //    //商品数量
@@ -109,7 +95,7 @@
     //    //减
     //    @property(nonatomic,strong) UIButton *deleteCommodityButton;
     _deleteCommodityButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_deleteCommodityButton setTitle:@"-" forState:UIControlStateNormal];
+    [_deleteCommodityButton setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateNormal];
     [_deleteCommodityButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     _deleteCommodityButton.tag = 2;
     [_deleteCommodityButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];

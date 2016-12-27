@@ -105,14 +105,14 @@ NSString *const CommonHeaderViewIdentifier = @"commonHeaderViewIdentifier";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableView == _rightTableView) {
-        return 140.f;
+        return kGetVerticalDistance(170);
     }
-    return 50;
+    return kGetVerticalDistance(104);
 }
 
 #pragma mark--双表联动
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return tableView==_rightTableView ? 30.0f : .1f;
+    return tableView==_rightTableView ? kGetVerticalDistance(50) : .1f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
@@ -289,6 +289,8 @@ NSString *const CommonHeaderViewIdentifier = @"commonHeaderViewIdentifier";
         _leftTableView.dataSource = self;
         _leftTableView.showsVerticalScrollIndicator = NO;
         _leftTableView.showsHorizontalScrollIndicator = NO;
+        _leftTableView.backgroundColor = HexColor(0xeeeeee);
+        _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
         _leftTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [_leftTableView registerClass:[LeftTableViewCell class] forCellReuseIdentifier:LeftTableViewCellIdentifier];
@@ -310,7 +312,7 @@ NSString *const CommonHeaderViewIdentifier = @"commonHeaderViewIdentifier";
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-    _leftTableView.frame = CGRectMake(0, 0, self.frame.size.width/4,self.bounds.size.height-50);
+    _leftTableView.frame = CGRectMake(0, 0,kGetHorizontalDistance(216),self.bounds.size.height-50);
     _rightTableView.frame = CGRectMake(CGRectGetMaxX(_leftTableView.frame), CGRectGetMinY(_leftTableView.frame),ScreenWidth - CGRectGetWidth(_leftTableView.frame),self.bounds.size.height-50);
 }
 #pragma mark--右边目录
@@ -322,6 +324,7 @@ NSString *const CommonHeaderViewIdentifier = @"commonHeaderViewIdentifier";
         _rightTableView.dataSource = self;
         _rightTableView.showsHorizontalScrollIndicator = NO;
         _rightTableView.showsVerticalScrollIndicator = NO;
+        _rightTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _rightTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [self addSubview:_rightTableView];
         
@@ -358,7 +361,7 @@ NSString *const CommonHeaderViewIdentifier = @"commonHeaderViewIdentifier";
         //        [_layer setCornerRadius:CGRectGetHeight([_layer bounds]) / 2];
         _layer.masksToBounds = YES;
         // 导航64
-        _layer.position = CGPointMake(rect.origin.x, CGRectGetMidY(rect)-80);
+        _layer.position = CGPointMake(rect.origin.x, CGRectGetMidY(rect)-kGetVerticalDistance(196));
         //        [_tableView.layer addSublayer:_layer];
         [self.layer addSublayer:_layer];
         
@@ -366,7 +369,7 @@ NSString *const CommonHeaderViewIdentifier = @"commonHeaderViewIdentifier";
         [path moveToPoint:_layer.position];
         //        (SCREEN_WIDTH - 60), 0, -50, 50)
         //toPoint:落点        //controlPoint:控制点
-        [path addQuadCurveToPoint:CGPointMake(38, ScreenHeight - 40) controlPoint:CGPointMake(ScreenWidth/4,rect.origin.y-80)];
+        [path addQuadCurveToPoint:CGPointMake(38, ScreenHeight - kGetVerticalDistance(204)) controlPoint:CGPointMake(kGetHorizontalDistance(150),rect.origin.y-180)];
         //        [_path addLineToPoint:CGPointMake(SCREEN_WIDTH-40, 30)];
         [self groupAnimation:(path)];
     }

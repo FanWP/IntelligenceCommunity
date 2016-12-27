@@ -189,18 +189,9 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
             
             cell.feeMoneyCountLabel.text = [NSString stringWithFormat:@"￥%@",[model.price stringValue]];
         }
-        //        if (indexPath.row == 0) {
-        //            cell.propertyFeeTitleLabel.text = @"公共绿化的养护";
-        //        }else if (indexPath.row == 1){
-        //            cell.propertyFeeTitleLabel.text = @"车辆停放管理";
-        //        }else{
-        //            cell.propertyFeeTitleLabel.text = @"物业公共设施维护";
-        //        }
-        
         return cell;
     }else if (indexPath.section == 6){
         SpecialOffersListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ParkingFeeSpecialOffersListViewCellIdentifier forIndexPath:indexPath];
-        //            cell.specialOffersDetailLabel.text = @"一次性预交1年减免一个月";
         
         SpecialOffersListModel *model = _specialOffersListMArray[indexPath.row];
         if (model.discountcontent && model.discountcontent.length > 0) {
@@ -235,52 +226,52 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
         
         switch (section) {
             case 1:{
-                otherInfoHeaderView.titleLabel.textColor = [UIColor grayColor];
+                otherInfoHeaderView.titleLabel.textColor = [UIColor blackColor];
                 otherInfoHeaderView.titleLabel.text = @"缴费账期:";
                 if (_propertyFeeOtherInfoModel.feeperiod.length > 0) {
                     
                     otherInfoHeaderView.detailLabel.text = _propertyFeeOtherInfoModel.feeperiod;
                 }
-            }
                 break;
+            }
             case 2:{
                 otherInfoHeaderView.titleLabel.text = @"应缴金额:";
                 if (_propertyFeeOtherInfoModel.totalFee && [_propertyFeeOtherInfoModel.totalFee stringValue].length > 0) {
                     
                     otherInfoHeaderView.detailLabel.text = [NSString stringWithFormat:@"￥%@",_propertyFeeOtherInfoModel.totalFee];
                 }
-            }
                 break;
+            }
             case 3:{
                 otherInfoHeaderView.titleLabel.text = @"缴费账号:";
                 if (_propertyFeeOtherInfoModel.feeAccount) {
                     
                     otherInfoHeaderView.detailLabel.text = [NSString stringWithFormat:@"%@",_propertyFeeOtherInfoModel.feeAccount];
                 }
-            }
                 break;
+            }
             case 4:{
                 otherInfoHeaderView.titleLabel.text = @"户     名:";
                 if (_propertyFeeOtherInfoModel.houseMaster) {
                     
                     otherInfoHeaderView.detailLabel.text = _propertyFeeOtherInfoModel.houseMaster;
                 }
-            }
                 break;
+            }
             case 5:{
                 otherInfoHeaderView.titleLabel.text = @"住户信息:";
                 if (_propertyFeeOtherInfoModel.houseInfo && _propertyFeeOtherInfoModel.houseInfo.length > 0) {
                     
                     otherInfoHeaderView.detailLabel.text = _propertyFeeOtherInfoModel.houseInfo;
                 }
-            }
                 break;
+            }
             case 6:{
                 otherInfoHeaderView.titleLabel.text = @"优惠活动:";
                 otherInfoHeaderView.detailLabel.text = @"";
                 otherInfoHeaderView.titleLabel.textColor = [UIColor redColor];
-            }
                 break;
+            }
                 
             default:
                 break;

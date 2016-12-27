@@ -35,14 +35,14 @@
 //    @property(nonatomic,strong) UILabel *titleLabel;
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.text = @"缴费明细";
-    _titleLabel.textColor = [UIColor grayColor];
+    _titleLabel.textColor = [UIColor blackColor];
     _titleLabel.textAlignment = NSTextAlignmentLeft;
     _titleLabel.font = UIFontNormal;
     [self.contentView addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(weakSelf.centerY);
         make.left.mas_offset(kGetHorizontalDistance(30));
-        make.width.mas_offset(100);
+        make.width.mas_offset(70);
         make.height.mas_offset(30);
     }];
 //    @property(nonatomic,strong) UILabel *totalTitleLabel;     //@"明细单"

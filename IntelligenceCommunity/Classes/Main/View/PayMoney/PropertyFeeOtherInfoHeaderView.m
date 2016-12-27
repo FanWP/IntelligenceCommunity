@@ -33,12 +33,12 @@
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(weakSelf.centerY);
         make.left.mas_equalTo(kGetHorizontalDistance(30));
-        make.width.mas_equalTo(100);
+        make.width.mas_equalTo(70);
     }];
     //对应详情
 //    @property(nonatomic,strong) UILabel *detailLabel;
     _detailLabel = [[UILabel alloc] init];
-    _detailLabel.textColor = [UIColor grayColor];
+    _detailLabel.textColor = [UIColor blackColor];
     _detailLabel.textAlignment = NSTextAlignmentLeft;
     _detailLabel.font = UIFontSmall;
     [self.contentView addSubview:_detailLabel];

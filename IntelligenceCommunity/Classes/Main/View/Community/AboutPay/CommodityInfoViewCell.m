@@ -35,7 +35,7 @@
     [self.contentView addSubview:_selectButton];
     [_selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.mas_offset(0);
-        make.width.mas_offset(60);
+        make.width.mas_offset(80);
     }];
 //    //商品图片
 //    @property(nonatomic,strong) UIImageView *commodityImageView;
@@ -47,19 +47,20 @@
     [_commodityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(_selectButton.mas_centerY);
         make.left.mas_equalTo(_selectButton.mas_right).offset(5);
-        make.width.height.mas_offset(60);
+        make.width.mas_offset(kGetHorizontalDistance(110));
+        make.height.mas_offset(kGetVerticalDistance(90));
     }];
 //    //商品名称
 //    @property(nonatomic,strong) UILabel *commodityNameLabel;
     _commodityNameLabel = [[UILabel alloc] init];
     _commodityNameLabel.text = @"商品名称";
-    _commodityNameLabel.textColor = [UIColor blackColor];
+    _commodityNameLabel.textColor = HexColor(0x222323);
     _commodityNameLabel.textAlignment = NSTextAlignmentLeft;
-    _commodityNameLabel.font = UIFontNormal;
+    _commodityNameLabel.font = UIFontLarge;
     [self.contentView addSubview:_commodityNameLabel];
     [_commodityNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_commodityImageView.mas_top).offset(0);
-        make.left.equalTo(_commodityImageView.mas_right).offset(5);
+        make.top.equalTo(_commodityImageView.mas_top).offset(-5);
+        make.left.equalTo(_commodityImageView.mas_right).offset(kGetHorizontalDistance(40));
         make.width.mas_offset(100);
         make.height.mas_offset(30);
     }];
@@ -69,11 +70,11 @@
     _commodityPriceLabel.text = @"￥ 120.00";
     _commodityPriceLabel.textColor = [UIColor grayColor];
     _commodityPriceLabel.textAlignment = NSTextAlignmentRight;
-    _commodityPriceLabel.font = UIFontNormal;
+    _commodityPriceLabel.font = UIFontLarge;
     [self.contentView addSubview:_commodityPriceLabel];
     [_commodityPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(_commodityNameLabel.mas_centerY);
-        make.right.mas_offset(-10);
+        make.right.mas_offset(-kGetHorizontalDistance(30));
         make.width.mas_offset(100);
         make.height.mas_offset(30);
 
@@ -82,9 +83,9 @@
 //    @property(nonatomic,strong) UILabel *commodityDescriptionLabel;
     _commodityDescriptionLabel = [[UILabel alloc] init];
     _commodityDescriptionLabel.text = @"服务便民";
-    _commodityDescriptionLabel.textColor = [UIColor grayColor];
+    _commodityDescriptionLabel.textColor = HexColor(0x888888);
     _commodityDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-    _commodityDescriptionLabel.font = UIFontNormal;
+    _commodityDescriptionLabel.font = UIFontSmall;
     [self.contentView addSubview:_commodityDescriptionLabel];
     [_commodityDescriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_commodityNameLabel);
@@ -102,7 +103,7 @@
     [self.contentView addSubview:_commodityCountLabel];
     [_commodityCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(_commodityDescriptionLabel.mas_centerY);
-        make.right.mas_equalTo(-10);
+        make.right.mas_equalTo(-kGetHorizontalDistance(34));
         make.width.mas_equalTo(80);
         make.height.mas_equalTo(20);
     }];

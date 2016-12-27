@@ -37,40 +37,40 @@
     [self addSubview:_advertiseImageView];
     [_advertiseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_offset(0);
-        make.height.mas_offset(250);
+        make.height.mas_offset(kGetVerticalDistance(316));
     }];
     //名称
 //    @property(nonatomic,strong) UIView *bottomView;
     _bottomView = [[UIView alloc] init];
-    _bottomView.backgroundColor = [UIColor grayColor];
-    _bottomView.alpha = .8f;
+    _bottomView.backgroundColor = HexColor(0x313131);
+    _bottomView.alpha = .3f;
     [self addSubview:_bottomView];
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(_advertiseImageView);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(kGetVerticalDistance(48));
     }];
 //    @property(nonatomic,strong) UILabel *commodityNameLabel;
     _commodityNameLabel = [[UILabel alloc] init];
-    _commodityNameLabel.text = @"名称:商品详情--商品详情--商品详情--商品详情";
+    _commodityNameLabel.text = @"名称:商品名称";
     _commodityNameLabel.textColor = [UIColor whiteColor];
     _commodityNameLabel.textAlignment = NSTextAlignmentLeft;
     _commodityNameLabel.font = UIFontLarge;
     [self addSubview:_commodityNameLabel];
     [_commodityNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.right.mas_equalTo(_bottomView);
-        make.left.equalTo(_bottomView.mas_left).offset(20);
+        make.left.equalTo(_bottomView.mas_left).offset(kGetHorizontalDistance(28));
     }];
 //    //价格
 //    @property(nonatomic,strong) UILabel *commodityPriceLabel;
     _commodityPriceLabel = [[UILabel alloc] init];
     _commodityPriceLabel.text = @"￥666.66元";
-    _commodityPriceLabel.textColor = [UIColor redColor];
+    _commodityPriceLabel.textColor = HexColor(0xfe9913);
     _commodityPriceLabel.textAlignment =  NSTextAlignmentLeft;
     _commodityPriceLabel.font = UIFontLargest;
     [self addSubview:_commodityPriceLabel];
     [_commodityPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_advertiseImageView.mas_bottom).offset(10);
-        make.left.mas_equalTo(20);
+        make.left.mas_equalTo(kGetHorizontalDistance(28));
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(40);
     }];
@@ -79,12 +79,11 @@
     //    @property(nonatomic,strong) UIImageView *bottomImageView;
     _bottomImageView = [[UIImageView alloc] init];
     _bottomImageView.contentMode =  UIViewContentModeScaleAspectFill;
-    _bottomImageView.image = [UIImage imageNamed:@"addAndDeleteBottomView"];
     [self addSubview:_bottomImageView];
     _bottomImageView.userInteractionEnabled = YES;
     [_bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(_commodityPriceLabel.mas_centerY);
-        make.right.mas_equalTo(-20);
+        make.right.mas_equalTo(-kGetHorizontalDistance(26));
         make.width.mas_equalTo(90);
         make.height.mas_equalTo(30);
     }];
@@ -117,7 +116,7 @@
     //    //减
     //    @property(nonatomic,strong) UIButton *deleteCommodityButton;
     _deleteCommodityButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_deleteCommodityButton setTitle:@"-" forState:UIControlStateNormal];
+    [_deleteCommodityButton setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateNormal];
     [_deleteCommodityButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     _deleteCommodityButton.tag = 2;
     [_deleteCommodityButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
@@ -129,7 +128,7 @@
     }];
 
     _lineLayer = [[CALayer alloc] init];
-    _lineLayer.backgroundColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    _lineLayer.backgroundColor = HexColor(0xeeeeee).CGColor;
     [self.layer addSublayer:_lineLayer];
     
 }
@@ -143,7 +142,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    _lineLayer.frame = CGRectMake(0, self.bounds.size.height - 10, self.bounds.size.width, 10);
+    _lineLayer.frame = CGRectMake(0, self.bounds.size.height - kGetVerticalDistance(18), self.bounds.size.width, kGetVerticalDistance(18));
     
 }
 

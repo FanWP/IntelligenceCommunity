@@ -32,7 +32,7 @@
     return self;
 }
 -(void)initializeComponent{
-    self.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
     //商品
 //    @property(nonatomic,strong) UIImageView *commodityImageView;
 //    @property(nonatomic,strong) UILabel *commodityLabel;
@@ -41,10 +41,9 @@
     _commodityImageView.image = [UIImage imageNamed:@"shop"];
     [self.contentView addSubview:_commodityImageView];
     [_commodityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
+        make.top.mas_equalTo(10);
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(ScreenWidth/4);
-        make.height.mas_equalTo(30);
     }];
     _commodityLabel = [[UILabel alloc] init];
 //    _commodityLabel.text = @"商品";

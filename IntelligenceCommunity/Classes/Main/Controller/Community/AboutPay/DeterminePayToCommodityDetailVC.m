@@ -71,9 +71,9 @@ NSString *const BottomViewCellIdentifier = @"commodityDetailBottomViewCellIdenti
             NSString *string = _model.introduction;
             CGRect rect = [string boundingRectWithSize:CGSizeMake(ScreenWidth-60, 0) options:NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil];
             
-            return rect.size.height+320;
+            return rect.size.height+kGetVerticalDistance(450);
         }else{
-            return 320;
+            return kGetVerticalDistance(380+44);
         }
     }
     return 0;

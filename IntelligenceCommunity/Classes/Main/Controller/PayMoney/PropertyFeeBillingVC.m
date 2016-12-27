@@ -26,7 +26,6 @@ NSString *const PropertyFeeBillingDetailCellIdentifier = @"propertyFeeBillingDet
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self defaultViewStyle];
-    self.navigationItem.title = @"账单详情";
  
     [self initializeComponent];
 }
@@ -37,6 +36,7 @@ NSString *const PropertyFeeBillingDetailCellIdentifier = @"propertyFeeBillingDet
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     self.automaticallyAdjustsScrollViewInsets = YES;
     
@@ -71,8 +71,9 @@ NSString *const PropertyFeeBillingDetailCellIdentifier = @"propertyFeeBillingDet
             break;
     }
     [HUD showProgress:@"正在加载数据"];
-    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:URLString method:RequestMethodPost timeout:20 parameters:parametersDictionary success:^(id  _Nullable responseObject) {
+    [[RequestManager manager] SessionRequestWithType:Pro_api requestWithURLString:URLString requestType:RequestMethodPost requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
         [HUD dismiss];
+
         ICLog(@"%@",responseObject);
         [_propertyFeeBillingModel setValuesForKeysWithDictionary:responseObject[@"body"]];
         
@@ -80,7 +81,6 @@ NSString *const PropertyFeeBillingDetailCellIdentifier = @"propertyFeeBillingDet
             [_tableView reloadData];
         });
 
-        
     } faile:^(NSError * _Nullable error) {
         [HUD dismiss];
         ICLog(@"%@",error);

@@ -35,8 +35,8 @@ NSString *const ServiceListCellIdentifier = @"ServiceListCellIdentifier";
     [super viewWillAppear:animated];
     self.tabBarController.navigationItem.title = @"智慧社区";
     
-//    CommodityListViewController *vc = [[CommodityListViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
+    CommodityListViewController *vc = [[CommodityListViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

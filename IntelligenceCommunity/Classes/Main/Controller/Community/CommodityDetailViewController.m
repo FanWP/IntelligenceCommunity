@@ -39,7 +39,7 @@ NSString *const CommodityDetailBottomViewCellIdentifier = @"commodityDetailBotto
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"商品详情";
     self.navigationController.navigationBar.translucent = NO;
-    
+    self.view.backgroundColor = HexColor(0xeeeeee);
     
     
     
@@ -144,7 +144,7 @@ NSString *const CommodityDetailBottomViewCellIdentifier = @"commodityDetailBotto
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
-        return 320;
+        return kGetHorizontalDistance(424);
     }else if (indexPath.row == 1){
 //        NSString *string = @"玩转简书的第一步，从这个专题开始。想上首页热门榜么？好内容想被更多人看到么？来投稿吧！如果被拒也不要灰心哦～入选文章会进一个队列挨个上首页，请耐心等待。投稿必须原创。如果发现有非原创类内容投稿，经网友举报、举证，确认后视情节轻重进行处罚，严重者将列入黑名单，再不采用。为了确保用户阅读体验，对于首页文章的格式，提出以下规范：";
         if (_model.introduction && _model.introduction.length > 0) {
@@ -152,9 +152,9 @@ NSString *const CommodityDetailBottomViewCellIdentifier = @"commodityDetailBotto
             NSString *string = _model.introduction;
             CGRect rect = [string boundingRectWithSize:CGSizeMake(ScreenWidth-60, 0) options:NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil];
             
-            return rect.size.height+320;
+            return rect.size.height+kGetVerticalDistance(450);
         }else{
-            return 320;
+            return kGetVerticalDistance(380+44);
         }
     }
     return 0;
@@ -185,12 +185,12 @@ NSString *const CommodityDetailBottomViewCellIdentifier = @"commodityDetailBotto
     }else{
         
         CommodityDetailBottomViewCell *bottomCell = [tableView dequeueReusableCellWithIdentifier:CommodityDetailBottomViewCellIdentifier forIndexPath:indexPath];
-//        bottomCell.commodityDetailLabel.text = @"玩转简书的第一步，从这个专题开始。想上首页热门榜么？好内容想被更多人看到么？来投稿吧！如果被拒也不要灰心哦～入选文章会进一个队列挨个上首页，请耐心等待。投稿必须原创。如果发现有非原创类内容投稿，经网友举报、举证，确认后视情节轻重进行处罚，严重者将列入黑名单，再不采用。为了确保用户阅读体验，对于首页文章的格式，提出以下规范：";
         
         if (_model.introduction && _model.introduction.length > 0) {
             
             bottomCell.commodityDetailLabel.text = _model.introduction;
         }
+//        bottomCell.commodityDetailLabel.text = @"玩转简书的第一步，从这个专题开始。想上首页热门榜么？好内容想被更多人看到么？来投稿吧！如果被拒也不要灰心哦～入选文章会进一个队列挨个上首页，请耐心等待。投稿必须原创。如果发现有非原创类内容投稿，经网友举报、举证，确认后视情节轻重进行处罚，严重者将列入黑名单，再不采用。为了确保用户阅读体验，对于首页文章的格式，提出以下规范：";
         return bottomCell;
     }
 }

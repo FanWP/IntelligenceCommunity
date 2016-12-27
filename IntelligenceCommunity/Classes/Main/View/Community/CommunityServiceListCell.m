@@ -14,6 +14,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.accessoryType = UITableViewCellAccessoryNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = HexColor(0xeeeeee);
         [self initializeComponent];
     }
     return self;
@@ -26,7 +28,7 @@
     _advertiseImageView.image = [UIImage imageNamed:@"3.jpg"];
     [self addSubview:_advertiseImageView];
     [_advertiseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
+        make.top.mas_equalTo(kGetVerticalDistance(18));
         make.left.bottom.right.mas_equalTo(0);
     }];
 }

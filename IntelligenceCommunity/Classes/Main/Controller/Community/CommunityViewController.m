@@ -36,7 +36,6 @@ NSString *const CommunityServiceListCellIdentifier = @"communityServiceListCellI
     self.navigationItem.title = @"社区服务";
     [self defaultViewStyle];
     
-    
     if (!_dataMArray) {
         _dataMArray = [NSMutableArray new];
     }
@@ -103,7 +102,7 @@ NSString *const CommunityServiceListCellIdentifier = @"communityServiceListCellI
     return 200;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 65;
+    return 60;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     

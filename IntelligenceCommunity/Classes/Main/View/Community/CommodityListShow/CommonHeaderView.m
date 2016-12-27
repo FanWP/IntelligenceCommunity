@@ -16,6 +16,7 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
         [self initializeComponent];
+        self.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return self;
 }
@@ -23,7 +24,7 @@
     
     _commodityCategoryNameLabel = [[UILabel alloc] init];
     _commodityCategoryNameLabel.text = @"商品分类名称";
-    _commodityCategoryNameLabel.textColor = [UIColor brownColor];
+    _commodityCategoryNameLabel.textColor = HexColor(0x575757);
     _commodityCategoryNameLabel.textAlignment = NSTextAlignmentLeft;
     _commodityCategoryNameLabel.font = UIFontNormal;
     [self.contentView addSubview:_commodityCategoryNameLabel];

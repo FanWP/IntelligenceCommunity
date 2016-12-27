@@ -195,7 +195,7 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
         }
         if (model.price && [model.price stringValue].length > 0) {
             
-            cell.feeMoneyCountLabel.text = [NSString stringWithFormat:@"￥%@",[model.price stringValue]];
+            cell.feeMoneyCountLabel.text = [NSString stringWithFormat:@"￥ %@ 元",[model.price stringValue]];
         } 
         return cell;
     }else if (indexPath.section == 6){
@@ -234,7 +234,7 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
         
         switch (section) {
             case 1:{
-                otherInfoHeaderView.titleLabel.textColor = [UIColor grayColor];
+                otherInfoHeaderView.titleLabel.textColor = [UIColor blackColor];
                 otherInfoHeaderView.titleLabel.text = @"缴费账期:";
                 if (_propertyFeeOtherInfoModel.feeperiod.length > 0) {
                     

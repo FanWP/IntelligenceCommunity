@@ -14,6 +14,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self initializeComponent];
+        self.backgroundColor = HexColor(0xeeeeee);
     }
     return  self;
 }
@@ -30,7 +31,7 @@
     [self addSubview:_propertyFeeTitleLabel];
     [_propertyFeeTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.mas_centerY).offset(0);
-        make.left.mas_offset(kGetHorizontalDistance(30));
+        make.left.mas_offset(kGetHorizontalDistance(160));
         make.width.mas_offset(100);
     }];
     

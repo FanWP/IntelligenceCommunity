@@ -18,6 +18,9 @@
 @property(nonatomic,strong) UILabel *businessHoursLabel;
 //签名
 @property(nonatomic,strong) UILabel *signatureLabel;
+
+//综合评分
+@property(nonatomic,strong) UILabel *scoreCountLabel;
 //月销量
 @property(nonatomic,strong) UILabel *monthSaleCountLabel;
 

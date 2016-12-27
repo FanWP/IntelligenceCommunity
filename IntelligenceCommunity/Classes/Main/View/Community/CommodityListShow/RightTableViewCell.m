@@ -10,6 +10,7 @@
 
 @interface RightTableViewCell ()
 
+@property(nonatomic,strong) CALayer *lineLayer;
 
 @end
 
@@ -27,57 +28,46 @@
 }
 -(void)initializeComponent{
     
+    __weak typeof(self) weakSelf = self;
     //商品图片
 //    @property(nonatomic,strong) UIImageView *commodityImageView;
     _commodityImageView = [[UIImageView alloc] init];
-    _commodityImageView.contentMode = UIViewContentModeCenter;
+    _commodityImageView.contentMode = UIViewContentModeScaleAspectFill;
     _commodityImageView.clipsToBounds = YES;
     _commodityImageView.image = [UIImage imageNamed:@"3.jpg"];
     [self addSubview:_commodityImageView];
     [_commodityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(10);
-        make.left.mas_equalTo(20);
-        make.width.height.mas_equalTo(80);
+        make.centerY.mas_equalTo(weakSelf.centerY).offset(0);
+        make.left.mas_equalTo(kGetHorizontalDistance(36));
+        make.width.height.mas_equalTo(kGetVerticalDistance(128));
     }];
 //    //商品名字
 //    @property(nonatomic,strong) UILabel *commodityNameLabel;
     _commodityNameLabel = [[UILabel alloc] init];
     _commodityNameLabel.text = @"商品名称";
-    _commodityNameLabel.textColor = [UIColor grayColor];
+    _commodityNameLabel.textColor = HexColor(0x2f2f2f);
     _commodityNameLabel.textAlignment = NSTextAlignmentLeft;
-    _commodityNameLabel.font = [UIFont systemFontOfSize:14];
+    _commodityNameLabel.font = UIFontLarge;
     _commodityPriceLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [self addSubview:_commodityNameLabel];
     [_commodityNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(_commodityImageView.mas_centerY);
-        make.left.equalTo(_commodityImageView.mas_right).offset(20);
+        make.top.mas_offset(kGetVerticalDistance(30));
+        make.left.equalTo(_commodityImageView.mas_right).offset(kGetHorizontalDistance(18));
         make.right.mas_equalTo(-20);
         make.height.mas_equalTo(30);
     }];
 //    //商品价格
 //    @property(nonatomic,strong) UILabel *commodityPriceLabel;
     _commodityPriceLabel = [[UILabel alloc] init];
-    _commodityPriceLabel.text = @"￥25.00";
-    _commodityPriceLabel.textColor = [UIColor grayColor];
+    _commodityPriceLabel.text = @"￥00.00";
+    _commodityPriceLabel.textColor = HexColor(0xfba152);
     _commodityPriceLabel.textAlignment = NSTextAlignmentLeft;
-    _commodityPriceLabel.font = [UIFont systemFontOfSize:14];
+    _commodityPriceLabel.font = UIFontNormal;
     [self addSubview:_commodityPriceLabel];
     [_commodityPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_commodityImageView.mas_bottom).offset(10);
-        make.left.equalTo(_commodityImageView.mas_left).offset(0);
+        make.top.equalTo(_commodityNameLabel.mas_bottom).offset(kGetVerticalDistance(16));
+        make.left.equalTo(_commodityNameLabel.mas_left).offset(0);
         make.width.mas_equalTo(100);
-        make.height.mas_equalTo(30);
-    }];
-    
-    _bottomImageView = [[UIImageView alloc] init];
-    _bottomImageView.contentMode =  UIViewContentModeScaleAspectFill;
-    _bottomImageView.image = [UIImage imageNamed:@"addAndDeleteBottomView"];
-    [self addSubview:_bottomImageView];
-    _bottomImageView.userInteractionEnabled = YES;
-    [_bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(_commodityPriceLabel.mas_centerY);
-        make.right.mas_equalTo(-20);
-        make.width.mas_equalTo(90);
         make.height.mas_equalTo(30);
     }];
     
@@ -89,8 +79,8 @@
     _addCommodityButton.tag = 1;
     [self addSubview:_addCommodityButton];
     [_addCommodityButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(_bottomImageView.mas_centerY);
-        make.right.equalTo(_bottomImageView.mas_right).offset(0);
+        make.bottom.mas_offset(-kGetVerticalDistance(0));
+        make.right.mas_offset(-kGetHorizontalDistance(26));
         make.width.height.mas_equalTo(30);
     }];
 //    //商品数量
@@ -109,7 +99,7 @@
 //    //减
 //    @property(nonatomic,strong) UIButton *deleteCommodityButton;
     _deleteCommodityButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_deleteCommodityButton setTitle:@"-" forState:UIControlStateNormal];
+    [_deleteCommodityButton setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateNormal];
     [_deleteCommodityButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     _deleteCommodityButton.tag = 2;
     [_deleteCommodityButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
@@ -120,6 +110,11 @@
         make.width.height.equalTo(_addCommodityButton);
     }];
 
+    
+    _lineLayer = [[CALayer alloc] init];
+    _lineLayer.backgroundColor = HexColor(0xe5e5e5).CGColor;
+    [self.contentView.layer addSublayer:_lineLayer];
+    
 }
 -(void)buttonAction:(UIButton *)button{
     
@@ -128,7 +123,11 @@
     }
 }
 
-
+-(void)layoutSubviews{
+    
+    [super layoutSubviews];
+    _lineLayer.frame = CGRectMake(0, self.height-1, self.width, 1);
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

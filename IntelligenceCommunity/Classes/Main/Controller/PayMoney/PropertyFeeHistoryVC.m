@@ -43,6 +43,7 @@ NSString *const PropertyFeeHistoryCellIdentifier = @"propertyFeeHistoryCellIdent
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     self.automaticallyAdjustsScrollViewInsets = YES;
     
@@ -113,7 +114,7 @@ NSString *const PropertyFeeHistoryCellIdentifier = @"propertyFeeHistoryCellIdent
     return _propertyFeeHistoryListMArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return kGetHorizontalDistance(110);
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     

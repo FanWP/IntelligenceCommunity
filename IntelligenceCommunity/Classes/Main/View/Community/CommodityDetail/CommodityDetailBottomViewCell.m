@@ -37,10 +37,10 @@
     _titleLabel.font = UIFontLarge;
     [self addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(10);
-        make.left.mas_equalTo(20);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(30);
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(kGetHorizontalDistance(32));
+        make.right.mas_offset(0);
+        make.height.mas_equalTo(kGetVerticalDistance(44));
     }];
 //    //图片
 //    @property(nonatomic,strong) UIImageView *advertiseImageView;
@@ -50,10 +50,10 @@
     _advertiseImageView.image = [UIImage imageNamed:@"3.jpg"];
     [self addSubview:_advertiseImageView];
     [_advertiseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_titleLabel.mas_bottom).offset(5);
-        make.left.mas_offset(20);
-        make.right.mas_offset(-20);
-        make.height.mas_offset(250);
+        make.top.equalTo(_titleLabel.mas_bottom).offset(0);
+        make.left.mas_offset(kGetHorizontalDistance(40));
+        make.right.mas_offset(-kGetHorizontalDistance(40));
+        make.height.mas_offset(kGetVerticalDistance(380));
     }];
 //    //商品详情
 //    @property(nonatomic,strong) UILabel *commodityDetailLabel;
@@ -66,9 +66,9 @@
     [_commodityDetailLabel sizeToFit];
     [self addSubview:_commodityDetailLabel];
     [_commodityDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_advertiseImageView.mas_bottom).offset(10);
-        make.left.mas_offset(30);
-        make.right.mas_offset(-30);
+        make.top.equalTo(_advertiseImageView.mas_bottom).offset(kGetVerticalDistance(26));
+        make.left.mas_offset(kGetHorizontalDistance(56));
+        make.right.mas_offset(-kGetHorizontalDistance(56));
         make.bottom.mas_offset(0);
     }];
     

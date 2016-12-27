@@ -27,15 +27,15 @@
 }
 -(void)initializeComponent{
     
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     //图标
 //    @property(nonatomic,strong) UIImageView *addressImageView;
     _addressImageView = [[UIImageView alloc] init];
     _addressImageView.contentMode = UIViewContentModeCenter;
-    _addressImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _addressImageView.image = [UIImage imageNamed:@"address"];
     [self.contentView addSubview:_addressImageView];
     [_addressImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(weakSelf.mas_centerY);
+        make.top.mas_offset(20);
         make.left.mas_offset(10);
         make.width.height.mas_offset(50);
     }];

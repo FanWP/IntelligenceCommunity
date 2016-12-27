@@ -47,20 +47,27 @@ NSString *const ServiceProvidersListViewCellIdentifier = @"serviceProvidersListV
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = YES;
     _tableView.showsHorizontalScrollIndicator = YES;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 50)];
+    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _searchBar = [[UISearchBar alloc] init];
+//    _searchBar.backgroundColor = [UIColor whiteColor];
     _searchBar.delegate = self;
-    _searchBar.placeholder = @"搜索";
+    _searchBar.placeholder = @"搜索店铺";
+    _searchBar.barTintColor = [UIColor whiteColor];
+    _searchBar.tintColor = [UIColor cyanColor];
+    _searchBar.showsScopeBar = NO;
     _searchBar.enablesReturnKeyAutomatically = YES;
+    [_searchBar sizeToFit];
     [view addSubview:_searchBar];
     [_searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
-        make.left.mas_equalTo(0);
+        make.left.mas_equalTo(5);
         make.bottom.mas_equalTo(-5);
-        make.right.mas_equalTo(0);
+        make.right.mas_equalTo(-5);
     }];
     _tableView.tableHeaderView = view;
     
@@ -108,7 +115,7 @@ NSString *const ServiceProvidersListViewCellIdentifier = @"serviceProvidersListV
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 100;
+    return kGetVerticalDistance(170);
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -121,16 +128,35 @@ NSString *const ServiceProvidersListViewCellIdentifier = @"serviceProvidersListV
 //    @property(nonatomic,strong) UIImageView *advertiseImageView;
 //    //店名
 //    @property(nonatomic,strong) UILabel *storeNameLabel;
-    cell.storeNameLabel.text = model.vendername;
+    if (model.vendername && model.vendername.length) {
+        
+        cell.storeNameLabel.text = model.vendername;
+    }
 //    //营业时间
 //    @property(nonatomic,strong) UILabel *businessHoursLabel;
-    cell.businessHoursLabel.text = [NSString stringWithFormat:@"营业时间: %@ ~ %@",model.startTime,model.endTime];
+    if (model.startTime && model.startTime.length) {
+        if (model.endTime && model.endTime.length) {
+            
+            cell.businessHoursLabel.text = [NSString stringWithFormat:@"营业时间: %@ ~ %@",model.startTime,model.endTime];
+        }
+    }
 //    //签名
 //    @property(nonatomic,strong) UILabel *signatureLabel;
-    cell.signatureLabel.text = model.serviceProviderDescription;
+    if (model.serviceProviderDescription && model.serviceProviderDescription.length) {
+        
+        cell.signatureLabel.text = model.serviceProviderDescription;
+    }
+    //综合评分
+//    @property(nonatomic,strong) UILabel *scoreCountLabel;
+    if (model.evaluate) {
+        cell.scoreCountLabel.text = [NSString stringWithFormat:@"综合评分:%@",model.evaluate];
+    }
 //    //月销量
 //    @property(nonatomic,strong) UILabel *monthSaleCountLabel;
-    cell.monthSaleCountLabel.text = [NSString stringWithFormat:@"月销量:%@单",model.salecount];
+    if (model.salecount) {
+        
+        cell.monthSaleCountLabel.text = [NSString stringWithFormat:@"月销量:%@单",model.salecount];
+    }
     
     return cell;
 }
