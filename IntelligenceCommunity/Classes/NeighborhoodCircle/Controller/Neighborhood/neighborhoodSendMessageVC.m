@@ -71,7 +71,7 @@
 
 - (void)setupRightBar
 {
-    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [button setTitle:@"发布" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(publishBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -88,22 +88,16 @@
         return;
     }
 
-    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"sessionId"] = SessionID;
     parameters[@"userId"] = UserID;
     parameters[@"content"] = _contentTextView.text;
     parameters[@"type"] = @"2";
-    
     NSString *urlString = [NSString stringWithFormat:@"%@smart_community/save/update/upload/friendsCircle",Smart_community_URL];
     
     ICLog_2(@"动态发布：%@  URL---%@",parameters,urlString);
-    
-    
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
         _repairImagesArray = [NSMutableArray arrayWithArray:[self getImagesWithSection:0]];
-        
         if(_repairImagesArray && _repairImagesArray.count > 0) {
             for (id item in _repairImagesArray) {
                 NSData *data;

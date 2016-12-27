@@ -68,7 +68,7 @@ NSString *const coViewAddID = @"HouseImageViewCellIdentifieruyt";
 
 - (void)setupRightBar
 {
-    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *button= [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [button setTitle:@"发布" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(publishBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

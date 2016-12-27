@@ -101,7 +101,8 @@
     
     if (_coverView) return;
     UIView *coverView = [[UIView alloc] initWithFrame:self.view.bounds];
-    coverView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+//coverView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+    coverView.backgroundColor = [UIColor clearColor];
     UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [coverView addGestureRecognizer:tap];
     self.coverView = coverView;
@@ -176,7 +177,6 @@
     
     //移除
     [self.coverView removeFromSuperview];
-    
 }
 
 
@@ -188,7 +188,6 @@
 
 - (void)setupChildVces
 {
-
 
     NSString *neiborhoodURL = [NSString stringWithFormat:@"%@smart_community/find/friendsCircle/list",Smart_community_URL];
     

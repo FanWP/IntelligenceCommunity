@@ -319,7 +319,8 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];
     MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
     
-    [HUD showMessage:@"数据提交中"];
+    [HUD showProgress:@"数据提交中，请等待！"];
+    
     [[AFHTTPSessionManager manager]POST:url parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

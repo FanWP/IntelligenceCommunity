@@ -512,12 +512,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         MJRefreshLog(@"用户登录失败--:%@",error);
     }];
-    
-    
-    
-    
-    
-    
+
 }
 
 //删除按钮的点击事件

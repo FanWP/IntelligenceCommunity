@@ -74,7 +74,7 @@
 
 - (void)setupRightBar
 {
-   UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+   UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [sendBtn addTarget:self action:@selector(rightBarClick) forControlEvents:UIControlEventTouchUpInside];
     [sendBtn setTitle:@"发布" forState:UIControlStateNormal];
     [sendBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
