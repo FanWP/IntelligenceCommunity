@@ -35,7 +35,7 @@ NSString *const OwnerViewCellIdentifier = @"ownerViewCellIdentifier";
     
     [self leftItemSetting];// 设置
     
-    _leftImagesArray = @[[UIImage imageNamed:@"houses"],[UIImage imageNamed:@"Payment"],[UIImage imageNamed:@"Orders"],[UIImage imageNamed:@"address"],[UIImage imageNamed:@"shopping cart"],[UIImage imageNamed:@"opinion"]];
+    _leftImagesArray = @[[UIImage imageNamed:@"houses"],[UIImage imageNamed:@"ownerPayment"],[UIImage imageNamed:@"Orders"],[UIImage imageNamed:@"ownerAddress"],[UIImage imageNamed:@"shopping cart"],[UIImage imageNamed:@"opinion"]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

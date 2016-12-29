@@ -30,10 +30,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = HexColor(0xeeeeee);
 }
 
 - (void)initializeComponent
 {
+    _storeNameView = [[UIView alloc] init];
+    _storeNameView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_storeNameView];
+    [_storeNameView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(0);
+        make.top.mas_offset(8);
+        make.width.mas_offset(self.view.width);
+        make.height.mas_offset(44);
+    }];
+    
+    
+    _storeNameLabel = [[UILabel alloc] init];
+    _storeNameLabel.text = @"店铺：米奇小妹妹的店";
+    _storeNameLabel.font = UIFontLarge;
+    [_storeNameView addSubview:_storeNameLabel];
+    [_storeNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(16);
+        make.centerY.equalTo(_storeNameView.mas_centerY);
+        make.right.mas_offset(-16);
+    }];
+    
+    
+    _appraiseView = [[UIView alloc] init];
+    _appraiseView.backgroundColor = [UIColor whiteColor];
+    
     
 }
 
