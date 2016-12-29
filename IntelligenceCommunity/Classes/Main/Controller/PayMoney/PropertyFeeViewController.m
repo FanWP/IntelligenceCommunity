@@ -345,12 +345,22 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
         
         [HUD dismiss];
         ICLog_2(@"%@",responseObject);
-        if ([responseObject[@"body"][@"resultCode"] integerValue] == 1000) {
+        NSDictionary *dictionary = [responseObject[@"body"] firstObject];
+        if ([dictionary[@"resultCode"] integerValue] == 1000) {
             
             //更新缴费账期内容
-            _propertyFeeOtherInfoModel.feeperiod = responseObject[@"body"][@"feeperiod"];
+            _propertyFeeOtherInfoModel.feeperiod = dictionary[@"feeperiod"];
             //更新缴费金额
-            _propertyFeeOtherInfoModel.totalFee = responseObject[@"body"][@"totalFee"];
+            _propertyFeeOtherInfoModel.totalFee = dictionary[@"totalFee"];
+            
+            
+            //物业费明细单
+            [_propertyFeeListMArray removeAllObjects];
+            for (NSDictionary *dic in dictionary[@"detailList"]) {
+                PropertyFeeListModel *model = [[PropertyFeeListModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic];
+                [_propertyFeeListMArray addObject:model];
+            }
             
             
         }

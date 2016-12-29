@@ -30,29 +30,29 @@
     
     
     MainViewController *MainController = [[MainViewController alloc] init];
-    MainController.tabBarItem.title = @"主界面";
-    MainController.tabBarItem.image = [UIImage imageNamed:@"compose_emoticonbutton_background"];
-    MainController.tabBarItem.selectedImage = [[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    MainController.tabBarItem.title = @"首页";
+    MainController.tabBarItem.image = [UIImage imageNamed:@"Home"];
+    MainController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Home_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     OfficialRecommendationViewController *OfficialRecommendationController = [[OfficialRecommendationViewController alloc] init];
-    OfficialRecommendationController.tabBarItem.title = @"官方推荐";
-    OfficialRecommendationController.tabBarItem.image = [UIImage imageNamed:@"compose_emoticonbutton_background"];
-    OfficialRecommendationController.tabBarItem.selectedImage = [[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    OfficialRecommendationController.tabBarItem.title = @"悠游";
+    OfficialRecommendationController.tabBarItem.image = [UIImage imageNamed:@"youyou"];
+    OfficialRecommendationController.tabBarItem.selectedImage = [[UIImage imageNamed:@"youyou_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     KeyViewController *keyController = [[KeyViewController alloc] init];
     keyController.tabBarItem.title = @"钥匙";
-    keyController.tabBarItem.image = [UIImage imageNamed:@"compose_emoticonbutton_background"];
-    keyController.tabBarItem.selectedImage = [[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    keyController.tabBarItem.image = [UIImage imageNamed:@"Opening"];
+    keyController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Opening_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     NeighborhoodCircleViewController *neighborhoodCircleController = [[NeighborhoodCircleViewController alloc] init];
-    neighborhoodCircleController.tabBarItem.title = @"邻里圈";
-    neighborhoodCircleController.tabBarItem.image = [UIImage imageNamed:@"compose_emoticonbutton_background"];
-    neighborhoodCircleController.tabBarItem.selectedImage = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    neighborhoodCircleController.tabBarItem.title = @"邻里";
+    neighborhoodCircleController.tabBarItem.image = [UIImage imageNamed:@"neighborhood"];
+    neighborhoodCircleController.tabBarItem.selectedImage = [UIImage imageNamed:@"neighborhood_highlighted"];
     
     OwnerViewController *ownerController = [[OwnerViewController alloc] init];
     ownerController.tabBarItem.title = @"我的";
-    ownerController.tabBarItem.image = [UIImage imageNamed:@"compose_emoticonbutton_background"];
-    ownerController.tabBarItem.selectedImage = [[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    ownerController.tabBarItem.image = [UIImage imageNamed:@"my "];
+    ownerController.tabBarItem.selectedImage = [[UIImage imageNamed:@"my_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     [self setViewControllers:@[MainController,OfficialRecommendationController,keyController,neighborhoodCircleController,ownerController]];
     self.selectedIndex = 0;

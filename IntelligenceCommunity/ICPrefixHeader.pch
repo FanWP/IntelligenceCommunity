@@ -32,6 +32,8 @@
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"    //cell高度只适应
 #import "YYPlaceholderTextView.h" // TextView
 #import "UILabel+AdjustHeightAndWidth.h"
+#import "User.h"        //保存用户基本信息
+#import "RSAEncryptor.h"
 
 
 //缴费模块:费用类型
@@ -53,7 +55,11 @@ typedef NS_ENUM(NSUInteger, CommunityServiceType) {
     DelicacyService = 3,        //美食
     EntertainmentService = 4,   //娱乐
 };
-
+//注册、忘记密码
+typedef NS_ENUM(NSUInteger, RegisterOrForgetPassword) {
+    RegisterAccount  = 1,
+    ForgetPassword   = 2,
+};
 
 typedef enum : NSUInteger {
     Neighborhood = 0,        //邻里圈

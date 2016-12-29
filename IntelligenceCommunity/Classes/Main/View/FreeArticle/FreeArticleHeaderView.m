@@ -163,7 +163,7 @@
     img.mj_y = 60;
     self.alreadySell = img;
     [self addSubview:img];
-#warning 原价、点赞、评论系列控件以[价格]的中心线为基准对齐
+#pragma mark-- 原价、点赞、评论系列控件以[价格]的中心线为基准对齐
     //    //价格
     //    @property(nonatomic,strong) UILabel *priceLabel;
     _priceLabel = [[UILabel alloc] init];
@@ -200,7 +200,7 @@
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
-#warning 评论按钮、数量、点赞按钮的大小以点赞数量控件为基准动态改变
+#pragma mark--评论按钮、数量、点赞按钮的大小以点赞数量控件为基准动态改变
     //    //评论按钮、评论数量
     //    @property(nonatomic,strong) UIButton *commentsButton;
     //    @property(nonatomic,strong) UILabel *commentCountLabel;

@@ -8,6 +8,11 @@
 
 #import "OwnerViewCell.h"
 
+@interface OwnerViewCell ()
+
+@property(nonatomic,strong) CALayer *lineLayer;
+
+@end
 @implementation OwnerViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -47,6 +52,14 @@
         make.height.mas_equalTo(30);
     }];
     
+    _lineLayer = [[CALayer alloc] init];
+    _lineLayer.backgroundColor = HexColor(0xeeeeee).CGColor;
+    [self.contentView.layer addSublayer:_lineLayer];
+    
+}
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    _lineLayer.frame = CGRectMake(0, self.height-1, ScreenWidth, 1);
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

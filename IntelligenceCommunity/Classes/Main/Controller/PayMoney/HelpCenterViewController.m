@@ -53,7 +53,12 @@ NSString *const HelperCenterViewCellIdentifier = @"helperCenterViewCellIdentifie
     
     NSMutableDictionary *parametersDictionary = [NSMutableDictionary new];
     [parametersDictionary setValue:@"1" forKey:@"pageSize"];
+    [parametersDictionary setValue:@"5" forKey:@"pageNum"];
     
+    User *user = [User currentUser];
+    
+    [parametersDictionary setValue:user.sessionId forKey:@"sessionId"];
+
     [HUD showProgress:@"正在加载数据"];
     [[RequestManager manager] SessionRequestWithType:Smart_community requestWithURLString:@"find/help/center" requestType:RequestMethodPost requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
         ICLog_2(@"%@",responseObject);

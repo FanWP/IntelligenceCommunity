@@ -10,6 +10,9 @@
 #import "RootTabBarController.h"
 #import "RootNavigationController.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,15 +25,9 @@
     // Override point for customization after application launch.
     
     
-    
-    ///564654654654564
-
-    //mumu
-
-    ////    ///6546546546
-    
     [self initUI];
     
+    [self keyboardConfig];
     
     
     return YES;
@@ -41,15 +38,26 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     RootNavigationController *navigationController = [[RootNavigationController alloc] init];
-    
-    //自动登录
-    RootTabBarController *tabBarController = [[RootTabBarController alloc] init];
-    [navigationController setViewControllers:@[tabBarController]];
-    
+    User *user = [User currentUser];
+    if (!user || user.isLogout) {   //该用户已登出  或者沙盒内未检索到登录信息
+        LoginViewController *loginController = [[LoginViewController alloc] init];
+        [navigationController setViewControllers:@[loginController]];
+    }else{      //自动登录
+        RootTabBarController *tabBarController = [[RootTabBarController alloc] init];
+        [navigationController setViewControllers:@[tabBarController]];
+    }
     
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     
+}
+/**
+ *  键盘全局配置
+ */
+-(void)keyboardConfig {
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.shouldShowTextFieldPlaceholder = NO;
+    manager.toolbarTintColor = ThemeColor;
 }
 #pragma mark--支付完成后的回调
 - (BOOL)application:(UIApplication *)application

@@ -31,6 +31,7 @@
 
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
     /**背景*/
     self.backgVIew.layer.cornerRadius = 5;
     self.backgVIew.layer.borderWidth = 1;

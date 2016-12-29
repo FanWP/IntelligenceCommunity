@@ -15,7 +15,7 @@
 
 @end
 
-
+//确认支付界面商品列表信息
 @interface CommodityInfoViewCell : UITableViewCell
 
 

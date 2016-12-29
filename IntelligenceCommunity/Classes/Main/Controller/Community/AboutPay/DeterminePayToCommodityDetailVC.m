@@ -63,7 +63,7 @@ NSString *const BottomViewCellIdentifier = @"commodityDetailBottomViewCellIdenti
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
-        return 320;
+        return kGetHorizontalDistance(424);
     }else if (indexPath.row == 1){
         //        NSString *string = @"玩转简书的第一步，从这个专题开始。想上首页热门榜么？好内容想被更多人看到么？来投稿吧！如果被拒也不要灰心哦～入选文章会进一个队列挨个上首页，请耐心等待。投稿必须原创。如果发现有非原创类内容投稿，经网友举报、举证，确认后视情节轻重进行处罚，严重者将列入黑名单，再不采用。为了确保用户阅读体验，对于首页文章的格式，提出以下规范：";
         if (_model.introduction && _model.introduction.length > 0) {

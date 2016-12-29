@@ -19,5 +19,11 @@
 
 @property(nonatomic,strong) NSObject *userInfo;
 
+#pragma mark--确定后取消
+-(void)alertControllerWithMessage:(NSString *)message;
+
+#pragma mark--确定后返回上级界面
+-(void)alertControllerWithTitle:(NSString *)title Message:(NSString *)message;
+
 @end
 

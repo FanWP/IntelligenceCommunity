@@ -103,6 +103,29 @@
         make.width.mas_offset(100);
     }];
     
+//    arrow
+    _rightImageView = [[UIImageView alloc] init];
+    _rightImageView.contentMode = UIViewContentModeCenter;
+    _rightImageView.image = [UIImage imageNamed:@"arrow"];
+    [self.contentView addSubview:_rightImageView];
+    [_rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(_sendTimeLabel.mas_centerY).offset(0);
+        make.right.mas_offset(-10);
+    }];
+    _fastSendLabel = [[UILabel alloc] init];
+    _fastSendLabel.text = @"尽快送达";
+    _fastSendLabel.textColor = HexColor(0x0dceac);
+    _fastSendLabel.textAlignment = NSTextAlignmentRight;
+    _fastSendLabel.font = UIFontNormal;
+    [self.contentView addSubview:_fastSendLabel];
+    [_fastSendLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(_sendTimeLabel.mas_centerY).offset(0);
+        make.right.equalTo(_rightImageView.mas_left).offset(-10);
+    }];
+    
+    
+    
+    
     _lineLayer = [[CALayer alloc] init];
     _lineLayer.backgroundColor = [UIColor grayColor].CGColor;
     [self.layer addSublayer:_lineLayer];

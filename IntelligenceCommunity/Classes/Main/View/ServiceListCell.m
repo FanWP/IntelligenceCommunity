@@ -8,6 +8,11 @@
 
 #import "ServiceListCell.h"
 
+@interface ServiceListCell ()
+
+@property(nonatomic,strong) CALayer *lineLayer;
+
+@end
 @implementation ServiceListCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -26,10 +31,10 @@
 //    @property(nonatomic,strong) UILabel *freeArticleLabel;
     _freeArticleImageView = [[UIImageView alloc] init];
     _freeArticleImageView.contentMode = UIViewContentModeCenter;
-    _freeArticleImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _freeArticleImageView.image = [UIImage imageNamed:@"Ceremony"];
     [self addSubview:_freeArticleImageView];
     [_freeArticleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5);
+        make.top.mas_equalTo(kGetVerticalDistance(30));
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(ScreenWidth/4);
         make.height.mas_equalTo(30);
@@ -37,12 +42,12 @@
     _freeArticleLabel = [[UILabel alloc] init];
     _freeArticleLabel.text = @"闲置物品";
     _freeArticleLabel.font = UIFontNormal;
-    _freeArticleLabel.textColor = [UIColor grayColor];
+    _freeArticleLabel.textColor = HexColor(0x818281);
     _freeArticleLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_freeArticleLabel];
     [_freeArticleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(_freeArticleImageView.mas_bottom).offset(0);
+        make.top.equalTo(_freeArticleImageView.mas_bottom).offset(kGetVerticalDistance(10));
         make.left.mas_equalTo(0);
         make.width.equalTo(_freeArticleImageView.mas_width);
         make.height.mas_equalTo(30);
@@ -62,7 +67,7 @@
 //    @property(nonatomic,strong) UILabel *communityLabel;
     _communityImageView = [[UIImageView alloc] init];
     _communityImageView.contentMode = UIViewContentModeCenter;
-    _communityImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _communityImageView.image = [UIImage imageNamed:@"service"];
     [self addSubview:_communityImageView];
     [_communityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.height.mas_equalTo(_freeArticleImageView);
@@ -71,7 +76,7 @@
     _communityLabel = [[UILabel alloc] init];
     _communityLabel.text = @"社区服务";
     _communityLabel.font = UIFontNormal;
-    _communityLabel.textColor = [UIColor grayColor];
+    _communityLabel.textColor = HexColor(0x818281);
     _communityLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_communityLabel];
     [_communityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -92,16 +97,16 @@
 //    @property(nonatomic,strong) UILabel *payMoneyLabel;
     _payMoneyImageView = [[UIImageView alloc] init];
     _payMoneyImageView.contentMode = UIViewContentModeCenter;
-    _payMoneyImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _payMoneyImageView.image = [UIImage imageNamed:@"Expenses"];
     [self addSubview:_payMoneyImageView];
     [_payMoneyImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.height.mas_equalTo(_freeArticleImageView);
         make.left.equalTo(_communityImageView.mas_right).offset(0);
     }];
     _payMoneyLabel = [[UILabel alloc] init];
-    _payMoneyLabel.text = @"缴费";
+    _payMoneyLabel.text = @"便民缴费";
     _payMoneyLabel.font = UIFontNormal;
-    _payMoneyLabel.textColor = [UIColor grayColor];
+    _payMoneyLabel.textColor = HexColor(0x818281);
     _payMoneyLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_payMoneyLabel];
     [_payMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,7 +127,7 @@
 //    @property(nonatomic,strong) UILabel *repairsLabel;
     _repairsImageView = [[UIImageView alloc] init];
     _repairsImageView.contentMode = UIViewContentModeCenter;
-    _repairsImageView.image = [UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"];
+    _repairsImageView.image = [UIImage imageNamed:@"Reporter"];
     [self addSubview:_repairsImageView];
     [_repairsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.height.mas_equalTo(_freeArticleImageView);
@@ -130,9 +135,9 @@
     }];
     
     _repairsLabel = [[UILabel alloc] init];
-    _repairsLabel.text = @"报修";
+    _repairsLabel.text = @"事故报修";
     _repairsLabel.font = UIFontNormal;
-    _repairsLabel.textColor = [UIColor grayColor];
+    _repairsLabel.textColor = HexColor(0x818281);
     _repairsLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_repairsLabel];
     [_repairsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -149,42 +154,11 @@
         make.left.equalTo(payMoneyButton.mas_right).offset(0);
     }];
     
-    //地图宣传图
-//    @property(nonatomic,strong) UIImageView *advertiseImageView;
-    _advertiseImageView = [[UIImageView alloc] init];
-    _advertiseImageView.contentMode = UIViewContentModeScaleToFill;
-    _advertiseImageView.image = [UIImage imageNamed:@"1.jpg"];
-    [self addSubview:_advertiseImageView];
-    [_advertiseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_freeArticleLabel.mas_bottom).offset(0);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
-        make.height.mas_equalTo(200);
-    }];
-    //    @property(nonatomic,strong) UILabel *advertiseContentLabel;
-    _advertiseContentLabel = [[UILabel alloc] init];
-    _advertiseContentLabel.text = @"新鲜牛奶到家";
-    _advertiseContentLabel.textAlignment = NSTextAlignmentCenter;
-    _advertiseContentLabel.textColor = [UIColor grayColor];
-    _advertiseContentLabel.font = UIFontNormal;
-    [self addSubview:_advertiseContentLabel];
-    [_advertiseContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_advertiseImageView.mas_bottom).offset(5);
-        make.left.mas_equalTo(10);
-        make.width.mas_equalTo(100);
-    }];
-    //    @property(nonatomic,strong) UILabel *timeLabel;
-    _timeLabel = [[UILabel alloc] init];
-    _timeLabel.text = @"2016-11-1";
-    _timeLabel.textColor = [UIColor grayColor];
-    _timeLabel.textAlignment = NSTextAlignmentCenter;
-    _timeLabel.font = UIFontNormal;
-    [self addSubview:_timeLabel];
-    [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_advertiseContentLabel.mas_top);
-        make.right.mas_equalTo(10);
-        make.width.mas_equalTo(100);
-    }];
+    
+    
+    _lineLayer = [[CALayer alloc] init];
+    _lineLayer.backgroundColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    [self.contentView.layer addSublayer:_lineLayer];
 }
 -(void)buttonAction:(UIButton *)button{
     
@@ -194,7 +168,10 @@
     
 }
 
-
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    _lineLayer.frame = CGRectMake(0, self.height-1, ScreenWidth, 1);
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
