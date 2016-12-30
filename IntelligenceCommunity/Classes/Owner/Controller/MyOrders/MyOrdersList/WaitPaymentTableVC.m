@@ -8,6 +8,8 @@
 
 #import "WaitPaymentTableVC.h"
 
+#import "AppraiseVC.h"
+
 #import "MyOrdersStoreTitleCell.h"
 #import "MyOrdersProductsCell.h"
 #import "MyOrdersDealCell.h"
@@ -126,6 +128,12 @@
     {
         return [self tableView:tableView dealCellWithIndexPath:indexPath];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AppraiseVC *appraiseVC = [[AppraiseVC alloc] init];
+    [self.navigationController pushViewController:appraiseVC animated:YES];
 }
 
 

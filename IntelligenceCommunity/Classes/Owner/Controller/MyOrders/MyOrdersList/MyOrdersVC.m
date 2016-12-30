@@ -60,7 +60,7 @@
     
     [_orderHeaderView removeFromSuperview];
     
-    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 64, KWidth, 43) titles:@[@"全部",@"待付款",@"待收货"] clickBlick:^void(NSInteger index) {
+    NeighborhoodCircleHeaderView *headerView = [[NeighborhoodCircleHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 43) titles:@[@"全部",@"待付款",@"待收货"] clickBlick:^void(NSInteger index) {
         
         [self titleClick:(index - 1)];
         
@@ -80,7 +80,7 @@
     
     UIScrollView *contentView = [[UIScrollView alloc] init];
     contentView.x = 0;
-    contentView.y = 88;
+    contentView.y = 44;
     contentView.height = self.view.bounds.size.height - 20;
     contentView.width = self.view.width;
     contentView.delegate = self;
