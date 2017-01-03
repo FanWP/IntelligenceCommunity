@@ -205,6 +205,7 @@
     _handAppraiseButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     _handAppraiseButton.backgroundColor = HexColor(0x05c4a2);
     [_handAppraiseButton setTitle:@"提交" forState:(UIControlStateNormal)];
+    [self.view addSubview:_handAppraiseButton];
     [_handAppraiseButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(20);
         make.top.equalTo(_anonymatView.mas_bottom).offset(60);
