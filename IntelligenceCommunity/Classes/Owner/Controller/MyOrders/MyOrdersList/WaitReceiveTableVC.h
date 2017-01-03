@@ -13,4 +13,6 @@
 
 @property (nonatomic,assign) MyOrdersType waitReceiveType;
 
+@property (nonatomic,copy) NSString *saleid;// 订单id号
+
 @end

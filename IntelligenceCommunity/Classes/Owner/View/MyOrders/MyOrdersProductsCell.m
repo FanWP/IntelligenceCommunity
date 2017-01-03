@@ -29,11 +29,14 @@
 {
     // 商品图片 productImageView;
     _productImageView = [[UIImageView alloc] init];
+//    _productImageView.backgroundColor = [UIColor orangeColor];
+    _productImageView.image = [UIImage imageNamed:@"2"];
     [self.contentView addSubview:_productImageView];
     [_productImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(12);
-        make.width.height.mas_offset(85);
-        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.top.mas_offset(12);
+        make.height.mas_offset(85);
+        make.width.mas_offset(40);
     }];
     
     // 标题 titleLabel;
@@ -43,9 +46,9 @@
     [self.contentView addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_productImageView.mas_right).offset(12);
-        make.top.mas_offset(20);
+        make.top.mas_offset(10);
         make.right.mas_offset(-12);
-        make.height.mas_offset(30);
+        make.height.mas_offset(25);
     }];
     
     // 详情 detailLabel;
@@ -57,7 +60,7 @@
         make.left.equalTo(_titleLabel.mas_left);
         make.top.equalTo(_titleLabel.mas_bottom);
         make.right.mas_offset(-16 - 20 - 12);
-        make.height.mas_offset(60);
+        make.height.mas_offset(50);
     }];
     
     // 价格 priceLabel;
@@ -68,7 +71,8 @@
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_titleLabel.mas_left);
         make.right.equalTo(_titleLabel.mas_right);
-        make.width.mas_offset(40);
+        make.width.mas_offset(10);
+        make.top.equalTo(_detailLabel.mas_bottom);
         make.height.equalTo(_titleLabel.mas_height);
     }];
     
@@ -80,9 +84,13 @@
     [_countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_priceLabel.mas_right);
         make.width.mas_offset(30);
+        make.top.equalTo(_priceLabel.mas_top);
         make.height.equalTo(_titleLabel.mas_height);
     }];
     
+//    _titleLabel.backgroundColor = [UIColor redColor];
+//    _detailLabel.backgroundColor = [UIColor cyanColor];
+//    _priceLabel.backgroundColor = [UIColor redColor];
 }
 
 - (void)awakeFromNib {

@@ -16,7 +16,7 @@
     
     if (self)
     {
-        
+        [self initializeComponent];
     }
     
     return self;
@@ -46,7 +46,7 @@
     [self.contentView addSubview:_firstButton];
     [_firstButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.right.mas_offset(-12 - 60 - 16);
+        make.right.mas_offset(-12 - 80 - 16);
         make.width.mas_offset(80);
         make.height.mas_offset(30);
     }];
@@ -56,13 +56,14 @@
     _secondButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [_secondButton.titleLabel setFont:UIFont13];
     _secondButton.layer.borderWidth = 1;
-    _secondButton.layer.borderColor = HexColor(0x05c4a2).CGColor;
+//    _secondButton.layer.borderColor = HexColor(0x05c4a2).CGColor;
     _secondButton.layer.cornerRadius = 5.0;
-    [_secondButton setTitleColor:HexColor(0x05c4a2) forState:(UIControlStateNormal)];
+//    [_secondButton setTitleColor:HexColor(0x05c4a2) forState:(UIControlStateNormal)];
     [self.contentView addSubview:_secondButton];
     [_secondButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_offset(12);
-        make.width.mas_offset(60);
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.right.mas_offset(-12);
+        make.width.mas_offset(80);
         make.height.equalTo(_firstButton.mas_height);
     }];
 

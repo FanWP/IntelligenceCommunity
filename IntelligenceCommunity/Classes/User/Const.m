@@ -18,10 +18,9 @@
 NSString *const URL_17_mall_api = @"http://192.168.1.17/mall_api/";
 NSString *const URL_17_pro_api = @"http://192.168.1.17/pro_api/";
 
-//NSString *const Smart_community_URL = @"http://192.168.1.17:8080/";
-//NSString *const Smart_community_picURL = @"http://192.168.1.4:8080/";
+NSString *const URL_4_mall_api = @"http://192.168.1.18:8080/mall_api/";
+NSString *const URL_4_pro_api = @"http://192.168.1.18:8080/pro_api/";
+
 
 NSString *const Smart_community_URL = @"http://192.168.1.17/";
-NSString *const Smart_community_picURL = @"http://192.168.1.4:8080/";
-
-
+NSString *const Smart_community_picURL = @"http://192.168.1.17/";
