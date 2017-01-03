@@ -50,7 +50,10 @@ NSString *const PropertyFeeBillingDetailCellIdentifier = @"propertyFeeBillingDet
 -(void)dataRequest{
     
     NSMutableDictionary *parametersDictionary = [NSMutableDictionary dictionary];
-
+    User *user = [User currentUser];
+    [parametersDictionary setValue:user.sessionId forKey:@"sessionId"];
+    
+    
     NSString *URLString = @"";
     switch (_feetype) {
         case propertyFee:       //物业费接口

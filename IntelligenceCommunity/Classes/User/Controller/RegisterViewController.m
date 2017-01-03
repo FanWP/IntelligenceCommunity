@@ -122,6 +122,7 @@ NSString *const REGISTER_CODE_SEND_TIME_KEY = @"REGISTER_CODE_SEND_TIME_KEY";
     _passwordTextField = [[UITextField alloc] init];
     _passwordTextField.placeholder = @"请输入密码";
     _passwordTextField.textColor = HexColor(0x3d3c3c);
+    _passwordTextField.secureTextEntry = YES;
     _passwordTextField.returnKeyType = UIReturnKeyNext;
     _passwordTextField.delegate = self;
     _passwordTextField.leftView = passwordLeftView;
@@ -145,6 +146,7 @@ NSString *const REGISTER_CODE_SEND_TIME_KEY = @"REGISTER_CODE_SEND_TIME_KEY";
     
     _repeatTextField = [[UITextField alloc] init];
     _repeatTextField.placeholder = @"请再次输入密码";
+    _repeatTextField.secureTextEntry = YES;
     _repeatTextField.textColor = HexColor(0x3d3c3c);
     _repeatTextField.returnKeyType = UIReturnKeyNext;
     _repeatTextField.delegate = self;
@@ -204,6 +206,12 @@ NSString *const REGISTER_CODE_SEND_TIME_KEY = @"REGISTER_CODE_SEND_TIME_KEY";
     
     ICLog_2(@"发送验证码");
     
+    if (![self isMobileNumber]) {
+        [self alertControllerWithMessage:@"手机号码格式错误,无法发送验证码"];
+        return;
+    }
+    //15091150081
+    
     //获取验证码并发送成功，记录发送时间
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDate *date = [NSDate date];
@@ -214,7 +222,8 @@ NSString *const REGISTER_CODE_SEND_TIME_KEY = @"REGISTER_CODE_SEND_TIME_KEY";
     
     
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
-    [parametersDic setValue:@"18220868151" forKey:@"userPhone"];
+    [parametersDic setValue:_nameTextField.text forKey:@"userPhone"];
+
     
     [[RequestManager manager] SessionRequestWithType:Smart_community requestWithURLString:@"unlogin/send/check/code" requestType:RequestMethodPost requestParameters:parametersDic success:^(id  _Nullable responseObject) {
         
@@ -225,13 +234,65 @@ NSString *const REGISTER_CODE_SEND_TIME_KEY = @"REGISTER_CODE_SEND_TIME_KEY";
                 [self alertControllerWithMessage:@"发送验证码成功"];
             }else{
                 [self alertControllerWithMessage:@"发送验证码失败,请检查手机号是否正确"];
+                //更新本地记录时间
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                NSDate *date = [NSDate date];
+                NSTimeInterval currentDate = [date timeIntervalSince1970];
+                [userDefaults setObject:@(currentDate) forKey:REGISTER_CODE_SEND_TIME_KEY];
+                [userDefaults synchronize];
+                
+                //定时器失效、按钮进入可操作状态
+                [_timer invalidate];
+                _timer = nil;
+                _currentTime = 0;
+                [_sendSecurityCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+                [_sendSecurityCodeButton setTitle:@"发送验证码" forState:UIControlStateDisabled];
+                if(_nameTextField.text.length > 0) {
+                    _sendSecurityCodeButton.enabled = YES;
+                }
+                
             }
         });
         
     } faile:^(NSError * _Nullable error) {
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self alertControllerWithMessage:@"发送验证码失败,请检查手机号是否正确"];
+            //更新本地记录时间
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSDate *date = [NSDate date];
+            NSTimeInterval currentDate = [date timeIntervalSince1970];
+            [userDefaults setObject:@(currentDate) forKey:REGISTER_CODE_SEND_TIME_KEY];
+            [userDefaults synchronize];
+            
+            //定时器失效、按钮进入可操作状态
+            [_timer invalidate];
+            _timer = nil;
+            _currentTime = 0;
+            [_sendSecurityCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+            [_sendSecurityCodeButton setTitle:@"发送验证码" forState:UIControlStateDisabled];
+            if(_nameTextField.text.length > 0) {
+                _sendSecurityCodeButton.enabled = YES;
+            }
+
+        });
     }];
 }
+// 正则判断手机号码地址格式
+- (BOOL)isMobileNumber {
+    
+    //    电信号段:133/153/180/181/189/177
+    //    联通号段:130/131/132/155/156/185/186/145/176
+    //    移动号段:134/135/136/137/138/139/150/151/152/157/158/159/182/183/184/187/188/147/178
+    //    虚拟运营商:170
+    
+    NSString *MOBILE = @"^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\\d{8}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    
+    return [regextestmobile evaluateWithObject:_nameTextField.text];
+}
+
 #pragma mark--注册/忘记密码
 -(void)registerButtonAction:(UIButton *)button{
     

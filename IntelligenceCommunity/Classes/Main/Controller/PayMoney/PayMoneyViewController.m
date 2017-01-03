@@ -84,7 +84,13 @@ NSString *const CostListViewCellIdentifier = @"costListViewCellIdentifier";
 -(void)dataRequest{
     
     [HUD showProgress:@"正在加载数据"];
-    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/surport/paytype/list" method:RequestMethodPost timeout:20 parameters:nil success:^(id  _Nullable responseObject) {
+    
+    NSMutableDictionary *parametersDic = [NSMutableDictionary new];
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
+    
+    
+    [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/surport/paytype/list" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
         
         [HUD dismiss];
         ICLog_2(@"%@",responseObject);

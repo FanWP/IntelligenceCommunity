@@ -50,6 +50,9 @@
 
 @property NSString *sessionId;
 
+
+@property NSInteger serviceTypeStatus;    //1表示普通商品类:商店、美食、娱乐   2表示预约服务类:便民
+
 @end
 
 /*

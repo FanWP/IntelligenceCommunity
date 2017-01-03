@@ -37,6 +37,7 @@
     
     _nameTextField = [[UITextField alloc] init];
     _nameTextField.placeholder = @"请输入用户名";
+    
     _nameTextField.textColor = HexColor(0x3d3c3c);
     _nameTextField.returnKeyType = UIReturnKeyNext;
     _nameTextField.delegate = self;
@@ -131,7 +132,6 @@
     User *user = [User currentUser];
     if(user) {
         _nameTextField.text = user.name;
-        _passwordTextField.text = user.password;
         _loginButton.enabled = YES;
     }
 }
@@ -144,7 +144,7 @@
 
 -(void)loginButtonTouchUpInside:(MUButton *)sender {
     HidenKeyboard;
-    
+        
     ICLog_2(@"登录");
     _loginButton.enabled = NO;
     [_loginButton startAnimation];
@@ -211,7 +211,6 @@
                 
             }else{
                 _nameTextField.text = @"";
-                _passwordTextField.text = @"";
                 [self alertControllerWithMessage:@"登录失败,请检查手机号、密码是否正确"];
             }
         });
@@ -341,7 +340,6 @@
                 
                 user.email = [NSString stringWithFormat:@"%@",dictionary[@"email"]];
             }
-            user.houseRole = dictionary[@"houseRole"];
             if (dictionary[@"houseRole"]) {
                 
                 user.houseRole = [NSString stringWithFormat:@"%@",dictionary[@"houseRole"]];
@@ -370,9 +368,9 @@
                 
                 user.userDescription = [NSString stringWithFormat:@"%@",dictionary[@"description"]];
             }
-            if (dictionary[@"sessionId"]) {
+            if (dic[@"sessionId"]) {
                 
-             NSString *finshRSASessionID =  [RSAEncryptor encryptString:[NSString stringWithFormat:@"%@",dictionary[@"sessionId"]] publicKey:pubkey];
+             NSString *finshRSASessionID =  [RSAEncryptor encryptString:[NSString stringWithFormat:@"%@",dic[@"sessionId"]] publicKey:pubkey];
                 
                 user.sessionId = finshRSASessionID;
             }
@@ -477,7 +475,8 @@
         }
         if (dic[@"sessionId"]) {
             
-            user.sessionId = [NSString stringWithFormat:@"%@",dic[@"sessionId"]];
+            NSString *finshRSASessionID =  [RSAEncryptor encryptString:[NSString stringWithFormat:@"%@",dic[@"sessionId"]] publicKey:pubkey];
+            user.sessionId = finshRSASessionID;
         }
         [CacheData addObject:user];
     }

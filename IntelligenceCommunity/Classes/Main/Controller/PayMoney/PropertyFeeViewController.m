@@ -77,8 +77,10 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
 -(void)dataRequest{
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
     [parametersDic setValue:@"1" forKey:@"userId"];
-    [parametersDic setValue:@"1" forKey:@"sessionId"];
-
+//    [parametersDic setValue:@"1" forKey:@"sessionId"];
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
+    
     [HUD showProgress:@"正在加载数据"];
     
     [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/user/profee" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
@@ -340,7 +342,10 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
     [parametersDictionary setValue:@"27" forKey:@"userId"];
     [parametersDictionary setValue:@"2" forKey:@"discountId"];
     [parametersDictionary setValue:@"1" forKey:@"houseId"];
-
+    User *user = [User currentUser];
+    [parametersDictionary setValue:user.sessionId forKey:@"sessionId"];
+    
+    
     [[RequestManager manager] SessionRequestWithType:Pro_api requestWithURLString:@"find/propertyfee/bydiscount" requestType:RequestMethodPost requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
         
         [HUD dismiss];

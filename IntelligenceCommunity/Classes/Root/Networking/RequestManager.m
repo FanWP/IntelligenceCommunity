@@ -149,10 +149,29 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
         return;
     }
     urlRequest.timeoutInterval = timeout;
-    //    [urlRequest setValue:@"userID" forHTTPHeaderField:<#(nonnull NSString *)#>]
     
     NSURLSessionDataTask *dataTask = [self dataTaskWithManager:[self sessionManager] url:urlRequest success:success faile:faile];
     [dataTask resume];
+    
+//    return;
+//    [[AFHTTPSessionManager manager] POST:RequestURL parameters:[[RequestManager manager] AFdictionaryTransformParameters:parameters]  progress:^(NSProgress * _Nonnull uploadProgress) {
+//        
+//        
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        
+//        if(responseObject) {
+//            success(responseObject);
+//        } else {
+//            faile([NSError errorWithDomain:@"NO Data" code:-1 userInfo:nil]);
+//        }
+//
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        if(error) {
+//            faile(error);
+//            return;
+//        }
+//    }];
+    
 }
 #pragma mark--原生session请求
 -(void)SessionRequestWithType:(RequestMethodType)requestMethodType  requestWithURLString:(NSString *)urlString  requestType:(RequestMethod)requestType  requestParameters:(NSDictionary *)parameters  success:(RequestSuccess)success faile:(RequestFaile)faile{
@@ -184,7 +203,7 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
     request.timeoutInterval = 30;
     
     [[RequestManager manager] dataRequestWithRequest:request success:success faile:faile];
-    
+
 }
 
 -(void)requestWithURLString:(NSString *)urlString  requestType:(RequestMethod)requestType  requestParameters:(NSDictionary *)parameters  success:(RequestSuccess)success faile:(RequestFaile)faile{
@@ -255,8 +274,20 @@ static const char * REQUEST_METHOD[4] = {"GET","POST","PUT","DELETE"};
     NSString *resultString = [resultArray componentsJoinedByString:@"&"];
     return [resultString dataUsingEncoding:NSUTF8StringEncoding];
 }
-
-
+//字典转换为请求参数
+-(NSString *)AFdictionaryTransformParameters:(NSDictionary *)dictionary{
+    
+    NSMutableArray *resultArray = [NSMutableArray new];
+    
+    for (NSString *key in dictionary) {
+        
+        NSString *keyAndValue = [NSString stringWithFormat:@"%@=%@",key,dictionary[key]];
+        [resultArray addObject:keyAndValue];
+        
+    }
+    NSString *resultString = [resultArray componentsJoinedByString:@"&"];
+    return resultString;
+}
 
 
 

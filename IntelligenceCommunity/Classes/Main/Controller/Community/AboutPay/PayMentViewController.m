@@ -236,8 +236,8 @@ typedef NS_ENUM(NSUInteger, PayMentType) {
 -(void)commitOrderAction:(UITapGestureRecognizer *)sender{
     ICLog_2(@"确认付款");
     
-    [self requestOrderSign];
-    
+//    [self requestOrderSign];
+    [self AliPay];
 }
 -(void)requestOrderSign{
     
