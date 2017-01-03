@@ -244,6 +244,9 @@
 		D753AD301E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D753AD2F1E052B0F0094602C /* FreeArticleDetailTableViewImagesCell.m */; };
 		D759D1EC1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */; };
 		D759D1EF1E03BFBB002B9F2D /* CommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */; };
+		D7F7A8AE1E138212003DC957 /* MyPublishVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D7F7A8AD1E138212003DC957 /* MyPublishVC.m */; };
+		D7F7A8B21E138277003DC957 /* DateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D7F7A8B01E138277003DC957 /* DateTimePickerView.m */; };
+		D7F7A8B31E138277003DC957 /* DateTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7F7A8B11E138277003DC957 /* DateTimePickerView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -787,6 +790,11 @@
 		D759D1EB1E03BD7F002B9F2D /* FreeArticleDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeArticleDetailTableVC.m; sourceTree = "<group>"; };
 		D759D1ED1E03BFBB002B9F2D /* CommunityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityDetailCell.h; sourceTree = "<group>"; };
 		D759D1EE1E03BFBB002B9F2D /* CommunityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityDetailCell.m; sourceTree = "<group>"; };
+		D7F7A8AC1E138212003DC957 /* MyPublishVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPublishVC.h; sourceTree = "<group>"; };
+		D7F7A8AD1E138212003DC957 /* MyPublishVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPublishVC.m; sourceTree = "<group>"; };
+		D7F7A8AF1E138277003DC957 /* DateTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimePickerView.h; sourceTree = "<group>"; };
+		D7F7A8B01E138277003DC957 /* DateTimePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTimePickerView.m; sourceTree = "<group>"; };
+		D7F7A8B11E138277003DC957 /* DateTimePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTimePickerView.xib; sourceTree = "<group>"; };
 		DC3F7A57EA4776F8FF5A88FC /* Pods-IntelligenceCommunity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligenceCommunity.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligenceCommunity/Pods-IntelligenceCommunity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1278,6 +1286,9 @@
 		185ADBD01DE4149500CD556D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D7F7A8AF1E138277003DC957 /* DateTimePickerView.h */,
+				D7F7A8B01E138277003DC957 /* DateTimePickerView.m */,
+				D7F7A8B11E138277003DC957 /* DateTimePickerView.xib */,
 				18C72AF21E10B835002CB9EF /* RSA.h */,
 				18C72AF31E10B835002CB9EF /* RSA.m */,
 				18C72AED1E10B817002CB9EF /* UWDatePickerView.h */,
@@ -1607,6 +1618,7 @@
 		18B002F11DE2E6F100D8FE56 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D7F7A8AB1E138212003DC957 /* MyPublish */,
 				18B002F21DE2E6F100D8FE56 /* OwnerViewController.h */,
 				710CA4111E0A4F75008565F9 /* OwnerViewController.m */,
 				71EFEB6B1E04D90E00CE467A /* Feedback */,
@@ -2103,6 +2115,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D7F7A8AB1E138212003DC957 /* MyPublish */ = {
+			isa = PBXGroup;
+			children = (
+				D7F7A8AC1E138212003DC957 /* MyPublishVC.h */,
+				D7F7A8AD1E138212003DC957 /* MyPublishVC.m */,
+			);
+			path = MyPublish;
+			sourceTree = "<group>";
+		};
 		FD8C0431E9B21BD24E03FFC3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2236,6 +2257,7 @@
 				D71BC12B1E0389900093357C /* LICENSE in Resources */,
 				18C72AE71E10B7D8002CB9EF /* IQKeyboardManager.bundle in Resources */,
 				18440FCF1E0D2FAB005D684A /* Icon.png in Resources */,
+				D7F7A8B31E138277003DC957 /* DateTimePickerView.xib in Resources */,
 				18B002841DE2C9D700D8FE56 /* Assets.xcassets in Resources */,
 				18B002821DE2C9D700D8FE56 /* Main.storyboard in Resources */,
 			);
@@ -2353,6 +2375,7 @@
 				184B1D111DE6E0F500F8F56E /* SearchViewController.m in Sources */,
 				1857BD311DF6AF2900E5F1DE /* ShoppingCartBottomView.m in Sources */,
 				D71BC1351E0389910093357C /* NSString+MJExtension.m in Sources */,
+				D7F7A8B21E138277003DC957 /* DateTimePickerView.m in Sources */,
 				71D3A77F1E0A16B0002C2F1C /* ILSettingGroup.m in Sources */,
 				71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */,
 				D730E1ED1E0B62B40056A20A /* FreeArticleModel.m in Sources */,
@@ -2373,6 +2396,7 @@
 				18B002D81DE2E4B500D8FE56 /* MainViewController.m in Sources */,
 				185ADBEF1DE44ECA00CD556D /* NeighborhoodCircleCell.m in Sources */,
 				187A23701DEBD51900D921FC /* PropertyFeeViewController.m in Sources */,
+				D7F7A8AE1E138212003DC957 /* MyPublishVC.m in Sources */,
 				18C72AB01E10B790002CB9EF /* NeiborhoodLookingForThingsVC.m in Sources */,
 				18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */,
 				18440FD91E0D2FAB005D684A /* openssl_wrapper.m in Sources */,
@@ -2682,7 +2706,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
+					"/Users/xinlvxing/Desktop/智慧社区/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2722,7 +2746,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
+					"/Users/xinlvxing/Desktop/智慧社区/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
