@@ -291,12 +291,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         // 工具条的Y值 == 键盘的Y值 - 工具条的高度
         MJRefreshLog(@"keyboardF.origin--:%f",keyboardF.origin.y);
         MJRefreshLog(@"KHeight--:%f",KHeight);
-        
-        
-//        CGFloat lHeight = KHeight;
-//        CGFloat jjou = keyboardF.origin.y;
-//        
-        
+
         // 工具条的Y值 == 键盘的Y值 - 工具条的高度
 //        if (keyboardF.origin.y > KHeight) { // 键盘的Y值已经远远超过了控制器view的高度
 //            self.replyView.y = self.view.height - self.replyView.height - 44 - 49;
@@ -304,7 +299,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 //            self.replyView.y = keyboardF.origin.y - self.replyView.height - 44 - 49;
 //        }
         
-        self.replyView.y = KHeight - keyboardF.origin.y - 44 - _replyView.height;
+        self.replyView.y = keyboardF.origin.y - 154;
 
     }];
 }
@@ -339,10 +334,11 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 //发送按钮的点击事件
 -(void)sendBtnClick:(UIButton *)button
 {
+    button.enabled = NO;
     [self.view endEditing:YES];
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     parmas[@"userId"] = UserID;
-    parmas[@"sessionid"] = SessionID;
+    parmas[@"sessionId"] = SessionID;
     parmas[@"type"] = @"1";//邻里圈
     parmas[@"conment"] = self.replyTextView.text;
     
@@ -352,20 +348,21 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         parmas[@"replyToUserId"] = self.replyModel.userid;
     }else //评论
     {
-        parmas[@"targetId"] = self.commonModel.ID;
+        parmas[@"targetId"] = _commonModel.ID;
         //        parmas[@"replyToUserId"] = @"0";
     }
     
     NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];
     MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
     
-    [HUD showProgress:@"数据提交中，请等待！"];
+//    [HUD showProgress:@"数据提交中，请等待！"];
     
     [[AFHTTPSessionManager manager]POST:url parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         MJRefreshLog(@"responseObject---%@",responseObject);
+         button.enabled = YES;
         
         NSNumber *num = responseObject[@"resultCode"];
          [self.replyView removeFromSuperview];
@@ -377,7 +374,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
             model.userid = UserID;
             model.type = 1;
             model.conment = self.replyTextView.text;
-            model.userNickName = @"本人";
+            model.userNickName = [User currentUser].nickname;
             if (_isReply) {//回复
                 model.flag = NO;
                 model.targetId = self.replyModel.targetId;
@@ -389,7 +386,7 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
                 model.flag = YES;
                 model.targetId = self.commonModel.ID;
                 //插入数据
-                [self.commonModel.friendsRef addObject:model];
+                [_commonModel.friendsRef addObject:model];
             }
 
             NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:_currentSession];
@@ -402,44 +399,60 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         MJRefreshLog(@"error---%@",error);
         [HUD dismiss];
+        button.enabled = YES;
     }];
 }
+
 
 #pragma mark=====创建输入框，弹出键盘======
 -(void)setupKeyboard
 {
     [self.replyView removeFromSuperview];
+    
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44 + 5, KWidth, 44)];
 
-    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight + 44, KWidth, 44)];
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
-//    [self.view addSubview:replyView];
     [self.view addSubview:replyView];
     
+    //设置分割线
+    UIImageView *topLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, -2, KWidth, 6)];
+    topLine.backgroundColor = MJRefreshColor(238, 238, 238);
+    topLine.layer.borderWidth = 0.500;
+    topLine.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    [replyView addSubview:topLine];
+    
+    
+    UIImageView *footLine = [[UIImageView alloc] initWithFrame:CGRectMake(10, 44, KWidth - 20, 2)];
+    footLine.backgroundColor = MJRefreshColor(75, 190, 43);
+    //    footLine.layer.borderWidth = 0.500;
+    //    footLine.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    [replyView addSubview:footLine];
+    
+    
     //设置输入框
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 34)];
-    textView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 12.5, KWidth - 80, 24)];
+    //    textView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.replyTextView = textView;
     textView.backgroundColor = [UIColor clearColor];
     textView.font = UIFontLarge;
     
     [replyView addSubview:textView];
+    
+    
     [textView becomeFirstResponder];
     
-    
     //设置都发送按钮
-    UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(KWidth - 80, 0, 80, 44)];
-    sendBtn.backgroundColor = [UIColor redColor];
+    UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(KWidth - 70, 10, 60, 30)];
+    sendBtn.backgroundColor = MJRefreshColor(222, 222, 222);
     [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
     [sendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     sendBtn.enabled = NO;
     self.sendBtn = sendBtn;
     [sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [replyView addSubview:sendBtn];
-    
-
-    
-
 }
 
 

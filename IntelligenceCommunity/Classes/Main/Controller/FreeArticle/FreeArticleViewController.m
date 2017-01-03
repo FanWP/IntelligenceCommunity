@@ -79,7 +79,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     [self setupRightBar];
 
     //监听键盘
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     //监听文本框
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:nil];
     
@@ -369,6 +369,34 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     
 }
 
+/**
+ * 键盘的frame发生改变时调用（显示、隐藏等）
+ */
+- (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+    // 如果正在切换键盘，就不要执行后面的代码
+    //    if (self.switchingKeybaord) return;
+    
+    NSDictionary *userInfo = notification.userInfo;
+    // 动画的持续时间
+    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 键盘的frame
+    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    // 执行动画
+    [UIView animateWithDuration:duration animations:^{
+
+        // 工具条的Y值 == 键盘的Y值 - 工具条的高度
+        //        if (keyboardF.origin.y > KHeight) { // 键盘的Y值已经远远超过了控制器view的高度
+        //            self.replyView.y = self.view.height - self.replyView.height - 44 - 49;
+        //        } else {
+        //            self.replyView.y = keyboardF.origin.y - self.replyView.height - 44 - 49;
+        //        }
+        
+        self.replyView.y = keyboardF.origin.y - 100;
+        
+    }];
+}
+
 
 -(void)textDidChange
 {
@@ -415,10 +443,11 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 //发送按钮的点击事件
 -(void)sendBtnClick:(UIButton *)button
 {
+    button.enabled = NO;
     [self.view endEditing:YES];
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     parmas[@"userId"] = UserID;
-    parmas[@"sessionid"] = SessionID;
+    parmas[@"sessionId"] = SessionID;
     parmas[@"type"] = @"2";
     parmas[@"conment"] = self.replyTextView.text;
     
@@ -435,10 +464,11 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     NSString *url = [NSString stringWithFormat:@"%@smart_community/save/update/friendsRef",Smart_community_URL];
     MJRefreshLog(@"parmas--:%@url---:%@",parmas,url);
     
-    [HUD showMessage:@"数据提交中"];
+//    [HUD showMessage:@"数据提交中"];
     [[AFHTTPSessionManager manager]POST:url parameters:parmas progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        button.enabled = YES;
         
         MJRefreshLog(@"responseObject---%@",responseObject);
         
@@ -452,7 +482,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
             model.userid = UserID;
             model.type = 1;
             model.conment = self.replyTextView.text;
-            model.userNickName = @"本人";
+            model.userNickName = [User currentUser].nickname;
             if (_isReply) {//回复
                 model.flag = NO;
                 model.targetId = self.replyModel.targetId;
@@ -475,6 +505,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         MJRefreshLog(@"error---%@",error);
+        button.enabled = YES;
     }];
 
 }
@@ -490,7 +521,7 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
 {
     [self.replyView removeFromSuperview];
     
-    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44, KWidth, 44)];
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 44 + 5, KWidth, 44)];
     
     NSString *type = self.parmas[@"type"];
     if ([type isEqualToString:@"3"]) {//我的发布
@@ -501,9 +532,26 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     self.replyView = replyView;
     [self.view addSubview:replyView];
     
+    //设置分割线
+    UIImageView *topLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 4)];
+    topLine.backgroundColor = MJRefreshColor(238, 238, 238);
+    topLine.layer.borderWidth = 0.500;
+    topLine.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    [replyView addSubview:topLine];
+    
+    
+    UIImageView *footLine = [[UIImageView alloc] initWithFrame:CGRectMake(10, 44, KWidth - 20, 2)];
+    footLine.backgroundColor = MJRefreshColor(75, 190, 43);
+//    footLine.layer.borderWidth = 0.500;
+//    footLine.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    [replyView addSubview:footLine];
+
+    
     //设置输入框
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 34)];
-    textView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 12, KWidth - 80, 24)];
+//    textView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.replyTextView = textView;
     textView.backgroundColor = [UIColor clearColor];
     textView.font = UIFontLarge;
@@ -514,8 +562,8 @@ NSString *const communityCellIdentifier = @"communityCellIdentifier";
     [textView becomeFirstResponder];
     
     //设置都发送按钮
-    UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(KWidth - 80, 0, 80, 44)];
-    sendBtn.backgroundColor = [UIColor redColor];
+    UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(KWidth - 70, 10, 60, 30)];
+    sendBtn.backgroundColor = MJRefreshColor(222, 222, 222);
     [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
     [sendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     sendBtn.enabled = NO;

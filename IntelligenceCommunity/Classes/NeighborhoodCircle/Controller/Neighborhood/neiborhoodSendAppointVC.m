@@ -151,7 +151,10 @@
         {
             ICLog_2(@"约发布请求成功：");
             
-            [HUD showSuccessMessage:@"月发布请求成功"];
+            [HUD showSuccessMessage:@"约发布请求成功"];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
 
             //清空数据
             
