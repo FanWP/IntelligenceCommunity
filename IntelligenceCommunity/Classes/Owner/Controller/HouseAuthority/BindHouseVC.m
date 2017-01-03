@@ -113,7 +113,7 @@
     [self.view addSubview:_roomNumberLabel];
     [_roomNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(16);
-        make.top.mas_offset(64 + 21);
+        make.top.mas_offset(21);
         make.right.mas_offset(-16);
         make.height.mas_offset(30);
     }];

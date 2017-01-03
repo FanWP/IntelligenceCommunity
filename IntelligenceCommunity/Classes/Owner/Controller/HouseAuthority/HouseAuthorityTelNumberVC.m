@@ -37,7 +37,7 @@
     [self.view addSubview:_phoneNumberLabel];
     [_phoneNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(35);
-        make.top.mas_offset(44 + 41);
+        make.top.mas_offset(41);
         make.right.mas_offset(-35);
         make.height.mas_offset(30);
     }];

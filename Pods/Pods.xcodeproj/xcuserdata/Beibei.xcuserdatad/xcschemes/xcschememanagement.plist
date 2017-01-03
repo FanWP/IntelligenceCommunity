@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>IQKeyboardManager.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -39,6 +44,11 @@
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>SDCycleScrollView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -52,6 +62,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>03A21FD9968DDCED99DEF522534D1FB4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>04CF549EBEEE7BC87AEAE35397184D94</key>
 		<dict>
 			<key>primary</key>
@@ -62,7 +77,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>39918760D130F7B2CBF9C5D3A316C909</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3E51C1FCF08367DF3A821253E724A42A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4CC4D8B0E64AD52F3E76F7BB1A3E4F34</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5871A5C6C87E45542A13660D2D480EB6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9482332586318B967BEEDCBD5D0DF99C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9650B5ADCE86F1A055FAFC635284BDB5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
