@@ -205,6 +205,8 @@
     _handAppraiseButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     _handAppraiseButton.backgroundColor = HexColor(0x05c4a2);
     [_handAppraiseButton setTitle:@"提交" forState:(UIControlStateNormal)];
+    [_handAppraiseButton.titleLabel setFont:UIFontLarge];
+    _handAppraiseButton.layer.cornerRadius = 49 / 2;
     [self.view addSubview:_handAppraiseButton];
     [_handAppraiseButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(20);
@@ -225,39 +227,181 @@
 - (void)firstStarClickAction:(UIButton *)button
 {
     button.selected = !button.selected;
+    
+    if (button.selected == NO)
+    {
+        _firstStarButton.selected = NO;
+        _secondStarButton.selected = NO;
+        _secondStarButton.selected = NO;
+        _thirdStarButton.selected = NO;
+        _fourStarButton.selected = NO;
+        _fiveStarButton.selected = NO;
+    }
 }
 
 - (void)secondStarClickAction:(UIButton *)button
 {
     button.selected = !button.selected;
+    
+    if (button.selected == YES)
+    {
+        _firstStarButton.selected = YES;
+    }
+    else
+    {
+        _secondStarButton.selected = NO;
+        _thirdStarButton.selected = NO;
+        _fourStarButton.selected = NO;
+        _fiveStarButton.selected = NO;
+    }
 }
 
 - (void)thirdStarClickAction:(UIButton *)button
 {
     button.selected = !button.selected;
+    
+    if (button.selected == YES)
+    {
+        _firstStarButton.selected = YES;
+        _secondStarButton.selected = YES;
+    }
+    else
+    {
+        _thirdStarButton.selected = NO;
+        _fourStarButton.selected = NO;
+        _fiveStarButton.selected = NO;
+    }
 }
 
 - (void)fourStarClickAction:(UIButton *)button
 {
     button.selected = !button.selected;
+    
+    if (button.selected == YES)
+    {
+        _firstStarButton.selected = YES;
+        _secondStarButton.selected = YES;
+        _thirdStarButton.selected = YES;
+    }
+    else
+    {
+        _fourStarButton.selected = NO;
+        _fiveStarButton.selected = NO;
+    }
 }
 
 - (void)fiveStarClickAction:(UIButton *)button
 {
     button.selected = !button.selected;
+    
+    if (button.selected == YES)
+    {
+        _firstStarButton.selected = YES;
+        _secondStarButton.selected = YES;
+        _thirdStarButton.selected = YES;
+        _fourStarButton.selected = YES;
+    }
+    else
+    {
+        _fiveStarButton.selected = NO;
+    }
 }
 
 
 - (void)anonymatAction:(UIButton *)button
 {
     button.selected = !button.selected;
+    
+    if (button.selected == YES)
+    {
+        _firstStarButton.selected = YES;
+        _secondStarButton.selected = YES;
+        _thirdStarButton.selected = YES;
+        _fourStarButton.selected = YES;
+        _fiveStarButton.selected = YES;
+    }
+    else
+    {
+        _firstStarButton.selected = NO;
+        _secondStarButton.selected = NO;
+        _thirdStarButton.selected = NO;
+        _fourStarButton.selected = NO;
+        _fiveStarButton.selected = NO;
+    }
 }
 
 
 
 - (void)handAppraiseClickAction:(UIButton *)button
 {
+//    add/comments
+    NSInteger evaluate;
+    if (_fiveStarButton.selected == YES)
+    {
+        evaluate = 5;
+    }
+    else if (_fiveStarButton.selected == NO && _fourStarButton.selected == YES)
+    {
+        evaluate = 4;
+    }
+    else if (_fiveStarButton.selected == NO && _fourStarButton.selected == NO && _thirdStarButton.selected == YES)
+    {
+        evaluate = 3;
+    }
+    else if (_fiveStarButton.selected == NO && _fourStarButton.selected == NO && _thirdStarButton.selected == NO && _secondStarButton.selected == YES)
+    {
+        evaluate = 2;
+    }
+    else if (_fiveStarButton.selected == NO && _fourStarButton.selected == NO && _thirdStarButton.selected == NO && _secondStarButton.selected == NO && _firstStarButton.selected == YES)
+    {
+        evaluate = 1;
+    }
+    else
+    {
+        evaluate = 0;
+    }
     
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    _saleid = @"1";
+    _vendorId = @"1";
+    
+    parameters[@"saleid"] = _saleid;// 订单id号
+    parameters[@"vendorId"] = _vendorId;// 商户门店id
+    parameters[@"userId"] = UserID;
+    parameters[@"evaluate"] = @(evaluate);// 星级评级
+    parameters[@"comments"] = _appraiseTextView.text;// 内容
+    parameters[@"sessionId"] = SessionID;
+    
+    ICLog_2(@"提交评价参数：%@",parameters);
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@add/comments",URL_17_mall_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"提交评价返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            [HUD showSuccessMessage:@"提交成功"];
+            
+            _appraiseTextView.text = @"";
+            _firstStarButton.selected = NO;
+            _secondStarButton.selected = NO;
+            _thirdStarButton.selected = NO;
+            _fourStarButton.selected = NO;
+            _fiveStarButton.selected = NO;
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        ICLog_2(@"提交评价错误：%@",error);
+    }];
 }
 
 

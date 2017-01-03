@@ -104,7 +104,7 @@ NSString *const commImageViewCellIdentifier = @"HouseImageViewCellIdentifier";
     _householdInfoLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:_householdInfoLabel];
     [_householdInfoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_offset(16 + 64);
+        make.top.mas_offset(16);
         make.left.mas_offset(15);
         make.right.mas_offset(-15);
         make.height.mas_offset(30);

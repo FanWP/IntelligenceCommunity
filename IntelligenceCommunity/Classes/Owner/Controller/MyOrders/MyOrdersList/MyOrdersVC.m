@@ -80,7 +80,7 @@
     
     UIScrollView *contentView = [[UIScrollView alloc] init];
     contentView.x = 0;
-    contentView.y = 44;
+    contentView.y = 22;
     contentView.height = self.view.bounds.size.height - 20;
     contentView.width = self.view.width;
     contentView.delegate = self;

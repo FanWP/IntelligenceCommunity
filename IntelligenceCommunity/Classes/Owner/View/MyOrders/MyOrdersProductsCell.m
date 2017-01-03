@@ -29,7 +29,8 @@
 {
     // 商品图片 productImageView;
     _productImageView = [[UIImageView alloc] init];
-    _productImageView.backgroundColor = [UIColor orangeColor];
+//    _productImageView.backgroundColor = [UIColor orangeColor];
+    _productImageView.image = [UIImage imageNamed:@"2"];
     [self.contentView addSubview:_productImageView];
     [_productImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(12);

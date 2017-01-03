@@ -14,6 +14,8 @@
 extern NSString *const Smart_community_URL;
 extern NSString *const URL_17_mall_api;
 extern NSString *const URL_17_pro_api;
+extern NSString *const URL_4_mall_api;
+extern NSString *const URL_4_pro_api;
 extern NSString *const Smart_community_picURL;
 
 

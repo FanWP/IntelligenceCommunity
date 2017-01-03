@@ -56,7 +56,7 @@
     [self.statusButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_offset(-12);
         make.centerY.equalTo(_storeNameButton.mas_centerY);
-        make.width.mas_offset(100);
+        make.width.mas_offset(80);
         make.height.equalTo(_storeNameButton.mas_height);
     }];
     

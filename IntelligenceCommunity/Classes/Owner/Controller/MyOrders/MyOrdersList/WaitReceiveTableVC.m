@@ -36,7 +36,7 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"userid"] = UserID;
+    parameters[@"userId"] = UserID;
     parameters[@"salestatus"] = @"3";//客户版: 1 全部查 2待付款 3待收货  //商户版: 4新订单 5催单 6退单  7进行中 8已完成  9已取消
     parameters[@"pageNum"] = @"1";
     parameters[@"pageSize"] = @"10";
@@ -116,7 +116,49 @@
         cell = [[MyOrdersStoreTitleCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
     }
     
+    cell.statusButton.layer.borderWidth = 1.0;
+    cell.statusButton.layer.borderColor = [UIColor blackColor].CGColor;
+    cell.statusButton.layer.cornerRadius = 5.0;
+    [cell.statusButton setTitle:@"催单" forState:(UIControlStateNormal)];
+    [cell.statusButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    [cell.statusButton addTarget:self action:@selector(remindAction) forControlEvents:(UIControlEventTouchUpInside)];
+    
     return cell;
+}
+- (void)remindAction
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    _saleid = @"1";
+    
+    parameters[@"saleid"] = _saleid;
+    parameters[@"express"] = @"1";
+    parameters[@"sessionId"] = SessionID;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@express/status/salerecord",URL_17_mall_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    {
+        ICLog_2(@"催单返回：%@",responseObject);
+        
+        NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+        
+        if (resultCode == 1000)
+        {
+            [HUD showSuccessMessage:@"催单成功"];
+        }
+        else
+        {
+            [HUD showErrorMessage:@"催单失败"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
+        [HUD showErrorMessage:@"催单失败"];
+        ICLog_2(@"催单错误：%@",error);
+    }];
 }
 
 // 店铺里商品信息的cell
@@ -137,6 +179,7 @@
     return cell;
 }
 
+
 // 处理订单的cell
 - (MyOrdersDealCell *)tableView:(UITableView *)tableView dealCellWithIndexPath:(NSIndexPath *)indexPath
 {
@@ -153,7 +196,55 @@
     cell.secondButton.layer.borderColor = HexColor(0x05c4a2).CGColor;
     [cell.secondButton setTitleColor:HexColor(0x05c4a2) forState:(UIControlStateNormal)];
     [cell.secondButton setTitle:@"确认收货" forState:(UIControlStateNormal)];
+    
+    [cell.secondButton addTarget:self action:@selector(confirmReceiveAction) forControlEvents:(UIControlEventTouchUpInside)];
+    
     return cell;
+}
+- (void)confirmReceiveAction
+{
+//    confrim/salestatus/salerecord
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认收货?" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        _saleid = @"1";
+        
+        parameters[@"saleid"] = _saleid;
+        parameters[@"salestatus"] = @"3";
+        parameters[@"buytype"] = @"1";// 1商品 2服务
+        parameters[@"sessionId"] = SessionID;
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@confrim/salestatus/salerecord",URL_17_mall_api];
+        
+        [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             ICLog_2(@"确认收货返回：%@",responseObject);
+             
+             NSInteger resultCode = [responseObject[@"resultCode"] integerValue];
+             
+             if (resultCode == 1000)
+             {
+                 [HUD showSuccessMessage:@"确认成功"];
+                 
+                 [self dataWaitReceiveList];
+             }
+             
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+         {
+             ICLog_2(@"确认收货错误：%@",error);
+         }];
+    }];
+    
+    [alert addAction:cancleAction];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
