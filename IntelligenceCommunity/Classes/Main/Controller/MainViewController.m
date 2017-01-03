@@ -52,8 +52,8 @@ NSString *const MainCommodityAdvertiseViewCellIdentifier = @"mainCommodityAdvert
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"News"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(action:)];
 
     
-    FeeHistoryListViewController *vc = [[FeeHistoryListViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    FeeHistoryListViewController *vc = [[FeeHistoryListViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
