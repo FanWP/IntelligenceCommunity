@@ -135,8 +135,7 @@ NSString *const coViewAddID = @"HouseImageViewCellIdentifieruyt";
             ICLog_2(@"寻物招领发布动态请求返回：");
             
             [HUD showSuccessMessage:@"邻里圈寻物招领-发布动态请求返回请求成功"];
-            
-#warning todo
+#pragma mark--todo
             //清空数据
             
             [_photosView removeFromSuperview];

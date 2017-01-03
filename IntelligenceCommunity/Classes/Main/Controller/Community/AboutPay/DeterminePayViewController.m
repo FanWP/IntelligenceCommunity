@@ -9,6 +9,7 @@
 #import "DeterminePayViewController.h"
 #import "DeterminePaySendAddressCell.h" //收货地址
 #import "CommodityInfoViewCell.h"       //商品信息列表cell
+#import "ServiceTimeSelectViewCell.h"   //时间选择
 #import "DeterminePayBottomView.h"      //底部view
 
 #import "ProListModel.h"        //商品数据模型
@@ -16,12 +17,17 @@
 
 #import "DeterminePayToCommodityDetailVC.h"     //查看详情
 #import "PayMentViewController.h"               //进入支付界面
+#import "AppointmentServiceViewController.h"    //预约结果界面
+
+
+#import "ICPickView.h"  //时间选择器
 
 NSString *const DeterminePaySendAddressCellIdentifier = @"determinePaySendAddressCellIdentifier";
 NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentifier";
-
+NSString *const ServiceTimeSelectViewCellIdentifier = @"serviceTimeSelectViewCellIdentifier";
 //CommodityInfoViewCellDelegate  选择按钮的状态操作
-@interface DeterminePayViewController ()<UITableViewDelegate,UITableViewDataSource,CommodityInfoViewCellDelegate>
+//ICPickViewDelegate  时间选择器
+@interface DeterminePayViewController ()<UITableViewDelegate,UITableViewDataSource,CommodityInfoViewCellDelegate,ICPickViewDelegate>
 
 @property(nonatomic,strong) UITableView *tableView;
 //记录是否所有商品都处于选中状态
@@ -29,6 +35,8 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
 
 //处于选中状态的商品总价
 @property(nonatomic,strong) NSString *selectCommodityTotalPriceString;
+
+@property(nonatomic,strong) ICPickView *icPickView; //时间选择器
 
 @end
 
@@ -41,7 +49,19 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
     self.navigationItem.title = @"确认支付";
     self.navigationController.navigationBar.translucent = NO;
 
+    
     [self initializeComponent];
+    
+    //时间选择器
+    _icPickView = [[ICPickView alloc] init];
+    _icPickView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 200);
+    _icPickView.delegate = self;
+    [self.view addSubview:_icPickView];
+    
+    
+    
+    
+    
 }
 -(void)initializeComponent{
     
@@ -55,6 +75,7 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
     
     [_tableView registerClass:[DeterminePaySendAddressCell class] forCellReuseIdentifier:DeterminePaySendAddressCellIdentifier];
     [_tableView registerClass:[CommodityInfoViewCell class] forCellReuseIdentifier:CommodityInfoViewCellIdentifier];
+    [_tableView registerClass:[ServiceTimeSelectViewCell class] forCellReuseIdentifier:ServiceTimeSelectViewCellIdentifier];
     
     _bottomView = [[DeterminePayBottomView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds)-64-50, ScreenWidth, 50)];
     //全选按钮
@@ -150,10 +171,17 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
             //预留
         }];
     }else{
-        PayMentViewController *VC = [[PayMentViewController alloc] init];
-        VC.payMentTotalPriceString = _selectCommodityTotalPriceString;
-        [self.navigationController pushViewController:VC animated:YES];
-        
+        User *user = [User currentUser];
+        if (user.serviceTypeStatus == 2) {
+            AppointmentServiceViewController *VC = [[AppointmentServiceViewController alloc] init];
+            [self.navigationController pushViewController:VC animated:YES];
+        }else{
+            
+            PayMentViewController *VC = [[PayMentViewController alloc] init];
+            VC.payMentTotalPriceString = _selectCommodityTotalPriceString;
+            [self.navigationController pushViewController:VC animated:YES];
+            
+        }
     }
 }
 //单个商品的选中/取消操作
@@ -212,17 +240,37 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _orderMArray.count+1;
+    User *user = [User currentUser];
+    if (user.serviceTypeStatus == 2) {  //预约类服务需要时间选择器
+        return _orderMArray.count+2;
+    }else{
+        return _orderMArray.count+1;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return indexPath.row==0 ? 130 : 80;
+    if (indexPath.row==0) {
+        return 130;
+    }else if (indexPath.row == _orderMArray.count+1){
+        return 50;
+    }else{
+        return 80;
+    }
+//    return indexPath.row==0 ? 130 : 80;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
         
         DeterminePaySendAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:DeterminePaySendAddressCellIdentifier forIndexPath:indexPath];
+        User *user = [User currentUser];
+        if (user.serviceTypeStatus == 2) {      //预约类服务
+            cell.sendTimeLabel.hidden = YES;
+            cell.fastSendLabel.hidden = YES;
+        }
+        return cell;
+    }else if (indexPath.row == _orderMArray.count+1){
+        ServiceTimeSelectViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ServiceTimeSelectViewCellIdentifier forIndexPath:indexPath];
+        
         return cell;
     }else{
         CommodityInfoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CommodityInfoViewCellIdentifier forIndexPath:indexPath];
@@ -254,13 +302,33 @@ NSString *const CommodityInfoViewCellIdentifier = @"commodityInfoViewCellIdentif
     
     if (indexPath.row==0) {     //收货地址
         return;
+    }else if (indexPath.row == _orderMArray.count+1){
+        [_icPickView showInView:self.view];
+        
+        
+    }else{
+        
+        ProListModel *model = _orderMArray[indexPath.row-1];
+        
+        DeterminePayToCommodityDetailVC *VC = [[DeterminePayToCommodityDetailVC alloc] init];
+        VC.model = model;
+        [self.navigationController pushViewController:VC animated:YES];
     }
-    ProListModel *model = _orderMArray[indexPath.row-1];
     
-    DeterminePayToCommodityDetailVC *VC = [[DeterminePayToCommodityDetailVC alloc] init];
-    VC.model = model;
-    [self.navigationController pushViewController:VC animated:YES];
+}
+#pragma mark--时间选择器
+-(void)didFinishPickView:(NSString *)date{
     
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_orderMArray.count+1 inSection:0];
+    ServiceTimeSelectViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    
+    if (date && date.length) {
+        
+        cell.selectResultTimeLabel.text = date;
+    }
+    
+    
+    ICLog_2(@"%@",date);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

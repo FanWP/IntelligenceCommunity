@@ -94,7 +94,7 @@
     [self.view addSubview:_nameTextField];
     [_nameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(16);
-        make.top.mas_offset(64 + 12);
+        make.top.mas_offset(12);
         make.right.mas_offset(-16);
         make.height.mas_offset(35);
     }];

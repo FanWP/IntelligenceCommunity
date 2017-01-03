@@ -77,8 +77,10 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
 -(void)dataRequest{
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
     [parametersDic setValue:@"1" forKey:@"userId"];
-    [parametersDic setValue:@"1" forKey:@"sessionId"];
-
+//    [parametersDic setValue:@"1" forKey:@"sessionId"];
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
+    
     [HUD showProgress:@"正在加载数据"];
     
     [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/user/profee" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
@@ -340,17 +342,30 @@ NSString *const SpecialOffersListViewCellIdentifier = @"specialOffersListViewCel
     [parametersDictionary setValue:@"27" forKey:@"userId"];
     [parametersDictionary setValue:@"2" forKey:@"discountId"];
     [parametersDictionary setValue:@"1" forKey:@"houseId"];
-
+    User *user = [User currentUser];
+    [parametersDictionary setValue:user.sessionId forKey:@"sessionId"];
+    
+    
     [[RequestManager manager] SessionRequestWithType:Pro_api requestWithURLString:@"find/propertyfee/bydiscount" requestType:RequestMethodPost requestParameters:parametersDictionary success:^(id  _Nullable responseObject) {
         
         [HUD dismiss];
         ICLog_2(@"%@",responseObject);
-        if ([responseObject[@"body"][@"resultCode"] integerValue] == 1000) {
+        NSDictionary *dictionary = [responseObject[@"body"] firstObject];
+        if ([dictionary[@"resultCode"] integerValue] == 1000) {
             
             //更新缴费账期内容
-            _propertyFeeOtherInfoModel.feeperiod = responseObject[@"body"][@"feeperiod"];
+            _propertyFeeOtherInfoModel.feeperiod = dictionary[@"feeperiod"];
             //更新缴费金额
-            _propertyFeeOtherInfoModel.totalFee = responseObject[@"body"][@"totalFee"];
+            _propertyFeeOtherInfoModel.totalFee = dictionary[@"totalFee"];
+            
+            
+            //物业费明细单
+            [_propertyFeeListMArray removeAllObjects];
+            for (NSDictionary *dic in dictionary[@"detailList"]) {
+                PropertyFeeListModel *model = [[PropertyFeeListModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic];
+                [_propertyFeeListMArray addObject:model];
+            }
             
             
         }

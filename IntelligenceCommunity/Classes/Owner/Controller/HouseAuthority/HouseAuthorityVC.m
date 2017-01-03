@@ -239,14 +239,14 @@
     [_ridgepoleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(35);
         make.right.mas_offset(-35);
-        make.top.offset(44 + 42);
+        make.top.offset(42);
         make.height.offset(30);
     }];
     
     
     
     // 选择几栋
-    CGFloat ridgepoleViewY = 44 + 42 + 30 + 16;
+    CGFloat ridgepoleViewY = 42 + 30 + 16;
     CGFloat width = KWidth - 2 * 35;
     _ridgepoleView = [[DMDropDownMenu alloc] initWithFrame:CGRectMake(35, ridgepoleViewY, width, 35)];
     _ridgepoleView.delegate = self;

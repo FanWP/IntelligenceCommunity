@@ -52,6 +52,37 @@ static char const userInfoKey = '\0';
 -(NSObject*)userInfo {
     return objc_getAssociatedObject(self, &userInfoKey);
 }
+#pragma mark--确定后取消
+-(void)alertControllerWithMessage:(NSString *)message{
+    
+    if (!message.length) {
+        return;
+    }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"友情提示:" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
+}
+#pragma mark--确定后返回上级界面
+-(void)alertControllerWithTitle:(NSString *)title Message:(NSString *)message{
+    
+    if (!message.length) {
+        return;
+    }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
+}
 
 @end
 

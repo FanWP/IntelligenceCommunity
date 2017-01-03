@@ -100,7 +100,7 @@
 //    ILSettingGroup *group = self.dataList[section];
 //    return group.footer;
 //}
-#warning 点击某一行cell
+#pragma mark-- 点击某一行cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 取消选中

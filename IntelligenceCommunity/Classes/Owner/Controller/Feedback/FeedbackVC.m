@@ -77,7 +77,7 @@
     [self.view addSubview:_feedbackContentTextView];
     [_feedbackContentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(15);
-        make.top.mas_offset(64 + 10);
+        make.top.mas_offset(10);
         make.right.mas_offset(-15);
         make.height.mas_offset(150);
     }];

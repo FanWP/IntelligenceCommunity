@@ -21,10 +21,9 @@
     [self.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     self.navigationBar.shadowImage = nil;
     
-    self.navigationBar.backIndicatorImage = [UIImage imageNamed:@"Root_Back"];
-    self.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"Root_Back"];
+    self.navigationBar.backIndicatorImage = [[UIImage imageNamed:@"Root_Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationBar.backIndicatorTransitionMaskImage = [[UIImage imageNamed:@"Root_Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-//    self.navigationBar.barTintColor =  HexColor(0x0dceac);
     self.navigationBar.barTintColor = MJRefreshColor(246, 246, 246);
 }
 

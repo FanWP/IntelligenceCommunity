@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+//底部信息
 @interface DeterminePayBottomView : UIView
 
 //全选

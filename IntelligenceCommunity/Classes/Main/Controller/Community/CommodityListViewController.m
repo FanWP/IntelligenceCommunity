@@ -63,6 +63,10 @@
     [_shoppingCartBottomView.shoppingCartButton addTarget:self action:@selector(showshoppingCartlist:) forControlEvents:UIControlEventTouchUpInside];
         //去结算
     [_shoppingCartBottomView.goSettlementButton addTarget:self action:@selector(goSettlementButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    User *user = [User currentUser];
+    if (user.serviceTypeStatus == 2) {
+        [_shoppingCartBottomView.goSettlementButton setTitle:@"立即预约" forState:UIControlStateNormal];
+    }
     [self.view addSubview:_shoppingCartBottomView];
     
     
@@ -74,6 +78,8 @@
     [parametersDic setValue:@"1" forKey:@"venderId"];
     [parametersDic setValue:@"1" forKey:@"pageNum"];
     [parametersDic setValue:@"5" forKey:@"pageSize"];
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
     
     [HUD showProgress:@"数据正在加载"];
     
@@ -184,7 +190,6 @@
             self.shoppingCartView.frame =CGRectMake(0,ScreenHeight-64-50-200, ScreenWidth,200);
             self.shoppingCartView.shoppingCartMArray = self.popTableView.orderMArray;
         } completion:^(BOOL finished){
-            
             
         }];
 

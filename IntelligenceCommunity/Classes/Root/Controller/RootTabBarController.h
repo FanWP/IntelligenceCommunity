@@ -10,4 +10,10 @@
 
 @interface RootTabBarController : UITabBarController
 
+/**
+ *  是否跳过指纹验证一次
+ */
+@property(nonatomic,assign) BOOL skipAuthOnce;
+
+
 @end

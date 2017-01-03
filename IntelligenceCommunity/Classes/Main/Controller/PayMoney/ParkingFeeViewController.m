@@ -72,7 +72,10 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
 -(void)dataRequest{
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
     [parametersDic setValue:@"1" forKey:@"userId"];
-    [parametersDic setValue:@"1" forKey:@"sessionId"];
+//    [parametersDic setValue:@"1" forKey:@"sessionId"];
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
+    
     [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/user/parkingfee" method:RequestMethodPost timeout:20 parameters:parametersDic success:^(id  _Nullable responseObject) {
         
         ICLog_2(@"PropertyFeeViewController---%@",responseObject);
@@ -332,6 +335,8 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
     [parametersDictionary setValue:@"1" forKey:@"type"];
     [parametersDictionary setValue:@"2" forKey:@"discountId"];
     [parametersDictionary setValue:@"1" forKey:@"userId"];
+    User *user = [User currentUser];
+    [parametersDictionary setValue:user.sessionId forKey:@"sessionId"];
     
     [HUD showProgress:@"数据正在加载"];
     [[RequestManager manager] JSONRequestWithType:Pro_api urlString:@"find/parkingfee/prepay/discount" method:RequestMethodPost timeout:20 parameters:parametersDictionary success:^(id  _Nullable responseObject) {
@@ -340,9 +345,15 @@ NSString *const ParkingFeeSpecialOffersListViewCellIdentifier = @"specialOffersL
         if ([responseObject[@"resultCode"] integerValue] == 1000) {
             
             //更新缴费账期内容
-            _propertyFeeOtherInfoModel.feeperiod = responseObject[@"body"][@"preFeePeriod"];
+            if ([responseObject[@"body"][@"preFeePeriod"] length]) {
+                
+                _propertyFeeOtherInfoModel.feeperiod = responseObject[@"body"][@"preFeePeriod"];
+            }
             //更新缴费金额
-            _propertyFeeOtherInfoModel.totalFee = responseObject[@"body"][@"actualAmount"];
+            if ([responseObject[@"body"][@"actualAmount"] length]) {
+                
+                _propertyFeeOtherInfoModel.totalFee = responseObject[@"body"][@"actualAmount"];
+            }
             
             
         }

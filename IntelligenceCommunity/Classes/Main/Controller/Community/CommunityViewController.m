@@ -41,6 +41,8 @@ NSString *const CommunityServiceListCellIdentifier = @"communityServiceListCellI
     }
     
     [self initializeComponent];
+    
+    
 }
 -(void)initializeComponent{
     
@@ -60,8 +62,24 @@ NSString *const CommunityServiceListCellIdentifier = @"communityServiceListCellI
 -(void)dataRequest{
     
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
-    
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
     [HUD showProgress:@"数据正在加载"];
+    
+//    NSString *string = [NSString stringWithFormat:@"%@mall_api/find/communityService/type",Smart_community_URL];
+//    [[AFHTTPSessionManager manager] POST:string parameters:parametersDic progress:^(NSProgress * _Nonnull uploadProgress) {
+//        
+//
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        
+//        [HUD dismiss];
+//        ICLog_2(@"%@",responseObject);
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//        [HUD dismiss];
+//        ICLog_2(@"%@",error);
+//    }];
     [[RequestManager manager] SessionRequestWithType:Mall_api requestWithURLString:@"find/communityService/type" requestType:RequestMethodPost requestParameters:parametersDic success:^(id  _Nullable responseObject) {
         [HUD dismiss];
         ICLog_2(@"%@",responseObject);
@@ -153,33 +171,37 @@ NSString *const CommunityServiceListCellIdentifier = @"communityServiceListCellI
     if (!_dataMArray.count) {       
         return;
     }
+    
+    CommunityServiceTypeModel *model;
+    
     if (tag == 1) {
-        CommunityServiceTypeModel *model_1 = [_dataMArray objectAtIndex:0];
+        model = [_dataMArray objectAtIndex:0];
         
-        VC.serviceTypeID = model_1.serviceTypeID;
-        VC.navigationItem.title = model_1.serviceTypename;
     }else if (tag == 2){
-        CommunityServiceTypeModel *model_2 = [_dataMArray objectAtIndex:1];
+        model = [_dataMArray objectAtIndex:1];
 
-        VC.serviceTypeID = model_2.serviceTypeID;
-        VC.navigationItem.title = model_2.serviceTypename;
     }else if (tag == 3){
-        CommunityServiceTypeModel *model_3 = [_dataMArray objectAtIndex:2];
+        model = [_dataMArray objectAtIndex:2];
 
-        VC.serviceTypeID = model_3.serviceTypeID;
-        VC.navigationItem.title = model_3.serviceTypename;
     }else if (tag == 4){
-        CommunityServiceTypeModel *model_4 = [_dataMArray objectAtIndex:3];
+        model = [_dataMArray objectAtIndex:3];
 
-        VC.serviceTypeID = model_4.serviceTypeID;
-        VC.navigationItem.title = model_4.serviceTypename;
     }
+    VC.serviceTypeID = model.serviceTypeID;             //ID
+    VC.navigationItem.title = model.serviceTypename;    //标题
+    
+    User *user = [User currentUser];
+    [CacheData write:^{
+        user.serviceTypeStatus = [model.status integerValue];
+    }];
+    
     [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 @end

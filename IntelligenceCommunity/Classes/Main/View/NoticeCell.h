@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+//公告
 @interface NoticeCell : UITableViewCell
 
 //公告图片

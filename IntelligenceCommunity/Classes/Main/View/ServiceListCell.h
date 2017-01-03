@@ -35,10 +35,6 @@
 @property(nonatomic,strong) UIImageView *repairsImageView;
 @property(nonatomic,strong) UILabel *repairsLabel;
 
-//地图宣传图
-@property(nonatomic,strong) UIImageView *advertiseImageView;
-@property(nonatomic,strong) UILabel *advertiseContentLabel;
-@property(nonatomic,strong) UILabel *timeLabel;
 
 //协议传递点击状态
 @property(nonatomic,strong) id<ServiceListCellDelegate>delegate;

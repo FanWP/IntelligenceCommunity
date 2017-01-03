@@ -43,7 +43,7 @@
 //    @property(nonatomic,strong) UILabel *nameLabel;
     _nameLabel = [[UILabel alloc] init];
     _nameLabel.text = @"收件人: 王麻子";
-    _nameLabel.textColor = [UIColor grayColor];
+    _nameLabel.textColor = [UIColor blackColor];
     _nameLabel.textAlignment = NSTextAlignmentLeft;
     _nameLabel.font = UIFontNormal;
     [self.contentView addSubview:_nameLabel];
@@ -56,7 +56,7 @@
 //    @property(nonatomic,strong) UILabel *phoneLabel;
     _phoneLabel = [[UILabel alloc] init];
     _phoneLabel.text = @"电话:32974932847";
-    _phoneLabel.textColor = [UIColor grayColor];
+    _phoneLabel.textColor = [UIColor blackColor];
     _phoneLabel.textAlignment = NSTextAlignmentRight;
     _phoneLabel.font = UIFontNormal;
     [self.contentView addSubview:_phoneLabel];
@@ -69,7 +69,7 @@
 //    @property(nonatomic,strong) UILabel *addressLabel;
     _addressLabel = [[UILabel alloc] init];
     _addressLabel.text = @"收货地址: 陕西省/西安市/高新区/科技四路/南窑头东区 ";
-    _addressLabel.textColor = [UIColor grayColor];
+    _addressLabel.textColor = [UIColor blackColor];
     _addressLabel.textAlignment = NSTextAlignmentLeft;
     _addressLabel.font = UIFontNormal;
     _addressLabel.numberOfLines = 2;
@@ -93,7 +93,7 @@
 //    @property(nonatomic,strong) UILabel *fastSendLabel;
     _sendTimeLabel = [[UILabel alloc] init];
     _sendTimeLabel.text = @"送达时间";
-    _sendTimeLabel.textColor = [UIColor grayColor];
+    _sendTimeLabel.textColor = [UIColor blackColor];
     _sendTimeLabel.textAlignment = NSTextAlignmentLeft;
     _sendTimeLabel.font = UIFontNormal;
     [self.contentView addSubview:_sendTimeLabel];
@@ -102,6 +102,29 @@
         make.left.mas_offset(20);
         make.width.mas_offset(100);
     }];
+    
+//    arrow
+    _rightImageView = [[UIImageView alloc] init];
+    _rightImageView.contentMode = UIViewContentModeCenter;
+    _rightImageView.image = [UIImage imageNamed:@"arrow"];
+    [self.contentView addSubview:_rightImageView];
+    [_rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(_sendTimeLabel.mas_centerY).offset(0);
+        make.right.mas_offset(-10);
+    }];
+    _fastSendLabel = [[UILabel alloc] init];
+    _fastSendLabel.text = @"尽快送达";
+    _fastSendLabel.textColor = HexColor(0x0dceac);
+    _fastSendLabel.textAlignment = NSTextAlignmentRight;
+    _fastSendLabel.font = UIFontNormal;
+    [self.contentView addSubview:_fastSendLabel];
+    [_fastSendLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(_sendTimeLabel.mas_centerY).offset(0);
+        make.right.equalTo(_rightImageView.mas_left).offset(-10);
+    }];
+    
+    
+    
     
     _lineLayer = [[CALayer alloc] init];
     _lineLayer.backgroundColor = [UIColor grayColor].CGColor;

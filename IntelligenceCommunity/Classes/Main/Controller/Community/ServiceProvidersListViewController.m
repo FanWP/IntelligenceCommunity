@@ -79,6 +79,8 @@ NSString *const ServiceProvidersListViewCellIdentifier = @"serviceProvidersListV
     
     NSMutableDictionary *parametersDic = [NSMutableDictionary new];
     [parametersDic setValue:[NSString stringWithFormat:@"%@",self.serviceTypeID] forKey:@"malltypeid"];
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
     
     [HUD showProgress:@"数据正在加载"];
     [[RequestManager manager] SessionRequestWithType:Mall_api requestWithURLString:@"find/vendorsInfo" requestType:RequestMethodPost requestParameters:parametersDic success:^(id  _Nullable responseObject) {

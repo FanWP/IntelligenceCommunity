@@ -10,15 +10,8 @@
 
 @interface HeaderView : UIView
 
-//宣传片
+//轮播图
 @property(nonatomic,strong) UIImageView *videoImageView;
 
-//公告图片
-@property(nonatomic,strong) UIImageView *noticeImageView;
-
-//公告信息
-@property(nonatomic,strong) UILabel *noticeLabel;
-//公告内容
-@property(nonatomic,copy) NSString *noticeContentString;
 
 @end
