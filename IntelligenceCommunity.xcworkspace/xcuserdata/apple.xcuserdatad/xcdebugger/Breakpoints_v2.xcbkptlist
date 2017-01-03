@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IntelligenceCommunity/Classes/User/Controller/RegisterViewController.m"
-            timestampString = "504667704.945468"
+            filePath = "IntelligenceCommunity/Classes/NeighborhoodCircle/Controller/NeighborhoodMainCommonTableVC.m"
+            timestampString = "504781085.176857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
-            landmarkName = "-registerAccountWithPublicyKey:"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-loadMoreNeighborhood"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,44 +35,76 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IntelligenceCommunity/Classes/User/Controller/RegisterViewController.m"
-            timestampString = "504667861.52934"
+            filePath = "IntelligenceCommunity/Classes/Main/Controller/PayMoney/FeeHistoryListViewController.m"
+            timestampString = "504786074.379682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
-            landmarkName = "-registerAccountWithPublicyKey:"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "-tableView:viewForHeaderInSection:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IntelligenceCommunity/Classes/Main/Controller/PayMoney/FeeHistoryListViewController.m"
+            timestampString = "504786115.274818"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "-initializeComponent"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IntelligenceCommunity/Classes/Main/Controller/PayMoney/FeeHistoryListViewController.m"
+            timestampString = "504786150.93687"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-initializeComponent"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[RegisterViewController registerAccountWithPublicyKey:]"
+                  symbolName = "__51-[FeeHistoryListViewController initializeComponent]_block_invoke"
                   moduleName = "IntelligenceCommunity"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/%E6%99%BA%E6%85%A7%E7%A4%BE%E5%8C%BAclient/IntelligenceCommunity/Classes/User/Controller/RegisterViewController.m"
-                  timestampString = "504694436.362538"
+                  urlString = "file:///Users/apple/Desktop/%E6%99%BA%E6%85%A7%E7%A4%BE%E5%8C%BAclient/IntelligenceCommunity/Classes/Main/Controller/PayMoney/FeeHistoryListViewController.m"
+                  timestampString = "504786158.945789"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "285"
-                  endingLineNumber = "285"
-                  offsetFromSymbolStart = "452">
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "245">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__56-[RegisterViewController registerAccountWithPublicyKey:]_block_invoke"
+                  symbolName = "__51-[FeeHistoryListViewController initializeComponent]_block_invoke"
                   moduleName = "IntelligenceCommunity"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/%E6%99%BA%E6%85%A7%E7%A4%BE%E5%8C%BAclient/IntelligenceCommunity/Classes/User/Controller/RegisterViewController.m"
-                  timestampString = "504694436.364748"
+                  urlString = "file:///Users/apple/Desktop/%E6%99%BA%E6%85%A7%E7%A4%BE%E5%8C%BAclient/IntelligenceCommunity/Classes/Main/Controller/PayMoney/FeeHistoryListViewController.m"
+                  timestampString = "504786158.948736"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "287"
-                  endingLineNumber = "287"
-                  offsetFromSymbolStart = "52">
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "257">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -15,6 +15,7 @@
 
 @interface CommodityListViewController : UIViewController
 
+
 //tableView
 @property(nonatomic,strong) PopTableViewCustom *popTableView;
 

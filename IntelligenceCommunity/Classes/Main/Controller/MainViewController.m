@@ -24,6 +24,9 @@
 #import "CommodityListViewController.h" //test
 #import "PayMentViewController.h"
 #import "DeterminePayViewController.h"
+#import "AppointmentServiceViewController.h"
+#import "FeeHistoryListViewController.h"
+
 
 NSString *const NoticeViewCellIdentifier = @"noticeViewCellIdentifier";
 NSString *const ServiceListCellIdentifier = @"ServiceListCellIdentifier";
@@ -49,7 +52,7 @@ NSString *const MainCommodityAdvertiseViewCellIdentifier = @"mainCommodityAdvert
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"News"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(action:)];
 
     
-    DeterminePayViewController *vc = [[DeterminePayViewController alloc] init];
+//    FeeHistoryListViewController *vc = [[FeeHistoryListViewController alloc] init];
 //    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewDidLoad {
@@ -59,7 +62,7 @@ NSString *const MainCommodityAdvertiseViewCellIdentifier = @"mainCommodityAdvert
     
     
     [self initializeComponent];
-
+    
 }
 -(void)action:(UIBarButtonItem *)item{
     ICLog_2(@"jkhkjh");

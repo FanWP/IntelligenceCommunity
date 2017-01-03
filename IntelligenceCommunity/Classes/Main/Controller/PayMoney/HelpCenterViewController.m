@@ -56,7 +56,6 @@ NSString *const HelperCenterViewCellIdentifier = @"helperCenterViewCellIdentifie
     [parametersDictionary setValue:@"5" forKey:@"pageNum"];
     
     User *user = [User currentUser];
-    
     [parametersDictionary setValue:user.sessionId forKey:@"sessionId"];
 
     [HUD showProgress:@"正在加载数据"];

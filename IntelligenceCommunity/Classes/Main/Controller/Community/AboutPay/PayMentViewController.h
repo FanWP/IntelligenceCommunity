@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//付款界面:微信支付、支付宝支付   2016年12月09日17:26:02
+//普通商品付款界面:微信支付、支付宝支付   2016年12月09日17:26:02
 @interface PayMentViewController : UIViewController
 
 //付款总额

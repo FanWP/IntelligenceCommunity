@@ -89,6 +89,9 @@
 		1857BD2E1DF68F2700E5F1DE /* CommodityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857BD2D1DF68F2700E5F1DE /* CommodityListViewController.m */; };
 		1857BD311DF6AF2900E5F1DE /* ShoppingCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857BD301DF6AF2900E5F1DE /* ShoppingCartBottomView.m */; };
 		1857BD341DF6C43200E5F1DE /* LeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857BD331DF6C43200E5F1DE /* LeftTableViewCell.m */; };
+		185AC31B1E160E7100E8A6B1 /* AppointmentServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185AC31A1E160E7100E8A6B1 /* AppointmentServiceViewController.m */; };
+		185AC31E1E165F2300E8A6B1 /* FeeHistoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185AC31D1E165F2300E8A6B1 /* FeeHistoryListViewController.m */; };
+		185AC3211E16600E00E8A6B1 /* FeeHistoryListHeaderFooterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185AC3201E16600E00E8A6B1 /* FeeHistoryListHeaderFooterViewCell.m */; };
 		185ADBC51DE3E43400CD556D /* ServiceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185ADBC41DE3E43400CD556D /* ServiceListCell.m */; };
 		185ADBC81DE4122800CD556D /* AdvertiseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185ADBC71DE4122800CD556D /* AdvertiseViewCell.m */; };
 		185ADBCC1DE4134000CD556D /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185ADBCB1DE4134000CD556D /* CellModel.m */; };
@@ -105,6 +108,9 @@
 		185D03861E13564E00A9AEA1 /* DateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D03841E13564E00A9AEA1 /* DateTimePickerView.m */; };
 		185D03871E13564E00A9AEA1 /* DateTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185D03851E13564E00A9AEA1 /* DateTimePickerView.xib */; };
 		1861D31D1E14B58E003F0EAF /* MainCommodityAdvertiseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1861D31C1E14B58E003F0EAF /* MainCommodityAdvertiseViewCell.m */; };
+		1861D3211E1511FA003F0EAF /* CuiPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1861D3201E1511FA003F0EAF /* CuiPickerView.m */; };
+		1861D3241E151291003F0EAF /* ICPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1861D3231E151291003F0EAF /* ICPickView.m */; };
+		1861D3271E151797003F0EAF /* ServiceTimeSelectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1861D3261E151797003F0EAF /* ServiceTimeSelectViewCell.m */; };
 		187383C11DF10E5F0088544A /* CommunityServiceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187383C01DF10E5F0088544A /* CommunityServiceHeaderView.m */; };
 		187383C41DF123060088544A /* CommunityServiceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187383C31DF123060088544A /* CommunityServiceListCell.m */; };
 		187383C71DF153440088544A /* ServiceProvidersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187383C61DF153440088544A /* ServiceProvidersListViewController.m */; };
@@ -477,6 +483,12 @@
 		1857BD301DF6AF2900E5F1DE /* ShoppingCartBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartBottomView.m; sourceTree = "<group>"; };
 		1857BD321DF6C43200E5F1DE /* LeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftTableViewCell.h; sourceTree = "<group>"; };
 		1857BD331DF6C43200E5F1DE /* LeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftTableViewCell.m; sourceTree = "<group>"; };
+		185AC3191E160E7100E8A6B1 /* AppointmentServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentServiceViewController.h; sourceTree = "<group>"; };
+		185AC31A1E160E7100E8A6B1 /* AppointmentServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentServiceViewController.m; sourceTree = "<group>"; };
+		185AC31C1E165F2300E8A6B1 /* FeeHistoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeeHistoryListViewController.h; sourceTree = "<group>"; };
+		185AC31D1E165F2300E8A6B1 /* FeeHistoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeeHistoryListViewController.m; sourceTree = "<group>"; };
+		185AC31F1E16600E00E8A6B1 /* FeeHistoryListHeaderFooterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeeHistoryListHeaderFooterViewCell.h; sourceTree = "<group>"; };
+		185AC3201E16600E00E8A6B1 /* FeeHistoryListHeaderFooterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeeHistoryListHeaderFooterViewCell.m; sourceTree = "<group>"; };
 		185ADBC31DE3E43400CD556D /* ServiceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListCell.h; sourceTree = "<group>"; };
 		185ADBC41DE3E43400CD556D /* ServiceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListCell.m; sourceTree = "<group>"; };
 		185ADBC61DE4122800CD556D /* AdvertiseViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertiseViewCell.h; sourceTree = "<group>"; };
@@ -507,6 +519,12 @@
 		185D03881E135DED00A9AEA1 /* IntelligenceCommunity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntelligenceCommunity.entitlements; sourceTree = "<group>"; };
 		1861D31B1E14B58E003F0EAF /* MainCommodityAdvertiseViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCommodityAdvertiseViewCell.h; sourceTree = "<group>"; };
 		1861D31C1E14B58E003F0EAF /* MainCommodityAdvertiseViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCommodityAdvertiseViewCell.m; sourceTree = "<group>"; };
+		1861D31F1E1511FA003F0EAF /* CuiPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CuiPickerView.h; sourceTree = "<group>"; };
+		1861D3201E1511FA003F0EAF /* CuiPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CuiPickerView.m; sourceTree = "<group>"; };
+		1861D3221E151291003F0EAF /* ICPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPickView.h; sourceTree = "<group>"; };
+		1861D3231E151291003F0EAF /* ICPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPickView.m; sourceTree = "<group>"; };
+		1861D3251E151797003F0EAF /* ServiceTimeSelectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTimeSelectViewCell.h; sourceTree = "<group>"; };
+		1861D3261E151797003F0EAF /* ServiceTimeSelectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTimeSelectViewCell.m; sourceTree = "<group>"; };
 		187383BF1DF10E5F0088544A /* CommunityServiceHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityServiceHeaderView.h; sourceTree = "<group>"; };
 		187383C01DF10E5F0088544A /* CommunityServiceHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityServiceHeaderView.m; sourceTree = "<group>"; };
 		187383C21DF123060088544A /* CommunityServiceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityServiceListCell.h; sourceTree = "<group>"; };
@@ -905,6 +923,8 @@
 				184C99CA1DEFD41200588FFD /* HelpCenterViewController.m */,
 				180897191DE59EAF0049A180 /* PayMoneyViewController.h */,
 				1808971A1DE59EAF0049A180 /* PayMoneyViewController.m */,
+				185AC31C1E165F2300E8A6B1 /* FeeHistoryListViewController.h */,
+				185AC31D1E165F2300E8A6B1 /* FeeHistoryListViewController.m */,
 				187A236E1DEBD51900D921FC /* PropertyFeeViewController.h */,
 				187A236F1DEBD51900D921FC /* PropertyFeeViewController.m */,
 				18F573581DED6E58000FDBF6 /* ParkingFeeViewController.h */,
@@ -971,6 +991,8 @@
 				184C99C71DEFD25700588FFD /* HelpCenterViewCell.m */,
 				184719E91DE811ED0081DABE /* CostListViewCell.h */,
 				184719EA1DE811ED0081DABE /* CostListViewCell.m */,
+				185AC31F1E16600E00E8A6B1 /* FeeHistoryListHeaderFooterViewCell.h */,
+				185AC3201E16600E00E8A6B1 /* FeeHistoryListHeaderFooterViewCell.m */,
 				187A23741DEBFC8800D921FC /* PropertyFeeHeaderView.h */,
 				187A23751DEBFC8800D921FC /* PropertyFeeHeaderView.m */,
 				187A23711DEBD58800D921FC /* PropertyFeeViewCell.h */,
@@ -1252,6 +1274,8 @@
 				184FF9DC1DF95D75005FD46E /* DeterminePaySendAddressCell.m */,
 				184FF9DE1DF9680E005FD46E /* CommodityInfoViewCell.h */,
 				184FF9DF1DF9680E005FD46E /* CommodityInfoViewCell.m */,
+				1861D3251E151797003F0EAF /* ServiceTimeSelectViewCell.h */,
+				1861D3261E151797003F0EAF /* ServiceTimeSelectViewCell.m */,
 				18466EA21DFA77FA009541D6 /* DeterminePayBottomView.h */,
 				18466EA31DFA77FA009541D6 /* DeterminePayBottomView.m */,
 			);
@@ -1267,6 +1291,8 @@
 				18466EA61DFAA4B5009541D6 /* DeterminePayToCommodityDetailVC.m */,
 				18466EA81DFAB015009541D6 /* PayMentViewController.h */,
 				18466EA91DFAB015009541D6 /* PayMentViewController.m */,
+				185AC3191E160E7100E8A6B1 /* AppointmentServiceViewController.h */,
+				185AC31A1E160E7100E8A6B1 /* AppointmentServiceViewController.m */,
 			);
 			path = AboutPay;
 			sourceTree = "<group>";
@@ -1344,6 +1370,17 @@
 				185D03571E13542600A9AEA1 /* MyPublishVC.m */,
 			);
 			path = MyPublish;
+			sourceTree = "<group>";
+		};
+		1861D31E1E1511E8003F0EAF /* ICPickView */ = {
+			isa = PBXGroup;
+			children = (
+				1861D31F1E1511FA003F0EAF /* CuiPickerView.h */,
+				1861D3201E1511FA003F0EAF /* CuiPickerView.m */,
+				1861D3221E151291003F0EAF /* ICPickView.h */,
+				1861D3231E151291003F0EAF /* ICPickView.m */,
+			);
+			path = ICPickView;
 			sourceTree = "<group>";
 		};
 		187A23891DEC39B500D921FC /* Networking */ = {
@@ -1497,6 +1534,7 @@
 		18B002B11DE2DC9B00D8FE56 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1861D31E1E1511E8003F0EAF /* ICPickView */,
 				18028F051E13651D001D1CC6 /* Controls */,
 				184B1D181DE6E5C000F8F56E /* WUAlbum */,
 			);
@@ -2341,6 +2379,7 @@
 				18B002D81DE2E4B500D8FE56 /* MainViewController.m in Sources */,
 				185ADBEF1DE44ECA00CD556D /* NeighborhoodCircleCell.m in Sources */,
 				187A23701DEBD51900D921FC /* PropertyFeeViewController.m in Sources */,
+				185AC31B1E160E7100E8A6B1 /* AppointmentServiceViewController.m in Sources */,
 				185D03581E13542600A9AEA1 /* MyPublishVC.m in Sources */,
 				18C72AB01E10B790002CB9EF /* NeiborhoodLookingForThingsVC.m in Sources */,
 				18F5734A1DED20AB000FDBF6 /* SpecialOffersListModel.m in Sources */,
@@ -2364,8 +2403,10 @@
 				18C72B0D1E10BA33002CB9EF /* HouseListTableVC.m in Sources */,
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
+				185AC31E1E165F2300E8A6B1 /* FeeHistoryListViewController.m in Sources */,
 				18028F0C1E136654001D1CC6 /* MULoaderView.m in Sources */,
 				18C72B081E10BA0F002CB9EF /* UIViewExt.m in Sources */,
+				1861D3241E151291003F0EAF /* ICPickView.m in Sources */,
 				18B0027C1DE2C9D700D8FE56 /* AppDelegate.m in Sources */,
 				71EFEB871E05245500CE467A /* NoticeListTableVC.m in Sources */,
 				D71BC1331E0389900093357C /* NSObject+MJKeyValue.m in Sources */,
@@ -2380,6 +2421,7 @@
 				18B002E41DE2E5FA00D8FE56 /* NeighborhoodCircleViewController.m in Sources */,
 				187383C41DF123060088544A /* CommunityServiceListCell.m in Sources */,
 				710135691E1217230059CE1D /* MyOrdersStoreTitleCell.m in Sources */,
+				185AC3211E16600E00E8A6B1 /* FeeHistoryListHeaderFooterViewCell.m in Sources */,
 				D70243111E04CC340033B78C /* FreeArticleHeaderView.m in Sources */,
 				185ADBDC1DE414AA00CD556D /* UIImage+FixOrientation.m in Sources */,
 				18F5735A1DED6E58000FDBF6 /* ParkingFeeViewController.m in Sources */,
@@ -2438,6 +2480,7 @@
 				18C72AFC1E10B966002CB9EF /* EditReceiveAddressVC.m in Sources */,
 				D71BC1311E0389900093357C /* NSObject+MJClass.m in Sources */,
 				187383CD1DF1676A0088544A /* ServiceProvidersListViewCell.m in Sources */,
+				1861D3271E151797003F0EAF /* ServiceTimeSelectViewCell.m in Sources */,
 				18B002BA1DE2DDA900D8FE56 /* Common.m in Sources */,
 				D730E1E51E0B5DD10056A20A /* Const.m in Sources */,
 				187A23881DEC329A00D921FC /* PropertyFeeBillingVC.m in Sources */,
@@ -2466,6 +2509,7 @@
 				184B1D2F1DE6E5C000F8F56E /* WUAlbumGroupViewController.m in Sources */,
 				D71BC1301E0389900093357C /* MJPropertyType.m in Sources */,
 				184B1D2E1DE6E5C000F8F56E /* WUAlbumAsset.m in Sources */,
+				1861D3211E1511FA003F0EAF /* CuiPickerView.m in Sources */,
 				18028F1A1E138B34001D1CC6 /* RSAEncryptor.m in Sources */,
 				D753AD241E04DB450094602C /* NSDate+Extension.m in Sources */,
 				D73C21361E07714F00D90FFB /* YYPlaceholderTextView.m in Sources */,
@@ -2646,7 +2690,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
+					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2687,7 +2731,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
+					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

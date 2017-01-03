@@ -56,6 +56,8 @@ NSString *const PropertyFeeHistoryCellIdentifier = @"propertyFeeHistoryCellIdent
     
     
     NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
+    User *user = [User currentUser];
+    [parametersDic setValue:user.sessionId forKey:@"sessionId"];
     
     NSString *URLString = @"";
     switch (_feetype) {
