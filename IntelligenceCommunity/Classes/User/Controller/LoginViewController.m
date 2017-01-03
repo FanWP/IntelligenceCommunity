@@ -334,8 +334,9 @@
             }
             if (dictionary[@"id"]) {
                 
-                user.userID = [NSString stringWithFormat:@"%@",dictionary[@"nickname"]];
+                user.userID = [NSString stringWithFormat:@"%@",dictionary[@"id"]];
             }
+            
             if (dictionary[@"email"]) {
                 
                 user.email = [NSString stringWithFormat:@"%@",dictionary[@"email"]];
@@ -438,7 +439,7 @@
         }
         if (dictionary[@"id"]) {
             
-            user.userID = [NSString stringWithFormat:@"%@",dictionary[@"nickname"]];
+            user.userID = [NSString stringWithFormat:@"%@",dictionary[@"id"]];
         }
         if (dictionary[@"email"]) {
             

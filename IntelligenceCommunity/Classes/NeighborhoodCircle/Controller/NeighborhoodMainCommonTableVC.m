@@ -62,7 +62,10 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     [self defaultViewStyle];
 
     [self setupRefresh];
-
+    
+    // 键盘的frame发生改变时发出的通知（位置和尺寸）
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
     //监听文本框
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChanged) name:UITextViewTextDidChangeNotification object:nil];
 }
@@ -269,6 +272,43 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     
 }
 
+
+/**
+ * 键盘的frame发生改变时调用（显示、隐藏等）
+ */
+- (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+    // 如果正在切换键盘，就不要执行后面的代码
+    //    if (self.switchingKeybaord) return;
+    
+    NSDictionary *userInfo = notification.userInfo;
+    // 动画的持续时间
+    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 键盘的frame
+    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    // 执行动画
+    [UIView animateWithDuration:duration animations:^{
+        // 工具条的Y值 == 键盘的Y值 - 工具条的高度
+        MJRefreshLog(@"keyboardF.origin--:%f",keyboardF.origin.y);
+        MJRefreshLog(@"KHeight--:%f",KHeight);
+        
+        
+//        CGFloat lHeight = KHeight;
+//        CGFloat jjou = keyboardF.origin.y;
+//        
+        
+        // 工具条的Y值 == 键盘的Y值 - 工具条的高度
+//        if (keyboardF.origin.y > KHeight) { // 键盘的Y值已经远远超过了控制器view的高度
+//            self.replyView.y = self.view.height - self.replyView.height - 44 - 49;
+//        } else {
+//            self.replyView.y = keyboardF.origin.y - self.replyView.height - 44 - 49;
+//        }
+        
+        self.replyView.y = KHeight - keyboardF.origin.y - 44 - _replyView.height;
+
+    }];
+}
+
 -(void)textDidChanged
 {
     self.sendBtn.enabled = [self.replyTextView hasText];
@@ -328,9 +368,8 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
         MJRefreshLog(@"responseObject---%@",responseObject);
         
         NSNumber *num = responseObject[@"resultCode"];
+         [self.replyView removeFromSuperview];
         if ([num integerValue] == 1000) {//发布成功
-            [self.replyView removeFromSuperview];
-            
             [HUD showSuccessMessage:@"发布成功"];
             
             //更改本地数据
@@ -356,10 +395,13 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
             NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:_currentSession];
             [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
    
+        }else{
+            [HUD dismiss];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         MJRefreshLog(@"error---%@",error);
+        [HUD dismiss];
     }];
 }
 
@@ -368,22 +410,22 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
 {
     [self.replyView removeFromSuperview];
 
-    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight -  216  - 92 - 44 - 64 - 49, KWidth, 44)];
+    UIView *replyView = [[UIView alloc] initWithFrame:CGRectMake(0,KHeight + 44, KWidth, 44)];
     replyView.backgroundColor = [UIColor whiteColor];
     self.replyView = replyView;
 //    [self.view addSubview:replyView];
     [self.view addSubview:replyView];
     
     //设置输入框
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth - 80, 34)];
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, KWidth, 34)];
     textView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     self.replyTextView = textView;
     textView.backgroundColor = [UIColor clearColor];
     textView.font = UIFontLarge;
     
     [replyView addSubview:textView];
-
     [textView becomeFirstResponder];
+    
     
     //设置都发送按钮
     UIButton *sendBtn = [[UIButton alloc] initWithFrame:CGRectMake(KWidth - 80, 0, 80, 44)];
@@ -394,6 +436,10 @@ NSString *const NeighborhoodCircleCellID = @"neighborhoodCircleCellIdentifier";
     self.sendBtn = sendBtn;
     [sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [replyView addSubview:sendBtn];
+    
+
+    
+
 }
 
 
