@@ -21,7 +21,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.tableView.backgroundColor = [UIColor cyanColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self dataWaitReceiveList];
+}
+
+- (void)dataWaitReceiveList
+{
+    //    find/salelist/bystatus
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"userid"] = UserID;
+    parameters[@"salestatus"] = @"3";//客户版: 1 全部查 2待付款 3待收货  //商户版: 4新订单 5催单 6退单  7进行中 8已完成  9已取消
+    parameters[@"pageNum"] = @"1";
+    parameters[@"pageSize"] = @"10";
+    parameters[@"sessionId"] = SessionID;
+    //    parameters[@"vendorid"] = @"";// 门店id（需要 查单个店面再订单传这个参数）
+    //    parameters[@"saleid"] = @"";// 订单id（当需要查询单个订单详细时，只传一个id，其他参数不传就行）
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@find/salelist/bystatus",URL_17_mall_api];
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+     {
+         ICLog_2(@"待收货列表返回：%@",responseObject);
+         
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+     {
+         ICLog_2(@"待收货错误：%@",error);
+     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +115,7 @@
     {
         cell = [[MyOrdersStoreTitleCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
     }
+    
     return cell;
 }
 
@@ -94,6 +130,10 @@
     {
         cell = [[MyOrdersProductsCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier1];
     }
+    cell.titleLabel.text = @"红玫瑰";
+    cell.detailLabel.text = @"季度利润比偶结构和宽容是";
+    cell.priceLabel.text = @"$_$ 30";
+    cell.countLabel.text = @"x2";
     return cell;
 }
 
@@ -108,6 +148,11 @@
     {
         cell = [[MyOrdersDealCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier2];
     }
+    cell.timeLabel.text = @"2016.12.23";
+    [cell.firstButton setTitle:@"联系商家" forState:(UIControlStateNormal)];
+    cell.secondButton.layer.borderColor = HexColor(0x05c4a2).CGColor;
+    [cell.secondButton setTitleColor:HexColor(0x05c4a2) forState:(UIControlStateNormal)];
+    [cell.secondButton setTitle:@"确认收货" forState:(UIControlStateNormal)];
     return cell;
 }
 

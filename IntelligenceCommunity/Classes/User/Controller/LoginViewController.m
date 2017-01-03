@@ -155,15 +155,16 @@
 -(void)getPublicKey{
     
     //获取公钥
-        [[RequestManager manager] JSONRequestWithType:Smart_community urlString:@"unlogin/sendpubkeyservlet" method:RequestMethodPost timeout:20 parameters:nil success:^(id  _Nullable responseObject) {
+        [[RequestManager manager] JSONRequestWithType:Smart_community urlString:@"unlogin/sendpubkeyservlet" method:RequestMethodPost timeout:60 parameters:nil success:^(id  _Nullable responseObject) {
     
+            ICLog_2(@"获取公钥返回：%@",responseObject);
             if ([responseObject[@"resultCode"] integerValue] == 1000) {
                 [self loginCheckWithPublicKey:responseObject[@"pubKey"]];
             }else{
                 [self alertControllerWithMessage:@"获取公钥失败"];
             }
         } faile:^(NSError * _Nullable error) {
-            ICLog_2(@"%@",error);
+            ICLog_2(@"公钥错误：%@",error);
             dispatch_async(dispatch_get_main_queue(), ^{
                 _nameTextField.text = @"";
                 _passwordTextField.text = @"";
@@ -188,10 +189,13 @@
     
     
     NSString *serviceURL = [NSString stringWithFormat:@"%@smart_community/unlogin/userlogin",Smart_community_URL];
+    
+    ICLog_2(@"登录接口：：：%@",serviceURL);
+    
     [[AFHTTPSessionManager manager] POST:serviceURL parameters:parametersDic progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        ICLog_2(@"%@",responseObject);
+        ICLog_2(@"登录返回：%@",responseObject);
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.loginButton.enabled = YES;
@@ -216,7 +220,7 @@
         });
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        ICLog_2(@"%@",error);
+        ICLog_2(@"登录错误：%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             self.loginButton.enabled = YES;
             [self.loginButton stopAnimation];

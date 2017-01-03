@@ -24,6 +24,7 @@
 @property (nonatomic,strong) UIView *anonymatView;// 匿名view
 @property (nonatomic,strong) UILabel *anonymatLabel;// 匿名评论
 @property (nonatomic,strong) UIButton *anonymatButton;// 是否匿名的button
+@property (nonatomic,strong) UIButton *handAppraiseButton;// 提交评价
 
 @end
 
@@ -184,19 +185,31 @@
     [_anonymatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_storeNameLabel.mas_left);
         make.centerY.equalTo(_anonymatView.mas_centerY);
-        make.width.mas_offset(80);
+        make.width.mas_offset(75);
         make.height.equalTo(_storeNameLabel.mas_height);
     }];
     
     
     _anonymatButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    _anonymatButton.selected = YES;
     [_anonymatButton setImage:[UIImage imageNamed:@"unselected"] forState:(UIControlStateNormal)];
     [_anonymatButton setImage:[UIImage imageNamed:@"selected"] forState:(UIControlStateSelected)];
     [_anonymatView addSubview:_anonymatButton];
     [_anonymatButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_anonymatLabel.mas_right);
-        make.width.height.mas_offset(50);
+        make.width.height.mas_offset(40);
         make.centerY.equalTo(_anonymatView.mas_centerY);
+    }];
+    
+    
+    _handAppraiseButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    _handAppraiseButton.backgroundColor = HexColor(0x05c4a2);
+    [_handAppraiseButton setTitle:@"提交" forState:(UIControlStateNormal)];
+    [_handAppraiseButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_offset(20);
+        make.top.equalTo(_anonymatView.mas_bottom).offset(60);
+        make.right.mas_offset(-20);
+        make.height.mas_offset(49);
     }];
     
     [_firstStarButton addTarget:self action:@selector(firstStarClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -204,6 +217,8 @@
     [_thirdStarButton addTarget:self action:@selector(thirdStarClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [_fourStarButton addTarget:self action:@selector(fourStarClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [_fiveStarButton addTarget:self action:@selector(fiveStarClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [_anonymatButton addTarget:self action:@selector(anonymatAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [_handAppraiseButton addTarget:self action:@selector(handAppraiseClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
 }
 
 - (void)firstStarClickAction:(UIButton *)button
@@ -232,11 +247,25 @@
 }
 
 
+- (void)anonymatAction:(UIButton *)button
+{
+    button.selected = !button.selected;
+}
+
+
+
+- (void)handAppraiseClickAction:(UIButton *)button
+{
+    
+}
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 /*
 #pragma mark - Navigation
 

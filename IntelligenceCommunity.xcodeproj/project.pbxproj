@@ -185,6 +185,8 @@
 		710CA4121E0A4F75008565F9 /* OwnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CA4111E0A4F75008565F9 /* OwnerViewController.m */; };
 		710CA4151E0A50FC008565F9 /* ReceiveAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CA4141E0A50FC008565F9 /* ReceiveAddressCell.m */; };
 		711CBE3E1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 711CBE3D1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m */; };
+		7133D03F1E1B39FD0035737A /* OrderDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7133D03E1E1B39FD0035737A /* OrderDetailTableVC.m */; };
+		7133D0421E1B3D600035737A /* OrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7133D0411E1B3D600035737A /* OrderDetailAddressCell.m */; };
 		71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A841E0390F500067125 /* RepairStatusTableVC.m */; };
 		71A20A881E0391E900067125 /* RepairStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A871E0391E900067125 /* RepairStatusCell.m */; };
 		71A20A8B1E03B58A00067125 /* HouseImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A20A8A1E03B58A00067125 /* HouseImageCell.m */; };
@@ -671,6 +673,10 @@
 		710CA4141E0A50FC008565F9 /* ReceiveAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveAddressCell.m; sourceTree = "<group>"; };
 		711CBE3C1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseAuthorityTelNumberVC.h; sourceTree = "<group>"; };
 		711CBE3D1E07C6BF009E4257 /* HouseAuthorityTelNumberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseAuthorityTelNumberVC.m; sourceTree = "<group>"; };
+		7133D03D1E1B39FD0035737A /* OrderDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailTableVC.h; sourceTree = "<group>"; };
+		7133D03E1E1B39FD0035737A /* OrderDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailTableVC.m; sourceTree = "<group>"; };
+		7133D0401E1B3D600035737A /* OrderDetailAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailAddressCell.h; sourceTree = "<group>"; };
+		7133D0411E1B3D600035737A /* OrderDetailAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailAddressCell.m; sourceTree = "<group>"; };
 		71A20A831E0390F500067125 /* RepairStatusTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusTableVC.h; sourceTree = "<group>"; };
 		71A20A841E0390F500067125 /* RepairStatusTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairStatusTableVC.m; sourceTree = "<group>"; };
 		71A20A861E0391E900067125 /* RepairStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairStatusCell.h; sourceTree = "<group>"; };
@@ -1772,6 +1778,8 @@
 				710135641E1217230059CE1D /* MyOrdersProductsCell.m */,
 				710135651E1217230059CE1D /* MyOrdersStoreTitleCell.h */,
 				710135661E1217230059CE1D /* MyOrdersStoreTitleCell.m */,
+				7133D0401E1B3D600035737A /* OrderDetailAddressCell.h */,
+				7133D0411E1B3D600035737A /* OrderDetailAddressCell.m */,
 			);
 			path = MyOrders;
 			sourceTree = "<group>";
@@ -1781,6 +1789,8 @@
 			children = (
 				7101356E1E1270160059CE1D /* AppraiseVC.h */,
 				7101356F1E1270160059CE1D /* AppraiseVC.m */,
+				7133D03D1E1B39FD0035737A /* OrderDetailTableVC.h */,
+				7133D03E1E1B39FD0035737A /* OrderDetailTableVC.m */,
 			);
 			path = MyOrdersDetailVC;
 			sourceTree = "<group>";
@@ -2389,6 +2399,7 @@
 				D70A89C81E027FED00BCE03C /* neighborhoodSendMessageVC.m in Sources */,
 				185ADBC81DE4122800CD556D /* AdvertiseViewCell.m in Sources */,
 				710C17A61E0905F000FF215E /* SettingTableVC.m in Sources */,
+				7133D03F1E1B39FD0035737A /* OrderDetailTableVC.m in Sources */,
 				7101357C1E1270160059CE1D /* WaitPaymentTableVC.m in Sources */,
 				71A20A8B1E03B58A00067125 /* HouseImageCell.m in Sources */,
 				18440FDA1E0D2FAB005D684A /* RSADataSigner.m in Sources */,
@@ -2402,6 +2413,7 @@
 				71A20A851E0390F500067125 /* RepairStatusTableVC.m in Sources */,
 				18C72B0D1E10BA33002CB9EF /* HouseListTableVC.m in Sources */,
 				D70A89CE1E028A4500BCE03C /* MaterialsAreadlySaleView.m in Sources */,
+				7133D0421E1B3D600035737A /* OrderDetailAddressCell.m in Sources */,
 				184B1D001DE6CCB800F8F56E /* CacheData.m in Sources */,
 				185AC31E1E165F2300E8A6B1 /* FeeHistoryListViewController.m in Sources */,
 				18028F0C1E136654001D1CC6 /* MULoaderView.m in Sources */,
@@ -2690,7 +2702,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
+					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2731,7 +2743,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Realm\"",
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"/Users/apple/Desktop/智慧社区client/IntelligenceCommunity/ALiPaySources",
+					/Users/apple/Desktop/SmartCommunity/IntelligenceCommunity/ALiPaySources,
 				);
 				INFOPLIST_FILE = IntelligenceCommunity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
